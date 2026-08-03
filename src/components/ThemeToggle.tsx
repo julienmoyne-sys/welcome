@@ -1,6 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "../hooks/useTheme";
 
 /*
@@ -37,6 +38,7 @@ export function ThemeToggle({
   className?: string;
   variant?: "default" | "dark";
 }) {
+  const t = useTranslations("nav");
   const { theme, mounted, toggleTheme } = useTheme();
   const styles = VARIANTS[variant];
 
@@ -55,7 +57,7 @@ export function ThemeToggle({
         type="button"
         role="switch"
         aria-checked={isDark}
-        aria-label="Activer le mode sombre"
+        aria-label={t("themeLabel")}
         onClick={toggleTheme}
         className={`relative h-[26px] w-[48px] shrink-0 cursor-pointer rounded-full border transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-welcome-gold focus-visible:ring-offset-2 ${styles.track}`}
       >
