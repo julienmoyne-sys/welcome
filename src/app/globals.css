@@ -1,0 +1,364 @@
+@import "tailwindcss" source(none);
+/* Chemin relatif à ce fichier : couvre src/app, src/components, src/lib, src/hooks. */
+@source "../";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-welcome-black: var(--welcome-black);
+  --color-welcome-gold: var(--welcome-gold);
+  --color-welcome-white: var(--welcome-white);
+  --color-welcome-cream: var(--welcome-cream);
+  --color-welcome-sage: var(--welcome-sage);
+  --color-welcome-body: var(--welcome-body);
+  --color-welcome-header: var(--welcome-header);
+  --color-welcome-ink-fg: var(--welcome-ink-fg);
+  --color-welcome-line: var(--welcome-line);
+  --color-welcome-footer-bg: #0b0b0b;
+  --color-welcome-footer-text: #f5f5f5;
+  --color-welcome-footer-muted: #b5b5b5;
+  /* Polices auto-hébergées par `next/font` (voir src/app/layout.tsx) : plus de
+     requête vers fonts.googleapis.com, donc un LCP plus rapide et pas de CLS. */
+  --font-manrope: var(--font-manrope-sans), "Manrope", sans-serif;
+  --font-inter: var(--font-inter-sans), "Inter", sans-serif;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #fafaf8;
+  --foreground: #0b0b0b;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --welcome-black: #0b0b0b;
+  --welcome-gold: #c6b24a;
+  --welcome-white: #ffffff;
+  --welcome-cream: #fafaf8;
+  --welcome-sage: #6f8471;
+  --welcome-body: #2a2a2a;
+  --welcome-header: #ffffff;
+  --welcome-ink-fg: #ffffff;
+  --welcome-line: rgba(11, 11, 11, 0.08);
+  --welcome-photo-filter: none;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #ffffff;
+  --card: #1c1c1c;
+  --card-foreground: #ffffff;
+  --popover: #1c1c1c;
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+
+  /* Welcome premium dark theme — lounge ambience */
+  --welcome-black: #ffffff;
+  --welcome-gold: #d4bf63;
+  --welcome-white: #1c1c1c;
+  --welcome-cream: #121212;
+  --welcome-sage: #8aa287;
+  --welcome-body: #d8d8d8;
+  --welcome-header: #161616;
+  --welcome-ink-fg: #121212;
+  --welcome-line: rgba(255, 255, 255, 0.12);
+  --welcome-photo-filter: brightness(0.8) contrast(1.05);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-background);
+}
+
+/* ---------- Theme (light / dark) ---------- */
+
+/* Photos keep their warmth: only a subtle filter in dark mode. */
+.welcome-photo {
+  filter: var(--welcome-photo-filter);
+  transition: filter 300ms ease;
+}
+
+/* Logo stays perfectly legible in both modes. */
+.welcome-logo {
+  transition: filter 300ms ease;
+}
+.dark .welcome-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/*
+ * L'iframe Google Maps n'expose aucune option de thème (seule l'API JavaScript
+ * a un `colorScheme`, qui suppose une clé API) : le mode sombre est donc simulé
+ * par filtre, et uniquement là — en clair la carte doit rester intacte.
+ *
+ * L'ordre compte : `grayscale` avant `invert` désature d'abord, ce qui évite les
+ * teintes fausses que produirait l'inversion seule (parcs rosés, eau orangée).
+ */
+.welcome-map {
+  filter: none;
+  transition: filter 300ms ease;
+}
+.dark .welcome-map {
+  filter: grayscale(100%) invert(92%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/*
+ * Avis Google (widget Elfsight) en mode sombre.
+ *
+ * Contrairement à la carte, ce widget est rendu dans le document et non dans une
+ * iframe : on peut donc le thémer proprement plutôt que l'inverser par filtre
+ * (ce qui abîmerait les photos de profil et le logo Google).
+ *
+ * On ne s'accroche qu'aux classes `es-*`, seul contrat stable exposé par Elfsight.
+ * Les autres (`ReviewContainer__Inner-sc-4342da43-0`, `cHRicJ`, …) sont générées
+ * par styled-components et changent à chaque déploiement de leur côté.
+ *
+ * `!important` est requis là où Elfsight écrit des styles en ligne (fonds, bouton
+ * « Plus d'avis ») : une déclaration importante d'une feuille de style l'emporte
+ * sur un style en ligne normal.
+ */
+/*
+ * Conteneurs structurels : Elfsight y peint un fond clair, y compris sur toute la
+ * chaîne d'en-tête. En sombre, le fond doit venir de la section, pas du widget.
+ */
+.dark .welcome-reviews .es-embed-root,
+.dark .welcome-reviews .es-main-container,
+.dark .welcome-reviews .es-main-content,
+.dark .welcome-reviews .es-widget-background-container,
+.dark .welcome-reviews .es-widget-background-wrapper,
+.dark .welcome-reviews .es-widget-background-content,
+.dark .welcome-reviews .es-background-base,
+.dark .welcome-reviews .es-background-overlay,
+.dark .welcome-reviews .es-widget-title-container,
+.dark .welcome-reviews .es-widget-title,
+.dark .welcome-reviews .es-header-component-top,
+.dark .welcome-reviews .es-header-container,
+.dark .welcome-reviews .es-header-info,
+.dark .welcome-reviews .es-header-heading-container,
+.dark .welcome-reviews .es-header-rating-container,
+.dark .welcome-reviews .es-grid-layout,
+.dark .welcome-reviews .es-review-container,
+.dark .welcome-reviews .es-review-align-container,
+.dark .welcome-reviews .es-review-content-container,
+.dark .welcome-reviews .es-review-author-block-container,
+.dark .welcome-reviews .es-ai-summary-author-block-container,
+.dark .welcome-reviews .es-ai-summary-content-container {
+  background-color: transparent !important;
+}
+
+/*
+ * Cartes d'avis : seule surface qui doit se détacher.
+ *
+ * La section d'accueil est déjà en `bg-welcome-white`, soit #1c1c1c en sombre :
+ * reprendre ce même token ici rendrait les cartes invisibles. On les élève donc
+ * d'un voile blanc translucide, et surtout on les délimite par une bordure — sur
+ * fond sombre une ombre portée ne délimite rien.
+ */
+.dark .welcome-reviews .es-review-background-container {
+  background-color: rgb(255 255 255 / 0.04) !important;
+  border: 1px solid var(--welcome-line) !important;
+  box-shadow: none !important;
+}
+
+/* Corps de texte. */
+.dark .welcome-reviews .es-review-content,
+.dark .welcome-reviews .es-text-shortener,
+.dark .welcome-reviews .es-ai-summary-list-item-text {
+  color: var(--welcome-body) !important;
+}
+
+/* Titres, noms d'auteur et note globale : `--welcome-black` vaut #fff en sombre. */
+.dark .welcome-reviews .es-review-author-name,
+.dark .welcome-reviews .es-header-heading-text,
+.dark .welcome-reviews .es-rating-value {
+  color: var(--welcome-black) !important;
+}
+
+/*
+ * Métadonnées secondaires (date, « Basé sur N avis »).
+ *
+ * Valeurs rgba explicites plutôt que `color-mix()` : le minifieur émet un repli
+ * sans transparence pour les navigateurs qui ne le gèrent pas, ce qui donnerait
+ * ici du blanc opaque — donc du texte blanc sur fond blanc pour le bouton
+ * ci-dessous. Ces règles sont de toute façon dans la portée `.dark`, où la
+ * palette est connue (comme `--welcome-line`, déjà défini en rgba).
+ */
+.dark .welcome-reviews .es-review-info-info-block,
+.dark .welcome-reviews .es-review-info-date,
+.dark .welcome-reviews .es-ai-summary-caption {
+  color: rgb(216 216 216 / 0.7) !important;
+}
+
+/* Accents : « Lire la suite » et les puces du résumé. */
+.dark .welcome-reviews .es-text-shortener-control,
+.dark .welcome-reviews .es-ai-summary-checkmark {
+  color: var(--welcome-gold) !important;
+  fill: var(--welcome-gold) !important;
+}
+
+/* Étoiles vides : sans cette règle elles restent quasi blanches sur fond sombre. */
+.dark .welcome-reviews .es-rating-item-unfilled svg path {
+  fill: rgb(255 255 255 / 0.22) !important;
+}
+
+/* Bouton « Plus d'avis » : entièrement stylé en ligne par Elfsight. */
+.dark .welcome-reviews .es-load-more-button {
+  background-color: rgb(255 255 255 / 0.1) !important;
+  border-color: var(--welcome-line) !important;
+  color: var(--welcome-black) !important;
+}
+
+/* Smooth, elegant cross-fade when switching themes. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: color, background-color, border-color, fill, stroke,
+    box-shadow, opacity, filter !important;
+  transition-duration: 300ms !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-delay: 0ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition-duration: 0ms !important;
+  }
+}
+
+@keyframes welcome-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.welcome-marquee-track {
+  animation: welcome-marquee 45s linear infinite;
+}
+
+.welcome-marquee:hover .welcome-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-marquee-track { animation: none; }
+}

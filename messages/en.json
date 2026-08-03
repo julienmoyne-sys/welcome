@@ -1,0 +1,319 @@
+{
+  "metadata": {
+    "site": {
+      "title": "Welcome Coworking Strasbourg",
+      "description": "Welcome Coworking in Strasbourg: open space, private offices and a meeting room in a bright, welcoming setting.",
+      "ogDescription": "Open space, private offices and a meeting room in Strasbourg, 204 avenue de Colmar."
+    },
+    "home": {
+      "title": "Coworking in Strasbourg — Welcome Coworking | Offices & open space",
+      "description": "Premium coworking space in Strasbourg: open space, private offices and a meeting room at 204 avenue de Colmar. Couffignal tram stop, free parking, 24/7 access.",
+      "ogTitle": "Coworking in Strasbourg — Welcome Coworking",
+      "ogDescription": "Open space, private offices and a meeting room in a bright, welcoming setting in Strasbourg. More than 100 companies hosted since 2017."
+    },
+    "faq": {
+      "title": "FAQ — Frequently asked questions about Welcome Coworking Strasbourg",
+      "description": "Everything you need to know about Welcome Coworking in Strasbourg: pricing, 24/7 access, private offices, meeting room, parking and booking a visit.",
+      "ogTitle": "FAQ — Welcome Coworking Strasbourg",
+      "ogDescription": "Frequently asked questions about Welcome Coworking in Strasbourg: plans, opening hours, services and arranging a visit."
+    },
+    "mentionsLegales": {
+      "title": "Legal notice — Welcome Coworking Strasbourg",
+      "description": "Legal notice for Welcome Coworking, a coworking space in Strasbourg operated by BUZZ CAPITAL (SAS), 204 avenue de Colmar, 67100 Strasbourg.",
+      "ogTitle": "Legal notice — Welcome Coworking",
+      "ogDescription": "Publisher, hosting provider, intellectual property and personal data for the Welcome Coworking website in Strasbourg."
+    },
+    "cgu": {
+      "title": "Terms of use — Welcome Coworking",
+      "description": "Terms of use for welcome-coworking.com, published by BUZZ CAPITAL (SAS), a coworking space in Strasbourg.",
+      "ogTitle": "Terms of use — Welcome Coworking",
+      "ogDescription": "Rules for accessing and using the Welcome Coworking website: content, contact form, liability and applicable law."
+    },
+    "confidentialite": {
+      "title": "Privacy policy — Welcome Coworking Strasbourg",
+      "description": "Welcome Coworking's privacy policy: collection, use, retention of and rights over your personal data.",
+      "ogTitle": "Privacy policy — Welcome Coworking",
+      "ogDescription": "Collection, use, retention of and rights over your personal data on welcome-coworking.com."
+    },
+    "cookies": {
+      "title": "Cookie policy — Welcome Coworking Strasbourg",
+      "description": "Welcome Coworking's cookie policy: which trackers the site uses, what they are for and how to manage your preferences.",
+      "ogTitle": "Cookie policy — Welcome Coworking",
+      "ogDescription": "The cookies and trackers used on welcome-coworking.com and how to manage your preferences."
+    },
+    "gestionCookies": {
+      "title": "Managing cookies — Welcome Coworking Strasbourg",
+      "description": "Manage your cookie preferences on the Welcome Coworking website. Find out how to enable, disable or delete cookies in your browser.",
+      "ogTitle": "Managing cookies — Welcome Coworking",
+      "ogDescription": "How to manage, enable or delete cookies on welcome-coworking.com."
+    },
+    "accessibilite": {
+      "title": "Accessibility statement — Welcome Coworking",
+      "description": "Digital accessibility statement for welcome-coworking.com: level of compliance, measures taken and how to get in touch if you encounter difficulties.",
+      "ogTitle": "Accessibility statement — Welcome Coworking",
+      "ogDescription": "Compliance status, technologies used and avenues of recourse regarding the accessibility of the Welcome Coworking website."
+    }
+  },
+
+  "nav": {
+    "homeLabel": "Welcome Coworking — home",
+    "espaces": "Spaces",
+    "solutions": "Solutions",
+    "references": "Clients",
+    "acces": "Getting here",
+    "contact": "Contact",
+    "cta": "Book a visit",
+    "languageLabel": "Choose a language",
+    "themeLabel": "Switch to dark mode"
+  },
+
+  "hero": {
+    "eyebrow": "Welcome to Welcome.",
+    "titleLine1": "Just like home.",
+    "titleLine2": "Only far more inspiring.",
+    "lead": "Discover a place where the comfort of a living room, the energy of a community and the services of a premium office all come together.",
+    "ctaVisit": "Book a visit",
+    "ctaWhatsapp": "WhatsApp",
+    "ctaDiscover": "Discover Welcome",
+    "imageAlt": "Welcome coworking space with a wooden bar, black steel glazing, plants and warm lighting"
+  },
+
+  "reassurance": {
+    "items": [
+      { "title": "A warm atmosphere", "text": "Wood, daylight and greenery" },
+      { "title": "Tram at the door", "text": "Couffignal stop" },
+      { "title": "Cycle highway", "text": "Strasbourg and Illkirch" },
+      { "title": "Easy to reach", "text": "Motorway and free parking" },
+      { "title": "Since 2017", "text": "More than 100 companies hosted" }
+    ]
+  },
+
+  "editorial": {
+    "eyebrow": "The Welcome spirit",
+    "titleLine1": "We all work better…",
+    "titleLine2": "when we feel good.",
+    "lead": "We designed Welcome as a place you actually look forward to starting your day in. Here, daylight, comfort, conversation and calm are a full part of the working experience.",
+    "benefits": [
+      { "title": "Focus", "text": "Spaces suited to every way of working." },
+      { "title": "Breathe", "text": "A warm atmosphere, full of plants and daylight." },
+      { "title": "Share", "text": "A human-sized place, made for meeting people." }
+    ],
+    "cta": "Explore the spaces",
+    "imageAlt": "Bright coworking space with wood, plants and black steel glazing"
+  },
+
+  "explore": {
+    "eyebrow": "The spaces",
+    "titleLine1": "A place designed",
+    "titleLine2": "for every way of",
+    "titleHighlight": "working",
+    "lead": "Discover a bright, welcoming and adaptable space where everyone naturally finds their place.",
+    "cta": "Find out more",
+    "cards": {
+      "openSpace": {
+        "title": "Open space",
+        "text": "Work in a bright and quiet environment.",
+        "alt": "Bright open space with wooden desks, black steel glazing and hanging plants"
+      },
+      "privateOffices": {
+        "title": "Private offices",
+        "text": "Enclosed spaces to work in complete confidentiality.",
+        "alt": "Private offices with a glazed partition, wooden desk and warm lighting"
+      },
+      "meetingRoom": {
+        "title": "Meeting room",
+        "text": "Host your teams and clients in a premium setting.",
+        "alt": "Premium meeting room with a large wooden table, black chairs and a screen"
+      },
+      "kitchenLounge": {
+        "title": "Kitchen & lounge",
+        "text": "Take a break just like at home.",
+        "alt": "Kitchen and lounge area with light sofas, a wooden bar and green plants"
+      }
+    }
+  },
+
+  "pricing": {
+    "eyebrow": "Our solutions",
+    "title": "Choose your own pace.",
+    "lead": "Whether you drop in occasionally or stay all year round, we have designed straightforward solutions in intimate spaces from €20 excl. VAT / month.",
+    "compare": "Compare",
+    "learnMore": "Find out more",
+    "plans": {
+      "nomad": {
+        "name": "Nomad",
+        "features": ["No minimum", "Fibre internet", "Self-service access", "Book by the hour"]
+      },
+      "openSpace": {
+        "name": "Open space",
+        "features": ["Flexible access", "Fibre internet", "Coffee", "Printing"]
+      },
+      "privateOffice": {
+        "name": "Private office",
+        "features": ["Enclosed office", "Secure access", "Premium furniture", "Fibre internet"]
+      },
+      "meetingRoom": {
+        "name": "Meeting room",
+        "features": ["Screen", "Video conferencing", "Up to 12 people", "Simple booking"]
+      }
+    }
+  },
+
+  "references": {
+    "eyebrow": "Clients",
+    "titleLead": "They put their",
+    "titleHighlight": "trust in us",
+    "carouselLabel": "Companies that chose Welcome Coworking",
+    "logoAlt": "{name} logo",
+    "statsBefore": "More than",
+    "statsCompanies": "100 companies",
+    "statsMiddle": "supported since",
+    "statsYear": "2017",
+    "awards": {
+      "coworker": {
+        "year": "2019",
+        "title": "Voted best coworking space in Strasbourg",
+        "sourcePrefix": "by the users of",
+        "sourceName": "coworker.com"
+      },
+      "desk": {
+        "year": "2026",
+        "title": "Ranked 2nd best coworking space in Strasbourg",
+        "sourcePrefix": "by",
+        "sourceName": "Desk"
+      }
+    }
+  },
+
+  "access": {
+    "eyebrow": "Getting here",
+    "titleLead": "Everything is just a few",
+    "titleHighlight": "minutes away.",
+    "lead": "Whether you come by tram, by bike or by car, Welcome is ideally located to make every one of your days simpler.",
+    "cards": [
+      {
+        "title": "Tram at the door",
+        "text": "The Couffignal stop drops you a few metres from the entrance."
+      },
+      {
+        "title": "Cycle highway",
+        "text": "Reach central Strasbourg or Illkirch quickly via the express cycle path."
+      },
+      { "title": "Immediate access", "text": "Motorway minutes away and free parking." },
+      {
+        "title": "A lively neighbourhood",
+        "text": "Right next to the Meinau stadium, shops, restaurants and services."
+      }
+    ],
+    "map": {
+      "ariaLabel": "Schematic map of the routes around Welcome: Couffignal tram stop at the door, central Strasbourg and Illkirch 10 minutes away by bike, motorway 2 minutes away, Meinau stadium 5 minutes on foot",
+      "nodes": {
+        "center": { "label": "Central Strasbourg", "sub": "10 min by bike" },
+        "illkirch": { "label": "Illkirch", "sub": "10 min by bike" },
+        "motorway": { "label": "Motorway", "sub": "Station and airport 15 min away" },
+        "stadium": { "label": "Meinau stadium", "sub": "5 minutes on foot" },
+        "tram": { "label": "Couffignal tram", "sub": "Right at the door" }
+      }
+    },
+    "transitLine": "Tram A and E (Couffignal stop) | Strasbourg station 15 min | Strasbourg airport 20 min",
+    "mapTitle": "Location map for Welcome Coworking, 204 avenue de Colmar, Strasbourg",
+    "ctaVisit": "Book a visit",
+    "ctaRoute": "Get directions"
+  },
+
+  "contact": {
+    "eyebrow": "Contact",
+    "titleLead": "What if your next working day started",
+    "titleHighlight": "right here",
+    "lead": "Would you like to visit Welcome, book a space or simply see the place for yourself? We would be delighted to have you.",
+    "photoAlt": "Welcome coworking space",
+    "whatsapp": {
+      "title": "Ask a question",
+      "text": "A quick question? Message us directly on WhatsApp and we will get back to you as soon as possible.",
+      "cta": "WhatsApp"
+    },
+    "info": {
+      "title": "Details",
+      "nameLabel": "Welcome Coworking",
+      "address": "204 avenue de Colmar, 67100 Strasbourg",
+      "phoneLabel": "Phone",
+      "phone": "+33 6 22 80 55 36",
+      "emailLabel": "Email address",
+      "hoursLabel": "Opening hours",
+      "hours": "Members: 24/7 / Visits: by appointment"
+    },
+    "form": {
+      "title": "Book a visit",
+      "lead": "Tell us what you need. We will get back to you quickly to arrange an appointment.",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "company": "Company",
+      "optional": "(optional)",
+      "companyPlaceholder": "Your company",
+      "email": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+33 6 12 34 56 78",
+      "needLabel": "What you need",
+      "needs": ["Open space", "Private office", "Meeting room", "Event space", "Something else"],
+      "message": "Message",
+      "messagePlaceholder": "Tell us more about your project...",
+      "rgpd": "I agree that Welcome Coworking may keep my details in order to respond to my enquiry, in accordance with the privacy policy.",
+      "submit": "Send",
+      "submitting": "Sending...",
+      "success": "Thank you for your message. We will get back to you very shortly.",
+      "error": "Something went wrong. Please try again."
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailInvalid": "Invalid email address",
+      "needRequired": "Please tell us what you need",
+      "messageRequired": "Message is required",
+      "rgpdRequired": "Please accept the privacy policy"
+    }
+  },
+
+  "footer": {
+    "faqLink": "Frequently Asked Questions (FAQ)",
+    "legal": {
+      "mentionsLegales": "Legal notice",
+      "cgu": "Terms of use",
+      "confidentialite": "Privacy policy",
+      "cookies": "Cookie policy",
+      "gestionCookies": "Managing cookies",
+      "accessibilite": "Accessibility"
+    },
+    "copyright": "© 2026 Welcome Coworking – All rights reserved."
+  },
+
+  "cookieBanner": {
+    "title": "Cookies and preferences",
+    "text": "This site only uses cookies and local storage strictly necessary for it to work (theme preference, display of Google reviews). No advertising trackers are set.",
+    "more": "Find out more",
+    "manage": "Manage my cookies",
+    "accept": "Got it",
+    "close": "Close the cookie banner"
+  },
+
+  "errors": {
+    "notFound": {
+      "title": "Page not found — Welcome Coworking",
+      "code": "404",
+      "heading": "Page not found",
+      "text": "This page does not exist or has been moved.",
+      "cta": "Back to home"
+    },
+    "boundary": {
+      "heading": "This page could not load",
+      "text": "Something went wrong on our side. You can try again or go back to the home page.",
+      "retry": "Try again",
+      "home": "Back to home"
+    }
+  },
+
+  "common": {
+    "backHome": "Back to home",
+    "lastUpdated": "Last updated: August 2026",
+    "legalEyebrow": "Legal information"
+  }
+}

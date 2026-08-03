@@ -1,0 +1,8 @@
+[install]
+saveTextLockfile = true
+# Garde-fou chaîne d'approvisionnement : ignore les versions publiées depuis
+# moins de 24 h.
+minimumReleaseAge = 86400
+# Chaque entrée lève ce garde-fou pour un paquet — à confirmer avec l'utilisateur
+# avant d'en ajouter.
+minimumReleaseAgeExcludes = []
