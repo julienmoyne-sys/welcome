@@ -6,6 +6,10 @@ import { useEffect } from "react";
  * Dernier filet : n'intervient que si le root layout lui-même échoue. Il remplace
  * donc `<html>`/`<body>` et ne peut compter sur aucune feuille de style de l'app —
  * d'où les styles en ligne.
+ *
+ * Volontairement non traduit : ce fichier vit hors du segment `[locale]`, donc sans
+ * `NextIntlClientProvider` ni langue résolue. Y appeler `useTranslations` échouerait
+ * précisément dans le cas que ce composant est censé rattraper.
  */
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {

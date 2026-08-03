@@ -197,138 +197,21 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+/** `category` est une clé stable (`space`, `pricing`, …), pas un libellé traduit. */
 export type FaqItem = { question: string; answer: string; category: string };
 
-export const FAQ_ITEMS: FaqItem[] = [
-  {
-    category: "L'espace & les équipements",
-    question: "Quels équipements sont mis à disposition des coworkers ?",
-    answer:
-      "Wi-Fi fibre, cuisine équipée, salle de réunion, espaces détente, imprimante, casiers, vélos en libre-service et stationnement gratuit autour de l'immeuble.",
-  },
-  {
-    category: "L'espace & les équipements",
-    question: "La salle de réunion peut-elle accueillir des visioconférences ?",
-    answer:
-      "Oui, la salle de réunion est équipée pour vos réunions hybrides et visioconférences, avec connexion fibre stable et un écran partagé sur demande.",
-  },
-  {
-    category: "L'espace & les équipements",
-    question: "Le site est-il accessible aux personnes à mobilité réduite ?",
-    answer:
-      "L'immeuble dispose d'un accès de plain-pied et d'ascenseur. N'hésitez pas à nous préciser vos besoins lors de la visite pour vous accompagner au mieux.",
-  },
-  {
-    category: "L'espace & les équipements",
-    question: "Proposez-vous des événements ou des moments de rencontre entre coworkers ?",
-    answer:
-      "Welcome organise régulièrement des afterworks, petits-déjeuners et moments d'échange pour favoriser les rencontres professionnelles et la convivialité.",
-  },
-  {
-    category: "Formules & tarifs",
-    question: "Quelles solutions de travail propose Welcome Coworking ?",
-    answer:
-      "Trois solutions : l'open space en coworking pour les indépendants, les bureaux privatifs fermés pour les équipes, et la location de salle de réunion à l'heure ou à la journée. Cuisine, espace détente et Wi-Fi fibre sont inclus.",
-  },
-  {
-    category: "Formules & tarifs",
-    question: "Puis-je venir travailler une seule journée ou à l'heure ?",
-    answer:
-      "Oui, la formule Nomade permet de réserver à l'heure sans engagement, idéale pour une journée ponctuelle ou un créneau de quelques heures.",
-  },
-  {
-    category: "Formules & tarifs",
-    question: "Les bureaux privatifs sont-ils vraiment fermés et sécurisés ?",
-    answer:
-      "Oui, les bureaux privatifs sont des espaces clos, accessibles 24/7, avec accès autonome et possibilité d'y installer votre équipe et vos documents en toute sérénité.",
-  },
-  {
-    category: "Formules & tarifs",
-    question: "Quelle est la durée minimale d'engagement pour un bureau privatif ?",
-    answer:
-      "Les bureaux privatifs sont proposés sans minimum d'engagement pour offrir une grande flexibilité. Contactez-nous pour étudier l'offre adaptée à votre équipe.",
-  },
-  {
-    category: "Formules & tarifs",
-    question: "Puis-je utiliser Welcome comme adresse commerciale de mon entreprise ?",
-    answer:
-      "Oui, selon la formule choisie, Welcome peut servir d'adresse de domiciliation commerciale. Renseignez-vous auprès de notre équipe pour les conditions.",
-  },
-  {
-    category: "Formules & tarifs",
-    question: "Puis-je recevoir du courrier professionnel à Welcome ?",
-    answer:
-      "Oui, les formules incluent généralement une domiciliation d'entreprise et la réception de courrier. Contactez-nous pour connaître les modalités exactes.",
-  },
-  {
-    category: "Accès & localisation",
-    question: "Où se situe l'espace de coworking Welcome à Strasbourg ?",
-    answer:
-      "Welcome Coworking se trouve au 204 avenue de Colmar, 67100 Strasbourg, à l'arrêt de tram Couffignal, avec un parking gratuit, un accès direct à l'autoroute et une piste cyclable express vers le centre-ville.",
-  },
-  {
-    category: "Accès & localisation",
-    question: "Comment se rendre à Welcome depuis la gare de Strasbourg ?",
-    answer:
-      "En tram A ou E direction Robertsau, arrêt Couffignal situé au pied de l'immeuble. Comptez environ 15 minutes depuis la gare de Strasbourg.",
-  },
-  {
-    category: "Accès & localisation",
-    question: "Y a-t-il un parking pour les coworkers et leurs visiteurs ?",
-    answer:
-      "Oui, le stationnement est gratuit autour du bâtiment et facile d'accès, directement relié à l'autoroute et aux transports en commun.",
-  },
-  {
-    category: "Accès & localisation",
-    question: "Y a-t-il des commerces ou restaurants à proximité ?",
-    answer:
-      "Le quartier de la Robertsau et le secteur de la place de Haguenau offrent boulangeries, restaurants et commerces à quelques minutes à pied ou en tram.",
-  },
-  {
-    category: "Réservation & engagement",
-    question: "Quels sont les horaires d'accès ?",
-    answer:
-      "Les clients accèdent à l'espace 24h/24 et 7j/7. Les visites de découverte se font sur rendez-vous, à demander par le formulaire de contact, par téléphone au +33 6 22 80 55 36 ou par WhatsApp.",
-  },
-  {
-    category: "Réservation & engagement",
-    question: "Peut-on visiter l'espace avant de s'engager ?",
-    answer:
-      "Oui. La visite est libre et sans engagement : vous découvrez les espaces, l'ambiance et les services, puis vous choisissez la formule adaptée à votre rythme.",
-  },
-  {
-    category: "Réservation & engagement",
-    question: "Comment réserver une salle de réunion ?",
-    answer:
-      "La réservation se fait par téléphone, WhatsApp ou email à contact@welcome-coworking.com. Nous vous confirmons rapidement la disponibilité et les tarifs.",
-  },
-  {
-    category: "Réservation & engagement",
-    question: "Puis-je amener des clients ou collaborateurs ponctuellement ?",
-    answer:
-      "Oui, vous pouvez recevoir vos invités dans les espaces communs ou en salle de réunion. Prévenez-nous simplement à l'avance pour organiser l'accueil.",
-  },
-  {
-    category: "À propos de Welcome",
-    question: "Depuis quand Welcome Coworking existe-t-il ?",
-    answer:
-      "Welcome Coworking accueille des entreprises à Strasbourg depuis 2017 et a accompagné plus de 100 sociétés, indépendants et équipes en télétravail.",
-  },
-  {
-    category: "Contact & services",
-    question: "Comment contacter Welcome Coworking rapidement ?",
-    answer:
-      "Par téléphone au +33 6 22 80 55 36, par WhatsApp, par email à contact@welcome-coworking.com ou directement via le formulaire de contact du site.",
-  },
-];
-
-/** Rich result « questions fréquentes », réservé à la page /faq. */
-export function faqPageJsonLd() {
+/**
+ * Rich result « questions fréquentes », réservé à la page /faq.
+ *
+ * Les questions sont passées en paramètre : elles vivent désormais dans les
+ * messages de traduction, afin que le balisage soit dans la langue de la page.
+ */
+export function faqPageJsonLd(items: FaqItem[], pagePath: string) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${SITE_URL}/faq#faq`,
-    mainEntity: FAQ_ITEMS.map((item) => ({
+    "@id": `${SITE_URL}${pagePath}#faq`,
+    mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },

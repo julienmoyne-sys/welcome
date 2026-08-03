@@ -1,35 +1,52 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { FaqSection } from "@/components/FaqSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbJsonLd, faqPageJsonLd, OG_DEFAULTS } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+import { buildPageMetadata, localePath } from "@/lib/metadata";
+import { breadcrumbJsonLd, faqPageJsonLd, SITE_NAME, type FaqItem } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "FAQ — Questions fréquentes sur Welcome Coworking Strasbourg",
-  description:
-    "Toutes les réponses sur Welcome Coworking à Strasbourg : tarifs, accès 24/7, bureaux privatifs, salle de réunion, stationnement et visite de l'espace.",
-  alternates: { canonical: "/faq" },
-  openGraph: {
-    ...OG_DEFAULTS,
-    url: "/faq",
-    title: "FAQ — Welcome Coworking Strasbourg",
-    description:
-      "Questions fréquentes sur le coworking Welcome à Strasbourg : formules, horaires, services et organisation d'une visite.",
-  },
-  twitter: { card: "summary" },
-};
+const PATH = "/faq";
 
-export default function FaqPage() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    namespace: "metadata.faq",
+    twitterCard: "summary",
+  });
+}
+
+export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations("faq");
+  const tMeta = await getTranslations("metadata.faq");
+  const items = t.raw("items") as FaqItem[];
+
   return (
     <div className="min-h-screen bg-welcome-white">
-      <JsonLd data={faqPageJsonLd()} />
+      {/* Le balisage FAQPage reprend les questions de la langue courante, et son
+          `@id` est propre à l'URL localisée pour ne pas collisionner entre langues. */}
+      <JsonLd data={faqPageJsonLd(items, localePath(locale, PATH))} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Accueil", path: "/" },
-          { name: "Questions fréquentes", path: "/faq" },
+          { name: SITE_NAME, path: localePath(locale, "/") },
+          { name: tMeta("ogTitle"), path: localePath(locale, PATH) },
         ])}
       />
 
@@ -39,17 +56,16 @@ export default function FaqPage() {
         <section className="bg-welcome-cream py-[100px]">
           <div className="mx-auto w-full max-w-[900px] px-6 text-center">
             <h2 className="font-manrope text-3xl font-semibold tracking-tight text-welcome-black md:text-4xl">
-              Une autre question ?
+              {t("cta.title")}
             </h2>
             <p className="mx-auto mt-4 max-w-xl font-inter text-[16px] leading-relaxed text-welcome-body">
-              Écrivez-nous ou venez découvrir l'espace : nous répondons rapidement et organisons les
-              visites sur rendez-vous.
+              {t("cta.lead")}
             </p>
             <Link
               href="/#contact"
               className="mt-8 inline-flex h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg"
             >
-              Nous contacter
+              {t("cta.button")}
             </Link>
           </div>
         </section>

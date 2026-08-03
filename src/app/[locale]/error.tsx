@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -10,6 +11,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations("errors.boundary");
   const router = useRouter();
 
   useEffect(() => {
@@ -23,11 +25,9 @@ export default function Error({
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="font-manrope text-xl font-semibold tracking-tight text-foreground">
-          Cette page n'a pas pu se charger
+          {t("heading")}
         </h1>
-        <p className="mt-2 font-inter text-sm text-muted-foreground">
-          Un problème est survenu de notre côté. Vous pouvez réessayer ou revenir à l'accueil.
-        </p>
+        <p className="mt-2 font-inter text-sm text-muted-foreground">{t("text")}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -38,7 +38,7 @@ export default function Error({
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 font-manrope text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Réessayer
+            {t("retry")}
           </button>
           {/* Navigation complète volontaire : après une erreur de rendu, mieux vaut
               repartir d'une page neuve que réutiliser un routeur client dégradé. */}
@@ -47,7 +47,7 @@ export default function Error({
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 font-manrope text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Retour à l'accueil
+            {t("home")}
           </a>
         </div>
       </div>

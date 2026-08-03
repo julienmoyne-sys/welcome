@@ -1,31 +1,29 @@
-import { FAQ_ITEMS } from "../lib/seo";
+import { useTranslations } from "next-intl";
 
-const grouped = FAQ_ITEMS.reduce<Record<string, typeof FAQ_ITEMS>>((acc, item) => {
-  if (!acc[item.category]) acc[item.category] = [];
-  acc[item.category].push(item);
-  return acc;
-}, {});
-
-const categoryOrder = [
-  "L'espace & les équipements",
-  "Formules & tarifs",
-  "Accès & localisation",
-  "Réservation & engagement",
-  "À propos de Welcome",
-  "Contact & services",
-];
+import type { FaqItem } from "@/lib/seo";
 
 export function FaqSection() {
+  const t = useTranslations("faq");
+  const items = t.raw("items") as FaqItem[];
+  const categoryOrder = t.raw("categoryOrder") as string[];
+
+  // Regroupement par clé de catégorie : l'ordre vient de `categoryOrder`, stable
+  // d'une langue à l'autre puisqu'il s'appuie sur des clés et non sur les libellés.
+  const grouped = items.reduce<Record<string, FaqItem[]>>((acc, item) => {
+    (acc[item.category] ??= []).push(item);
+    return acc;
+  }, {});
+
   return (
     <section id="faq" className="scroll-mt-[90px] bg-welcome-white py-[120px]">
       <div className="mx-auto w-full max-w-[900px] px-6">
         <p className="font-manrope text-sm font-semibold uppercase tracking-[0.15em] text-welcome-gold">
-          Questions fréquentes
+          {t("eyebrow")}
         </p>
         {/* `h1` de la page /faq : ce composant n'est utilisé que là, et la page n'avait
             aucun titre de niveau 1. Classes inchangées, donc rendu visuel identique. */}
         <h1 className="mt-4 font-manrope text-4xl font-semibold leading-tight tracking-tight text-welcome-black md:text-5xl">
-          Tout ce qu'il faut savoir sur <span className="text-welcome-gold">Welcome</span>
+          {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span>
         </h1>
 
         <div className="mt-14 space-y-14">
@@ -35,7 +33,7 @@ export function FaqSection() {
                 <div key={category}>
                   <h3 className="mb-6 inline-flex items-center font-manrope text-[15px] font-semibold uppercase tracking-[0.12em] text-welcome-gold">
                     <span className="mr-3 h-[6px] w-[6px] rounded-full bg-welcome-gold" />
-                    {category}
+                    {t(`categories.${category}`)}
                   </h3>
                   <div className="divide-y divide-welcome-black/10 rounded-[20px] border border-welcome-black/10 bg-welcome-white px-6 shadow-[0_2px_14px_rgba(0,0,0,0.03)]">
                     {grouped[category].map((item) => (

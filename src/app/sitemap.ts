@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { LOCALES } from "@/i18n/routing";
+import { localePath } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/seo";
 
 /**
@@ -7,17 +9,36 @@ import { SITE_URL } from "@/lib/seo";
  * n'apparaissent pas ici : ce sont des redirections 308 vers des sections de
  * l'accueil (voir `next.config.ts`), pas des URL indexables.
  */
-const ROUTES: MetadataRoute.Sitemap = [
-  { url: "/", changeFrequency: "weekly", priority: 1 },
-  { url: "/faq", changeFrequency: "monthly", priority: 0.7 },
-  { url: "/mentions-legales", changeFrequency: "yearly", priority: 0.3 },
-  { url: "/conditions-generales-d-utilisation", changeFrequency: "yearly", priority: 0.3 },
-  { url: "/politique-de-confidentialite", changeFrequency: "yearly", priority: 0.3 },
-  { url: "/politique-de-cookies", changeFrequency: "yearly", priority: 0.3 },
-  { url: "/gestion-des-cookies", changeFrequency: "yearly", priority: 0.3 },
-  { url: "/declaration-d-accessibilite", changeFrequency: "yearly", priority: 0.3 },
+const PAGES = [
+  { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/faq", changeFrequency: "monthly" as const, priority: 0.7 },
+  { path: "/mentions-legales", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/conditions-generales-d-utilisation", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/politique-de-confidentialite", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/politique-de-cookies", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/gestion-des-cookies", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/declaration-d-accessibilite", changeFrequency: "yearly" as const, priority: 0.3 },
 ];
 
+/**
+ * Une entrée par page et par langue, chacune portant `alternates.languages`.
+ *
+ * Déclarer les traductions dans le sitemap double le signal `hreflang` déjà présent
+ * dans le `<head>` : Google recommande explicitement l'un ou l'autre, et les deux
+ * ensemble lèvent toute ambiguïté sur le fait que ces URL sont des traductions et
+ * non du contenu dupliqué.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ROUTES.map((route) => ({ ...route, url: `${SITE_URL}${route.url}` }));
+  return PAGES.flatMap((page) =>
+    LOCALES.map((locale) => ({
+      url: `${SITE_URL}${localePath(locale, page.path)}`,
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+      alternates: {
+        languages: Object.fromEntries(
+          LOCALES.map((code) => [code, `${SITE_URL}${localePath(code, page.path)}`]),
+        ),
+      },
+    })),
+  );
 }

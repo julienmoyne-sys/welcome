@@ -1,0 +1,439 @@
+{
+  "mentionsLegales": {
+    "titleLead": "",
+    "titleHighlight": "Impressum",
+    "intro": "Angaben zum Herausgeber der Website welcome-coworking.com gemäß Artikel 6 des französischen Gesetzes Nr. 2004-575 vom 21. Juni 2004 über das Vertrauen in die digitale Wirtschaft.",
+    "publisherTitle": "Herausgeber der Website",
+    "publisherRows": [
+      { "label": "Firmenname", "value": "BUZZ CAPITAL" },
+      { "label": "Handelsname", "value": "Welcome Coworking" },
+      { "label": "Rechtsform", "value": "Vereinfachte Aktiengesellschaft (SAS)" },
+      { "label": "Stammkapital", "value": "10.000 €" },
+      { "label": "Sitz", "value": "204 avenue de Colmar, 67100 Straßburg, Frankreich" },
+      { "label": "SIREN-Nummer", "value": "825 282 551" },
+      { "label": "SIRET-Nummer (Sitz)", "value": "825 282 551 00019" },
+      { "label": "Registereintrag", "value": "Handelsregister Straßburg 825 282 551" },
+      { "label": "USt-IdNr.", "value": "FR71825282551" },
+      {
+        "label": "Tätigkeitsschlüssel (NAF/APE)",
+        "value": "8211Z — Kombinierte Büroverwaltungsdienstleistungen"
+      },
+      { "label": "Gründungsdatum", "value": "15. Februar 2017" },
+      { "label": "Präsident / Verantwortlicher", "value": "Julien Moyne" },
+      { "label": "Telefon", "value": "+33 6 22 80 55 36", "link": "tel" },
+      { "label": "E-Mail", "value": "contact@welcome-coworking.com", "link": "mailto" }
+    ],
+    "publisherNote": "Gesellschaft eingetragen im Handels- und Gesellschaftsregister Straßburg unter der Nummer 825 282 551.",
+    "sections": [
+      {
+        "title": "Hosting der Website",
+        "paragraphs": [
+          "Die Website wird von OVHcloud gehostet, einer vereinfachten Aktiengesellschaft mit einem einzigen Gesellschafter, eingetragen im Handelsregister Lille Métropole unter der Nummer 424 761 419 00045, mit Sitz in 2 rue Kellermann, 59100 Roubaix, Frankreich.",
+          "Kontakt Hoster: support@ovhcloud.com — Telefon: +33 9 72 10 10 07."
+        ]
+      },
+      {
+        "title": "Zweck der Website",
+        "paragraphs": [
+          "Zweck dieser Website ist die Darstellung der Räume, Tarife und Leistungen des Coworking-Space Welcome in der 204 avenue de Colmar in Straßburg sowie die Möglichkeit für Besucher, Kontakt aufzunehmen oder eine Besichtigung zu vereinbaren.",
+          "Über diese Website findet kein Online-Verkauf statt. Die Leistungen sind Gegenstand gesondert mitgeteilter Verträge und Bedingungen."
+        ]
+      },
+      {
+        "title": "Geistiges Eigentum",
+        "paragraphs": [
+          "Alle Bestandteile der Website (Struktur, Texte, Illustrationen, Fotografien, Logos, Marken, Symbole, Layouts und Code) sind Eigentum von BUZZ CAPITAL oder seiner Partner und durch das Recht des geistigen Eigentums geschützt.",
+          "Jede vollständige oder teilweise Vervielfältigung, Wiedergabe, Bearbeitung oder Verwertung dieser Bestandteile, in welcher Form auch immer, ist ohne vorherige schriftliche Zustimmung von BUZZ CAPITAL untersagt."
+        ]
+      },
+      {
+        "title": "Personenbezogene Daten",
+        "paragraphs": [
+          "Die über das Kontaktformular übermittelten Daten (Name, E-Mail-Adresse, Telefonnummer und Nachricht) werden ausschließlich zur Beantwortung Ihrer Anfrage und gegebenenfalls zur Vereinbarung einer Besichtigung verwendet. Sie werden weder verkauft noch zu kommerziellen Zwecken an Dritte weitergegeben.",
+          "Gemäß der Verordnung (EU) 2016/679 (DSGVO) und dem französischen Gesetz Nr. 78-17 vom 6. Januar 1978 in der geänderten Fassung haben Sie das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit. Diese Rechte können per E-Mail an contact@welcome-coworking.com ausgeübt werden.",
+          "Sie können außerdem Beschwerde bei der CNIL einlegen (3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — www.cnil.fr)."
+        ]
+      },
+      {
+        "title": "Cookies und Reichweitenmessung",
+        "paragraphs": [
+          "Die Website verwendet ausschließlich Cookies und lokalen Speicher, die für ihren Betrieb unbedingt erforderlich sind, insbesondere zur Speicherung Ihrer Anzeigepräferenz (heller oder dunkler Modus). Diese erfordern keine vorherige Einwilligung.",
+          "Da keine Werbetracker oder Analysedienste Dritter eingesetzt werden, findet kein Profiling statt."
+        ]
+      },
+      {
+        "title": "Hyperlinks",
+        "paragraphs": [
+          "Die Website kann Links zu Websites Dritter enthalten (Kartendienste, Messenger, soziale Netzwerke). BUZZ CAPITAL hat keinen Einfluss auf diese Websites und übernimmt keine Haftung für deren Inhalte oder deren Umgang mit personenbezogenen Daten."
+        ]
+      },
+      {
+        "title": "Haftung",
+        "paragraphs": [
+          "Die auf der Website veröffentlichten Informationen dienen der Orientierung und können jederzeit geändert werden. BUZZ CAPITAL bemüht sich um Richtigkeit und Aktualität, kann jedoch keine vollständige Fehlerfreiheit oder ununterbrochene Verfügbarkeit garantieren."
+        ]
+      },
+      {
+        "title": "Anwendbares Recht",
+        "paragraphs": [
+          "Dieses Impressum unterliegt französischem Recht. Im Streitfall und in Ermangelung einer gütlichen Einigung sind die Gerichte im Bezirk Straßburg zuständig."
+        ]
+      }
+    ]
+  },
+
+  "cgu": {
+    "titleLead": "",
+    "titleHighlight": "Nutzungsbedingungen",
+    "intro": "Regeln für den Zugang zu und die Nutzung der Website welcome-coworking.com.",
+    "sections": [
+      {
+        "title": "1. Gegenstand",
+        "paragraphs": [
+          "Diese Nutzungsbedingungen (die „Bedingungen“) regeln den Zugang zu und die Nutzung der Website welcome-coworking.com (die „Website“), herausgegeben von BUZZ CAPITAL, vereinfachte Aktiengesellschaft mit einem Stammkapital von 10.000 €, eingetragen im Handelsregister Straßburg unter der Nummer 825 282 551, mit Sitz in 204 avenue de Colmar, 67100 Straßburg.",
+          "Die Website ist eine Präsentationsseite für die Räume, Tarife und Leistungen des Coworking-Space Welcome. Es finden online keine Verkäufe oder kostenpflichtigen Buchungen statt."
+        ]
+      },
+      {
+        "title": "2. Annahme der Bedingungen",
+        "paragraphs": [
+          "Die Nutzung der Website bedeutet die vollständige und uneingeschränkte Annahme dieser Bedingungen. Der Herausgeber kann sie jederzeit ändern; maßgeblich ist die zum Zeitpunkt des Aufrufs online verfügbare Fassung."
+        ]
+      },
+      {
+        "title": "3. Zugang zur Website",
+        "paragraphs": [
+          "Die Website ist kostenlos rund um die Uhr an sieben Tagen der Woche zugänglich, ausgenommen Unterbrechungen für Wartung, Aktualisierungen, höhere Gewalt oder technische Störungen. Der Herausgeber haftet nicht für eine zeitweise Nichtverfügbarkeit.",
+          "Die Kosten für Internetzugang und Ausstattung trägt der Nutzer."
+        ]
+      },
+      {
+        "title": "4. Nutzung des Kontaktformulars",
+        "paragraphs": [
+          "Der Nutzer verpflichtet sich, bei der Nutzung des Kontaktformulars zutreffende Angaben zu machen und keine rechtswidrigen, beleidigenden, verleumderischen oder Rechte Dritter verletzenden Inhalte zu übermitteln.",
+          "Die übermittelten Daten werden gemäß der Datenschutzerklärung verarbeitet und dienen ausschließlich der Beantwortung der Anfrage und gegebenenfalls der Vereinbarung einer Besichtigung."
+        ]
+      },
+      {
+        "title": "5. Untersagte Verhaltensweisen",
+        "paragraphs": [
+          "Untersagt sind insbesondere: jeder Versuch eines unbefugten Zugriffs auf die Website oder ihre Systeme, das massenhafte automatisierte Auslesen von Inhalten, das Einbringen von Schadprogrammen sowie jede Handlung, die geeignet ist, den Betrieb der Website zu stören."
+        ]
+      },
+      {
+        "title": "6. Geistiges Eigentum",
+        "paragraphs": [
+          "Alle Bestandteile der Website (Texte, Fotografien, Illustrationen, Logos, Marken, Layouts und Code) sind durch das Recht des geistigen Eigentums geschützt und bleiben Eigentum von BUZZ CAPITAL oder seiner Partner.",
+          "Jede vollständige oder teilweise Vervielfältigung, Wiedergabe oder Bearbeitung ist ohne vorherige schriftliche Zustimmung untersagt."
+        ]
+      },
+      {
+        "title": "7. Hyperlinks",
+        "paragraphs": [
+          "Die Website kann auf Dienste Dritter verweisen (Kartendienste, Messenger, soziale Netzwerke, Kundenbewertungen). Der Herausgeber hat keinen Einfluss auf diese Dienste und übernimmt keine Haftung für deren Inhalte oder Praktiken."
+        ]
+      },
+      {
+        "title": "8. Haftung",
+        "paragraphs": [
+          "Die auf der Website veröffentlichten Informationen dienen der Orientierung und können sich ändern. Sie stellen kein vertragliches Angebot dar; die Leistungen sind Gegenstand gesondert mitgeteilter Verträge und Bedingungen.",
+          "Der Herausgeber haftet nicht für mittelbare Schäden, die aus der Nutzung der Website entstehen."
+        ]
+      },
+      {
+        "title": "9. Personenbezogene Daten und Cookies",
+        "paragraphs": [
+          "Die Verarbeitung personenbezogener Daten und die Verwendung von Cookies sind in der Datenschutzerklärung und der Cookie-Richtlinie beschrieben, die über die Fußzeile der Website erreichbar sind."
+        ]
+      },
+      {
+        "title": "10. Anwendbares Recht und Streitigkeiten",
+        "paragraphs": [
+          "Diese Bedingungen unterliegen französischem Recht. Im Streitfall und in Ermangelung einer gütlichen Einigung sind die Gerichte im Bezirk Straßburg zuständig.",
+          "Fragen zu den Bedingungen können an contact@welcome-coworking.com gerichtet werden."
+        ]
+      }
+    ]
+  },
+
+  "confidentialite": {
+    "eyebrow": "Datenschutz",
+    "titleLead": "",
+    "titleHighlight": "Datenschutzerklärung",
+    "intro": "Diese Seite beschreibt, wie Welcome Coworking Ihre personenbezogenen Daten erhebt, verwendet und schützt, wenn Sie die Website welcome-coworking.com nutzen.",
+    "controllerTitle": "Verantwortlicher",
+    "controllerRows": [
+      { "label": "Firmenname", "value": "BUZZ CAPITAL" },
+      { "label": "Handelsname", "value": "Welcome Coworking" },
+      { "label": "Adresse", "value": "204 avenue de Colmar, 67100 Straßburg, Frankreich" },
+      { "label": "SIRET-Nummer", "value": "825 282 551 00019" },
+      { "label": "Telefon", "value": "+33 6 22 80 55 36", "link": "tel" },
+      { "label": "E-Mail", "value": "contact@welcome-coworking.com", "link": "mailto" }
+    ],
+    "rightsSectionTitle": "Ihre Rechte",
+    "rights": [
+      "Recht auf Auskunft über Ihre personenbezogenen Daten;",
+      "Recht auf Berichtigung unrichtiger Daten;",
+      "Recht auf Löschung („Recht auf Vergessenwerden“) nach den gesetzlichen Voraussetzungen;",
+      "Recht auf Einschränkung der Verarbeitung;",
+      "Recht auf Widerspruch gegen die Verarbeitung, insbesondere zu Zwecken der Direktwerbung;",
+      "Recht auf Datenübertragbarkeit;",
+      "Recht, Anweisungen zum Umgang mit Ihren Daten nach Ihrem Tod zu erteilen."
+    ],
+    "rightsFooterBefore": "Zur Ausübung dieser Rechte senden Sie uns eine Nachricht an",
+    "rightsFooterAfter": "oder schreiben Sie an die oben genannte Postadresse. Wir verpflichten uns, innerhalb eines Monats zu antworten. Sie können außerdem Beschwerde bei der CNIL einlegen (www.cnil.fr).",
+    "sections": [
+      {
+        "title": "Erhobene Daten",
+        "paragraphs": [
+          "Wir erheben ausschließlich die für die Kontaktaufnahme und die etwaige Vereinbarung einer Besichtigung erforderlichen Daten: Name, Vorname, E-Mail-Adresse, Telefonnummer und Inhalt der Nachricht.",
+          "Diese Daten werden freiwillig über das Kontaktformular übermittelt. Es werden keine Daten automatisch zu Zwecken der Werbeprofilbildung erhoben."
+        ]
+      },
+      {
+        "title": "Zwecke und Rechtsgrundlage",
+        "paragraphs": [
+          "Ihre Daten werden verwendet, um Ihre Anfragen zu beantworten, Ihnen die gewünschten Informationen bereitzustellen und gegebenenfalls eine Besichtigung zu vereinbaren. Rechtsgrundlage der Verarbeitung ist Ihre mit dem Absenden des Formulars erteilte Einwilligung sowie das berechtigte Interesse von Welcome Coworking an der Pflege der Beziehungen zu Interessenten und Kunden."
+        ]
+      },
+      {
+        "title": "Empfänger der Daten",
+        "paragraphs": [
+          "Nur die zur Bearbeitung Ihrer Anfrage befugten Verantwortlichen und Mitarbeitenden von Welcome Coworking haben Zugang zu Ihren Daten. Sie werden nicht verkauft, vermietet oder zu kommerziellen Zwecken an Dritte weitergegeben.",
+          "Das Hosting der Website erfolgt bei OVHcloud, das gegebenenfalls die technischen Daten der Nachrichten hostet. Dieser Auftragsverarbeiter handelt unter der Verantwortung von BUZZ CAPITAL und unter Einhaltung der Pflichten der DSGVO."
+        ]
+      },
+      {
+        "title": "Speicherdauer",
+        "paragraphs": [
+          "Die über das Kontaktformular erhobenen Daten werden für die zur Bearbeitung Ihrer Anfrage erforderliche Dauer gespeichert und anschließend zu Beweiszwecken und zur Pflege der Geschäftsbeziehungen für höchstens drei Jahre ab dem letzten Kontakt archiviert, sofern keine gesetzliche Pflicht etwas anderes vorschreibt."
+        ]
+      },
+      {
+        "title": "Ihre Rechte",
+        "paragraphs": [
+          "Gemäß der Verordnung (EU) 2016/679 (DSGVO) und dem französischen Gesetz Nr. 78-17 vom 6. Januar 1978 in der geänderten Fassung haben Sie die folgenden Rechte:"
+        ]
+      },
+      {
+        "title": "Sicherheit",
+        "paragraphs": [
+          "Wir setzen geeignete technische und organisatorische Maßnahmen ein, um Ihre Daten vor Verlust, Veränderung, unbefugtem Zugriff oder Offenlegung zu schützen. Dazu gehören insbesondere die Verwendung einer gesicherten Verbindung (HTTPS) und das Hosting bei einem anerkannten Anbieter.",
+          "Da trotz dieser Vorkehrungen kein System unfehlbar ist, bitten wir Sie, über das Kontaktformular niemals sensible Informationen zu übermitteln."
+        ]
+      },
+      {
+        "title": "Cookies und Tracker",
+        "paragraphs": [
+          "Die Website verwendet ausschließlich Cookies und lokalen Speicher, die für ihren Betrieb unbedingt erforderlich sind, insbesondere zur Speicherung Ihrer Anzeigepräferenz (heller oder dunkler Modus). Es werden keine Werbe- oder Analyse-Cookies Dritter gesetzt. Weitere Einzelheiten finden Sie in unserer Cookie-Richtlinie."
+        ]
+      },
+      {
+        "title": "Änderungen",
+        "paragraphs": [
+          "Diese Datenschutzerklärung kann jederzeit aktualisiert werden, um Änderungen unserer Praktiken oder gesetzlicher Pflichten abzubilden. Das Datum der letzten Aktualisierung ist am Seitenende angegeben."
+        ]
+      }
+    ]
+  },
+
+  "cookies": {
+    "eyebrow": "Verwaltung der Tracker",
+    "titleLead": "",
+    "titleHighlight": "Cookie-Richtlinie",
+    "intro": "Diese Seite informiert Sie über die von Welcome Coworking auf welcome-coworking.com verwendeten Cookies und Tracker sowie darüber, wie Sie Ihre Einstellungen verwalten können.",
+    "tableTitle": "Auf der Website gesetzte Cookies",
+    "tableHeaders": {
+      "name": "Name",
+      "type": "Typ",
+      "duration": "Dauer",
+      "purpose": "Zweck"
+    },
+    "rows": [
+      {
+        "name": "welcome-theme",
+        "type": "Präferenz",
+        "duration": "1 Jahr",
+        "purpose": "Speichert Ihre Anzeigewahl (heller oder dunkler Modus), damit Ihr Erlebnis von Besuch zu Besuch einheitlich bleibt."
+      },
+      {
+        "name": "welcome-cookie-notice",
+        "type": "Präferenz",
+        "duration": "1 Jahr",
+        "purpose": "Hält Ihre Kenntnisnahme der für den Betrieb der Website unbedingt erforderlichen Cookies fest."
+      }
+    ],
+    "sections": [
+      {
+        "title": "Was ist ein Cookie?",
+        "paragraphs": [
+          "Ein Cookie ist eine kleine Textdatei, die beim Besuch einer Website auf Ihrem Gerät (Computer, Tablet oder Smartphone) abgelegt wird. Sie ermöglicht es der Website, nützliche Informationen zu speichern, um die Navigation zu erleichtern und Ihr Erlebnis zu verbessern.",
+          "Der Begriff „Cookie“ steht hier allgemein für alle Tracker, die beim Besuch der Website gesetzt oder gelesen werden."
+        ]
+      },
+      {
+        "title": "Unbedingt erforderliche Cookies",
+        "paragraphs": [
+          "Welcome Coworking verwendet ausschließlich Cookies, die für den ordnungsgemäßen Betrieb der Website unbedingt erforderlich sind. Diese Cookies erfordern gemäß den Vorgaben der CNIL und der DSGVO keine vorherige Einwilligung.",
+          "Sie dienen dazu, Ihre wesentlichen Einstellungen zu speichern, insbesondere Ihre Themenwahl (hell oder dunkel), und eine stabile Navigation zu gewährleisten."
+        ]
+      },
+      {
+        "title": "Cookies zur Reichweitenmessung",
+        "paragraphs": [
+          "Die Website setzt derzeit keine Cookies zur Reichweitenmessung, für Werbung oder für soziale Netzwerke. Es findet keine Werbeprofilbildung statt, und es werden keine Navigationsdaten zu Targeting-Zwecken an Dritte weitergegeben."
+        ]
+      },
+      {
+        "title": "Cookies Dritter",
+        "paragraphs": [
+          "Die einzigen auf der Website vorhandenen Verweise auf Dienste Dritter (Google Maps, WhatsApp-Schaltfläche, soziale Netzwerke) können bei Interaktion eigene Cookies setzen. Welcome Coworking hat keinen Einfluss auf diese Cookies und empfiehlt Ihnen, die jeweiligen Datenschutzerklärungen dieser Dienste zu lesen."
+        ]
+      },
+      {
+        "title": "Verwaltung der Cookies",
+        "paragraphs": [
+          "Sie können Ihren Browser jederzeit so einstellen, dass Cookies abgelehnt oder gelöscht werden. Das Deaktivieren der unbedingt erforderlichen Cookies kann jedoch die Funktionsweise der Website beeinträchtigen, insbesondere die Speicherung Ihrer Anzeigepräferenz.",
+          "Weitere Informationen zur Verwaltung von Cookies in Ihrem Browser finden Sie auf den entsprechenden Hilfeseiten von Google Chrome, Mozilla Firefox, Safari oder Microsoft Edge."
+        ]
+      },
+      {
+        "title": "Speicherdauer",
+        "paragraphs": [
+          "Die von Welcome Coworking gesetzten Cookies werden höchstens ein Jahr gespeichert. Danach werden sie automatisch gelöscht oder bei Ihrem nächsten Besuch entsprechend Ihrer Wahl erneuert."
+        ]
+      },
+      {
+        "title": "Änderungen",
+        "paragraphs": [
+          "Diese Cookie-Richtlinie kann jederzeit aktualisiert werden, um Änderungen unserer Praktiken oder gesetzlicher Pflichten abzubilden. Das Datum der letzten Aktualisierung ist am Seitenende angegeben."
+        ]
+      }
+    ]
+  },
+
+  "gestionCookies": {
+    "eyebrow": "Ihre Einstellungen",
+    "titleLead": "Cookies",
+    "titleHighlight": "verwalten",
+    "intro": "Diese Seite erklärt, wie Sie die bei Ihrem Besuch auf welcome-coworking.com gesetzten Cookies verwalten, aktivieren oder löschen.",
+    "contactSectionTitle": "Kontakt",
+    "guidesTitle": "Anleitungen je Browser",
+    "sections": [
+      {
+        "title": "Ihre Einstellungen bei Welcome Coworking",
+        "paragraphs": [
+          "Welcome Coworking setzt ausschließlich Cookies, die für den Betrieb der Website unbedingt erforderlich sind. Es werden keine Werbe-, Analyse- oder Social-Media-Cookies verwendet.",
+          "Die derzeit gesetzten Cookies dienen dazu, Ihre Anzeigepräferenz (heller oder dunkler Modus) zu speichern und Ihre Kenntnisnahme dieser erforderlichen Cookies festzuhalten."
+        ]
+      },
+      {
+        "title": "So verwalten Sie Cookies in Ihrem Browser",
+        "paragraphs": [
+          "Sie können Ihren Browser jederzeit so einstellen, dass Cookies akzeptiert, abgelehnt oder gelöscht werden. Das Vorgehen unterscheidet sich je nach Software leicht. Nachfolgend finden Sie die wichtigsten Schritte für die gängigsten Browser."
+        ]
+      },
+      {
+        "title": "Folgen der Ablehnung von Cookies",
+        "paragraphs": [
+          "Die Ablehnung der unbedingt erforderlichen Cookies kann die Funktionsweise einzelner Bereiche der Website beeinträchtigen. So wird Ihre Themenwahl (hell oder dunkel) möglicherweise nicht von Seite zu Seite oder von Besuch zu Besuch beibehalten.",
+          "Die Ablehnung von Cookies Dritter (Google Maps, WhatsApp, soziale Netzwerke) kann die Anzeige dieser eingebetteten Dienste oder die Interaktion mit ihnen einschränken."
+        ]
+      },
+      {
+        "title": "Kontakt",
+        "paragraphs": [
+          "Bei Fragen zu Cookies und zur Verwaltung Ihrer Einstellungen erreichen Sie uns unter folgender Adresse:"
+        ]
+      }
+    ],
+    "guides": [
+      {
+        "name": "Google Chrome",
+        "steps": [
+          "Klicken Sie oben rechts auf die drei Punkte und dann auf Einstellungen.",
+          "Wählen Sie unter Datenschutz und Sicherheit den Punkt Cookies und andere Websitedaten.",
+          "Aktivieren oder deaktivieren Sie Cookies nach Ihren Wünschen.",
+          "Um vorhandene Cookies zu löschen, klicken Sie auf Alle Cookies und Websitedaten ansehen."
+        ]
+      },
+      {
+        "name": "Mozilla Firefox",
+        "steps": [
+          "Öffnen Sie das Menü ☰ und dann Einstellungen.",
+          "Suchen Sie im Bereich Datenschutz & Sicherheit den Abschnitt Cookies und Website-Daten.",
+          "Wählen Sie die gewünschte Blockierstufe oder klicken Sie auf Daten verwalten, um Cookies zu löschen."
+        ]
+      },
+      {
+        "name": "Safari",
+        "steps": [
+          "Klicken Sie in der Menüleiste auf Safari > Einstellungen.",
+          "Wählen Sie den Tab Datenschutz.",
+          "Legen Sie unter Cookies und Websitedaten fest, ob Tracking verhindert oder erlaubt wird.",
+          "Klicken Sie auf Websitedaten verwalten, um vorhandene Cookies zu löschen."
+        ]
+      },
+      {
+        "name": "Microsoft Edge",
+        "steps": [
+          "Klicken Sie auf die drei Punkte und dann auf Einstellungen.",
+          "Gehen Sie zu Cookies und Websiteberechtigungen.",
+          "Verwalten und löschen Sie Cookies nach Ihren Wünschen."
+        ]
+      }
+    ]
+  },
+
+  "accessibilite": {
+    "titleLead": "Erklärung zur",
+    "titleHighlight": "Barrierefreiheit",
+    "intro": "Erklärung erstellt am 2. August 2026 für die Website welcome-coworking.com.",
+    "sections": [
+      {
+        "title": "Verpflichtung",
+        "paragraphs": [
+          "BUZZ CAPITAL, Herausgeber der Website welcome-coworking.com, verpflichtet sich, die Website möglichst vielen Menschen zugänglich zu machen, einschließlich Menschen mit Behinderung, im Sinne des französischen Referenzrahmens zur Verbesserung der Barrierefreiheit (RGAA 4.1) und der WCAG 2.1 Stufe AA.",
+          "Dies erfolgt freiwillig: als privates Unternehmen mit weniger als 250 Beschäftigten und einem Umsatz unter 250 Millionen Euro unterliegt die Website nicht der gesetzlichen Barrierefreiheitspflicht nach Artikel 47 des französischen Gesetzes Nr. 2005-102 vom 11. Februar 2005."
+        ]
+      },
+      {
+        "title": "Konformitätsstand",
+        "paragraphs": [
+          "Die Website welcome-coworking.com ist teilweise konform mit RGAA 4.1. Bislang wurde kein externes Audit zur Barrierefreiheit durchgeführt; die Bewertung beruht auf internen Prüfungen."
+        ]
+      },
+      {
+        "title": "Umgesetzte Maßnahmen",
+        "paragraphs": ["Die folgenden Vorkehrungen wurden bei der Gestaltung der Website getroffen:"],
+        "list": [
+          "Semantische Struktur der Inhalte (hierarchische Überschriften, Navigationsbereiche, ein einziger Hauptinhalt pro Seite).",
+          "Textalternativen für informationstragende Bilder und zugängliche Bezeichnungen für Schaltflächen mit reinen Symbolen.",
+          "Vollständige Tastaturnavigation mit sichtbarer Fokusanzeige.",
+          "Formularfelder mit eindeutigen Bezeichnungen und Fehlermeldungen in Textform.",
+          "Verstärkte Farbkontraste sowie ein vom Nutzer wählbarer heller oder dunkler Modus.",
+          "Responsive Oberfläche für Smartphone, Tablet und Computer, mit Zoom bis 200 % ohne Informationsverlust."
+        ]
+      },
+      {
+        "title": "Bekannte Einschränkungen",
+        "paragraphs": [
+          "Einige von Diensten Dritter bereitgestellte Inhalte sind möglicherweise nicht vollständig barrierefrei, insbesondere die eingebettete Google-Maps-Karte und das Widget für Google-Kundenbewertungen. Postadresse und Anfahrt stehen auch als Text zur Verfügung, und die Kontaktdaten bleiben telefonisch und per E-Mail erreichbar."
+        ]
+      },
+      {
+        "title": "Rückmeldung und Kontakt",
+        "paragraphs": [
+          "Wenn Sie Schwierigkeiten beim Zugriff auf Inhalte oder Dienste der Website haben, können Sie uns kontaktieren, um eine barrierefreie Alternative zu erhalten: per E-Mail an contact@welcome-coworking.com, telefonisch unter +33 6 22 80 55 36 oder per Post an BUZZ CAPITAL — 204 avenue de Colmar, 67100 Straßburg.",
+          "Wir verpflichten uns, innerhalb einer angemessenen Frist zu antworten und eine geeignete Lösung anzubieten."
+        ]
+      },
+      {
+        "title": "Rechtsbehelfe",
+        "paragraphs": [
+          "Bleibt eine Meldung ohne befriedigende Antwort, können Sie den französischen Défenseur des droits einschalten: Online-Formular unter formulaire.defenseurdesdroits.fr oder per Post (portofrei) an Défenseur des droits — Libre réponse 71120 — 75342 Paris CEDEX 07. Ein Beauftragter kann außerdem in Ihrem Département kontaktiert werden."
+        ]
+      }
+    ]
+  }
+}

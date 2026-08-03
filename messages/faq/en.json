@@ -1,0 +1,121 @@
+{
+  "eyebrow": "Frequently asked questions",
+  "titleLead": "Everything you need to know about",
+  "titleHighlight": "Welcome",
+  "cta": {
+    "title": "Another question?",
+    "lead": "Write to us or come and see the space for yourself: we reply quickly and arrange visits by appointment.",
+    "button": "Get in touch"
+  },
+  "categoryOrder": ["space", "pricing", "access", "booking", "about", "contact"],
+  "categories": {
+    "space": "The space & facilities",
+    "pricing": "Plans & pricing",
+    "access": "Location & getting here",
+    "booking": "Booking & commitment",
+    "about": "About Welcome",
+    "contact": "Contact & services"
+  },
+  "items": [
+    {
+      "category": "space",
+      "question": "What facilities are available to coworkers?",
+      "answer": "Fibre Wi-Fi, a fully equipped kitchen, a meeting room, lounge areas, a printer, lockers, self-service bikes and free parking around the building."
+    },
+    {
+      "category": "space",
+      "question": "Can the meeting room host video conferences?",
+      "answer": "Yes, the meeting room is equipped for hybrid meetings and video conferences, with a stable fibre connection and a shared screen on request."
+    },
+    {
+      "category": "space",
+      "question": "Is the site accessible to people with reduced mobility?",
+      "answer": "The building has step-free access and a lift. Do let us know your requirements when you visit so that we can support you as well as possible."
+    },
+    {
+      "category": "space",
+      "question": "Do you organise events or opportunities for coworkers to meet?",
+      "answer": "Welcome regularly hosts after-work gatherings, breakfasts and informal get-togethers to encourage professional connections and a friendly atmosphere."
+    },
+    {
+      "category": "pricing",
+      "question": "What working solutions does Welcome Coworking offer?",
+      "answer": "Three solutions: coworking in the open space for freelancers, enclosed private offices for teams, and meeting room rental by the hour or by the day. Kitchen, lounge area and fibre Wi-Fi are included."
+    },
+    {
+      "category": "pricing",
+      "question": "Can I come and work for a single day or by the hour?",
+      "answer": "Yes, the Nomad plan lets you book by the hour with no commitment, ideal for a one-off day or a few hours."
+    },
+    {
+      "category": "pricing",
+      "question": "Are the private offices genuinely enclosed and secure?",
+      "answer": "Yes, the private offices are fully enclosed spaces with 24/7 self-service access, where you can settle your team and your documents with complete peace of mind."
+    },
+    {
+      "category": "pricing",
+      "question": "What is the minimum commitment for a private office?",
+      "answer": "Private offices come with no minimum commitment, for maximum flexibility. Get in touch and we will look at the right arrangement for your team."
+    },
+    {
+      "category": "pricing",
+      "question": "Can I use Welcome as my company's business address?",
+      "answer": "Yes, depending on the plan you choose, Welcome can serve as your registered business address. Ask our team about the conditions."
+    },
+    {
+      "category": "pricing",
+      "question": "Can I receive business post at Welcome?",
+      "answer": "Yes, the plans generally include a business address and post handling. Contact us for the exact arrangements."
+    },
+    {
+      "category": "access",
+      "question": "Where is the Welcome coworking space in Strasbourg?",
+      "answer": "Welcome Coworking is at 204 avenue de Colmar, 67100 Strasbourg, by the Couffignal tram stop, with free parking, direct motorway access and an express cycle path into the city centre."
+    },
+    {
+      "category": "access",
+      "question": "How do I get to Welcome from Strasbourg station?",
+      "answer": "Take tram A or E towards Robertsau and get off at Couffignal, right at the foot of the building. Allow around 15 minutes from Strasbourg station."
+    },
+    {
+      "category": "access",
+      "question": "Is there parking for coworkers and their visitors?",
+      "answer": "Yes, parking is free around the building and easy to access, with direct links to the motorway and public transport."
+    },
+    {
+      "category": "access",
+      "question": "Are there shops or restaurants nearby?",
+      "answer": "The Robertsau district and the area around place de Haguenau offer bakeries, restaurants and shops a few minutes away on foot or by tram."
+    },
+    {
+      "category": "booking",
+      "question": "What are the access hours?",
+      "answer": "Members have access to the space 24 hours a day, 7 days a week. Introductory visits are by appointment, which you can request via the contact form, by phone on +33 6 22 80 55 36 or on WhatsApp."
+    },
+    {
+      "category": "booking",
+      "question": "Can I visit the space before committing?",
+      "answer": "Yes. Visits are free and come with no obligation: you see the spaces, the atmosphere and the services, then choose the plan that suits your pace."
+    },
+    {
+      "category": "booking",
+      "question": "How do I book the meeting room?",
+      "answer": "Bookings are made by phone, on WhatsApp or by email to contact@welcome-coworking.com. We will confirm availability and pricing promptly."
+    },
+    {
+      "category": "booking",
+      "question": "Can I occasionally bring in clients or colleagues?",
+      "answer": "Yes, you can host your guests in the shared areas or in the meeting room. Simply let us know in advance so that we can welcome them properly."
+    },
+    {
+      "category": "about",
+      "question": "How long has Welcome Coworking been running?",
+      "answer": "Welcome Coworking has been hosting companies in Strasbourg since 2017 and has supported more than 100 businesses, freelancers and remote-working teams."
+    },
+    {
+      "category": "contact",
+      "question": "What is the quickest way to contact Welcome Coworking?",
+      "answer": "By phone on +33 6 22 80 55 36, on WhatsApp, by email to contact@welcome-coworking.com, or directly via the contact form on this site."
+    }
+  ]
+}

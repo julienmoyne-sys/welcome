@@ -1,12 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import { Cookie, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+
+import { Link } from "@/i18n/navigation";
 
 const STORAGE_KEY = "welcome-cookie-notice";
 
 export function CookieBanner() {
+  const t = useTranslations("cookieBanner");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -36,25 +39,21 @@ export function CookieBanner() {
         </div>
 
         <div className="flex-1">
-          <p className="font-manrope text-[15px] font-semibold text-welcome-black">
-            Cookies et préférences
-          </p>
+          <p className="font-manrope text-[15px] font-semibold text-welcome-black">{t("title")}</p>
           <p className="mt-1 font-inter text-[13.5px] leading-[1.6] text-welcome-body">
-            Ce site utilise uniquement des cookies et un stockage local strictement nécessaires à
-            son fonctionnement (préférence de thème, affichage des avis Google). Aucun traceur
-            publicitaire n'est déposé.{" "}
+            {t("text")}{" "}
             <Link
               href="/politique-de-cookies"
               className="font-medium text-welcome-gold underline-offset-4 hover:underline"
             >
-              En savoir plus
+              {t("more")}
             </Link>
             {" · "}
             <Link
               href="/gestion-des-cookies"
               className="font-medium text-welcome-gold underline-offset-4 hover:underline"
             >
-              Gérer mes cookies
+              {t("manage")}
             </Link>
           </p>
         </div>
@@ -65,12 +64,12 @@ export function CookieBanner() {
             onClick={dismiss}
             className="inline-flex h-[46px] items-center justify-center rounded-[12px] bg-welcome-gold px-6 font-manrope text-[14.5px] font-semibold text-[#0b0b0b] transition-transform duration-200 hover:-translate-y-[1px]"
           >
-            J'ai compris
+            {t("accept")}
           </button>
           <button
             type="button"
             onClick={dismiss}
-            aria-label="Fermer le bandeau cookies"
+            aria-label={t("close")}
             className="inline-flex h-[46px] w-[46px] items-center justify-center rounded-[12px] border border-welcome-black/10 text-welcome-body transition-colors hover:bg-welcome-cream"
           >
             <X className="h-4 w-4" strokeWidth={1.8} />

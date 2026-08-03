@@ -12,6 +12,24 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   de: "Deutsch",
 };
 
+/**
+ * Drapeaux du sélecteur de langue.
+ *
+ * Des emoji et non des SVG : un `<option>` d'un `<select>` natif ne peut contenir
+ * que du texte. Le drapeau anglais est celui du Royaume-Uni, cohérent avec le tag
+ * `en_GB` ci-dessous.
+ *
+ * Windows ne possède pas de glyphes de drapeau dans ses polices emoji : le couple
+ * de lettres du code pays s'affiche à la place (« FR », « GB », « DE »). C'est la
+ * raison pour laquelle le libellé textuel est conservé à côté — le sélecteur reste
+ * parfaitement lisible dans ce cas.
+ */
+export const LOCALE_FLAGS: Record<Locale, string> = {
+  fr: "🇫🇷",
+  en: "🇬🇧",
+  de: "🇩🇪",
+};
+
 /** Codes de langue complets, pour `og:locale` et l'attribut `lang`. */
 export const LOCALE_TAGS: Record<Locale, string> = {
   fr: "fr_FR",

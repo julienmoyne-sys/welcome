@@ -1,0 +1,121 @@
+{
+  "eyebrow": "Häufige Fragen",
+  "titleLead": "Alles Wissenswerte über",
+  "titleHighlight": "Welcome",
+  "cta": {
+    "title": "Noch eine Frage?",
+    "lead": "Schreiben Sie uns oder schauen Sie vorbei: wir antworten schnell und vereinbaren Besichtigungstermine.",
+    "button": "Kontakt aufnehmen"
+  },
+  "categoryOrder": ["space", "pricing", "access", "booking", "about", "contact"],
+  "categories": {
+    "space": "Räume & Ausstattung",
+    "pricing": "Tarife & Preise",
+    "access": "Lage & Anfahrt",
+    "booking": "Buchung & Laufzeit",
+    "about": "Über Welcome",
+    "contact": "Kontakt & Services"
+  },
+  "items": [
+    {
+      "category": "space",
+      "question": "Welche Ausstattung steht den Coworkern zur Verfügung?",
+      "answer": "Glasfaser-WLAN, voll ausgestattete Küche, Besprechungsraum, Loungebereiche, Drucker, Schließfächer, Fahrräder zur freien Nutzung und kostenlose Parkplätze rund um das Gebäude."
+    },
+    {
+      "category": "space",
+      "question": "Ist der Besprechungsraum für Videokonferenzen geeignet?",
+      "answer": "Ja, der Besprechungsraum ist für hybride Meetings und Videokonferenzen ausgestattet, mit stabiler Glasfaserverbindung und auf Anfrage einem gemeinsamen Bildschirm."
+    },
+    {
+      "category": "space",
+      "question": "Ist der Standort für Menschen mit eingeschränkter Mobilität zugänglich?",
+      "answer": "Das Gebäude verfügt über einen schwellenlosen Zugang und einen Aufzug. Teilen Sie uns Ihre Bedürfnisse gerne bei der Besichtigung mit, damit wir Sie bestmöglich unterstützen können."
+    },
+    {
+      "category": "space",
+      "question": "Gibt es Veranstaltungen oder Gelegenheiten, andere Coworker kennenzulernen?",
+      "answer": "Welcome veranstaltet regelmäßig Afterworks, Frühstücke und informelle Treffen, um berufliche Begegnungen und ein gutes Miteinander zu fördern."
+    },
+    {
+      "category": "pricing",
+      "question": "Welche Arbeitsangebote bietet Welcome Coworking?",
+      "answer": "Drei Angebote: Coworking im Open Space für Selbstständige, geschlossene private Büros für Teams sowie die Vermietung des Besprechungsraums stunden- oder tageweise. Küche, Loungebereich und Glasfaser-WLAN sind inbegriffen."
+    },
+    {
+      "category": "pricing",
+      "question": "Kann ich auch nur einen Tag oder stundenweise arbeiten?",
+      "answer": "Ja, mit dem Tarif Nomade können Sie ohne Bindung stundenweise buchen — ideal für einen einzelnen Tag oder ein paar Stunden."
+    },
+    {
+      "category": "pricing",
+      "question": "Sind die privaten Büros wirklich geschlossen und gesichert?",
+      "answer": "Ja, die privaten Büros sind vollständig geschlossene Räume mit eigenständigem Zugang rund um die Uhr, in denen Sie Ihr Team und Ihre Unterlagen unbesorgt unterbringen können."
+    },
+    {
+      "category": "pricing",
+      "question": "Wie lange ist die Mindestlaufzeit für ein privates Büro?",
+      "answer": "Private Büros werden ohne Mindestlaufzeit angeboten, für größtmögliche Flexibilität. Sprechen Sie uns an, wir finden das passende Angebot für Ihr Team."
+    },
+    {
+      "category": "pricing",
+      "question": "Kann ich Welcome als Geschäftsadresse meines Unternehmens nutzen?",
+      "answer": "Ja, je nach gewähltem Tarif kann Welcome als Geschäftsadresse dienen. Erkundigen Sie sich bei unserem Team nach den Bedingungen."
+    },
+    {
+      "category": "pricing",
+      "question": "Kann ich Geschäftspost bei Welcome empfangen?",
+      "answer": "Ja, die Tarife umfassen in der Regel eine Geschäftsadresse und die Annahme von Post. Kontaktieren Sie uns für die genauen Modalitäten."
+    },
+    {
+      "category": "access",
+      "question": "Wo liegt der Coworking-Space Welcome in Straßburg?",
+      "answer": "Welcome Coworking befindet sich in der 204 avenue de Colmar, 67100 Straßburg, an der Tramhaltestelle Couffignal, mit kostenlosen Parkplätzen, direkter Autobahnanbindung und einem Radschnellweg in die Innenstadt."
+    },
+    {
+      "category": "access",
+      "question": "Wie komme ich vom Straßburger Bahnhof zu Welcome?",
+      "answer": "Mit der Tram A oder E Richtung Robertsau bis zur Haltestelle Couffignal, direkt am Gebäude. Rechnen Sie mit etwa 15 Minuten ab dem Bahnhof Straßburg."
+    },
+    {
+      "category": "access",
+      "question": "Gibt es Parkplätze für Coworker und ihre Besucher?",
+      "answer": "Ja, rund um das Gebäude ist das Parken kostenlos und leicht zugänglich, mit direkter Anbindung an Autobahn und öffentliche Verkehrsmittel."
+    },
+    {
+      "category": "access",
+      "question": "Gibt es Geschäfte oder Restaurants in der Nähe?",
+      "answer": "Das Viertel Robertsau und die Gegend um die Place de Haguenau bieten Bäckereien, Restaurants und Geschäfte, wenige Minuten zu Fuß oder mit der Tram entfernt."
+    },
+    {
+      "category": "booking",
+      "question": "Wie sind die Zugangszeiten?",
+      "answer": "Mitglieder haben rund um die Uhr an sieben Tagen der Woche Zugang. Erstbesichtigungen finden nach Vereinbarung statt — über das Kontaktformular, telefonisch unter +33 6 22 80 55 36 oder per WhatsApp."
+    },
+    {
+      "category": "booking",
+      "question": "Kann ich den Space vor einer Buchung besichtigen?",
+      "answer": "Ja. Die Besichtigung ist unverbindlich und kostenlos: Sie sehen die Räume, die Atmosphäre und die Leistungen und wählen anschließend den Tarif, der zu Ihrem Rhythmus passt."
+    },
+    {
+      "category": "booking",
+      "question": "Wie reserviere ich den Besprechungsraum?",
+      "answer": "Die Reservierung erfolgt telefonisch, per WhatsApp oder per E-Mail an contact@welcome-coworking.com. Wir bestätigen Verfügbarkeit und Preise zeitnah."
+    },
+    {
+      "category": "booking",
+      "question": "Kann ich gelegentlich Kunden oder Kollegen mitbringen?",
+      "answer": "Ja, Sie können Ihre Gäste in den Gemeinschaftsbereichen oder im Besprechungsraum empfangen. Sagen Sie uns einfach vorab Bescheid, damit wir den Empfang organisieren können."
+    },
+    {
+      "category": "about",
+      "question": "Seit wann gibt es Welcome Coworking?",
+      "answer": "Welcome Coworking empfängt seit 2017 Unternehmen in Straßburg und hat über 100 Firmen, Selbstständige und Teams im Homeoffice begleitet."
+    },
+    {
+      "category": "contact",
+      "question": "Wie erreiche ich Welcome Coworking am schnellsten?",
+      "answer": "Telefonisch unter +33 6 22 80 55 36, per WhatsApp, per E-Mail an contact@welcome-coworking.com oder direkt über das Kontaktformular dieser Website."
+    }
+  ]
+}

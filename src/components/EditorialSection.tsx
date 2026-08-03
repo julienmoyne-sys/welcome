@@ -1,24 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import editorialImage from "../assets/editorial-welcome.jpg";
 
-const benefits = [
-  {
-    title: "Se concentrer",
-    text: "Des espaces adaptés à chaque façon de travailler.",
-  },
-  {
-    title: "Respirer",
-    text: "Une atmosphère chaleureuse, végétale et lumineuse.",
-  },
-  {
-    title: "Partager",
-    text: "Un lieu à taille humaine, propice aux rencontres.",
-  },
-];
-
 export function EditorialSection() {
+  const t = useTranslations("editorial");
+  const benefits = t.raw("benefits") as { title: string; text: string }[];
+
   return (
     <section className="bg-welcome-cream py-24 sm:py-28 lg:py-[120px]">
       <div className="mx-auto w-full max-w-[1280px] px-6 lg:px-10">
@@ -29,7 +18,7 @@ export function EditorialSection() {
               {/* Dimensions intrinsèques fournies par l'import statique. */}
               <Image
                 src={editorialImage}
-                alt="Espace de coworking lumineux avec bois, plantes et verrières noires"
+                alt={t("imageAlt")}
                 className="welcome-photo h-[420px] w-full object-cover sm:h-[520px] lg:h-[620px]"
                 /*
                  * Largeur réelle du créneau, et non `100vw` / `48vw` : le conteneur
@@ -48,17 +37,15 @@ export function EditorialSection() {
           {/* Text column — 52% on desktop */}
           <div className="w-full lg:w-[52%]">
             <p className="font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage">
-              L’esprit Welcome
+              {t("eyebrow")}
             </p>
             <h2 className="mt-4 font-manrope text-[36px] font-bold leading-[1.12] tracking-tight text-welcome-black sm:text-[42px] lg:text-[48px] xl:text-[56px]">
-              On travaille mieux…
+              {t("titleLine1")}
               <br />
-              <span className="text-welcome-gold">quand on se sent bien.</span>
+              <span className="text-welcome-gold">{t("titleLine2")}</span>
             </h2>
             <p className="mt-6 max-w-xl font-inter text-lg leading-[1.7] text-welcome-body">
-              Nous avons imaginé Welcome comme un lieu où l’on prend plaisir à commencer sa journée.
-              Ici, la lumière, le confort, les échanges et la sérénité font pleinement partie de
-              l’expérience de travail.
+              {t("lead")}
             </p>
 
             {/* Benefits grid */}
@@ -80,7 +67,7 @@ export function EditorialSection() {
                 href="/#espaces"
                 className="inline-flex items-center justify-center rounded-[12px] border border-welcome-black/20 bg-transparent px-[26px] py-[15px] font-manrope text-[16px] font-semibold text-welcome-black transition-all duration-200 hover:bg-welcome-black hover:text-welcome-ink-fg"
               >
-                Découvrir les espaces
+                {t("cta")}
               </Link>
             </div>
           </div>

@@ -1,71 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import { TrainFront, Bike, Car, Trophy } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 import { useReveal } from "../hooks/useReveal";
 import logoRond from "../assets/welcome-logo-rond.jpg";
 
-const cards = [
-  {
-    Icon: TrainFront,
-    title: "Tram au pied de l’immeuble",
-    text: "L’arrêt Couffignal vous dépose à quelques mètres de l’entrée.",
-  },
-  {
-    Icon: Bike,
-    title: "Autoroute à vélo",
-    text: "Rejoignez rapidement Strasbourg Centre ou Illkirch grâce à la piste cyclable rapide.",
-  },
-  {
-    Icon: Car,
-    title: "Accès immédiat",
-    text: "Autoroute à quelques minutes et parking gratuit.",
-  },
-  {
-    Icon: Trophy,
-    title: "Un quartier vivant",
-    text: "À proximité immédiate du stade de la Meinau, des commerces, restaurants et services.",
-  },
+// L'ordre des icônes suit celui du tableau `access.cards` des messages.
+const CARD_ICONS = [TrainFront, Bike, Car, Trophy];
+
+/** Position de chaque repère sur la carte schématique, indépendante de la langue. */
+const MAP_NODES = [
+  { key: "center", x: 300, y: 58, align: "center" as const },
+  { key: "illkirch", x: 300, y: 400, align: "center" as const },
+  { key: "motorway", x: 74, y: 252, align: "start" as const },
+  { key: "stadium", x: 526, y: 252, align: "end" as const },
+  { key: "tram", x: 360, y: 170, align: "start" as const },
 ];
 
 function MapIllustration({ visible }: { visible: boolean }) {
-  const nodes = [
-    {
-      label: "Strasbourg Centre",
-      sub: "10 min en vélo",
-      x: 300,
-      y: 58,
-      align: "center" as const,
-    },
-    {
-      label: "Illkirch",
-      sub: "10 min en vélo",
-      x: 300,
-      y: 400,
-      align: "center" as const,
-    },
-    {
-      label: "Autoroute",
-      sub: "Gare et Aéroport à 15min",
-      x: 74,
-      y: 252,
-      align: "start" as const,
-    },
-    {
-      label: "Stade de la Meinau",
-      sub: "5 minutes à pied",
-      x: 526,
-      y: 252,
-      align: "end" as const,
-    },
-    {
-      label: "Tram Couffignal",
-      sub: "Au pied de l’immeuble",
-      x: 360,
-      y: 170,
-      align: "start" as const,
-    },
-  ];
+  const t = useTranslations("access.map");
+  const nodes = MAP_NODES.map((node) => ({
+    ...node,
+    label: t(`nodes.${node.key}.label`),
+    sub: t(`nodes.${node.key}.sub`),
+  }));
 
   return (
     <div className="relative overflow-hidden rounded-[20px] border border-welcome-black/[0.07] bg-welcome-white p-4 shadow-[0_18px_50px_-30px_rgba(11,11,11,0.28)] sm:p-8">
@@ -73,7 +33,7 @@ function MapIllustration({ visible }: { visible: boolean }) {
         viewBox="0 0 600 460"
         className="h-auto w-full"
         role="img"
-        aria-label="Carte schématique des accès autour de Welcome : tram Couffignal au pied de l'immeuble, Strasbourg Centre et Illkirch à 10 minutes en vélo, autoroute à 2 minutes, stade de la Meinau à 5 minutes à pied"
+        aria-label={t("ariaLabel")}
       >
         {/* subtle grid */}
         <g stroke="var(--welcome-black)" strokeOpacity="0.04">
@@ -198,6 +158,8 @@ function MapIllustration({ visible }: { visible: boolean }) {
 }
 
 export function AccessSection() {
+  const t = useTranslations("access");
+  const cards = t.raw("cards") as { title: string; text: string }[];
   const header = useReveal<HTMLDivElement>();
   const grid = useReveal<HTMLDivElement>();
   const bottom = useReveal<HTMLDivElement>();
@@ -217,14 +179,13 @@ export function AccessSection() {
             id="acces"
             className="scroll-mt-[120px] font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage"
           >
-            Accès
+            {t("eyebrow")}
           </p>
           <h2 className="mt-4 font-manrope text-[36px] font-bold leading-[1.12] tracking-tight text-welcome-black sm:text-[42px] lg:text-[52px]">
-            Tout est à quelques <span className="text-welcome-gold">minutes.</span>
+            {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span>
           </h2>
           <p className="mt-6 max-w-2xl font-inter text-lg leading-[1.7] text-welcome-body">
-            Que vous veniez en tram, à vélo ou en voiture, Welcome est idéalement situé pour
-            simplifier chacune de vos journées.
+            {t("lead")}
           </p>
         </div>
 
@@ -240,7 +201,9 @@ export function AccessSection() {
           </div>
 
           <div className="flex w-full flex-col gap-5 lg:w-[40%]">
-            {cards.map(({ Icon, title, text }, i) => (
+            {cards.map(({ title, text }, i) => {
+              const Icon = CARD_ICONS[i];
+              return (
               <div
                 key={title}
                 className="group rounded-[20px] border border-welcome-black/[0.07] bg-welcome-white p-6 shadow-[0_10px_30px_-24px_rgba(11,11,11,0.35)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_18px_40px_-24px_rgba(11,11,11,0.35)]"
@@ -264,7 +227,8 @@ export function AccessSection() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -277,13 +241,12 @@ export function AccessSection() {
           }}
         >
           <p className="mb-5 text-center font-inter text-[15px] font-medium text-welcome-body/80 sm:text-base">
-            Tram A et E (Arrêt Couffignal) | Gare Strasbourg à 15min | Aéroport de Strasbourg à
-            20min
+            {t("transitLine")}
           </p>
 
           <div className="relative overflow-hidden rounded-[20px] border border-welcome-black/[0.07] shadow-[0_18px_50px_-30px_rgba(11,11,11,0.28)]">
             <iframe
-              title="Carte de localisation de Welcome Coworking, 204 avenue de Colmar, Strasbourg"
+              title={t("mapTitle")}
               src="https://www.google.com/maps?q=204+Avenue+de+Colmar,+67100+Strasbourg&output=embed&z=15"
               className="welcome-map h-[420px] w-full border-0"
               loading="lazy"
@@ -296,7 +259,7 @@ export function AccessSection() {
               href="/#contact"
               className="inline-flex h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg active:scale-[0.99]"
             >
-              Organiser une visite
+              {t("ctaVisit")}
             </Link>
             <a
               href="https://www.google.com/maps/dir/?api=1&destination=204%20avenue%20de%20Colmar%2C%2067100%20Strasbourg"
@@ -304,7 +267,7 @@ export function AccessSection() {
               rel="noopener noreferrer"
               className="inline-flex h-[52px] items-center justify-center rounded-[12px] border border-welcome-black/20 bg-transparent px-8 font-manrope text-[16px] font-semibold text-welcome-black transition-all duration-200 hover:bg-welcome-black hover:text-welcome-ink-fg active:scale-[0.99]"
             >
-              Voir l’itinéraire
+              {t("ctaRoute")}
             </a>
           </div>
         </div>

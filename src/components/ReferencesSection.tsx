@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Trophy } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useReveal } from "../hooks/useReveal";
 import { GoogleReviews } from "./GoogleReviews";
 
@@ -46,6 +47,7 @@ const clientLogos = [
 ];
 
 export function ReferencesSection() {
+  const t = useTranslations("references");
   const { ref, visible } = useReveal<HTMLElement>();
 
   return (
@@ -61,17 +63,17 @@ export function ReferencesSection() {
             id="references"
             className="scroll-mt-[120px] font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage"
           >
-            Références
+            {t("eyebrow")}
           </p>
           <h2 className="mt-4 font-manrope text-4xl font-semibold leading-[1.12] tracking-tight text-welcome-black md:text-5xl">
-            Ils nous ont fait <span className="text-welcome-gold">confiance</span>.
+            {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span>.
           </h2>
         </div>
 
         {/* Logo carousel */}
         <div
           className="welcome-marquee relative mt-16 overflow-hidden rounded-2xl bg-welcome-white p-6 shadow-[0_2px_24px_rgba(11,11,11,0.05)] ring-1 ring-welcome-black/5"
-          aria-label="Clients ayant choisi Welcome Coworking"
+          aria-label={t("carouselLabel")}
         >
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-welcome-white to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-welcome-white to-transparent" />
@@ -84,7 +86,7 @@ export function ReferencesSection() {
                 {/* La seconde moitié du défilement est un doublon décoratif. */}
                 <Image
                   src={logo.src}
-                  alt={i >= clientLogos.length ? "" : `Logo ${logo.name}`}
+                  alt={i >= clientLogos.length ? "" : t("logoAlt", { name: logo.name })}
                   aria-hidden={i >= clientLogos.length}
                   sizes="220px"
                   className="max-h-[104px] w-auto max-w-full object-contain opacity-80 grayscale transition-all duration-300 hover:scale-105 hover:opacity-100 hover:grayscale-0 dark:opacity-95 dark:invert"
@@ -96,8 +98,10 @@ export function ReferencesSection() {
 
         {/* Stats line */}
         <p className="mt-10 text-center font-inter text-[17px] leading-[1.7] text-welcome-body/80">
-          Plus de <span className="font-semibold text-welcome-black">100 entreprises</span>{" "}
-          accompagnées depuis <span className="font-semibold text-welcome-black">2017</span>.
+          {t("statsBefore")}{" "}
+          <span className="font-semibold text-welcome-black">{t("statsCompanies")}</span>{" "}
+          {t("statsMiddle")}{" "}
+          <span className="font-semibold text-welcome-black">{t("statsYear")}</span>.
         </p>
 
         {/* Awards */}
@@ -110,16 +114,18 @@ export function ReferencesSection() {
           >
             <span className="flex h-14 w-14 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-welcome-gold/10 text-welcome-gold">
               <Trophy size={22} strokeWidth={2} />
-              <span className="font-manrope text-xs font-bold">2019</span>
+              <span className="font-manrope text-xs font-bold">
+                {t("awards.coworker.year")}
+              </span>
             </span>
             <div>
               <p className="font-manrope text-base font-semibold leading-snug text-welcome-black sm:text-lg">
-                Élu meilleur espace de coworking à Strasbourg
+                {t("awards.coworker.title")}
               </p>
               <p className="mt-1 font-inter text-[15px] text-welcome-body/70">
-                par les utilisateurs du site{" "}
+                {t("awards.coworker.sourcePrefix")}{" "}
                 <span className="font-medium text-welcome-gold underline-offset-2 group-hover:underline">
-                  coworker.com
+                  {t("awards.coworker.sourceName")}
                 </span>
               </p>
             </div>
@@ -133,16 +139,16 @@ export function ReferencesSection() {
           >
             <span className="flex h-14 w-14 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-welcome-gold/10 text-welcome-gold">
               <Trophy size={22} strokeWidth={2} />
-              <span className="font-manrope text-xs font-bold">2026</span>
+              <span className="font-manrope text-xs font-bold">{t("awards.desk.year")}</span>
             </span>
             <div>
               <p className="font-manrope text-base font-semibold leading-snug text-welcome-black sm:text-lg">
-                Classé 2ème meilleur espace de coworking à Strasbourg
+                {t("awards.desk.title")}
               </p>
               <p className="mt-1 font-inter text-[15px] text-welcome-body/70">
-                par le site{" "}
+                {t("awards.desk.sourcePrefix")}{" "}
                 <span className="font-medium text-welcome-gold underline-offset-2 group-hover:underline">
-                  Desk
+                  {t("awards.desk.sourceName")}
                 </span>
               </p>
             </div>

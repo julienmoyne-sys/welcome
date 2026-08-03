@@ -1,0 +1,338 @@
+{
+  "metadata": {
+    "site": {
+      "title": "Welcome Coworking Straßburg",
+      "description": "Welcome Coworking in Straßburg: Open Space, private Büros und Besprechungsraum in einer hellen, einladenden Umgebung.",
+      "ogDescription": "Open Space, private Büros und Besprechungsraum in Straßburg, 204 avenue de Colmar."
+    },
+    "home": {
+      "title": "Coworking in Straßburg — Welcome Coworking | Büros & Open Space",
+      "description": "Premium-Coworking in Straßburg: Open Space, private Büros und Besprechungsraum in der 204 avenue de Colmar. Tramhaltestelle Couffignal, kostenlose Parkplätze, Zugang rund um die Uhr.",
+      "ogTitle": "Coworking in Straßburg — Welcome Coworking",
+      "ogDescription": "Open Space, private Büros und Besprechungsraum in einer hellen, einladenden Umgebung in Straßburg. Über 100 Unternehmen seit 2017."
+    },
+    "faq": {
+      "title": "FAQ — Häufige Fragen zu Welcome Coworking Straßburg",
+      "description": "Alle Antworten zu Welcome Coworking in Straßburg: Preise, Zugang rund um die Uhr, private Büros, Besprechungsraum, Parken und Besichtigung.",
+      "ogTitle": "FAQ — Welcome Coworking Straßburg",
+      "ogDescription": "Häufige Fragen zum Coworking bei Welcome in Straßburg: Tarife, Öffnungszeiten, Leistungen und Terminvereinbarung."
+    },
+    "mentionsLegales": {
+      "title": "Impressum — Welcome Coworking Straßburg",
+      "description": "Impressum von Welcome Coworking, Coworking-Space in Straßburg, betrieben von BUZZ CAPITAL (SAS), 204 avenue de Colmar, 67100 Straßburg.",
+      "ogTitle": "Impressum — Welcome Coworking",
+      "ogDescription": "Herausgeber, Hosting, geistiges Eigentum und personenbezogene Daten der Website von Welcome Coworking in Straßburg."
+    },
+    "cgu": {
+      "title": "Nutzungsbedingungen — Welcome Coworking",
+      "description": "Nutzungsbedingungen der Website welcome-coworking.com, herausgegeben von BUZZ CAPITAL (SAS), Coworking-Space in Straßburg.",
+      "ogTitle": "Nutzungsbedingungen — Welcome Coworking",
+      "ogDescription": "Regeln für Zugang und Nutzung der Website von Welcome Coworking: Inhalte, Kontaktformular, Haftung und anwendbares Recht."
+    },
+    "confidentialite": {
+      "title": "Datenschutzerklärung — Welcome Coworking Straßburg",
+      "description": "Datenschutzerklärung von Welcome Coworking: Erhebung, Verwendung, Speicherung und Ihre Rechte in Bezug auf personenbezogene Daten.",
+      "ogTitle": "Datenschutzerklärung — Welcome Coworking",
+      "ogDescription": "Erhebung, Verwendung, Speicherung und Rechte in Bezug auf Ihre personenbezogenen Daten auf welcome-coworking.com."
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie — Welcome Coworking Straßburg",
+      "description": "Cookie-Richtlinie von Welcome Coworking: welche Tracker die Website verwendet, wozu sie dienen und wie Sie Ihre Einstellungen verwalten.",
+      "ogTitle": "Cookie-Richtlinie — Welcome Coworking",
+      "ogDescription": "Die auf welcome-coworking.com verwendeten Cookies und Tracker sowie die Verwaltung Ihrer Einstellungen."
+    },
+    "gestionCookies": {
+      "title": "Cookies verwalten — Welcome Coworking Straßburg",
+      "description": "Verwalten Sie Ihre Cookie-Einstellungen auf der Website von Welcome Coworking. Erfahren Sie, wie Sie Cookies je nach Browser aktivieren, deaktivieren oder löschen.",
+      "ogTitle": "Cookies verwalten — Welcome Coworking",
+      "ogDescription": "So verwalten, aktivieren oder löschen Sie Cookies auf welcome-coworking.com."
+    },
+    "accessibilite": {
+      "title": "Erklärung zur Barrierefreiheit — Welcome Coworking",
+      "description": "Erklärung zur digitalen Barrierefreiheit der Website welcome-coworking.com: Konformitätsstand, umgesetzte Maßnahmen und Kontakt bei Zugangsschwierigkeiten.",
+      "ogTitle": "Erklärung zur Barrierefreiheit — Welcome Coworking",
+      "ogDescription": "Konformitätsstand, eingesetzte Technologien und Rechtsbehelfe zur Barrierefreiheit der Website von Welcome Coworking."
+    }
+  },
+
+  "nav": {
+    "homeLabel": "Welcome Coworking — Startseite",
+    "espaces": "Räume",
+    "solutions": "Angebote",
+    "references": "Referenzen",
+    "acces": "Anfahrt",
+    "contact": "Kontakt",
+    "cta": "Besichtigung buchen",
+    "languageLabel": "Sprache wählen",
+    "themeLabel": "Dunklen Modus aktivieren"
+  },
+
+  "hero": {
+    "eyebrow": "Willkommen bei Welcome.",
+    "titleLine1": "Wie zu Hause.",
+    "titleLine2": "Nur viel inspirierender.",
+    "lead": "Entdecken Sie einen Ort, an dem der Komfort eines Wohnzimmers, die Energie einer Gemeinschaft und die Leistungen eines Premium-Büros zusammenkommen.",
+    "ctaVisit": "Besichtigung buchen",
+    "ctaWhatsapp": "WhatsApp",
+    "ctaDiscover": "Welcome entdecken",
+    "imageAlt": "Coworking-Space Welcome mit Holztheke, schwarzen Sprossenfenstern, Pflanzen und warmer Beleuchtung"
+  },
+
+  "reassurance": {
+    "items": [
+      { "title": "Warme Atmosphäre", "text": "Holz, Licht und Pflanzen" },
+      { "title": "Tram vor der Tür", "text": "Haltestelle Couffignal" },
+      { "title": "Radschnellweg", "text": "Straßburg und Illkirch" },
+      { "title": "Gut erreichbar", "text": "Autobahn und kostenlose Parkplätze" },
+      { "title": "Seit 2017", "text": "Über 100 Unternehmen zu Gast" }
+    ]
+  },
+
+  "editorial": {
+    "eyebrow": "Der Welcome-Geist",
+    "titleLine1": "Man arbeitet besser…",
+    "titleLine2": "wenn man sich wohlfühlt.",
+    "lead": "Wir haben Welcome als Ort gestaltet, an dem man den Tag gerne beginnt. Licht, Komfort, Austausch und Ruhe sind hier fester Teil des Arbeitserlebnisses.",
+    "benefits": [
+      { "title": "Konzentrieren", "text": "Räume für jede Art zu arbeiten." },
+      { "title": "Aufatmen", "text": "Eine warme Atmosphäre voller Pflanzen und Tageslicht." },
+      { "title": "Teilen", "text": "Ein Ort mit menschlichem Maß, gemacht für Begegnungen." }
+    ],
+    "cta": "Räume entdecken",
+    "imageAlt": "Heller Coworking-Space mit Holz, Pflanzen und schwarzen Sprossenfenstern"
+  },
+
+  "explore": {
+    "eyebrow": "Die Räume",
+    "titleLine1": "Ein Ort, gedacht",
+    "titleLine2": "für jede Art zu",
+    "titleHighlight": "arbeiten",
+    "lead": "Entdecken Sie einen hellen, einladenden und wandelbaren Ort, an dem jeder ganz selbstverständlich seinen Platz findet.",
+    "cta": "Mehr erfahren",
+    "cards": {
+      "openSpace": {
+        "title": "Open Space",
+        "text": "Arbeiten Sie in einer hellen und ruhigen Umgebung.",
+        "alt": "Heller Open Space mit Holztischen, schwarzen Sprossenfenstern und Hängepflanzen"
+      },
+      "privateOffices": {
+        "title": "Private Büros",
+        "text": "Geschlossene Räume für vertrauliches Arbeiten.",
+        "alt": "Private Büros mit Glastrennwand, Holzschreibtisch und warmer Beleuchtung"
+      },
+      "meetingRoom": {
+        "title": "Besprechungsraum",
+        "text": "Empfangen Sie Ihre Teams und Kunden in einem Premium-Rahmen.",
+        "alt": "Hochwertiger Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm"
+      },
+      "kitchenLounge": {
+        "title": "Küche & Lounge",
+        "text": "Machen Sie Pause wie zu Hause.",
+        "alt": "Küchen- und Loungebereich mit hellen Sofas, Holztheke und grünen Pflanzen"
+      }
+    }
+  },
+
+  "pricing": {
+    "eyebrow": "Unsere Angebote",
+    "title": "Wählen Sie Ihren Rhythmus.",
+    "lead": "Ob Sie gelegentlich vorbeikommen oder das ganze Jahr bleiben: wir haben einfache Angebote in intimen Räumen ab 20 € netto / Monat gestaltet.",
+    "compare": "Vergleichen",
+    "learnMore": "Mehr erfahren",
+    "plans": {
+      "nomad": {
+        "name": "Nomade",
+        "features": [
+          "Ohne Mindestlaufzeit",
+          "Glasfaser-Internet",
+          "Eigenständiger Zugang",
+          "Stundenweise buchbar"
+        ]
+      },
+      "openSpace": {
+        "name": "Open Space",
+        "features": ["Flexibler Zugang", "Glasfaser-Internet", "Kaffee", "Drucken"]
+      },
+      "privateOffice": {
+        "name": "Privates Büro",
+        "features": [
+          "Geschlossenes Büro",
+          "Gesicherter Zugang",
+          "Hochwertiges Mobiliar",
+          "Glasfaser-Internet"
+        ]
+      },
+      "meetingRoom": {
+        "name": "Besprechungsraum",
+        "features": ["Bildschirm", "Videokonferenz", "Bis zu 12 Personen", "Einfache Buchung"]
+      }
+    }
+  },
+
+  "references": {
+    "eyebrow": "Referenzen",
+    "titleLead": "Sie haben uns ihr",
+    "titleHighlight": "Vertrauen geschenkt",
+    "carouselLabel": "Unternehmen, die sich für Welcome Coworking entschieden haben",
+    "logoAlt": "Logo {name}",
+    "statsBefore": "Über",
+    "statsCompanies": "100 Unternehmen",
+    "statsMiddle": "begleitet seit",
+    "statsYear": "2017",
+    "awards": {
+      "coworker": {
+        "year": "2019",
+        "title": "Zum besten Coworking-Space in Straßburg gewählt",
+        "sourcePrefix": "von den Nutzern von",
+        "sourceName": "coworker.com"
+      },
+      "desk": {
+        "year": "2026",
+        "title": "Platz 2 der besten Coworking-Spaces in Straßburg",
+        "sourcePrefix": "laut",
+        "sourceName": "Desk"
+      }
+    }
+  },
+
+  "access": {
+    "eyebrow": "Anfahrt",
+    "titleLead": "Alles ist nur wenige",
+    "titleHighlight": "Minuten entfernt.",
+    "lead": "Ob mit der Tram, dem Fahrrad oder dem Auto: Welcome liegt ideal, um Ihnen jeden Tag zu erleichtern.",
+    "cards": [
+      {
+        "title": "Tram vor der Tür",
+        "text": "Die Haltestelle Couffignal liegt wenige Meter vom Eingang entfernt."
+      },
+      {
+        "title": "Radschnellweg",
+        "text": "Über den Radschnellweg schnell in die Straßburger Innenstadt oder nach Illkirch."
+      },
+      {
+        "title": "Sofort erreichbar",
+        "text": "Autobahn in wenigen Minuten und kostenlose Parkplätze."
+      },
+      {
+        "title": "Ein lebendiges Viertel",
+        "text": "Direkt neben dem Stade de la Meinau, Geschäften, Restaurants und Dienstleistern."
+      }
+    ],
+    "map": {
+      "ariaLabel": "Schematische Karte der Anbindung rund um Welcome: Tramhaltestelle Couffignal vor der Tür, Straßburger Innenstadt und Illkirch 10 Minuten mit dem Fahrrad, Autobahn 2 Minuten, Stade de la Meinau 5 Minuten zu Fuß",
+      "nodes": {
+        "center": { "label": "Straßburg Innenstadt", "sub": "10 Min. mit dem Rad" },
+        "illkirch": { "label": "Illkirch", "sub": "10 Min. mit dem Rad" },
+        "motorway": { "label": "Autobahn", "sub": "Bahnhof und Flughafen 15 Min." },
+        "stadium": { "label": "Stade de la Meinau", "sub": "5 Minuten zu Fuß" },
+        "tram": { "label": "Tram Couffignal", "sub": "Direkt vor der Tür" }
+      }
+    },
+    "transitLine": "Tram A und E (Haltestelle Couffignal) | Bahnhof Straßburg 15 Min. | Flughafen Straßburg 20 Min.",
+    "mapTitle": "Lagekarte von Welcome Coworking, 204 avenue de Colmar, Straßburg",
+    "ctaVisit": "Besichtigung buchen",
+    "ctaRoute": "Route anzeigen"
+  },
+
+  "contact": {
+    "eyebrow": "Kontakt",
+    "titleLead": "Und wenn Ihr nächster Arbeitstag",
+    "titleHighlight": "hier",
+    "lead": "Möchten Sie Welcome besichtigen, einen Raum buchen oder sich einfach umsehen? Wir freuen uns auf Sie.",
+    "photoAlt": "Coworking-Space Welcome",
+    "whatsapp": {
+      "title": "Eine Frage stellen",
+      "text": "Eine kurze Frage? Schreiben Sie uns direkt über WhatsApp, wir antworten schnellstmöglich.",
+      "cta": "WhatsApp"
+    },
+    "info": {
+      "title": "Informationen",
+      "nameLabel": "Welcome Coworking",
+      "address": "204 avenue de Colmar, 67100 Straßburg",
+      "phoneLabel": "Telefon",
+      "phone": "+33 6 22 80 55 36",
+      "emailLabel": "E-Mail-Adresse",
+      "hoursLabel": "Öffnungszeiten",
+      "hours": "Mitglieder: rund um die Uhr / Besichtigungen: nach Vereinbarung"
+    },
+    "form": {
+      "title": "Besichtigung buchen",
+      "lead": "Erzählen Sie uns von Ihrem Bedarf. Wir melden uns schnell für einen Termin.",
+      "name": "Name",
+      "namePlaceholder": "Ihr Name",
+      "company": "Unternehmen",
+      "optional": "(optional)",
+      "companyPlaceholder": "Ihr Unternehmen",
+      "email": "E-Mail-Adresse",
+      "emailPlaceholder": "sie@beispiel.de",
+      "phone": "Telefon",
+      "phonePlaceholder": "+33 6 12 34 56 78",
+      "needLabel": "Ihr Bedarf",
+      "needs": [
+        "Open Space",
+        "Privates Büro",
+        "Besprechungsraum",
+        "Veranstaltungsraum",
+        "Sonstiges"
+      ],
+      "message": "Nachricht",
+      "messagePlaceholder": "Erzählen Sie uns mehr über Ihr Vorhaben...",
+      "rgpd": "Ich bin damit einverstanden, dass Welcome Coworking meine Angaben zur Beantwortung meiner Anfrage speichert, gemäß der Datenschutzerklärung.",
+      "submit": "Senden",
+      "submitting": "Wird gesendet...",
+      "success": "Vielen Dank für Ihre Nachricht. Wir melden uns sehr bald bei Ihnen.",
+      "error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    },
+    "validation": {
+      "nameRequired": "Name ist erforderlich",
+      "emailInvalid": "Ungültige E-Mail-Adresse",
+      "needRequired": "Bitte geben Sie Ihren Bedarf an",
+      "messageRequired": "Nachricht ist erforderlich",
+      "rgpdRequired": "Bitte akzeptieren Sie die Datenschutzerklärung"
+    }
+  },
+
+  "footer": {
+    "faqLink": "Häufige Fragen (FAQ)",
+    "legal": {
+      "mentionsLegales": "Impressum",
+      "cgu": "Nutzungsbedingungen",
+      "confidentialite": "Datenschutzerklärung",
+      "cookies": "Cookie-Richtlinie",
+      "gestionCookies": "Cookies verwalten",
+      "accessibilite": "Barrierefreiheit"
+    },
+    "copyright": "© 2026 Welcome Coworking – Alle Rechte vorbehalten."
+  },
+
+  "cookieBanner": {
+    "title": "Cookies und Einstellungen",
+    "text": "Diese Website verwendet ausschließlich Cookies und lokalen Speicher, die für den Betrieb unbedingt erforderlich sind (Themenwahl, Anzeige der Google-Bewertungen). Es werden keine Werbetracker gesetzt.",
+    "more": "Mehr erfahren",
+    "manage": "Cookies verwalten",
+    "accept": "Verstanden",
+    "close": "Cookie-Hinweis schließen"
+  },
+
+  "errors": {
+    "notFound": {
+      "title": "Seite nicht gefunden — Welcome Coworking",
+      "code": "404",
+      "heading": "Seite nicht gefunden",
+      "text": "Diese Seite existiert nicht oder wurde verschoben.",
+      "cta": "Zurück zur Startseite"
+    },
+    "boundary": {
+      "heading": "Diese Seite konnte nicht geladen werden",
+      "text": "Auf unserer Seite ist ein Problem aufgetreten. Sie können es erneut versuchen oder zur Startseite zurückkehren.",
+      "retry": "Erneut versuchen",
+      "home": "Zurück zur Startseite"
+    }
+  },
+
+  "common": {
+    "backHome": "Zurück zur Startseite",
+    "lastUpdated": "Letzte Aktualisierung: August 2026",
+    "legalEyebrow": "Rechtliche Hinweise"
+  }
+}

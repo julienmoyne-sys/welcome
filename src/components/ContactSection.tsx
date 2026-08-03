@@ -3,13 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Check } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useReveal } from "../hooks/useReveal";
 import { submitContact } from "../lib/contact.actions";
 import contactPhoto from "../assets/contact-photo-real.png";
 
-const needs = ["Open space", "Bureau privatif", "Salle de réunion", "Espace événementiel", "Autre"];
-
 export function ContactSection() {
+  const t = useTranslations("contact");
+  const locale = useLocale();
+  const needs = t.raw("form.needs") as string[];
   const { ref, visible } = useReveal<HTMLElement>();
 
   const [form, setForm] = useState({
@@ -40,7 +42,7 @@ export function ContactSection() {
     setStatus("submitting");
 
     try {
-      const result = await submitContact(form);
+      const result = await submitContact(form, locale);
 
       if (result.status === "invalid") {
         setStatus("error");
@@ -81,15 +83,13 @@ export function ContactSection() {
           }`}
         >
           <p className="font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage">
-            Contact
+            {t("eyebrow")}
           </p>
           <h2 className="mt-4 font-manrope text-4xl font-semibold leading-[1.12] tracking-tight text-welcome-black md:text-5xl">
-            Et si votre prochaine journée de travail commençait{" "}
-            <span className="text-welcome-gold">ici</span> ?
+            {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
           </h2>
           <p className="mt-5 font-inter text-lg leading-relaxed text-welcome-body/80">
-            Vous souhaitez visiter Welcome, réserver un espace ou simplement découvrir les lieux ?
-            Nous serons ravis de vous accueillir.
+            {t("lead")}
           </p>
         </div>
 
@@ -104,7 +104,7 @@ export function ContactSection() {
             <div className="overflow-hidden rounded-[20px]">
               <Image
                 src={contactPhoto}
-                alt="Espace de coworking Welcome"
+                alt={t("photoAlt")}
                 // Colonne de 45 % dans un conteneur plafonné à 1280 px avec padding :
                 // ≥ 1280 → 45 % de 1200 = 540 px ; sinon la largeur réelle du créneau.
                 sizes="(min-width: 1280px) 540px, (min-width: 1024px) 45vw, calc(100vw - 48px)"
@@ -115,11 +115,10 @@ export function ContactSection() {
             {/* WhatsApp question card */}
             <div className="mt-6 rounded-[20px] border border-welcome-black/[0.06] bg-welcome-white p-7 shadow-[0_14px_40px_-28px_rgba(11,11,11,0.22)] transition-all duration-200 hover:-translate-y-[3px]">
               <h3 className="font-manrope text-lg font-semibold text-welcome-black">
-                Poser une question
+                {t("whatsapp.title")}
               </h3>
               <p className="mt-2 font-inter text-[15px] leading-relaxed text-welcome-body/70">
-                Une question rapide ? Écrivez-nous directement sur WhatsApp, nous vous répondons au
-                plus vite.
+                {t("whatsapp.text")}
               </p>
               <a
                 href="https://wa.me/33622805536"
@@ -143,7 +142,7 @@ export function ContactSection() {
 
             <div className="mt-6 rounded-[20px] border border-welcome-black/[0.06] bg-welcome-white p-7 shadow-[0_14px_40px_-28px_rgba(11,11,11,0.22)] transition-all duration-200 hover:-translate-y-[3px]">
               <h3 className="font-manrope text-lg font-semibold text-welcome-black">
-                Informations
+                {t("info.title")}
               </h3>
               <div className="mt-5 space-y-4">
                 <div className="flex items-start gap-4">
@@ -152,7 +151,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-manrope text-[15px] font-semibold text-welcome-black">
-                      Welcome Coworking
+                      {t("info.nameLabel")}
                     </p>
                     <a
                       href="https://www.google.com/maps/dir/?api=1&destination=204%20avenue%20de%20Colmar%2C%2067100%20Strasbourg"
@@ -160,7 +159,7 @@ export function ContactSection() {
                       rel="noopener noreferrer"
                       className="font-inter text-sm leading-relaxed text-welcome-body/70 transition-colors hover:text-welcome-gold"
                     >
-                      204 avenue de Colmar, 67100 Strasbourg
+                      {t("info.address")}
                     </a>
                   </div>
                 </div>
@@ -170,7 +169,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-manrope text-[15px] font-semibold text-welcome-black">
-                      Téléphone
+                      {t("info.phoneLabel")}
                     </p>
                     <a
                       href="https://wa.me/33622805536"
@@ -178,7 +177,7 @@ export function ContactSection() {
                       rel="noopener noreferrer"
                       className="font-inter text-sm text-welcome-body/70 transition-colors hover:text-welcome-gold"
                     >
-                      +33 6 22 80 55 36
+                      {t("info.phone")}
                     </a>
                   </div>
                 </div>
@@ -188,7 +187,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-manrope text-[15px] font-semibold text-welcome-black">
-                      Adresse e-mail
+                      {t("info.emailLabel")}
                     </p>
                     <a
                       href="mailto:contact@welcome-coworking.com"
@@ -204,10 +203,10 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-manrope text-[15px] font-semibold text-welcome-black">
-                      Horaires
+                      {t("info.hoursLabel")}
                     </p>
                     <p className="font-inter text-sm text-welcome-body/70">
-                      Clients : 24/24 7/7 / Visites : sur RDV
+                      {t("info.hours")}
                     </p>
                   </div>
                 </div>
@@ -226,11 +225,10 @@ export function ContactSection() {
               className="flex h-full flex-col rounded-[20px] border border-welcome-black/[0.06] bg-welcome-white p-7 shadow-[0_14px_40px_-28px_rgba(11,11,11,0.22)] lg:p-10"
             >
               <h3 className="font-manrope text-2xl font-semibold text-welcome-black">
-                Organiser une visite
+                {t("form.title")}
               </h3>
               <p className="mt-2 font-inter text-[15px] leading-relaxed text-welcome-body/70">
-                Parlez-nous de votre besoin. Nous vous répondrons rapidement afin de convenir d’un
-                rendez-vous.
+                {t("form.lead")}
               </p>
 
               <div className="mt-7 space-y-5">
@@ -240,7 +238,7 @@ export function ContactSection() {
                       htmlFor="name"
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
-                      Nom
+                      {t("form.name")}
                     </label>
                     <input
                       id="name"
@@ -248,7 +246,7 @@ export function ContactSection() {
                       value={form.name}
                       onChange={(e) => update("name", e.target.value)}
                       className="h-12 w-full rounded-[12px] border border-welcome-black/10 bg-welcome-cream/50 px-4 font-inter text-[15px] text-welcome-black outline-none transition-all placeholder:text-welcome-body/40 focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
-                      placeholder="Votre nom"
+                      placeholder={t("form.namePlaceholder")}
                     />
                     {errors.name && (
                       <p className="mt-1.5 font-inter text-xs text-red-600">{errors.name}</p>
@@ -259,8 +257,8 @@ export function ContactSection() {
                       htmlFor="company"
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
-                      Entreprise{" "}
-                      <span className="font-normal text-welcome-body/50">(optionnel)</span>
+                      {t("form.company")}{" "}
+                      <span className="font-normal text-welcome-body/50">{t("form.optional")}</span>
                     </label>
                     <input
                       id="company"
@@ -268,7 +266,7 @@ export function ContactSection() {
                       value={form.company}
                       onChange={(e) => update("company", e.target.value)}
                       className="h-12 w-full rounded-[12px] border border-welcome-black/10 bg-welcome-cream/50 px-4 font-inter text-[15px] text-welcome-black outline-none transition-all placeholder:text-welcome-body/40 focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
-                      placeholder="Votre entreprise"
+                      placeholder={t("form.companyPlaceholder")}
                     />
                   </div>
                 </div>
@@ -279,7 +277,7 @@ export function ContactSection() {
                       htmlFor="email"
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
-                      Adresse e-mail
+                      {t("form.email")}
                     </label>
                     <input
                       id="email"
@@ -287,7 +285,7 @@ export function ContactSection() {
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
                       className="h-12 w-full rounded-[12px] border border-welcome-black/10 bg-welcome-cream/50 px-4 font-inter text-[15px] text-welcome-black outline-none transition-all placeholder:text-welcome-body/40 focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
-                      placeholder="vous@exemple.fr"
+                      placeholder={t("form.emailPlaceholder")}
                     />
                     {errors.email && (
                       <p className="mt-1.5 font-inter text-xs text-red-600">{errors.email}</p>
@@ -298,8 +296,8 @@ export function ContactSection() {
                       htmlFor="phone"
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
-                      Téléphone{" "}
-                      <span className="font-normal text-welcome-body/50">(optionnel)</span>
+                      {t("form.phone")}{" "}
+                      <span className="font-normal text-welcome-body/50">{t("form.optional")}</span>
                     </label>
                     <input
                       id="phone"
@@ -307,14 +305,14 @@ export function ContactSection() {
                       value={form.phone}
                       onChange={(e) => update("phone", e.target.value)}
                       className="h-12 w-full rounded-[12px] border border-welcome-black/10 bg-welcome-cream/50 px-4 font-inter text-[15px] text-welcome-black outline-none transition-all placeholder:text-welcome-body/40 focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
-                      placeholder="+33 6 12 34 56 78"
+                      placeholder={t("form.phonePlaceholder")}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="mb-2.5 block font-manrope text-sm font-semibold text-welcome-black">
-                    Votre besoin
+                    {t("form.needLabel")}
                   </label>
                   <div className="flex flex-wrap gap-2.5">
                     {needs.map((need) => {
@@ -346,7 +344,7 @@ export function ContactSection() {
                     htmlFor="message"
                     className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                   >
-                    Message
+                    {t("form.message")}
                   </label>
                   <textarea
                     id="message"
@@ -354,7 +352,7 @@ export function ContactSection() {
                     value={form.message}
                     onChange={(e) => update("message", e.target.value)}
                     className="w-full resize-none rounded-[12px] border border-welcome-black/10 bg-welcome-cream/50 px-4 py-3 font-inter text-[15px] text-welcome-black outline-none transition-all placeholder:text-welcome-body/40 focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
-                    placeholder="Dites-nous en plus sur votre projet..."
+                    placeholder={t("form.messagePlaceholder")}
                   />
                   {errors.message && (
                     <p className="mt-1.5 font-inter text-xs text-red-600">{errors.message}</p>
@@ -385,8 +383,7 @@ export function ContactSection() {
                     id="rgpd-label"
                     className="font-inter text-xs leading-relaxed text-welcome-body/60"
                   >
-                    J’accepte que Welcome Coworking conserve mes informations afin de répondre à ma
-                    demande, conformément à la politique de confidentialité.
+                    {t("form.rgpd")}
                   </p>
                 </div>
                 {errors.rgpd && (
@@ -400,17 +397,17 @@ export function ContactSection() {
                   disabled={status === "submitting"}
                   className="inline-flex h-[54px] w-full items-center justify-center rounded-[14px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg disabled:opacity-70 sm:w-auto"
                 >
-                  {status === "submitting" ? "Envoi en cours..." : "Envoyer"}
+                  {status === "submitting" ? t("form.submitting") : t("form.submit")}
                 </button>
 
                 {status === "success" && (
                   <p className="rounded-[12px] bg-welcome-sage/10 px-4 py-3 font-inter text-sm text-welcome-sage">
-                    Merci pour votre message. Nous vous recontacterons très rapidement.
+                    {t("form.success")}
                   </p>
                 )}
                 {status === "error" && Object.keys(errors).length === 0 && (
                   <p className="rounded-[12px] bg-red-50 px-4 py-3 font-inter text-sm text-red-700">
-                    Une erreur est survenue. Veuillez réessayer.
+                    {t("form.error")}
                   </p>
                 )}
               </div>

@@ -1,40 +1,19 @@
-import { Leaf, TrainFront, Bike, Car, Star } from "lucide-react";
+import { Bike, Car, Leaf, Star, TrainFront } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const items = [
-  {
-    icon: Leaf,
-    title: "Ambiance chaleureuse",
-    text: "Bois, lumière et végétation",
-  },
-  {
-    icon: TrainFront,
-    title: "Tram au pied de l’immeuble",
-    text: "Arrêt Couffignal",
-  },
-  {
-    icon: Bike,
-    title: "Autoroute à vélo",
-    text: "Strasbourg et Illkirch",
-  },
-  {
-    icon: Car,
-    title: "Accès facile",
-    text: "Autoroute et parking gratuit",
-  },
-  {
-    icon: Star,
-    title: "Depuis 2017",
-    text: "Plus de 100 entreprises accueillies",
-  },
-];
+// L'ordre des icônes suit celui du tableau `reassurance.items` des messages.
+const ICONS = [Leaf, TrainFront, Bike, Car, Star];
 
 export function ReassuranceSection() {
+  const t = useTranslations("reassurance");
+  const items = t.raw("items") as { title: string; text: string }[];
+
   return (
     <section className="relative z-10 -mt-16 w-full px-4 sm:px-6 lg:px-10">
       <div className="mx-auto w-full max-w-[1280px] rounded-[20px] bg-welcome-white px-6 py-8 shadow-[0_8px_40px_-12px_rgba(11,11,11,0.08)] sm:px-10">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-0">
           {items.map((item, index) => {
-            const Icon = item.icon;
+            const Icon = ICONS[index];
             const isLast = index === items.length - 1;
 
             return (
