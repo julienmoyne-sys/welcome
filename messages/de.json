@@ -11,6 +11,24 @@
       "ogTitle": "Coworking in Straßburg — Welcome Coworking",
       "ogDescription": "Open Space, private Büros und Besprechungsraum in einer hellen, einladenden Umgebung in Straßburg. Über 100 Unternehmen seit 2017."
     },
+    "openSpace": {
+      "title": "Open Space in Straßburg — Welcome Coworking",
+      "description": "Entdecken Sie den Open Space von Welcome Coworking in Straßburg: hell, ruhig und flexibel mit Glasfaser, Kaffee und Druckmöglichkeit.",
+      "ogTitle": "Der Open Space — Welcome Coworking Straßburg",
+      "ogDescription": "Ein heller, ruhiger und einladender Open Space für flexibles Arbeiten in Straßburg."
+    },
+    "privateOffices": {
+      "title": "Private Büros in Straßburg — Welcome Coworking", "description": "Entdecken Sie komfortable, ausgestattete private Büros für konzentriertes Arbeiten in Straßburg.",
+      "ogTitle": "Private Büros — Welcome Coworking Straßburg", "ogDescription": "Helle, bezugsfertige private Büros in einem einladenden Coworking-Space."
+    },
+    "meetingRoom": {
+      "title": "Besprechungsraum in Straßburg — Welcome Coworking", "description": "Buchen Sie einen ausgestatteten Besprechungsraum in Straßburg für Teams und Kunden.",
+      "ogTitle": "Der Besprechungsraum — Welcome Coworking Straßburg", "ogDescription": "Ein Raum für bis zu 12 Personen mit Bildschirm und Videokonferenz."
+    },
+    "kitchenLounge": {
+      "title": "Küche und Lounge — Welcome Coworking Straßburg", "description": "Entdecken Sie einen einladenden Ort für Pausen, Mittagessen und Austausch bei Welcome Coworking.",
+      "ogTitle": "Küche und Lounge — Welcome Coworking Straßburg", "ogDescription": "Ein gemütlicher Raum für Mittagessen, Pausen und gemeinsamen Kaffee."
+    },
     "faq": {
       "title": "FAQ — Häufige Fragen zu Welcome Coworking Straßburg",
       "description": "Alle Antworten zu Welcome Coworking in Straßburg: Preise, Zugang rund um die Uhr, private Büros, Besprechungsraum, Parken und Besichtigung.",
@@ -133,6 +151,71 @@
     }
   },
 
+  "openSpacePage": {
+    "back": "Zurück zu den Räumen",
+    "eyebrow": "Der Open Space",
+    "titleLead": "Ihr Platz in einem Raum",
+    "titleHighlight": "zum Aufatmen.",
+    "lead": "Arbeiten Sie in einer hellen, ruhigen und einladenden Umgebung, die Konzentration fördert und zugleich Raum für Austausch lässt.",
+    "visit": "Besichtigung buchen",
+    "imageAlt": "Heller Open Space von Welcome Coworking mit Holztischen, schwarzen Sprossenfenstern und Hängepflanzen",
+    "detailsEyebrow": "Im Alltag",
+    "detailsTitle": "Alles, was Sie für gutes Arbeiten brauchen.",
+    "detailsText": "Wählen Sie Ihren Platz, schließen Sie sich an und starten Sie in den Tag. Der Open Space bietet einen professionellen Rahmen mit persönlicher Atmosphäre und allen wichtigen Services.",
+    "features": [
+      { "title": "Flexibler Zugang", "text": "Ein Arbeitsplatz passend zu Ihrem Rhythmus und Ihrem Tarif." },
+      { "title": "Glasfaser-Internet", "text": "Eine schnelle, stabile Verbindung für entspanntes Arbeiten." },
+      { "title": "Kaffee inklusive", "text": "Alles für eine echte Pause, fast wie zu Hause." },
+      { "title": "Drucken", "text": "Die wichtigsten Bürogeräte stehen direkt vor Ort bereit." }
+    ],
+    "ctaTitle": "Möchten Sie Ihren zukünftigen Arbeitsplatz entdecken?",
+    "ctaText": "Erleben Sie die Welcome-Atmosphäre und finden Sie das passende Angebot."
+  },
+  "privateOfficesPage": {
+    "back": "Zurück zu den Räumen", "eyebrow": "Private Büros",
+    "titleLead": "Ihr eigenes Büro,", "titleHighlight": "ganz ohne Aufwand.",
+    "lead": "Arbeiten Sie mit Ihrem Team in einem ruhigen, komfortablen Raum, empfangen Sie Kunden und bewahren Sie Vertraulichkeit.",
+    "visit": "Besichtigung buchen", "imageAlt": "Privates Welcome Büro mit Glastrennwand, Holztisch und warmer Beleuchtung",
+    "detailsEyebrow": "Ihr Raum", "detailsTitle": "Die Ruhe eines Büros, die Energie von Welcome.",
+    "detailsText": "Beziehen Sie ein startbereites Büro und nutzen Sie alle Coworking-Bereiche und Services.",
+    "features": [
+      { "title": "Privatsphäre", "text": "Ein geschlossener Raum für konzentriertes Arbeiten." },
+      { "title": "Glasfaser-Internet", "text": "Eine schnelle, stabile Verbindung für Ihr Team." },
+      { "title": "Komfortable Möbel", "text": "Ein eingerichtetes, startbereites Büro." },
+      { "title": "Gesicherter Zugang", "text": "Eine kontrollierte professionelle Umgebung." }
+    ],
+    "ctaTitle": "Ihr nächstes Büro könnte hier sein.", "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor."
+  },
+  "meetingRoomPage": {
+    "back": "Zurück zu den Räumen", "eyebrow": "Der Besprechungsraum",
+    "titleLead": "Ein Rahmen, der Ideen", "titleHighlight": "voranbringt.",
+    "lead": "Bringen Sie Ihr Team zusammen und empfangen Sie Kunden in einem komfortablen, ausgestatteten Raum.",
+    "visit": "Besichtigung buchen", "imageAlt": "Welcome Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm",
+    "detailsEyebrow": "Ihre Termine", "detailsTitle": "Alles ist bereit für Ihr Meeting.",
+    "detailsText": "Teammeeting, Kundenpräsentation oder Videokonferenz: arbeiten Sie in einer ruhigen, professionellen Umgebung.",
+    "features": [
+      { "title": "Bis zu 12 Personen", "text": "Ideal für Meetings und kleine Workshops." },
+      { "title": "Bildschirm", "text": "Präsentieren Sie Ihre Inhalte komfortabel." },
+      { "title": "Videokonferenz", "text": "Binden Sie entfernte Teilnehmer vollständig ein." },
+      { "title": "Glasfaser-Internet", "text": "Eine zuverlässige Verbindung ohne Unterbrechung." }
+    ],
+    "ctaTitle": "Planen Sie ein Meeting in Straßburg?", "ctaText": "Entdecken Sie den Raum und erzählen Sie uns von Ihrem Termin."
+  },
+  "kitchenLoungePage": {
+    "back": "Zurück zu den Räumen", "eyebrow": "Küche & Lounge",
+    "titleLead": "Eine echte Pause,", "titleHighlight": "fast wie zu Hause.",
+    "lead": "Wechseln Sie den Rhythmus in einem einladenden Raum zum Mittagessen, Durchatmen und für gemeinsame Momente.",
+    "visit": "Besichtigung buchen", "imageAlt": "Welcome Küche und Lounge mit hellen Sofas, Holztheke und grünen Pflanzen",
+    "detailsEyebrow": "Zwischen Projekten", "detailsTitle": "Ein Raum zum Austauschen und Auftanken.",
+    "detailsText": "Küche und Lounge verlängern das Welcome-Erlebnis in einer einfachen, entspannten Atmosphäre.",
+    "features": [
+      { "title": "Kaffee verfügbar", "text": "Eine angenehme Pause zu jeder Tageszeit." },
+      { "title": "Loungebereich", "text": "Bequeme Sitzplätze für einen Ortswechsel." },
+      { "title": "Küchenbereich", "text": "Ein praktischer Ort für das Mittagessen." },
+      { "title": "Gemeinsame Momente", "text": "Ein natürlicher Rahmen für Gespräche." }
+    ],
+    "ctaTitle": "Erleben Sie die Welcome-Atmosphäre.", "ctaText": "Bei einer Besichtigung entdecken Sie alle Räume am besten."
+  },
   "pricing": {
     "eyebrow": "Unsere Angebote",
     "title": "Wählen Sie Ihren Rhythmus.",

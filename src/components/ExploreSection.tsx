@@ -21,10 +21,10 @@ const CARD_SIZES =
 
 /** Clé de traduction ↔ visuel. L'ordre du tableau est l'ordre d'affichage. */
 const CARDS = [
-  { key: "openSpace", image: openSpaceImage },
-  { key: "privateOffices", image: privateOfficesImage },
-  { key: "meetingRoom", image: meetingRoomImage },
-  { key: "kitchenLounge", image: kitchenLoungeImage },
+  { key: "openSpace", image: openSpaceImage, href: "/open-space" },
+  { key: "privateOffices", image: privateOfficesImage, href: "/bureaux-privatifs" },
+  { key: "meetingRoom", image: meetingRoomImage, href: "/salle-de-reunion" },
+  { key: "kitchenLounge", image: kitchenLoungeImage, href: "/cuisine-detente" },
 ] as const;
 
 export function ExploreSection() {
@@ -80,7 +80,7 @@ export function ExploreSection() {
                 </p>
                 <div className="mt-6">
                   <Link
-                    href="/#espaces"
+                    href={card.href}
                     className="inline-flex h-[44px] items-center justify-center rounded-[12px] bg-welcome-black px-5 font-manrope text-[14px] font-semibold text-welcome-ink-fg transition-all duration-200 hover:bg-welcome-black/85"
                   >
                     {t("cta")}

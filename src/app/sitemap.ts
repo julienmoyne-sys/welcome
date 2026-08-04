@@ -11,6 +11,10 @@ import { SITE_URL } from "@/lib/seo";
  */
 const PAGES = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/open-space", changeFrequency: "monthly" as const, priority: 0.8 },
+  { path: "/bureaux-privatifs", changeFrequency: "monthly" as const, priority: 0.8 },
+  { path: "/salle-de-reunion", changeFrequency: "monthly" as const, priority: 0.8 },
+  { path: "/cuisine-detente", changeFrequency: "monthly" as const, priority: 0.7 },
   { path: "/faq", changeFrequency: "monthly" as const, priority: 0.7 },
   { path: "/mentions-legales", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/conditions-generales-d-utilisation", changeFrequency: "yearly" as const, priority: 0.3 },

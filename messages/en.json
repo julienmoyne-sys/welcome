@@ -11,6 +11,24 @@
       "ogTitle": "Coworking in Strasbourg — Welcome Coworking",
       "ogDescription": "Open space, private offices and a meeting room in a bright, welcoming setting in Strasbourg. More than 100 companies hosted since 2017."
     },
+    "openSpace": {
+      "title": "Open space in Strasbourg — Welcome Coworking",
+      "description": "Discover the Welcome Coworking open space in Strasbourg: a bright, quiet workspace with flexible access, fibre internet, coffee and printing.",
+      "ogTitle": "The open space — Welcome Coworking Strasbourg",
+      "ogDescription": "A bright, quiet and welcoming open space where you can work at your own pace in Strasbourg."
+    },
+    "privateOffices": {
+      "title": "Private offices in Strasbourg — Welcome Coworking", "description": "Discover comfortable, equipped private offices where your team can work with confidence in Strasbourg.",
+      "ogTitle": "Private offices — Welcome Coworking Strasbourg", "ogDescription": "Bright, ready-to-use private offices in a warm coworking space."
+    },
+    "meetingRoom": {
+      "title": "Meeting room in Strasbourg — Welcome Coworking", "description": "Book an equipped meeting room in Strasbourg for your team and clients.",
+      "ogTitle": "The meeting room — Welcome Coworking Strasbourg", "ogDescription": "An equipped room for up to 12 people, with display and video conferencing."
+    },
+    "kitchenLounge": {
+      "title": "Kitchen and lounge — Welcome Coworking Strasbourg", "description": "Discover a welcoming place to pause, have lunch and connect at Welcome Coworking.",
+      "ogTitle": "Kitchen and lounge — Welcome Coworking Strasbourg", "ogDescription": "A warm space to have lunch, take a break and share a coffee."
+    },
     "faq": {
       "title": "FAQ — Frequently asked questions about Welcome Coworking Strasbourg",
       "description": "Everything you need to know about Welcome Coworking in Strasbourg: pricing, 24/7 access, private offices, meeting room, parking and booking a visit.",
@@ -133,6 +151,71 @@
     }
   },
 
+  "openSpacePage": {
+    "back": "Back to the spaces",
+    "eyebrow": "The open space",
+    "titleLead": "Your place, in a workspace",
+    "titleHighlight": "with room to breathe.",
+    "lead": "Settle into a bright, quiet and welcoming environment designed for focused work without giving up the energy of a shared space.",
+    "visit": "Book a visit",
+    "imageAlt": "Bright Welcome Coworking open space with wooden tables, black-framed windows and hanging plants",
+    "detailsEyebrow": "Every day",
+    "detailsTitle": "Everything you need to work well.",
+    "detailsText": "Choose your seat, plug in and start your day. The open space offers a professional, human-scale setting with all the essential services close at hand.",
+    "features": [
+      { "title": "Flexible access", "text": "A workspace available according to your schedule and plan." },
+      { "title": "Fibre internet", "text": "A fast, stable connection for stress-free work." },
+      { "title": "Coffee included", "text": "Everything you need for a proper break, just like home." },
+      { "title": "Printing", "text": "Useful office equipment is available directly on site." }
+    ],
+    "ctaTitle": "Ready to discover your future workspace?",
+    "ctaText": "Come and experience the Welcome atmosphere and find the plan that suits you."
+  },
+  "privateOfficesPage": {
+    "back": "Back to the spaces", "eyebrow": "Private offices",
+    "titleLead": "An office of your own,", "titleHighlight": "without the hassle.",
+    "lead": "Enjoy a quiet, comfortable enclosed space where your team can work, welcome clients and keep conversations confidential.",
+    "visit": "Book a visit", "imageAlt": "Welcome private office with glass partition, wooden desk and warm lighting",
+    "detailsEyebrow": "Your space", "detailsTitle": "The privacy of an office, the energy of Welcome.",
+    "detailsText": "Settle your team into a ready-to-use office and enjoy all the coworking spaces and services.",
+    "features": [
+      { "title": "Privacy", "text": "An enclosed space for focused work." },
+      { "title": "Fibre internet", "text": "A fast, stable connection for your team." },
+      { "title": "Comfortable furniture", "text": "A fitted office ready when you arrive." },
+      { "title": "Secure access", "text": "A controlled professional environment." }
+    ],
+    "ctaTitle": "Your next office could be here.", "ctaText": "Come and picture your team at Welcome."
+  },
+  "meetingRoomPage": {
+    "back": "Back to the spaces", "eyebrow": "The meeting room",
+    "titleLead": "A setting that moves", "titleHighlight": "ideas forward.",
+    "lead": "Bring your team together and welcome clients in a comfortable, equipped room designed for productive conversations.",
+    "visit": "Book a visit", "imageAlt": "Welcome meeting room with large wooden table, black chairs and display",
+    "detailsEyebrow": "Your meetings", "detailsTitle": "Everything is ready when you are.",
+    "detailsText": "Team meeting, client presentation or video call: settle into a quiet, professional setting.",
+    "features": [
+      { "title": "Up to 12 people", "text": "Ideal for meetings and small workshops." },
+      { "title": "Display", "text": "Present your content comfortably." },
+      { "title": "Video conferencing", "text": "Keep remote participants fully involved." },
+      { "title": "Fibre internet", "text": "A reliable connection without interruptions." }
+    ],
+    "ctaTitle": "Planning a meeting in Strasbourg?", "ctaText": "Discover the room and tell us about your next event."
+  },
+  "kitchenLoungePage": {
+    "back": "Back to the spaces", "eyebrow": "Kitchen & lounge",
+    "titleLead": "A proper break,", "titleHighlight": "just like home.",
+    "lead": "Change pace in a welcoming space designed for lunch, a quiet moment and time shared with other members.",
+    "visit": "Book a visit", "imageAlt": "Welcome kitchen and lounge with light sofas, wooden counter and green plants",
+    "detailsEyebrow": "Between projects", "detailsTitle": "A space to connect and recharge.",
+    "detailsText": "The kitchen and lounge extend the Welcome experience in a simple, friendly atmosphere.",
+    "features": [
+      { "title": "Coffee available", "text": "An enjoyable break at any time of day." },
+      { "title": "Lounge area", "text": "Comfortable seating for a change of scene." },
+      { "title": "Kitchen space", "text": "A practical place to enjoy lunch." },
+      { "title": "Shared moments", "text": "A natural setting for connecting with members." }
+    ],
+    "ctaTitle": "Come and experience Welcome.", "ctaText": "A visit is the best way to discover every space."
+  },
   "pricing": {
     "eyebrow": "Our solutions",
     "title": "Choose your own pace.",

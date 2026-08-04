@@ -11,6 +11,30 @@
       "ogTitle": "Coworking à Strasbourg — Welcome Coworking",
       "ogDescription": "Open space, bureaux privatifs et salle de réunion dans un lieu lumineux et chaleureux à Strasbourg. Plus de 100 entreprises accueillies depuis 2017."
     },
+    "openSpace": {
+      "title": "Open space à Strasbourg — Welcome Coworking",
+      "description": "Découvrez l'open space de Welcome Coworking à Strasbourg : un espace lumineux et calme, avec accès flexible, fibre, café et impression.",
+      "ogTitle": "L'open space — Welcome Coworking Strasbourg",
+      "ogDescription": "Un open space lumineux, calme et chaleureux pour travailler à votre rythme à Strasbourg."
+    },
+    "privateOffices": {
+      "title": "Bureaux privatifs à Strasbourg — Welcome Coworking",
+      "description": "Découvrez des bureaux privatifs confortables et équipés pour travailler sereinement à Strasbourg.",
+      "ogTitle": "Les bureaux privatifs — Welcome Coworking Strasbourg",
+      "ogDescription": "Des bureaux fermés, lumineux et prêts à travailler dans un coworking chaleureux."
+    },
+    "meetingRoom": {
+      "title": "Salle de réunion à Strasbourg — Welcome Coworking",
+      "description": "Réservez une salle de réunion équipée à Strasbourg pour recevoir vos équipes et clients.",
+      "ogTitle": "La salle de réunion — Welcome Coworking Strasbourg",
+      "ogDescription": "Une salle équipée jusqu'à 12 personnes, avec écran et visioconférence."
+    },
+    "kitchenLounge": {
+      "title": "Cuisine et espace détente — Welcome Coworking Strasbourg",
+      "description": "Découvrez un lieu convivial pour faire une pause, déjeuner et échanger chez Welcome Coworking.",
+      "ogTitle": "Cuisine et détente — Welcome Coworking Strasbourg",
+      "ogDescription": "Un espace chaleureux pour déjeuner, faire une pause et partager un café."
+    },
     "faq": {
       "title": "FAQ — Questions fréquentes sur Welcome Coworking Strasbourg",
       "description": "Toutes les réponses sur Welcome Coworking à Strasbourg : tarifs, accès 24/7, bureaux privatifs, salle de réunion, stationnement et visite de l'espace.",
@@ -133,6 +157,74 @@
     }
   },
 
+  "openSpacePage": {
+    "back": "Revenir aux espaces",
+    "eyebrow": "L'open space",
+    "titleLead": "Votre place, dans un espace",
+    "titleHighlight": "qui respire.",
+    "lead": "Installez-vous dans un environnement lumineux, calme et chaleureux, pensé pour favoriser la concentration sans renoncer aux échanges.",
+    "visit": "Organiser une visite",
+    "imageAlt": "Open space lumineux de Welcome Coworking avec tables en bois, verrières noires et plantes suspendues",
+    "detailsEyebrow": "Au quotidien",
+    "detailsTitle": "Tout ce qu'il faut pour bien travailler.",
+    "detailsText": "Choisissez votre place, branchez-vous et commencez votre journée. L'open space offre un cadre professionnel à taille humaine, avec les services essentiels à portée de main.",
+    "features": [
+      { "title": "Accès flexible", "text": "Un espace disponible selon votre rythme et votre formule." },
+      { "title": "Internet fibre", "text": "Une connexion rapide et stable pour travailler sereinement." },
+      { "title": "Café à disposition", "text": "De quoi faire une vraie pause, comme à la maison." },
+      { "title": "Impression", "text": "Les équipements utiles sont accessibles directement sur place." }
+    ],
+    "ctaTitle": "Envie de découvrir votre futur espace de travail ?",
+    "ctaText": "Venez ressentir l'ambiance Welcome et choisir la formule qui vous convient."
+  },
+  "privateOfficesPage": {
+    "back": "Revenir aux espaces", "eyebrow": "Les bureaux privatifs",
+    "titleLead": "Un bureau à vous,", "titleHighlight": "sans les contraintes.",
+    "lead": "Profitez d'un espace fermé, calme et confortable pour travailler en équipe, recevoir vos clients et préserver votre confidentialité.",
+    "visit": "Organiser une visite",
+    "imageAlt": "Bureau privatif Welcome avec cloison vitrée, bureau en bois et éclairage chaleureux",
+    "detailsEyebrow": "Votre espace", "detailsTitle": "La tranquillité d'un bureau, l'énergie de Welcome.",
+    "detailsText": "Installez votre équipe dans un bureau prêt à travailler et profitez de tous les espaces et services du coworking.",
+    "features": [
+      { "title": "Confidentialité", "text": "Un espace fermé pour travailler sereinement." },
+      { "title": "Internet fibre", "text": "Une connexion rapide et stable pour votre équipe." },
+      { "title": "Mobilier confortable", "text": "Un bureau aménagé et prêt dès votre arrivée." },
+      { "title": "Accès sécurisé", "text": "Un environnement professionnel et maîtrisé." }
+    ],
+    "ctaTitle": "Votre prochain bureau est peut-être ici.", "ctaText": "Venez découvrir les volumes et imaginer votre équipe chez Welcome."
+  },
+  "meetingRoomPage": {
+    "back": "Revenir aux espaces", "eyebrow": "La salle de réunion",
+    "titleLead": "Un cadre qui fait", "titleHighlight": "avancer les idées.",
+    "lead": "Réunissez vos équipes et recevez vos clients dans une salle confortable, équipée et pensée pour des échanges efficaces.",
+    "visit": "Organiser une visite",
+    "imageAlt": "Salle de réunion Welcome avec grande table en bois, chaises noires et écran",
+    "detailsEyebrow": "Vos rendez-vous", "detailsTitle": "Tout est prêt pour vous réunir.",
+    "detailsText": "Réunion d'équipe, présentation client ou visioconférence : installez-vous dans un environnement professionnel et calme.",
+    "features": [
+      { "title": "Jusqu'à 12 personnes", "text": "Une capacité adaptée aux réunions et ateliers." },
+      { "title": "Écran", "text": "Présentez vos contenus dans de bonnes conditions." },
+      { "title": "Visioconférence", "text": "Intégrez pleinement vos interlocuteurs à distance." },
+      { "title": "Internet fibre", "text": "Une connexion fiable sans interruption." }
+    ],
+    "ctaTitle": "Une réunion à organiser à Strasbourg ?", "ctaText": "Découvrez la salle et parlons de votre prochain rendez-vous."
+  },
+  "kitchenLoungePage": {
+    "back": "Revenir aux espaces", "eyebrow": "Cuisine & détente",
+    "titleLead": "Une vraie pause,", "titleHighlight": "comme à la maison.",
+    "lead": "Changez de rythme dans un espace chaleureux conçu pour déjeuner, souffler et partager un moment avec les autres membres.",
+    "visit": "Organiser une visite",
+    "imageAlt": "Cuisine et espace détente Welcome avec canapés clairs, bar en bois et plantes vertes",
+    "detailsEyebrow": "Entre deux projets", "detailsTitle": "Un espace pour se retrouver et respirer.",
+    "detailsText": "La cuisine et le salon prolongent l'expérience Welcome dans une ambiance simple et conviviale.",
+    "features": [
+      { "title": "Café à disposition", "text": "Une pause agréable à tout moment de la journée." },
+      { "title": "Coin salon", "text": "Des assises confortables pour changer de cadre." },
+      { "title": "Espace cuisine", "text": "Un lieu pratique pour déjeuner sur place." },
+      { "title": "Moments partagés", "text": "Un cadre naturel pour échanger entre membres." }
+    ],
+    "ctaTitle": "Venez ressentir l'ambiance Welcome.", "ctaText": "Une visite reste la meilleure façon de découvrir tous les espaces."
+  },
   "pricing": {
     "eyebrow": "Nos solutions",
     "title": "Choisissez votre rythme.",
