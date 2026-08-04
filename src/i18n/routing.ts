@@ -7,9 +7,9 @@ export const DEFAULT_LOCALE: Locale = "fr";
 
 /** Étiquettes du sélecteur de langue, chacune dans sa propre langue. */
 export const LOCALE_LABELS: Record<Locale, string> = {
-  fr: "Français",
-  en: "English",
-  de: "Deutsch",
+  fr: "FR",
+  en: "EN",
+  de: "DE",
 };
 
 /**
