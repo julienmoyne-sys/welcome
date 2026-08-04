@@ -40,7 +40,7 @@ export function LanguageSwitcher() {
             router.replace(pathname, { locale: next });
           });
         }}
-        className="cursor-pointer appearance-none rounded-[10px] border border-welcome-line bg-transparent py-1.5 pr-7 pl-2.5 font-manrope text-[14px] font-semibold text-welcome-black outline-none transition-colors focus-visible:ring-2 focus-visible:ring-welcome-gold disabled:opacity-60"
+        className="cursor-pointer appearance-none rounded-[10px] border border-welcome-line bg-transparent py-1.5 pr-7 pl-2.5 font-manrope text-[14px] font-semibold text-welcome-black outline-none transition-colors focus-visible:ring-2 focus-visible:ring-welcome-gold disabled:opacity-60 [&>option]:bg-white [&>option]:text-black"
       >
         {LOCALES.map((code) => (
           <option key={code} value={code}>
