@@ -8,9 +8,9 @@ import { Link } from "@/i18n/navigation";
  * `cta` distingue le libellé « Comparer » de « En savoir plus ».
  */
 const PLANS = [
-  { key: "nomad", icon: Briefcase, cta: "compare" },
-  { key: "openSpace", icon: Armchair, cta: "compare" },
-  { key: "privateOffice", icon: DoorOpen, cta: "compare" },
+  { key: "nomad", icon: Briefcase, cta: "compare", href: "/comparatif-solutions" },
+  { key: "openSpace", icon: Armchair, cta: "compare", href: "/comparatif-solutions" },
+  { key: "privateOffice", icon: DoorOpen, cta: "compare", href: "/comparatif-solutions" },
   {
     key: "meetingRoom",
     icon: Presentation,
@@ -87,8 +87,12 @@ export function PricingSection() {
                 {/* Button */}
                 <div className="mt-10">
                   <Link
-                    href={"href" in plan ? plan.href : "/#solutions"}
-                    className="inline-flex h-[52px] w-full items-center justify-center rounded-[12px] border border-welcome-black/20 bg-transparent font-manrope text-[15px] font-semibold text-welcome-black transition-all duration-200 hover:border-welcome-black hover:bg-welcome-black hover:text-welcome-ink-fg"
+                    href={plan.href}
+                    className={`inline-flex h-[52px] w-full items-center justify-center rounded-[12px] border font-manrope text-[15px] font-semibold text-welcome-black transition-all duration-200 hover:border-welcome-black hover:bg-welcome-black hover:text-welcome-ink-fg ${
+                      plan.cta === "learnMore"
+                        ? "border-welcome-gold/40 bg-welcome-gold/10"
+                        : "border-welcome-black/15 bg-welcome-black/[0.04]"
+                    }`}
                   >
                     {t(plan.cta)}
                   </Link>

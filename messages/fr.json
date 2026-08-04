@@ -35,6 +35,12 @@
       "ogTitle": "Cuisine et détente — Welcome Coworking Strasbourg",
       "ogDescription": "Un espace chaleureux pour déjeuner, faire une pause et partager un café."
     },
+    "comparison": {
+      "title": "Comparatif des formules de coworking — Welcome Strasbourg",
+      "description": "Comparez les formules Nomade, Open Space et Bureau privatif de Welcome Coworking Strasbourg : accès, services, engagement et espaces inclus.",
+      "ogTitle": "Comparez les solutions Welcome Coworking",
+      "ogDescription": "Un comparatif clair des formules Nomade, Open Space et Bureau privatif à Strasbourg."
+    },
     "faq": {
       "title": "FAQ — Questions fréquentes sur Welcome Coworking Strasbourg",
       "description": "Toutes les réponses sur Welcome Coworking à Strasbourg : tarifs, accès 24/7, bureaux privatifs, salle de réunion, stationnement et visite de l'espace.",
@@ -225,12 +231,48 @@
     ],
     "ctaTitle": "Venez ressentir l'ambiance Welcome.", "ctaText": "Une visite reste la meilleure façon de découvrir tous les espaces."
   },
+  "comparisonPage": {
+    "back": "Revenir aux solutions", "eyebrow": "Comparatif des solutions",
+    "titleLead": "Trouvez la formule", "titleHighlight": "faite pour vous.",
+    "lead": "Comparez en un coup d'œil les trois façons de travailler chez Welcome et identifiez celle qui correspond le mieux à votre rythme.",
+    "criteria": "Critères", "tableCaption": "Comparaison des formules Nomade, Open Space et Bureau privatif",
+    "offers": [
+      { "name": "Nomade", "tagline": "Pour venir ponctuellement, sans contrainte.", "idealFor": "Idéal pour : besoins occasionnels" },
+      { "name": "Open Space", "tagline": "Pour travailler régulièrement dans un espace partagé.", "idealFor": "Idéal pour : indépendants" },
+      { "name": "Bureau privatif", "tagline": "Pour installer une équipe dans son propre espace.", "idealFor": "Idéal pour : équipes" }
+    ],
+    "groups": [
+      { "title": "Usage et flexibilité", "rows": [
+        { "label": "Rythme conseillé", "values": [{"status":"included","label":"Ponctuel"},{"status":"included","label":"Régulier"},{"status":"included","label":"Équipe"}] },
+        { "label": "Type d'espace", "values": [{"status":"variable","label":"Place partagée"},{"status":"included","label":"Open space"},{"status":"included","label":"Bureau fermé"}] },
+        { "label": "Réservation", "values": [{"status":"included","label":"À l'heure"},{"status":"variable","label":"Selon la formule"},{"status":"variable","label":"Sur étude"}] },
+        { "label": "Engagement minimum", "values": [{"status":"included","label":"Aucun"},{"status":"variable","label":"Selon la formule"},{"status":"included","label":"Aucun"}] }
+      ]},
+      { "title": "Services du quotidien", "rows": [
+        { "label": "Internet fibre", "values": [{"status":"included","label":"Inclus"},{"status":"included","label":"Inclus"},{"status":"included","label":"Inclus"}] },
+        { "label": "Accès autonome", "values": [{"status":"included","label":"Inclus"},{"status":"variable","label":"Selon la formule"},{"status":"included","label":"Inclus 24/7"}] },
+        { "label": "Cuisine et espaces détente", "values": [{"status":"included","label":"Inclus"},{"status":"included","label":"Inclus"},{"status":"included","label":"Inclus"}] },
+        { "label": "Impression", "values": [{"status":"variable","label":"Selon la formule"},{"status":"included","label":"Inclus"},{"status":"variable","label":"Selon la formule"}] },
+        { "label": "Café", "values": [{"status":"variable","label":"Selon la formule"},{"status":"included","label":"Inclus"},{"status":"variable","label":"Selon la formule"}] }
+      ]},
+      { "title": "Espace et confidentialité", "rows": [
+        { "label": "Espace fermé et confidentiel", "values": [{"status":"excluded","label":"Non"},{"status":"excluded","label":"Non"},{"status":"included","label":"Inclus"}] },
+        { "label": "Mobilier dédié", "values": [{"status":"excluded","label":"Place partagée"},{"status":"variable","label":"Poste selon disponibilité"},{"status":"included","label":"Mobilier premium"}] },
+        { "label": "Salle de réunion", "values": [{"status":"variable","label":"En option"},{"status":"variable","label":"En option"},{"status":"variable","label":"En option"}] },
+        { "label": "Installation durable d'une équipe", "values": [{"status":"excluded","label":"Non adaptée"},{"status":"variable","label":"Pour une personne"},{"status":"included","label":"Oui"}] }
+      ]}
+    ],
+    "legend": {"included":"Inclus", "variable":"Variable ou en option", "excluded":"Non inclus"},
+    "note": "Ce comparatif constitue un premier aperçu. Les disponibilités, modalités d'accès et services précis peuvent varier selon la formule retenue et seront confirmés lors de votre échange avec Welcome.",
+    "ctaTitle": "Encore un doute entre deux formules ?", "ctaText": "Parlons de votre rythme, de votre équipe et de vos besoins pour identifier la solution la plus simple.",
+    "ctaVisit": "Organiser une visite", "ctaFaq": "Consulter la FAQ"
+  },
   "pricing": {
     "eyebrow": "Nos solutions",
     "title": "Choisissez votre rythme.",
-    "lead": "Que vous veniez occasionnellement ou toute l’année, nous avons imaginé des solutions simples dans des espaces intimistes à partir de 20€ HT / mois.",
+    "lead": "Que vous veniez occasionnellement ou toute l’année, nous avons imaginé des solutions simples dans des espaces intimistes à partir de 85€ HT / mois.",
     "compare": "Comparer",
-    "learnMore": "En savoir plus",
+    "learnMore": "Découvrir",
     "plans": {
       "nomad": {
         "name": "Nomade",

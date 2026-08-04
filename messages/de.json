@@ -29,6 +29,10 @@
       "title": "Küche und Lounge — Welcome Coworking Straßburg", "description": "Entdecken Sie einen einladenden Ort für Pausen, Mittagessen und Austausch bei Welcome Coworking.",
       "ogTitle": "Küche und Lounge — Welcome Coworking Straßburg", "ogDescription": "Ein gemütlicher Raum für Mittagessen, Pausen und gemeinsamen Kaffee."
     },
+    "comparison": {
+      "title": "Coworking-Angebote im Vergleich — Welcome Straßburg", "description": "Vergleichen Sie Nomade, Open Space und privates Büro bei Welcome Coworking Straßburg: Zugang, Services und enthaltene Bereiche.",
+      "ogTitle": "Welcome Coworking Angebote vergleichen", "ogDescription": "Ein klarer Vergleich von Nomade, Open Space und privatem Büro in Straßburg."
+    },
     "faq": {
       "title": "FAQ — Häufige Fragen zu Welcome Coworking Straßburg",
       "description": "Alle Antworten zu Welcome Coworking in Straßburg: Preise, Zugang rund um die Uhr, private Büros, Besprechungsraum, Parken und Besichtigung.",
@@ -216,12 +220,48 @@
     ],
     "ctaTitle": "Erleben Sie die Welcome-Atmosphäre.", "ctaText": "Bei einer Besichtigung entdecken Sie alle Räume am besten."
   },
+  "comparisonPage": {
+    "back": "Zurück zu den Angeboten", "eyebrow": "Angebotsvergleich",
+    "titleLead": "Finden Sie das Angebot,", "titleHighlight": "das zu Ihnen passt.",
+    "lead": "Vergleichen Sie die drei Arten, bei Welcome zu arbeiten, und finden Sie schnell die passende Lösung für Ihren Rhythmus.",
+    "criteria": "Kriterien", "tableCaption": "Vergleich der Angebote Nomade, Open Space und privates Büro",
+    "offers": [
+      { "name": "Nomade", "tagline": "Für gelegentliche Besuche ohne Verpflichtung.", "idealFor": "Ideal für: gelegentlichen Bedarf" },
+      { "name": "Open Space", "tagline": "Für regelmäßiges Arbeiten im geteilten Raum.", "idealFor": "Ideal für: Selbstständige" },
+      { "name": "Privates Büro", "tagline": "Für ein Team im eigenen Arbeitsbereich.", "idealFor": "Ideal für: Teams" }
+    ],
+    "groups": [
+      { "title": "Nutzung und Flexibilität", "rows": [
+        { "label": "Empfohlener Rhythmus", "values": [{"status":"included","label":"Gelegentlich"},{"status":"included","label":"Regelmäßig"},{"status":"included","label":"Team"}] },
+        { "label": "Art des Arbeitsplatzes", "values": [{"status":"variable","label":"Geteilter Platz"},{"status":"included","label":"Open Space"},{"status":"included","label":"Geschlossenes Büro"}] },
+        { "label": "Buchung", "values": [{"status":"included","label":"Stundenweise"},{"status":"variable","label":"Je nach Angebot"},{"status":"variable","label":"Individuelles Angebot"}] },
+        { "label": "Mindestbindung", "values": [{"status":"included","label":"Keine"},{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"Keine"}] }
+      ]},
+      { "title": "Services im Alltag", "rows": [
+        { "label": "Glasfaser-Internet", "values": [{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"}] },
+        { "label": "Eigenständiger Zugang", "values": [{"status":"included","label":"Inklusive"},{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"24/7 inklusive"}] },
+        { "label": "Küche und Lounge", "values": [{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"}] },
+        { "label": "Drucken", "values": [{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"Inklusive"},{"status":"variable","label":"Je nach Angebot"}] },
+        { "label": "Kaffee", "values": [{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"Inklusive"},{"status":"variable","label":"Je nach Angebot"}] }
+      ]},
+      { "title": "Raum und Privatsphäre", "rows": [
+        { "label": "Geschlossener vertraulicher Raum", "values": [{"status":"excluded","label":"Nein"},{"status":"excluded","label":"Nein"},{"status":"included","label":"Inklusive"}] },
+        { "label": "Eigene Möblierung", "values": [{"status":"excluded","label":"Geteilter Platz"},{"status":"variable","label":"Nach Verfügbarkeit"},{"status":"included","label":"Premium-Mobiliar"}] },
+        { "label": "Besprechungsraum", "values": [{"status":"variable","label":"Optional"},{"status":"variable","label":"Optional"},{"status":"variable","label":"Optional"}] },
+        { "label": "Dauerhafter Teamarbeitsplatz", "values": [{"status":"excluded","label":"Nicht geeignet"},{"status":"variable","label":"Für eine Person"},{"status":"included","label":"Ja"}] }
+      ]}
+    ],
+    "legend": {"included":"Inklusive", "variable":"Variabel oder optional", "excluded":"Nicht enthalten"},
+    "note": "Dieser Vergleich ist ein erster Überblick. Verfügbarkeit, Zugangsbedingungen und genaue Leistungen können je nach Angebot variieren und werden im Gespräch mit Welcome bestätigt.",
+    "ctaTitle": "Noch unsicher zwischen zwei Angeboten?", "ctaText": "Erzählen Sie uns von Ihrem Rhythmus, Team und Bedarf, damit wir die einfachste Lösung finden.",
+    "ctaVisit": "Besichtigung buchen", "ctaFaq": "FAQ ansehen"
+  },
   "pricing": {
     "eyebrow": "Unsere Angebote",
     "title": "Wählen Sie Ihren Rhythmus.",
     "lead": "Ob Sie gelegentlich vorbeikommen oder das ganze Jahr bleiben: wir haben einfache Angebote in intimen Räumen ab 20 € netto / Monat gestaltet.",
     "compare": "Vergleichen",
-    "learnMore": "Mehr erfahren",
+    "learnMore": "Entdecken",
     "plans": {
       "nomad": {
         "name": "Nomade",

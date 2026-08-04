@@ -11,6 +11,7 @@ import { SITE_URL } from "@/lib/seo";
  */
 const PAGES = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/comparatif-solutions", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/open-space", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/bureaux-privatifs", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/salle-de-reunion", changeFrequency: "monthly" as const, priority: 0.8 },
