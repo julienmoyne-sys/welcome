@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
+import { Suspense } from "react";
 import Image from "next/image";
 import {
   Armchair,
-  ArrowLeft,
   Clock3,
   Coffee,
   LockKeyhole,
@@ -21,6 +21,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { Link } from "@/i18n/navigation";
+import { SpaceBackLink } from "./SpaceBackLink";
 import { localePath } from "@/lib/metadata";
 import { breadcrumbJsonLd, SITE_NAME } from "@/lib/seo";
 
@@ -41,12 +42,14 @@ export async function SpacePresentationPage({
   namespace,
   image,
   kind,
+  solutionsBackLabel,
 }: {
   locale: string;
   path: string;
   namespace: SpaceNamespace;
   image: StaticImageData;
   kind: SpaceKind;
+  solutionsBackLabel?: string;
 }) {
   setRequestLocale(locale);
 
@@ -67,13 +70,9 @@ export async function SpacePresentationPage({
       <main>
         <section className="px-6 pb-20 pt-10 sm:pb-24 sm:pt-14 lg:px-10 lg:pb-28">
           <div className="mx-auto max-w-[1280px]">
-            <Link
-              href="/#espaces"
-              className="inline-flex items-center gap-2 font-manrope text-[15px] font-semibold text-welcome-body transition-colors hover:text-welcome-gold"
-            >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              {t("back")}
-            </Link>
+            <Suspense>
+              <SpaceBackLink spacesLabel={t("back")} solutionsLabel={solutionsBackLabel} />
+            </Suspense>
 
             <div className="mt-8 grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
               <div className="py-4">

@@ -11,7 +11,13 @@ const PLANS = [
   { key: "nomad", icon: Briefcase, cta: "compare" },
   { key: "openSpace", icon: Armchair, cta: "compare" },
   { key: "privateOffice", icon: DoorOpen, cta: "compare" },
-  { key: "meetingRoom", icon: Presentation, cta: "learnMore", featured: true },
+  {
+    key: "meetingRoom",
+    icon: Presentation,
+    cta: "learnMore",
+    href: "/salle-de-reunion?from=solutions",
+    featured: true,
+  },
 ] as const;
 
 export function PricingSection() {
@@ -81,7 +87,7 @@ export function PricingSection() {
                 {/* Button */}
                 <div className="mt-10">
                   <Link
-                    href="/#solutions"
+                    href={"href" in plan ? plan.href : "/#solutions"}
                     className="inline-flex h-[52px] w-full items-center justify-center rounded-[12px] border border-welcome-black/20 bg-transparent font-manrope text-[15px] font-semibold text-welcome-black transition-all duration-200 hover:border-welcome-black hover:bg-welcome-black hover:text-welcome-ink-fg"
                   >
                     {t(plan.cta)}

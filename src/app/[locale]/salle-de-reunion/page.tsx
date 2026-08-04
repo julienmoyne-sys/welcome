@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import meetingRoomImage from "@/assets/salle-reunion.jpg";
 import { SpacePresentationPage } from "@/components/SpacePresentationPage";
@@ -26,6 +27,7 @@ export async function generateMetadata({
 
 export default async function MeetingRoomPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meetingRoomPage" });
 
   return (
     <SpacePresentationPage
@@ -34,6 +36,7 @@ export default async function MeetingRoomPage({ params }: { params: Promise<{ lo
       namespace="meetingRoomPage"
       image={meetingRoomImage}
       kind="meetingRoom"
+      solutionsBackLabel={t("backSolutions")}
     />
   );
 }

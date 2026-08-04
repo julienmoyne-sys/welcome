@@ -187,7 +187,7 @@
     "ctaTitle": "Ihr nächstes Büro könnte hier sein.", "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor."
   },
   "meetingRoomPage": {
-    "back": "Zurück zu den Räumen", "eyebrow": "Der Besprechungsraum",
+    "back": "Zurück zu den Räumen", "backSolutions": "Zurück zu den Angeboten", "eyebrow": "Der Besprechungsraum",
     "titleLead": "Ein Rahmen, der Ideen", "titleHighlight": "voranbringt.",
     "lead": "Bringen Sie Ihr Team zusammen und empfangen Sie Kunden in einem komfortablen, ausgestatteten Raum.",
     "visit": "Besichtigung buchen", "imageAlt": "Welcome Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm",

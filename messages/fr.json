@@ -194,7 +194,7 @@
     "ctaTitle": "Votre prochain bureau est peut-être ici.", "ctaText": "Venez découvrir les volumes et imaginer votre équipe chez Welcome."
   },
   "meetingRoomPage": {
-    "back": "Revenir aux espaces", "eyebrow": "La salle de réunion",
+    "back": "Revenir aux espaces", "backSolutions": "Revenir aux solutions", "eyebrow": "La salle de réunion",
     "titleLead": "Un cadre qui fait", "titleHighlight": "avancer les idées.",
     "lead": "Réunissez vos équipes et recevez vos clients dans une salle confortable, équipée et pensée pour des échanges efficaces.",
     "visit": "Organiser une visite",

@@ -187,7 +187,7 @@
     "ctaTitle": "Your next office could be here.", "ctaText": "Come and picture your team at Welcome."
   },
   "meetingRoomPage": {
-    "back": "Back to the spaces", "eyebrow": "The meeting room",
+    "back": "Back to the spaces", "backSolutions": "Back to the solutions", "eyebrow": "The meeting room",
     "titleLead": "A setting that moves", "titleHighlight": "ideas forward.",
     "lead": "Bring your team together and welcome clients in a comfortable, equipped room designed for productive conversations.",
     "visit": "Book a visit", "imageAlt": "Welcome meeting room with large wooden table, black chairs and display",
