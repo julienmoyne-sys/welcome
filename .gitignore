@@ -34,3 +34,6 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+.env.developement
+src/lib/contact.server.ts
+.env.development
