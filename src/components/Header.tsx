@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
+import { HomeLogoLink } from "./HomeLogoLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
-import { WelcomeLogo } from "./WelcomeLogo";
 
 const NAV_HASHES = ["espaces", "solutions", "references", "acces", "contact"] as const;
 
@@ -14,9 +14,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-welcome-line bg-welcome-header">
       <div className="mx-auto flex h-[90px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
         {/* `Link` de next-intl : conserve la langue courante dans l'URL. */}
-        <Link href="/" className="shrink-0" aria-label={t("homeLabel")}>
-          <WelcomeLogo className="w-[210px]" />
-        </Link>
+        <HomeLogoLink label={t("homeLabel")} />
 
         <nav className="hidden items-center gap-10 lg:flex lg:gap-14">
           {NAV_HASHES.map((hash) => (

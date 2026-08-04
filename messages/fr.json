@@ -215,7 +215,7 @@
         "tram": { "label": "Tram Couffignal", "sub": "Au pied de l’immeuble" }
       }
     },
-    "transitLine": "Tram A et E (Arrêt Couffignal) | Gare Strasbourg à 15min | Aéroport de Strasbourg à 20min",
+    "transitLine": "Tram A et E (Arrêt Couffignal) | Gare et aéroport de Strasbourg à 15min",
     "mapTitle": "Carte de localisation de Welcome Coworking, 204 avenue de Colmar, Strasbourg",
     "ctaVisit": "Organiser une visite",
     "ctaRoute": "Voir l’itinéraire"

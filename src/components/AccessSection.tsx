@@ -247,7 +247,7 @@ export function AccessSection() {
           <div className="relative overflow-hidden rounded-[20px] border border-welcome-black/[0.07] shadow-[0_18px_50px_-30px_rgba(11,11,11,0.28)]">
             <iframe
               title={t("mapTitle")}
-              src="https://www.google.com/maps?q=204+Avenue+de+Colmar,+67100+Strasbourg&output=embed&z=15"
+              src="https://www.google.com/maps?q=204+Avenue+de+Colmar,+67100+Strasbourg&output=embed&z=13"
               className="welcome-map h-[420px] w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
