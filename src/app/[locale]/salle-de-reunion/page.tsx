@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import meetingRoomImage from "@/assets/salle-reunion.jpg";
+import meetingRoomImage from "@/assets/salle-reunion-pro.png";
 import { SpacePresentationPage } from "@/components/SpacePresentationPage";
 import { routing } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";

@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import privateOfficesImage from "../assets/bureaux-privatifs.jpg";
 import kitchenLoungeImage from "../assets/cuisine-detente.jpg";
 import openSpaceImage from "../assets/open-space.jpg";
-import meetingRoomImage from "../assets/salle-reunion.jpg";
+import meetingRoomImage from "../assets/salle-reunion-pro.png";
 
 /*
  * Largeur réelle d'une carte, gouttières et padding déduits — surdéclarer ferait

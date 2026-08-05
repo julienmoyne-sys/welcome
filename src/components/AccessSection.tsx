@@ -240,10 +240,6 @@ export function AccessSection() {
             transform: bottom.visible ? "none" : "translateY(20px)",
           }}
         >
-          <p className="mb-5 text-center font-inter text-[15px] font-medium text-welcome-body/80 sm:text-base">
-            {t("transitLine")}
-          </p>
-
           <div className="relative overflow-hidden rounded-[20px] border border-welcome-black/[0.07] shadow-[0_18px_50px_-30px_rgba(11,11,11,0.28)]">
             <iframe
               title={t("mapTitle")}
