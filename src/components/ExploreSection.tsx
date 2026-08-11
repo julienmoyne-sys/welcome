@@ -2,9 +2,9 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-import privateOfficesImage from "../assets/bureaux-privatifs.jpg";
+import privateOfficesImage from "../assets/bureaux-privatifs-2026.png";
 import kitchenLoungeImage from "../assets/cuisine-detente-pro.png";
-import openSpaceImage from "../assets/open-space.jpg";
+import openSpaceImage from "../assets/open-space-2026.png";
 import meetingRoomImage from "../assets/salle-reunion-pro.png";
 
 /*

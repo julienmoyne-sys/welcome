@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import privateOfficesImage from "@/assets/bureaux-privatifs.jpg";
+import privateOfficesImage from "@/assets/bureaux-privatifs-2026.png";
 import { SpacePresentationPage } from "@/components/SpacePresentationPage";
 import { routing } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";

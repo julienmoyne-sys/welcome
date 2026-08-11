@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-import editorialImage from "../assets/editorial-welcome.jpg";
+import editorialImage from "../assets/editorial-welcome-2026.png";
 
 export function EditorialSection() {
   const t = useTranslations("editorial");

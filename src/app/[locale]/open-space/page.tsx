@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import openSpaceImage from "@/assets/open-space.jpg";
+import openSpaceImage from "@/assets/open-space-2026.png";
 import { SpacePresentationPage } from "@/components/SpacePresentationPage";
 import { routing } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";
