@@ -47,6 +47,11 @@ export function EditorialSection() {
             <p className="mt-6 max-w-xl font-inter text-lg leading-[1.7] text-welcome-body">
               {t("lead")}
             </p>
+            {t.has("lead2") && (
+              <p className="mt-4 max-w-xl font-inter text-lg leading-[1.7] text-welcome-body">
+                {t("lead2")}
+              </p>
+            )}
 
             {/* Benefits grid */}
             <div className="mt-10 grid grid-cols-1 gap-8 border-t border-welcome-black/10 pt-10 sm:grid-cols-3">

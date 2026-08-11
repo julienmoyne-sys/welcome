@@ -101,7 +101,7 @@
     "eyebrow": "Bienvenue chez Welcome.",
     "titleLine1": "Comme à la maison.",
     "titleLine2": "En beaucoup plus inspirant.",
-    "lead": "Découvrez un espace où le confort d’un salon, l’énergie d’un collectif et les services d’un bureau premium se rencontrent.",
+    "lead": "Découvrez le confort et la chaleur d’un intérieur, associés aux équipements et aux services d’un véritable environnement professionnel premium.",
     "ctaVisit": "Organiser une visite",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Découvrir Welcome",
@@ -110,11 +110,11 @@
 
   "reassurance": {
     "items": [
-      { "title": "Ambiance chaleureuse", "text": "Bois, lumière et végétation" },
-      { "title": "Tram au pied de l’immeuble", "text": "Arrêt Couffignal" },
-      { "title": "Autoroute à vélo", "text": "Strasbourg et Illkirch" },
-      { "title": "Accès facile", "text": "Autoroute et parking gratuit" },
-      { "title": "Depuis 2017", "text": "Plus de 100 entreprises accueillies" }
+      { "icon": "atmosphere", "title": "Atmosphère chaleureuse", "text": "Bois, végétation & lumière naturelle" },
+      { "icon": "access", "title": "Accès facile", "text": "En tram, à vélo, en voiture ou en train" },
+      { "icon": "profiles", "title": "Tous profils", "text": "Pour nomades et résidents, sous contrat" },
+      { "icon": "workspace", "title": "Des solutions de travail", "text": "Salle de réunion, bureaux privatifs ou open space" },
+      { "icon": "history", "title": "Depuis 2017", "text": "Plus de 100 entreprises accueillies" }
     ]
   },
 
@@ -122,7 +122,8 @@
     "eyebrow": "L’esprit Welcome",
     "titleLine1": "On travaille mieux…",
     "titleLine2": "quand on se sent bien.",
-    "lead": "Nous avons imaginé Welcome comme un lieu où l’on prend plaisir à commencer sa journée. Ici, la lumière, le confort, les échanges et la sérénité font pleinement partie de l’expérience de travail.",
+    "lead": "Welcome! est né d’une conviction simple : notre lieu de travail ne devrait pas être un endroit que l’on subit chaque matin.",
+    "lead2": "Nous avons voulu créer un lieu où l’on se sent bien. Vraiment bien. Un endroit où l’on vient pour travailler, mais où l’on reste aussi pour l’atmosphère, les rencontres et tous ces petits riens qui changent une journée.",
     "benefits": [
       { "title": "Se concentrer", "text": "Des espaces adaptés à chaque façon de travailler." },
       { "title": "Respirer", "text": "Une atmosphère chaleureuse, végétale et lumineuse." },

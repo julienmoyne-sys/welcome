@@ -93,7 +93,7 @@
     "eyebrow": "Welcome to Welcome.",
     "titleLine1": "Just like home.",
     "titleLine2": "Only far more inspiring.",
-    "lead": "Discover a place where the comfort of a living room, the energy of a community and the services of a premium office all come together.",
+    "lead": "Discover the comfort and warmth of a welcoming interior, combined with the amenities and services of a truly premium professional environment.",
     "ctaVisit": "Book a visit",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Discover Welcome",
@@ -102,11 +102,11 @@
 
   "reassurance": {
     "items": [
-      { "title": "A warm atmosphere", "text": "Wood, daylight and greenery" },
-      { "title": "Tram at the door", "text": "Couffignal stop" },
-      { "title": "Cycle highway", "text": "Strasbourg and Illkirch" },
-      { "title": "Easy to reach", "text": "Motorway and free parking" },
-      { "title": "Since 2017", "text": "More than 100 companies hosted" }
+      { "icon": "atmosphere", "title": "A warm atmosphere", "text": "Wood, greenery & natural light" },
+      { "icon": "access", "title": "Easy access", "text": "By tram, bike, car or train" },
+      { "icon": "profiles", "title": "All profiles", "text": "For nomads and residents, under contract" },
+      { "icon": "workspace", "title": "Work solutions", "text": "Meeting room, private offices or open space" },
+      { "icon": "history", "title": "Since 2017", "text": "More than 100 companies welcomed" }
     ]
   },
 
@@ -114,7 +114,8 @@
     "eyebrow": "The Welcome spirit",
     "titleLine1": "We all work better…",
     "titleLine2": "when we feel good.",
-    "lead": "We designed Welcome as a place you actually look forward to starting your day in. Here, daylight, comfort, conversation and calm are a full part of the working experience.",
+    "lead": "Welcome! was born from a simple belief: our workplace should not be somewhere we endure every morning.",
+    "lead2": "We wanted to create a place where people feel good. Really good. A place people come to work, but also stay for the atmosphere, the connections and all those little things that can transform a day.",
     "benefits": [
       { "title": "Focus", "text": "Spaces suited to every way of working." },
       { "title": "Breathe", "text": "A warm atmosphere, full of plants and daylight." },

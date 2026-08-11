@@ -93,7 +93,7 @@
     "eyebrow": "Willkommen bei Welcome.",
     "titleLine1": "Wie zu Hause.",
     "titleLine2": "Nur viel inspirierender.",
-    "lead": "Entdecken Sie einen Ort, an dem der Komfort eines Wohnzimmers, die Energie einer Gemeinschaft und die Leistungen eines Premium-Büros zusammenkommen.",
+    "lead": "Entdecken Sie den Komfort und die Wärme eines wohnlichen Interieurs, verbunden mit der Ausstattung und den Services eines echten professionellen Premium-Arbeitsumfelds.",
     "ctaVisit": "Besichtigung buchen",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Welcome entdecken",
@@ -102,11 +102,11 @@
 
   "reassurance": {
     "items": [
-      { "title": "Warme Atmosphäre", "text": "Holz, Licht und Pflanzen" },
-      { "title": "Tram vor der Tür", "text": "Haltestelle Couffignal" },
-      { "title": "Radschnellweg", "text": "Straßburg und Illkirch" },
-      { "title": "Gut erreichbar", "text": "Autobahn und kostenlose Parkplätze" },
-      { "title": "Seit 2017", "text": "Über 100 Unternehmen zu Gast" }
+      { "icon": "atmosphere", "title": "Warme Atmosphäre", "text": "Holz, Pflanzen & Tageslicht" },
+      { "icon": "access", "title": "Einfach erreichbar", "text": "Mit Tram, Fahrrad, Auto oder Zug" },
+      { "icon": "profiles", "title": "Alle Profile", "text": "Für Nomaden und feste Mieter mit Vertrag" },
+      { "icon": "workspace", "title": "Arbeitslösungen", "text": "Besprechungsraum, private Büros oder Open Space" },
+      { "icon": "history", "title": "Seit 2017", "text": "Mehr als 100 Unternehmen empfangen" }
     ]
   },
 
@@ -114,7 +114,8 @@
     "eyebrow": "Der Welcome-Geist",
     "titleLine1": "Man arbeitet besser…",
     "titleLine2": "wenn man sich wohlfühlt.",
-    "lead": "Wir haben Welcome als Ort gestaltet, an dem man den Tag gerne beginnt. Licht, Komfort, Austausch und Ruhe sind hier fester Teil des Arbeitserlebnisses.",
+    "lead": "Welcome! entstand aus einer einfachen Überzeugung: Unser Arbeitsplatz sollte kein Ort sein, den wir jeden Morgen nur ertragen.",
+    "lead2": "Wir wollten einen Ort schaffen, an dem man sich wohlfühlt. Richtig wohl. Einen Ort, an den man zum Arbeiten kommt, aber auch wegen der Atmosphäre, der Begegnungen und all der kleinen Dinge bleibt, die einen Tag verändern.",
     "benefits": [
       { "title": "Konzentrieren", "text": "Räume für jede Art zu arbeiten." },
       { "title": "Aufatmen", "text": "Eine warme Atmosphäre voller Pflanzen und Tageslicht." },
