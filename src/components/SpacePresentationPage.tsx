@@ -100,7 +100,9 @@ export async function SpacePresentationPage({
                   fill
                   priority
                   sizes="(min-width: 1024px) 58vw, 100vw"
-                  className="welcome-photo object-cover"
+                  className={`welcome-photo object-cover ${
+                    kind === "kitchenLounge" ? "object-[60%_center]" : "object-center"
+                  }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>

@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import privateOfficesImage from "../assets/bureaux-privatifs.jpg";
-import kitchenLoungeImage from "../assets/cuisine-detente.jpg";
+import kitchenLoungeImage from "../assets/cuisine-detente-pro.png";
 import openSpaceImage from "../assets/open-space.jpg";
 import meetingRoomImage from "../assets/salle-reunion-pro.png";
 
@@ -66,7 +66,9 @@ export function ExploreSection() {
                   alt={t(`cards.${card.key}.alt`)}
                   fill
                   sizes={CARD_SIZES}
-                  className="welcome-photo object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  className={`welcome-photo object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] ${
+                    card.key === "kitchenLounge" ? "object-[60%_center]" : "object-center"
+                  }`}
                 />
               </div>
 

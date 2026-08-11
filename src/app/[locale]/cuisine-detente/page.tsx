@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import kitchenLoungeImage from "@/assets/cuisine-detente.jpg";
+import kitchenLoungeImage from "@/assets/cuisine-detente-pro.png";
 import { SpacePresentationPage } from "@/components/SpacePresentationPage";
 import { routing } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";

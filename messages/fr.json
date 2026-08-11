@@ -123,11 +123,11 @@
     "titleLine1": "On travaille mieux…",
     "titleLine2": "quand on se sent bien.",
     "lead": "Welcome! est né d’une conviction simple : notre lieu de travail ne devrait pas être un endroit que l’on subit chaque matin.",
-    "lead2": "Nous avons voulu créer un lieu où l’on se sent bien. Vraiment bien. Un endroit où l’on vient pour travailler, mais où l’on reste aussi pour l’atmosphère, les rencontres et tous ces petits riens qui changent une journée.",
+    "lead2": "Nous avons voulu créer un lieu où l’on se sent vraiment bien. Un endroit où l’on vient pour travailler, mais où l’on reste aussi pour l’atmosphère, les rencontres et toutes ces petites choses qui changent une journée.",
     "benefits": [
-      { "title": "Se concentrer", "text": "Des espaces adaptés à chaque façon de travailler." },
+      { "title": "Se concentrer", "text": "Des espaces au calme, adaptés à chaque façon de travailler." },
       { "title": "Respirer", "text": "Une atmosphère chaleureuse, végétale et lumineuse." },
-      { "title": "Partager", "text": "Un lieu à taille humaine, propice aux rencontres." }
+      { "title": "Partager", "text": "Un lieu à taille humaine où tout le monde se connait." }
     ],
     "cta": "Découvrir les espaces",
     "imageAlt": "Espace de coworking lumineux avec bois, plantes et verrières noires"
