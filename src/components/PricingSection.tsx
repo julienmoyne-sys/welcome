@@ -38,7 +38,9 @@ export function PricingSection() {
             {t("title")}
           </h2>
           <p className="mx-auto mt-6 max-w-xl font-inter text-lg leading-[1.7] text-welcome-body">
-            {t("lead")}
+            {t.rich("lead", {
+              strong: (chunks) => <strong className="font-bold">{chunks}</strong>,
+            })}
           </p>
         </div>
 
@@ -108,6 +110,9 @@ export function PricingSection() {
             );
           })}
         </div>
+        <p className="mt-5 text-right font-inter text-[13px] text-welcome-body">
+          {t("commitmentNote")}
+        </p>
       </div>
     </section>
   );

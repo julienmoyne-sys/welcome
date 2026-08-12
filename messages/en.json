@@ -18,20 +18,28 @@
       "ogDescription": "A bright, quiet and welcoming open space where you can work at your own pace in Strasbourg."
     },
     "privateOffices": {
-      "title": "Private offices in Strasbourg — Welcome Coworking", "description": "Discover comfortable, equipped private offices where your team can work with confidence in Strasbourg.",
-      "ogTitle": "Private offices — Welcome Coworking Strasbourg", "ogDescription": "Bright, ready-to-use private offices in a warm coworking space."
+      "title": "Private offices in Strasbourg — Welcome Coworking",
+      "description": "Discover comfortable, equipped private offices where your team can work with confidence in Strasbourg.",
+      "ogTitle": "Private offices — Welcome Coworking Strasbourg",
+      "ogDescription": "Bright, ready-to-use private offices in a warm coworking space."
     },
     "meetingRoom": {
-      "title": "Meeting room in Strasbourg — Welcome Coworking", "description": "Book an equipped meeting room in Strasbourg for your team and clients.",
-      "ogTitle": "The meeting room — Welcome Coworking Strasbourg", "ogDescription": "An equipped room for up to 12 people, with display and video conferencing."
+      "title": "Meeting room in Strasbourg — Welcome Coworking",
+      "description": "Book an equipped meeting room in Strasbourg for your team and clients.",
+      "ogTitle": "The meeting room — Welcome Coworking Strasbourg",
+      "ogDescription": "An equipped room for up to 12 people, with display and video conferencing."
     },
     "kitchenLounge": {
-      "title": "Kitchen and lounge — Welcome Coworking Strasbourg", "description": "Discover a welcoming place to pause, have lunch and connect at Welcome Coworking.",
-      "ogTitle": "Kitchen and lounge — Welcome Coworking Strasbourg", "ogDescription": "A warm space to have lunch, take a break and share a coffee."
+      "title": "Kitchen and lounge — Welcome Coworking Strasbourg",
+      "description": "Discover a welcoming place to pause, have lunch and connect at Welcome Coworking.",
+      "ogTitle": "Kitchen and lounge — Welcome Coworking Strasbourg",
+      "ogDescription": "A warm space to have lunch, take a break and share a coffee."
     },
     "comparison": {
-      "title": "Coworking plan comparison — Welcome Strasbourg", "description": "Compare Welcome Coworking Strasbourg Nomad, Open Space and Private Office plans: access, services, commitment and spaces included.",
-      "ogTitle": "Compare Welcome Coworking plans", "ogDescription": "A clear comparison of Nomad, Open Space and Private Office plans in Strasbourg."
+      "title": "Coworking plan comparison — Welcome Strasbourg",
+      "description": "Compare Welcome Coworking Strasbourg Nomad, Open Space and Private Office plans: access, services, commitment and spaces included.",
+      "ogTitle": "Compare Welcome Coworking plans",
+      "ogDescription": "A clear comparison of Nomad, Open Space and Private Office plans in Strasbourg."
     },
     "faq": {
       "title": "FAQ — Frequently asked questions about Welcome Coworking Strasbourg",
@@ -102,10 +110,22 @@
 
   "reassurance": {
     "items": [
-      { "icon": "atmosphere", "title": "A warm atmosphere", "text": "Wood, greenery & natural light" },
+      {
+        "icon": "atmosphere",
+        "title": "A warm atmosphere",
+        "text": "Wood, greenery & natural light"
+      },
       { "icon": "access", "title": "Easy access", "text": "By tram, bike, car or train" },
-      { "icon": "profiles", "title": "All profiles", "text": "For nomads and residents, under contract" },
-      { "icon": "workspace", "title": "Work solutions", "text": "Meeting room, private offices or open space" },
+      {
+        "icon": "profiles",
+        "title": "All profiles",
+        "text": "For nomads and residents, under contract"
+      },
+      {
+        "icon": "workspace",
+        "title": "Work solutions",
+        "text": "Meeting room, private offices or open space"
+      },
       { "icon": "history", "title": "Since 2017", "text": "More than 100 companies welcomed" }
     ]
   },
@@ -168,20 +188,30 @@
     "detailsTitle": "Everything you need to work well.",
     "detailsText": "Choose your seat, plug in and start your day. The open space offers a professional, human-scale setting with all the essential services close at hand.",
     "features": [
-      { "title": "Flexible access", "text": "A workspace available according to your schedule and plan." },
+      {
+        "title": "Flexible access",
+        "text": "A workspace available according to your schedule and plan."
+      },
       { "title": "Fibre internet", "text": "A fast, stable connection for stress-free work." },
-      { "title": "Coffee included", "text": "Everything you need for a proper break, just like home." },
+      {
+        "title": "Coffee included",
+        "text": "Everything you need for a proper break, just like home."
+      },
       { "title": "Printing", "text": "Useful office equipment is available directly on site." }
     ],
     "ctaTitle": "Ready to discover your future workspace?",
     "ctaText": "Come and experience the Welcome atmosphere and find the plan that suits you."
   },
   "privateOfficesPage": {
-    "back": "Back to the spaces", "eyebrow": "Private offices",
-    "titleLead": "An office of your own,", "titleHighlight": "without the hassle.",
+    "back": "Back to the spaces",
+    "eyebrow": "Private offices",
+    "titleLead": "An office of your own,",
+    "titleHighlight": "without the hassle.",
     "lead": "Enjoy a quiet, comfortable enclosed space where your team can work, welcome clients and keep conversations confidential.",
-    "visit": "Book a visit", "imageAlt": "Welcome private office with glass partition, wooden desk and warm lighting",
-    "detailsEyebrow": "Your space", "detailsTitle": "The privacy of an office, the energy of Welcome.",
+    "visit": "Book a visit",
+    "imageAlt": "Welcome private office with glass partition, wooden desk and warm lighting",
+    "detailsEyebrow": "Your space",
+    "detailsTitle": "The privacy of an office, the energy of Welcome.",
     "detailsText": "Settle your team into a ready-to-use office and enjoy all the coworking spaces and services.",
     "features": [
       { "title": "Privacy", "text": "An enclosed space for focused work." },
@@ -189,14 +219,20 @@
       { "title": "Comfortable furniture", "text": "A fitted office ready when you arrive." },
       { "title": "Secure access", "text": "A controlled professional environment." }
     ],
-    "ctaTitle": "Your next office could be here.", "ctaText": "Come and picture your team at Welcome."
+    "ctaTitle": "Your next office could be here.",
+    "ctaText": "Come and picture your team at Welcome."
   },
   "meetingRoomPage": {
-    "back": "Back to the spaces", "backSolutions": "Back to the solutions", "eyebrow": "The meeting room",
-    "titleLead": "A setting that moves", "titleHighlight": "ideas forward.",
+    "back": "Back to the spaces",
+    "backSolutions": "Back to the solutions",
+    "eyebrow": "The meeting room",
+    "titleLead": "A setting that moves",
+    "titleHighlight": "ideas forward.",
     "lead": "Bring your team together and welcome clients in a comfortable, equipped room designed for productive conversations.",
-    "visit": "Book a visit", "imageAlt": "Welcome meeting room with large wooden table, black chairs and display",
-    "detailsEyebrow": "Your meetings", "detailsTitle": "Everything is ready when you are.",
+    "visit": "Book a visit",
+    "imageAlt": "Welcome meeting room with large wooden table, black chairs and display",
+    "detailsEyebrow": "Your meetings",
+    "detailsTitle": "Everything is ready when you are.",
     "detailsText": "Team meeting, client presentation or video call: settle into a quiet, professional setting.",
     "features": [
       { "title": "Up to 12 people", "text": "Ideal for meetings and small workshops." },
@@ -204,14 +240,19 @@
       { "title": "Video conferencing", "text": "Keep remote participants fully involved." },
       { "title": "Fibre internet", "text": "A reliable connection without interruptions." }
     ],
-    "ctaTitle": "Planning a meeting in Strasbourg?", "ctaText": "Discover the room and tell us about your next event."
+    "ctaTitle": "Planning a meeting in Strasbourg?",
+    "ctaText": "Discover the room and tell us about your next event."
   },
   "kitchenLoungePage": {
-    "back": "Back to the spaces", "eyebrow": "Kitchen & lounge",
-    "titleLead": "A proper break,", "titleHighlight": "just like home.",
+    "back": "Back to the spaces",
+    "eyebrow": "Kitchen & lounge",
+    "titleLead": "A proper break,",
+    "titleHighlight": "just like home.",
     "lead": "Change pace in a welcoming space designed for lunch, a quiet moment and time shared with other members.",
-    "visit": "Book a visit", "imageAlt": "Welcome kitchen and lounge with light sofas, wooden counter and green plants",
-    "detailsEyebrow": "Between projects", "detailsTitle": "A space to connect and recharge.",
+    "visit": "Book a visit",
+    "imageAlt": "Welcome kitchen and lounge with light sofas, wooden counter and green plants",
+    "detailsEyebrow": "Between projects",
+    "detailsTitle": "A space to connect and recharge.",
     "detailsText": "The kitchen and lounge extend the Welcome experience in a simple, friendly atmosphere.",
     "features": [
       { "title": "Coffee available", "text": "An enjoyable break at any time of day." },
@@ -219,50 +260,173 @@
       { "title": "Kitchen space", "text": "A practical place to enjoy lunch." },
       { "title": "Shared moments", "text": "A natural setting for connecting with members." }
     ],
-    "ctaTitle": "Come and experience Welcome.", "ctaText": "A visit is the best way to discover every space."
+    "ctaTitle": "Come and experience Welcome.",
+    "ctaText": "A visit is the best way to discover every space."
   },
   "comparisonPage": {
-    "back": "Back to the solutions", "eyebrow": "Plan comparison",
-    "titleLead": "Find the plan", "titleHighlight": "made for you.",
+    "back": "Back to the solutions",
+    "eyebrow": "Plan comparison",
+    "titleLead": "Find the plan",
+    "titleHighlight": "made for you.",
     "lead": "Compare the three ways to work at Welcome and quickly identify the one that best matches your schedule.",
-    "criteria": "Criteria", "tableCaption": "Comparison of Nomad, Open Space and Private Office plans",
+    "criteria": "Criteria",
+    "tableCaption": "Comparison of Nomad, Open Space and Private Office plans",
     "offers": [
-      { "name": "Nomad", "tagline": "For occasional visits with no constraints.", "idealFor": "Best for: occasional needs" },
-      { "name": "Open Space", "tagline": "For regular work in a shared space.", "idealFor": "Best for: freelancers" },
-      { "name": "Private office", "tagline": "For settling a team into its own space.", "idealFor": "Best for: teams" }
+      {
+        "name": "Nomad",
+        "tagline": "For occasional visits with no constraints.",
+        "idealFor": "Best for: occasional needs"
+      },
+      {
+        "name": "Open Space",
+        "tagline": "For regular work in a shared space.",
+        "idealFor": "Best for: freelancers"
+      },
+      {
+        "name": "Private office",
+        "tagline": "For settling a team into its own space.",
+        "idealFor": "Best for: teams"
+      }
     ],
     "groups": [
-      { "title": "Use and flexibility", "rows": [
-        { "label": "Recommended rhythm", "values": [{"status":"included","label":"Occasional"},{"status":"included","label":"Regular"},{"status":"included","label":"Team"}] },
-        { "label": "Workspace type", "values": [{"status":"variable","label":"Shared seat"},{"status":"included","label":"Open space"},{"status":"included","label":"Enclosed office"}] },
-        { "label": "Booking", "values": [{"status":"included","label":"By the hour"},{"status":"variable","label":"Depends on plan"},{"status":"variable","label":"Tailored quote"}] },
-        { "label": "Minimum commitment", "values": [{"status":"included","label":"None"},{"status":"variable","label":"Depends on plan"},{"status":"included","label":"None"}] }
-      ]},
-      { "title": "Everyday services", "rows": [
-        { "label": "Fibre internet", "values": [{"status":"included","label":"Included"},{"status":"included","label":"Included"},{"status":"included","label":"Included"}] },
-        { "label": "Self-service access", "values": [{"status":"included","label":"Included"},{"status":"variable","label":"Depends on plan"},{"status":"included","label":"24/7 included"}] },
-        { "label": "Kitchen and lounge areas", "values": [{"status":"included","label":"Included"},{"status":"included","label":"Included"},{"status":"included","label":"Included"}] },
-        { "label": "Printing", "values": [{"status":"variable","label":"Depends on plan"},{"status":"included","label":"Included"},{"status":"variable","label":"Depends on plan"}] },
-        { "label": "Coffee", "values": [{"status":"variable","label":"Depends on plan"},{"status":"included","label":"Included"},{"status":"variable","label":"Depends on plan"}] }
-      ]},
-      { "title": "Space and privacy", "rows": [
-        { "label": "Enclosed confidential space", "values": [{"status":"excluded","label":"No"},{"status":"excluded","label":"No"},{"status":"included","label":"Included"}] },
-        { "label": "Dedicated furniture", "values": [{"status":"excluded","label":"Shared seat"},{"status":"variable","label":"Subject to availability"},{"status":"included","label":"Premium furniture"}] },
-        { "label": "Meeting room", "values": [{"status":"variable","label":"Optional"},{"status":"variable","label":"Optional"},{"status":"variable","label":"Optional"}] },
-        { "label": "Long-term team setup", "values": [{"status":"excluded","label":"Not suitable"},{"status":"variable","label":"For one person"},{"status":"included","label":"Yes"}] }
-      ]}
+      {
+        "title": "Use and flexibility",
+        "rows": [
+          {
+            "label": "Recommended rhythm",
+            "values": [
+              { "status": "included", "label": "Occasional" },
+              { "status": "included", "label": "Regular" },
+              { "status": "included", "label": "Team" }
+            ]
+          },
+          {
+            "label": "Workspace type",
+            "values": [
+              { "status": "variable", "label": "Shared seat" },
+              { "status": "included", "label": "Open space" },
+              { "status": "included", "label": "Enclosed office" }
+            ]
+          },
+          {
+            "label": "Booking",
+            "values": [
+              { "status": "included", "label": "By the hour" },
+              { "status": "variable", "label": "Depends on plan" },
+              { "status": "variable", "label": "Tailored quote" }
+            ]
+          },
+          {
+            "label": "Minimum commitment",
+            "values": [
+              { "status": "included", "label": "None" },
+              { "status": "variable", "label": "Depends on plan" },
+              { "status": "included", "label": "None" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Everyday services",
+        "rows": [
+          {
+            "label": "Fibre internet",
+            "values": [
+              { "status": "included", "label": "Included" },
+              { "status": "included", "label": "Included" },
+              { "status": "included", "label": "Included" }
+            ]
+          },
+          {
+            "label": "Self-service access",
+            "values": [
+              { "status": "included", "label": "Included" },
+              { "status": "variable", "label": "Depends on plan" },
+              { "status": "included", "label": "24/7 included" }
+            ]
+          },
+          {
+            "label": "Kitchen and lounge areas",
+            "values": [
+              { "status": "included", "label": "Included" },
+              { "status": "included", "label": "Included" },
+              { "status": "included", "label": "Included" }
+            ]
+          },
+          {
+            "label": "Printing",
+            "values": [
+              { "status": "variable", "label": "Depends on plan" },
+              { "status": "included", "label": "Included" },
+              { "status": "variable", "label": "Depends on plan" }
+            ]
+          },
+          {
+            "label": "Coffee",
+            "values": [
+              { "status": "variable", "label": "Depends on plan" },
+              { "status": "included", "label": "Included" },
+              { "status": "variable", "label": "Depends on plan" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Space and privacy",
+        "rows": [
+          {
+            "label": "Enclosed confidential space",
+            "values": [
+              { "status": "excluded", "label": "No" },
+              { "status": "excluded", "label": "No" },
+              { "status": "included", "label": "Included" }
+            ]
+          },
+          {
+            "label": "Dedicated furniture",
+            "values": [
+              { "status": "excluded", "label": "Shared seat" },
+              { "status": "variable", "label": "Subject to availability" },
+              { "status": "included", "label": "Premium furniture" }
+            ]
+          },
+          {
+            "label": "Meeting room",
+            "values": [
+              { "status": "variable", "label": "Optional" },
+              { "status": "variable", "label": "Optional" },
+              { "status": "variable", "label": "Optional" }
+            ]
+          },
+          {
+            "label": "Long-term team setup",
+            "values": [
+              { "status": "excluded", "label": "Not suitable" },
+              { "status": "variable", "label": "For one person" },
+              { "status": "included", "label": "Yes" }
+            ]
+          }
+        ]
+      }
     ],
-    "legend": {"included":"Included", "variable":"Variable or optional", "excluded":"Not included"},
+    "legend": {
+      "included": "Included",
+      "variable": "Variable or optional",
+      "excluded": "Not included"
+    },
     "note": "This comparison is an initial overview. Availability, access arrangements and exact services may vary by plan and will be confirmed when you speak with Welcome.",
-    "ctaTitle": "Still choosing between two plans?", "ctaText": "Tell us about your schedule, team and needs so we can identify the simplest option.",
-    "ctaVisit": "Book a visit", "ctaFaq": "View the FAQ"
+    "ctaTitle": "Still choosing between two plans?",
+    "ctaText": "Tell us about your schedule, team and needs so we can identify the simplest option.",
+    "ctaVisit": "Book a visit",
+    "ctaFaq": "View the FAQ"
   },
   "pricing": {
     "eyebrow": "Our solutions",
     "title": "Choose your own pace.",
-    "lead": "Whether you drop in occasionally or stay all year round, we have designed straightforward solutions in intimate spaces from €20 excl. VAT / month.",
+    "lead": "Whether you drop in occasionally or stay all year round, we have designed straightforward solutions in intimate spaces from €20 excl. VAT / month. All our plans are <strong>commitment-free</strong>.",
     "compare": "Compare",
     "learnMore": "Discover",
+    "commitmentNote": "* : with a partial commitment",
     "plans": {
       "nomad": {
         "name": "Nomad",
@@ -368,7 +532,7 @@
       "phone": "+33 6 22 80 55 36",
       "emailLabel": "Email address",
       "hoursLabel": "Opening hours",
-      "hours": "Members: 24/7 / Visits: by appointment"
+      "hours": "Members: 24/7 / Visits: <strong>by appointment</strong>"
     },
     "form": {
       "title": "Book a visit",

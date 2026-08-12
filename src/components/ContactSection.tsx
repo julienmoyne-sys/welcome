@@ -206,7 +206,9 @@ export function ContactSection() {
                       {t("info.hoursLabel")}
                     </p>
                     <p className="font-inter text-sm text-welcome-body/70">
-                      {t("info.hours")}
+                      {t.rich("info.hours", {
+                        strong: (chunks) => <strong className="font-bold">{chunks}</strong>,
+                      })}
                     </p>
                   </div>
                 </div>

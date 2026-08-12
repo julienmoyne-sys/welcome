@@ -18,20 +18,28 @@
       "ogDescription": "Ein heller, ruhiger und einladender Open Space für flexibles Arbeiten in Straßburg."
     },
     "privateOffices": {
-      "title": "Private Büros in Straßburg — Welcome Coworking", "description": "Entdecken Sie komfortable, ausgestattete private Büros für konzentriertes Arbeiten in Straßburg.",
-      "ogTitle": "Private Büros — Welcome Coworking Straßburg", "ogDescription": "Helle, bezugsfertige private Büros in einem einladenden Coworking-Space."
+      "title": "Private Büros in Straßburg — Welcome Coworking",
+      "description": "Entdecken Sie komfortable, ausgestattete private Büros für konzentriertes Arbeiten in Straßburg.",
+      "ogTitle": "Private Büros — Welcome Coworking Straßburg",
+      "ogDescription": "Helle, bezugsfertige private Büros in einem einladenden Coworking-Space."
     },
     "meetingRoom": {
-      "title": "Besprechungsraum in Straßburg — Welcome Coworking", "description": "Buchen Sie einen ausgestatteten Besprechungsraum in Straßburg für Teams und Kunden.",
-      "ogTitle": "Der Besprechungsraum — Welcome Coworking Straßburg", "ogDescription": "Ein Raum für bis zu 12 Personen mit Bildschirm und Videokonferenz."
+      "title": "Besprechungsraum in Straßburg — Welcome Coworking",
+      "description": "Buchen Sie einen ausgestatteten Besprechungsraum in Straßburg für Teams und Kunden.",
+      "ogTitle": "Der Besprechungsraum — Welcome Coworking Straßburg",
+      "ogDescription": "Ein Raum für bis zu 12 Personen mit Bildschirm und Videokonferenz."
     },
     "kitchenLounge": {
-      "title": "Küche und Lounge — Welcome Coworking Straßburg", "description": "Entdecken Sie einen einladenden Ort für Pausen, Mittagessen und Austausch bei Welcome Coworking.",
-      "ogTitle": "Küche und Lounge — Welcome Coworking Straßburg", "ogDescription": "Ein gemütlicher Raum für Mittagessen, Pausen und gemeinsamen Kaffee."
+      "title": "Küche und Lounge — Welcome Coworking Straßburg",
+      "description": "Entdecken Sie einen einladenden Ort für Pausen, Mittagessen und Austausch bei Welcome Coworking.",
+      "ogTitle": "Küche und Lounge — Welcome Coworking Straßburg",
+      "ogDescription": "Ein gemütlicher Raum für Mittagessen, Pausen und gemeinsamen Kaffee."
     },
     "comparison": {
-      "title": "Coworking-Angebote im Vergleich — Welcome Straßburg", "description": "Vergleichen Sie Nomade, Open Space und privates Büro bei Welcome Coworking Straßburg: Zugang, Services und enthaltene Bereiche.",
-      "ogTitle": "Welcome Coworking Angebote vergleichen", "ogDescription": "Ein klarer Vergleich von Nomade, Open Space und privatem Büro in Straßburg."
+      "title": "Coworking-Angebote im Vergleich — Welcome Straßburg",
+      "description": "Vergleichen Sie Nomade, Open Space und privates Büro bei Welcome Coworking Straßburg: Zugang, Services und enthaltene Bereiche.",
+      "ogTitle": "Welcome Coworking Angebote vergleichen",
+      "ogDescription": "Ein klarer Vergleich von Nomade, Open Space und privatem Büro in Straßburg."
     },
     "faq": {
       "title": "FAQ — Häufige Fragen zu Welcome Coworking Straßburg",
@@ -103,9 +111,21 @@
   "reassurance": {
     "items": [
       { "icon": "atmosphere", "title": "Warme Atmosphäre", "text": "Holz, Pflanzen & Tageslicht" },
-      { "icon": "access", "title": "Einfach erreichbar", "text": "Mit Tram, Fahrrad, Auto oder Zug" },
-      { "icon": "profiles", "title": "Alle Profile", "text": "Für Nomaden und feste Mieter mit Vertrag" },
-      { "icon": "workspace", "title": "Arbeitslösungen", "text": "Besprechungsraum, private Büros oder Open Space" },
+      {
+        "icon": "access",
+        "title": "Einfach erreichbar",
+        "text": "Mit Tram, Fahrrad, Auto oder Zug"
+      },
+      {
+        "icon": "profiles",
+        "title": "Alle Profile",
+        "text": "Für Nomaden und feste Mieter mit Vertrag"
+      },
+      {
+        "icon": "workspace",
+        "title": "Arbeitslösungen",
+        "text": "Besprechungsraum, private Büros oder Open Space"
+      },
       { "icon": "history", "title": "Seit 2017", "text": "Mehr als 100 Unternehmen empfangen" }
     ]
   },
@@ -168,8 +188,14 @@
     "detailsTitle": "Alles, was Sie für gutes Arbeiten brauchen.",
     "detailsText": "Wählen Sie Ihren Platz, schließen Sie sich an und starten Sie in den Tag. Der Open Space bietet einen professionellen Rahmen mit persönlicher Atmosphäre und allen wichtigen Services.",
     "features": [
-      { "title": "Flexibler Zugang", "text": "Ein Arbeitsplatz passend zu Ihrem Rhythmus und Ihrem Tarif." },
-      { "title": "Glasfaser-Internet", "text": "Eine schnelle, stabile Verbindung für entspanntes Arbeiten." },
+      {
+        "title": "Flexibler Zugang",
+        "text": "Ein Arbeitsplatz passend zu Ihrem Rhythmus und Ihrem Tarif."
+      },
+      {
+        "title": "Glasfaser-Internet",
+        "text": "Eine schnelle, stabile Verbindung für entspanntes Arbeiten."
+      },
       { "title": "Kaffee inklusive", "text": "Alles für eine echte Pause, fast wie zu Hause." },
       { "title": "Drucken", "text": "Die wichtigsten Bürogeräte stehen direkt vor Ort bereit." }
     ],
@@ -177,11 +203,15 @@
     "ctaText": "Erleben Sie die Welcome-Atmosphäre und finden Sie das passende Angebot."
   },
   "privateOfficesPage": {
-    "back": "Zurück zu den Räumen", "eyebrow": "Private Büros",
-    "titleLead": "Ihr eigenes Büro,", "titleHighlight": "ganz ohne Aufwand.",
+    "back": "Zurück zu den Räumen",
+    "eyebrow": "Private Büros",
+    "titleLead": "Ihr eigenes Büro,",
+    "titleHighlight": "ganz ohne Aufwand.",
     "lead": "Arbeiten Sie mit Ihrem Team in einem ruhigen, komfortablen Raum, empfangen Sie Kunden und bewahren Sie Vertraulichkeit.",
-    "visit": "Besichtigung buchen", "imageAlt": "Privates Welcome Büro mit Glastrennwand, Holztisch und warmer Beleuchtung",
-    "detailsEyebrow": "Ihr Raum", "detailsTitle": "Die Ruhe eines Büros, die Energie von Welcome.",
+    "visit": "Besichtigung buchen",
+    "imageAlt": "Privates Welcome Büro mit Glastrennwand, Holztisch und warmer Beleuchtung",
+    "detailsEyebrow": "Ihr Raum",
+    "detailsTitle": "Die Ruhe eines Büros, die Energie von Welcome.",
     "detailsText": "Beziehen Sie ein startbereites Büro und nutzen Sie alle Coworking-Bereiche und Services.",
     "features": [
       { "title": "Privatsphäre", "text": "Ein geschlossener Raum für konzentriertes Arbeiten." },
@@ -189,14 +219,20 @@
       { "title": "Komfortable Möbel", "text": "Ein eingerichtetes, startbereites Büro." },
       { "title": "Gesicherter Zugang", "text": "Eine kontrollierte professionelle Umgebung." }
     ],
-    "ctaTitle": "Ihr nächstes Büro könnte hier sein.", "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor."
+    "ctaTitle": "Ihr nächstes Büro könnte hier sein.",
+    "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor."
   },
   "meetingRoomPage": {
-    "back": "Zurück zu den Räumen", "backSolutions": "Zurück zu den Angeboten", "eyebrow": "Der Besprechungsraum",
-    "titleLead": "Ein Rahmen, der Ideen", "titleHighlight": "voranbringt.",
+    "back": "Zurück zu den Räumen",
+    "backSolutions": "Zurück zu den Angeboten",
+    "eyebrow": "Der Besprechungsraum",
+    "titleLead": "Ein Rahmen, der Ideen",
+    "titleHighlight": "voranbringt.",
     "lead": "Bringen Sie Ihr Team zusammen und empfangen Sie Kunden in einem komfortablen, ausgestatteten Raum.",
-    "visit": "Besichtigung buchen", "imageAlt": "Welcome Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm",
-    "detailsEyebrow": "Ihre Termine", "detailsTitle": "Alles ist bereit für Ihr Meeting.",
+    "visit": "Besichtigung buchen",
+    "imageAlt": "Welcome Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm",
+    "detailsEyebrow": "Ihre Termine",
+    "detailsTitle": "Alles ist bereit für Ihr Meeting.",
     "detailsText": "Teammeeting, Kundenpräsentation oder Videokonferenz: arbeiten Sie in einer ruhigen, professionellen Umgebung.",
     "features": [
       { "title": "Bis zu 12 Personen", "text": "Ideal für Meetings und kleine Workshops." },
@@ -204,14 +240,19 @@
       { "title": "Videokonferenz", "text": "Binden Sie entfernte Teilnehmer vollständig ein." },
       { "title": "Glasfaser-Internet", "text": "Eine zuverlässige Verbindung ohne Unterbrechung." }
     ],
-    "ctaTitle": "Planen Sie ein Meeting in Straßburg?", "ctaText": "Entdecken Sie den Raum und erzählen Sie uns von Ihrem Termin."
+    "ctaTitle": "Planen Sie ein Meeting in Straßburg?",
+    "ctaText": "Entdecken Sie den Raum und erzählen Sie uns von Ihrem Termin."
   },
   "kitchenLoungePage": {
-    "back": "Zurück zu den Räumen", "eyebrow": "Küche & Lounge",
-    "titleLead": "Eine echte Pause,", "titleHighlight": "fast wie zu Hause.",
+    "back": "Zurück zu den Räumen",
+    "eyebrow": "Küche & Lounge",
+    "titleLead": "Eine echte Pause,",
+    "titleHighlight": "fast wie zu Hause.",
     "lead": "Wechseln Sie den Rhythmus in einem einladenden Raum zum Mittagessen, Durchatmen und für gemeinsame Momente.",
-    "visit": "Besichtigung buchen", "imageAlt": "Welcome Küche und Lounge mit hellen Sofas, Holztheke und grünen Pflanzen",
-    "detailsEyebrow": "Zwischen Projekten", "detailsTitle": "Ein Raum zum Austauschen und Auftanken.",
+    "visit": "Besichtigung buchen",
+    "imageAlt": "Welcome Küche und Lounge mit hellen Sofas, Holztheke und grünen Pflanzen",
+    "detailsEyebrow": "Zwischen Projekten",
+    "detailsTitle": "Ein Raum zum Austauschen und Auftanken.",
     "detailsText": "Küche und Lounge verlängern das Welcome-Erlebnis in einer einfachen, entspannten Atmosphäre.",
     "features": [
       { "title": "Kaffee verfügbar", "text": "Eine angenehme Pause zu jeder Tageszeit." },
@@ -219,50 +260,173 @@
       { "title": "Küchenbereich", "text": "Ein praktischer Ort für das Mittagessen." },
       { "title": "Gemeinsame Momente", "text": "Ein natürlicher Rahmen für Gespräche." }
     ],
-    "ctaTitle": "Erleben Sie die Welcome-Atmosphäre.", "ctaText": "Bei einer Besichtigung entdecken Sie alle Räume am besten."
+    "ctaTitle": "Erleben Sie die Welcome-Atmosphäre.",
+    "ctaText": "Bei einer Besichtigung entdecken Sie alle Räume am besten."
   },
   "comparisonPage": {
-    "back": "Zurück zu den Angeboten", "eyebrow": "Angebotsvergleich",
-    "titleLead": "Finden Sie das Angebot,", "titleHighlight": "das zu Ihnen passt.",
+    "back": "Zurück zu den Angeboten",
+    "eyebrow": "Angebotsvergleich",
+    "titleLead": "Finden Sie das Angebot,",
+    "titleHighlight": "das zu Ihnen passt.",
     "lead": "Vergleichen Sie die drei Arten, bei Welcome zu arbeiten, und finden Sie schnell die passende Lösung für Ihren Rhythmus.",
-    "criteria": "Kriterien", "tableCaption": "Vergleich der Angebote Nomade, Open Space und privates Büro",
+    "criteria": "Kriterien",
+    "tableCaption": "Vergleich der Angebote Nomade, Open Space und privates Büro",
     "offers": [
-      { "name": "Nomade", "tagline": "Für gelegentliche Besuche ohne Verpflichtung.", "idealFor": "Ideal für: gelegentlichen Bedarf" },
-      { "name": "Open Space", "tagline": "Für regelmäßiges Arbeiten im geteilten Raum.", "idealFor": "Ideal für: Selbstständige" },
-      { "name": "Privates Büro", "tagline": "Für ein Team im eigenen Arbeitsbereich.", "idealFor": "Ideal für: Teams" }
+      {
+        "name": "Nomade",
+        "tagline": "Für gelegentliche Besuche ohne Verpflichtung.",
+        "idealFor": "Ideal für: gelegentlichen Bedarf"
+      },
+      {
+        "name": "Open Space",
+        "tagline": "Für regelmäßiges Arbeiten im geteilten Raum.",
+        "idealFor": "Ideal für: Selbstständige"
+      },
+      {
+        "name": "Privates Büro",
+        "tagline": "Für ein Team im eigenen Arbeitsbereich.",
+        "idealFor": "Ideal für: Teams"
+      }
     ],
     "groups": [
-      { "title": "Nutzung und Flexibilität", "rows": [
-        { "label": "Empfohlener Rhythmus", "values": [{"status":"included","label":"Gelegentlich"},{"status":"included","label":"Regelmäßig"},{"status":"included","label":"Team"}] },
-        { "label": "Art des Arbeitsplatzes", "values": [{"status":"variable","label":"Geteilter Platz"},{"status":"included","label":"Open Space"},{"status":"included","label":"Geschlossenes Büro"}] },
-        { "label": "Buchung", "values": [{"status":"included","label":"Stundenweise"},{"status":"variable","label":"Je nach Angebot"},{"status":"variable","label":"Individuelles Angebot"}] },
-        { "label": "Mindestbindung", "values": [{"status":"included","label":"Keine"},{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"Keine"}] }
-      ]},
-      { "title": "Services im Alltag", "rows": [
-        { "label": "Glasfaser-Internet", "values": [{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"}] },
-        { "label": "Eigenständiger Zugang", "values": [{"status":"included","label":"Inklusive"},{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"24/7 inklusive"}] },
-        { "label": "Küche und Lounge", "values": [{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"},{"status":"included","label":"Inklusive"}] },
-        { "label": "Drucken", "values": [{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"Inklusive"},{"status":"variable","label":"Je nach Angebot"}] },
-        { "label": "Kaffee", "values": [{"status":"variable","label":"Je nach Angebot"},{"status":"included","label":"Inklusive"},{"status":"variable","label":"Je nach Angebot"}] }
-      ]},
-      { "title": "Raum und Privatsphäre", "rows": [
-        { "label": "Geschlossener vertraulicher Raum", "values": [{"status":"excluded","label":"Nein"},{"status":"excluded","label":"Nein"},{"status":"included","label":"Inklusive"}] },
-        { "label": "Eigene Möblierung", "values": [{"status":"excluded","label":"Geteilter Platz"},{"status":"variable","label":"Nach Verfügbarkeit"},{"status":"included","label":"Premium-Mobiliar"}] },
-        { "label": "Besprechungsraum", "values": [{"status":"variable","label":"Optional"},{"status":"variable","label":"Optional"},{"status":"variable","label":"Optional"}] },
-        { "label": "Dauerhafter Teamarbeitsplatz", "values": [{"status":"excluded","label":"Nicht geeignet"},{"status":"variable","label":"Für eine Person"},{"status":"included","label":"Ja"}] }
-      ]}
+      {
+        "title": "Nutzung und Flexibilität",
+        "rows": [
+          {
+            "label": "Empfohlener Rhythmus",
+            "values": [
+              { "status": "included", "label": "Gelegentlich" },
+              { "status": "included", "label": "Regelmäßig" },
+              { "status": "included", "label": "Team" }
+            ]
+          },
+          {
+            "label": "Art des Arbeitsplatzes",
+            "values": [
+              { "status": "variable", "label": "Geteilter Platz" },
+              { "status": "included", "label": "Open Space" },
+              { "status": "included", "label": "Geschlossenes Büro" }
+            ]
+          },
+          {
+            "label": "Buchung",
+            "values": [
+              { "status": "included", "label": "Stundenweise" },
+              { "status": "variable", "label": "Je nach Angebot" },
+              { "status": "variable", "label": "Individuelles Angebot" }
+            ]
+          },
+          {
+            "label": "Mindestbindung",
+            "values": [
+              { "status": "included", "label": "Keine" },
+              { "status": "variable", "label": "Je nach Angebot" },
+              { "status": "included", "label": "Keine" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Services im Alltag",
+        "rows": [
+          {
+            "label": "Glasfaser-Internet",
+            "values": [
+              { "status": "included", "label": "Inklusive" },
+              { "status": "included", "label": "Inklusive" },
+              { "status": "included", "label": "Inklusive" }
+            ]
+          },
+          {
+            "label": "Eigenständiger Zugang",
+            "values": [
+              { "status": "included", "label": "Inklusive" },
+              { "status": "variable", "label": "Je nach Angebot" },
+              { "status": "included", "label": "24/7 inklusive" }
+            ]
+          },
+          {
+            "label": "Küche und Lounge",
+            "values": [
+              { "status": "included", "label": "Inklusive" },
+              { "status": "included", "label": "Inklusive" },
+              { "status": "included", "label": "Inklusive" }
+            ]
+          },
+          {
+            "label": "Drucken",
+            "values": [
+              { "status": "variable", "label": "Je nach Angebot" },
+              { "status": "included", "label": "Inklusive" },
+              { "status": "variable", "label": "Je nach Angebot" }
+            ]
+          },
+          {
+            "label": "Kaffee",
+            "values": [
+              { "status": "variable", "label": "Je nach Angebot" },
+              { "status": "included", "label": "Inklusive" },
+              { "status": "variable", "label": "Je nach Angebot" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Raum und Privatsphäre",
+        "rows": [
+          {
+            "label": "Geschlossener vertraulicher Raum",
+            "values": [
+              { "status": "excluded", "label": "Nein" },
+              { "status": "excluded", "label": "Nein" },
+              { "status": "included", "label": "Inklusive" }
+            ]
+          },
+          {
+            "label": "Eigene Möblierung",
+            "values": [
+              { "status": "excluded", "label": "Geteilter Platz" },
+              { "status": "variable", "label": "Nach Verfügbarkeit" },
+              { "status": "included", "label": "Premium-Mobiliar" }
+            ]
+          },
+          {
+            "label": "Besprechungsraum",
+            "values": [
+              { "status": "variable", "label": "Optional" },
+              { "status": "variable", "label": "Optional" },
+              { "status": "variable", "label": "Optional" }
+            ]
+          },
+          {
+            "label": "Dauerhafter Teamarbeitsplatz",
+            "values": [
+              { "status": "excluded", "label": "Nicht geeignet" },
+              { "status": "variable", "label": "Für eine Person" },
+              { "status": "included", "label": "Ja" }
+            ]
+          }
+        ]
+      }
     ],
-    "legend": {"included":"Inklusive", "variable":"Variabel oder optional", "excluded":"Nicht enthalten"},
+    "legend": {
+      "included": "Inklusive",
+      "variable": "Variabel oder optional",
+      "excluded": "Nicht enthalten"
+    },
     "note": "Dieser Vergleich ist ein erster Überblick. Verfügbarkeit, Zugangsbedingungen und genaue Leistungen können je nach Angebot variieren und werden im Gespräch mit Welcome bestätigt.",
-    "ctaTitle": "Noch unsicher zwischen zwei Angeboten?", "ctaText": "Erzählen Sie uns von Ihrem Rhythmus, Team und Bedarf, damit wir die einfachste Lösung finden.",
-    "ctaVisit": "Besichtigung buchen", "ctaFaq": "FAQ ansehen"
+    "ctaTitle": "Noch unsicher zwischen zwei Angeboten?",
+    "ctaText": "Erzählen Sie uns von Ihrem Rhythmus, Team und Bedarf, damit wir die einfachste Lösung finden.",
+    "ctaVisit": "Besichtigung buchen",
+    "ctaFaq": "FAQ ansehen"
   },
   "pricing": {
     "eyebrow": "Unsere Angebote",
     "title": "Wählen Sie Ihren Rhythmus.",
-    "lead": "Ob Sie gelegentlich vorbeikommen oder das ganze Jahr bleiben: wir haben einfache Angebote in intimen Räumen ab 20 € netto / Monat gestaltet.",
+    "lead": "Ob Sie gelegentlich vorbeikommen oder das ganze Jahr bleiben: wir haben einfache Angebote in intimen Räumen ab 20 € netto / Monat gestaltet. Alle unsere Angebote sind <strong>ohne Bindung</strong>.",
     "compare": "Vergleichen",
     "learnMore": "Entdecken",
+    "commitmentNote": "* : mit teilweiser Bindung",
     "plans": {
       "nomad": {
         "name": "Nomade",
@@ -381,7 +545,7 @@
       "phone": "+33 6 22 80 55 36",
       "emailLabel": "E-Mail-Adresse",
       "hoursLabel": "Öffnungszeiten",
-      "hours": "Mitglieder: rund um die Uhr / Besichtigungen: nach Vereinbarung"
+      "hours": "Mitglieder: rund um die Uhr / Besichtigungen: <strong>nach Vereinbarung</strong>"
     },
     "form": {
       "title": "Besichtigung buchen",
