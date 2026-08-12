@@ -113,7 +113,7 @@
       { "icon": "atmosphere", "title": "Atmosphère chaleureuse", "text": "Bois, végétation & lumière naturelle" },
       { "icon": "access", "title": "Accès facile", "text": "En tram, à vélo, en voiture ou en train" },
       { "icon": "profiles", "title": "Tous profils", "text": "Pour nomades et résidents, sous contrat exclusivement" },
-      { "icon": "workspace", "title": "1 besoin, 1 solution", "text": "Salle de réunion, bureaux privatifs ou open space, selon disponibilité" },
+      { "icon": "workspace", "title": "1 besoin, 1 solution", "text": "Salle de réunion, bureaux privatifs ou open space, à temps plein ou partiel" },
       { "icon": "history", "title": "Depuis 2017", "text": "Plus de 100 entreprises accueillies" }
     ]
   },
@@ -143,7 +143,7 @@
     "cards": {
       "openSpace": {
         "title": "Open Space",
-        "text": "Travaillez dans un environnement lumineux et calme.",
+        "text": "Travaillez dans un environnement intimiste et économique.",
         "alt": "Open space lumineux avec tables en bois, verrières noires et plantes suspendues"
       },
       "privateOffices": {
@@ -157,9 +157,9 @@
         "alt": "Salle de réunion premium avec grande table en bois, chaises noires et écran"
       },
       "kitchenLounge": {
-        "title": "Cuisine & détente",
+        "title": "Espace détente",
         "text": "Prenez une pause comme à la maison.",
-        "alt": "Espace cuisine et détente avec canapés clairs, bar en bois et plantes vertes"
+        "alt": "Espace cuisine et détente, avec cuisine toute équipée, bar en bois et verdure"
       }
     }
   },
