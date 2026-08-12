@@ -101,7 +101,7 @@
     "eyebrow": "Bienvenue chez Welcome.",
     "titleLine1": "Comme à la maison.",
     "titleLine2": "En beaucoup plus inspirant.",
-    "lead": "Découvrez le confort et la chaleur d’un intérieur, associés aux équipements et aux services d’un véritable environnement professionnel premium.",
+    "lead": "Découvrez le confort et la chaleur d’un intérieur, associés aux équipements et aux services d’un véritable environnement professionnel premium à <strong>Strasbourg</strong>.",
     "ctaVisit": "Organiser une visite",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Découvrir Welcome",
@@ -143,7 +143,7 @@
     "cards": {
       "openSpace": {
         "title": "Open Space",
-        "text": "Travaillez dans un environnement intimiste et économique.",
+        "text": "Bénéficiez d'un poste confortable et économique.",
         "alt": "Open space lumineux avec tables en bois, verrières noires et plantes suspendues"
       },
       "privateOffices": {
@@ -271,25 +271,29 @@
   "pricing": {
     "eyebrow": "Nos solutions",
     "title": "Choisissez votre rythme.",
-    "lead": "Que vous veniez occasionnellement ou toute l’année, nous avons imaginé des solutions simples dans des espaces intimistes à partir de 85€ HT / mois.",
+    "lead": "Que vous veniez occasionnellement ou toute l’année, nous avons imaginé des solutions simples dans des espaces intimistes à partir de 35€ HT / mois.",
     "compare": "Comparer",
     "learnMore": "Découvrir",
     "plans": {
       "nomad": {
         "name": "Nomade",
-        "features": ["Sans minimum", "Internet fibre", "Accès autonome", "Réservation à l'heure"]
+        "availability": "8 postes restants",
+        "features": ["Flex ou Résident", "Tout espace réservable", "45 à 90 € HT /mois"]
       },
       "openSpace": {
         "name": "Open Space",
-        "features": ["Accès flexible", "Internet fibre", "Café", "Impression"]
+        "availability": "2 postes restants",
+        "features": ["Résident", "Temps plein/partiel", "Bureau dédié", "Crédit réunion inclus", "ChatGPT Business inclus", "250 à 300 € HT /mois"]
       },
       "privateOffice": {
         "name": "Bureau privatif",
-        "features": ["Bureau fermé", "Accès sécurisé", "Mobilier premium", "Internet fibre"]
+        "availability": "5 postes restants",
+        "features": ["Résident", "Temps plein/partiel", "Bureau dédié", "Crédit réunion inclus", "ChatGPT Business inclus", "425 € à 700 HT /mois"]
       },
       "meetingRoom": {
         "name": "Salle de réunion",
-        "features": ["Écran", "Visioconférence", "Jusqu'à 12 personnes", "Réservation simple"]
+        "availability": "selon disponibilité",
+        "features": ["Écran mural", "HDMI et Chromecast", "Jusqu'à 9 personnes", "sur devis"]
       }
     }
   },
@@ -328,13 +332,13 @@
     "cards": [
       {
         "title": "Tram au pied de l’immeuble",
-        "text": "L’arrêt Couffignal vous dépose à quelques mètres de l’entrée."
+        "text": "L’arrêt Couffignal (ligne A et E) est situé à 150m de votre bureau."
       },
       {
-        "title": "Autoroute à vélo",
-        "text": "Rejoignez rapidement Strasbourg Centre ou Illkirch grâce à la piste cyclable rapide."
+        "title": "Piste cyclable rapide bidirectionnelle",
+        "text": "Rejoignez rapidement Strasbourg-Centre ou Illkirch via la Colmarienne."
       },
-      { "title": "Accès immédiat", "text": "Autoroute à quelques minutes et parking gratuit." },
+      { "title": "Accès rapide à l'autoroute", "text": "Autoroute à quelques minutes et parking gratuit." },
       {
         "title": "Un quartier vivant",
         "text": "À proximité immédiate du stade de la Meinau, des commerces, restaurants et services."

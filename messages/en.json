@@ -266,18 +266,22 @@
     "plans": {
       "nomad": {
         "name": "Nomad",
+        "availability": "5 spaces available",
         "features": ["No minimum", "Fibre internet", "Self-service access", "Book by the hour"]
       },
       "openSpace": {
         "name": "Open space",
+        "availability": "5 spaces available",
         "features": ["Flexible access", "Fibre internet", "Coffee", "Printing"]
       },
       "privateOffice": {
         "name": "Private office",
+        "availability": "5 spaces available",
         "features": ["Enclosed office", "Secure access", "Premium furniture", "Fibre internet"]
       },
       "meetingRoom": {
         "name": "Meeting room",
+        "availability": "5 spaces available",
         "features": ["Screen", "Video conferencing", "Up to 12 people", "Simple booking"]
       }
     }

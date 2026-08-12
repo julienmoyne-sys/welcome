@@ -51,9 +51,9 @@ export function PricingSection() {
             return (
               <article
                 key={plan.key}
-                className={`relative flex flex-col rounded-[20px] p-8 shadow-[0_8px_40px_-12px_rgba(11,11,11,0.08)] transition-all duration-300 lg:p-10 ${
+                className={`relative flex flex-col rounded-[20px] px-6 py-8 shadow-[0_8px_40px_-12px_rgba(11,11,11,0.08)] transition-all duration-300 lg:px-7 lg:py-10 ${
                   "featured" in plan && plan.featured
-                    ? "z-10 scale-[1.02] bg-welcome-gold/[0.04] shadow-[0_16px_48px_-12px_rgba(11,11,11,0.12)] md:-my-2 md:py-10"
+                    ? "z-10 bg-welcome-gold/[0.04] shadow-[0_16px_48px_-12px_rgba(11,11,11,0.12)]"
                     : "bg-welcome-white hover:shadow-[0_12px_44px_-12px_rgba(11,11,11,0.1)]"
                 }`}
               >
@@ -84,14 +84,21 @@ export function PricingSection() {
                   ))}
                 </ul>
 
-                {/* Button */}
+                {/* Availability and button */}
                 <div className="mt-10">
+                  <p className="mb-4 flex items-center justify-center gap-2 font-inter text-[14px] font-medium text-welcome-body">
+                    <span
+                      className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500"
+                      aria-hidden="true"
+                    />
+                    {t(`plans.${plan.key}.availability`)}
+                  </p>
                   <Link
                     href={plan.href}
-                    className={`inline-flex h-[52px] w-full items-center justify-center rounded-[12px] border font-manrope text-[15px] font-semibold text-welcome-black transition-all duration-200 hover:border-welcome-black hover:bg-welcome-black hover:text-welcome-ink-fg ${
+                    className={`inline-flex h-[52px] w-full items-center justify-center rounded-[12px] border font-manrope text-[15px] font-semibold transition-all duration-200 ${
                       plan.cta === "learnMore"
-                        ? "border-welcome-gold/40 bg-welcome-gold/10"
-                        : "border-welcome-black/15 bg-welcome-black/[0.04]"
+                        ? "border-[#0b0b0b] bg-[#0b0b0b] text-white hover:border-[#0b0b0b]/85 hover:bg-[#0b0b0b]/85 dark:border-welcome-gold/40 dark:bg-welcome-gold/10 dark:text-welcome-black dark:hover:border-welcome-black dark:hover:bg-welcome-black dark:hover:text-welcome-ink-fg"
+                        : "border-welcome-sage bg-welcome-sage text-white hover:border-welcome-sage/90 hover:bg-welcome-sage/90 hover:text-white dark:text-[#0b0b0b] dark:hover:text-[#0b0b0b]"
                     }`}
                   >
                     {t(plan.cta)}

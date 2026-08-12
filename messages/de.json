@@ -266,6 +266,7 @@
     "plans": {
       "nomad": {
         "name": "Nomade",
+        "availability": "5 Plätze verfügbar",
         "features": [
           "Ohne Mindestlaufzeit",
           "Glasfaser-Internet",
@@ -275,10 +276,12 @@
       },
       "openSpace": {
         "name": "Open Space",
+        "availability": "5 Plätze verfügbar",
         "features": ["Flexibler Zugang", "Glasfaser-Internet", "Kaffee", "Drucken"]
       },
       "privateOffice": {
         "name": "Privates Büro",
+        "availability": "5 Plätze verfügbar",
         "features": [
           "Geschlossenes Büro",
           "Gesicherter Zugang",
@@ -288,6 +291,7 @@
       },
       "meetingRoom": {
         "name": "Besprechungsraum",
+        "availability": "5 Plätze verfügbar",
         "features": ["Bildschirm", "Videokonferenz", "Bis zu 12 Personen", "Einfache Buchung"]
       }
     }

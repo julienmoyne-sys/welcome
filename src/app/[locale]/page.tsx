@@ -78,7 +78,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <span className="text-welcome-gold">{t("titleLine2")}</span>
               </h1>
               <p className="mt-6 max-w-lg font-manrope text-lg leading-relaxed text-welcome-black/80">
-                {t("lead")}
+                {t.rich("lead", {
+                  strong: (chunks) => <strong className="font-bold">{chunks}</strong>,
+                })}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
