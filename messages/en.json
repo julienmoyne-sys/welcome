@@ -6,14 +6,14 @@
       "ogDescription": "Open space, private offices and a meeting room in Strasbourg, 204 avenue de Colmar."
     },
     "home": {
-      "title": "Coworking in Strasbourg — Welcome Coworking | Offices & open space",
-      "description": "Premium coworking space in Strasbourg: open space, private offices and a meeting room at 204 avenue de Colmar. Couffignal tram stop, free parking, 24/7 access.",
+      "title": "Coworking Strasbourg | Offices & Open Space | Welcome!",
+      "description": "Premium coworking in Strasbourg with open space, private offices and a meeting room. Couffignal tram stop, free parking and 24/7 access.",
       "ogTitle": "Coworking in Strasbourg — Welcome Coworking",
       "ogDescription": "Open space, private offices and a meeting room in a bright, welcoming setting in Strasbourg. More than 100 companies hosted since 2017."
     },
     "contact": {
       "title": "Contact | Welcome! Coworking Strasbourg",
-      "description": "Contact Welcome! Coworking in Strasbourg to discover our offices, workstations, meeting room and coworking solutions.",
+      "description": "Contact Welcome! Coworking in Strasbourg to find the right desk, private office or meeting room for your needs.",
       "ogTitle": "Contact | Welcome! Coworking Strasbourg",
       "ogDescription": "Tell us about your office, workstation or meeting room requirements in Strasbourg."
     },
@@ -25,19 +25,19 @@
     },
     "privateOffices": {
       "title": "Private offices in Strasbourg — Welcome Coworking",
-      "description": "Discover comfortable, equipped private offices where your team can work with confidence in Strasbourg.",
+      "description": "Discover comfortable, fully equipped private offices where your team can work with confidence in Strasbourg.",
       "ogTitle": "Private offices — Welcome Coworking Strasbourg",
       "ogDescription": "Bright, ready-to-use private offices in a warm coworking space."
     },
     "meetingRoom": {
       "title": "Meeting room in Strasbourg — Welcome Coworking",
-      "description": "Book an equipped meeting room in Strasbourg for your team and clients.",
+      "description": "Book a quiet, fully equipped meeting room in Strasbourg for team meetings, client presentations and video calls.",
       "ogTitle": "The meeting room — Welcome Coworking Strasbourg",
       "ogDescription": "An equipped room for up to 12 people, with display and video conferencing."
     },
     "kitchenLounge": {
       "title": "Kitchen and lounge — Welcome Coworking Strasbourg",
-      "description": "Discover a welcoming place to pause, have lunch and connect at Welcome Coworking.",
+      "description": "In Strasbourg, enjoy a welcoming space to take a break, have lunch and connect at Welcome Coworking.",
       "ogTitle": "Kitchen and lounge — Welcome Coworking Strasbourg",
       "ogDescription": "A warm space to have lunch, take a break and share a coffee."
     },
@@ -559,7 +559,7 @@
   "contactPage": {
     "eyebrow": "Contact",
     "title": "Let's talk about the way you work.",
-    "lead": "An office for a few days or for the long term? A workstation, a room to bring your team together, or simply curious to discover Welcome!? Tell us what you need."
+    "lead": "Tell us what you need."
   },
   "contact": {
     "eyebrow": "Contact",

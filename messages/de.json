@@ -6,14 +6,14 @@
       "ogDescription": "Open Space, private Büros und Besprechungsraum in Straßburg, 204 avenue de Colmar."
     },
     "home": {
-      "title": "Coworking in Straßburg — Welcome Coworking | Büros & Open Space",
-      "description": "Premium-Coworking in Straßburg: Open Space, private Büros und Besprechungsraum in der 204 avenue de Colmar. Tramhaltestelle Couffignal, kostenlose Parkplätze, Zugang rund um die Uhr.",
+      "title": "Coworking Straßburg | Büros & Open Space | Welcome!",
+      "description": "Premium-Coworking in Straßburg mit Open Space, privaten Büros und Besprechungsraum. Tram Couffignal, kostenlose Parkplätze und 24/7-Zugang.",
       "ogTitle": "Coworking in Straßburg — Welcome Coworking",
       "ogDescription": "Open Space, private Büros und Besprechungsraum in einer hellen, einladenden Umgebung in Straßburg. Über 100 Unternehmen seit 2017."
     },
     "contact": {
       "title": "Kontakt | Welcome! Coworking Straßburg",
-      "description": "Kontaktieren Sie Welcome! Coworking in Straßburg und entdecken Sie unsere Büros, Arbeitsplätze, unseren Besprechungsraum und unsere Coworking-Lösungen.",
+      "description": "Sie suchen einen Arbeitsplatz, ein privates Büro oder einen Besprechungsraum in Straßburg? Sprechen Sie mit Welcome! Coworking.",
       "ogTitle": "Kontakt | Welcome! Coworking Straßburg",
       "ogDescription": "Sprechen Sie mit uns über Ihren Bedarf an Büro, Arbeitsplatz oder Besprechungsraum in Straßburg."
     },
@@ -25,19 +25,19 @@
     },
     "privateOffices": {
       "title": "Private Büros in Straßburg — Welcome Coworking",
-      "description": "Entdecken Sie komfortable, ausgestattete private Büros für konzentriertes Arbeiten in Straßburg.",
+      "description": "Entdecken Sie komfortable Privatbüros für konzentriertes Arbeiten in Straßburg.",
       "ogTitle": "Private Büros — Welcome Coworking Straßburg",
       "ogDescription": "Helle, bezugsfertige private Büros in einem einladenden Coworking-Space."
     },
     "meetingRoom": {
       "title": "Besprechungsraum in Straßburg — Welcome Coworking",
-      "description": "Buchen Sie einen ausgestatteten Besprechungsraum in Straßburg für Teams und Kunden.",
+      "description": "Buchen Sie in Straßburg einen ruhigen, voll ausgestatteten Besprechungsraum für Teammeetings, Kundenpräsentationen und Videokonferenzen.",
       "ogTitle": "Der Besprechungsraum — Welcome Coworking Straßburg",
       "ogDescription": "Ein Raum für bis zu 12 Personen mit Bildschirm und Videokonferenz."
     },
     "kitchenLounge": {
       "title": "Küche und Lounge — Welcome Coworking Straßburg",
-      "description": "Entdecken Sie einen einladenden Ort für Pausen, Mittagessen und Austausch bei Welcome Coworking.",
+      "description": "Genießen Sie in Straßburg einen einladenden Bereich für Pausen, Mittagessen und den Austausch bei Welcome Coworking.",
       "ogTitle": "Küche und Lounge — Welcome Coworking Straßburg",
       "ogDescription": "Ein gemütlicher Raum für Mittagessen, Pausen und gemeinsamen Kaffee."
     },
@@ -574,7 +574,7 @@
   "contactPage": {
     "eyebrow": "Kontakt",
     "title": "Sprechen wir darüber, wie Sie arbeiten.",
-    "lead": "Ein Büro für einige Tage oder langfristig? Ein Arbeitsplatz, ein Raum für Ihr Team oder einfach Lust, Welcome! kennenzulernen? Sagen Sie uns, was Sie brauchen."
+    "lead": "Sagen Sie uns, was Sie brauchen."
   },
   "contact": {
     "eyebrow": "Kontakt",

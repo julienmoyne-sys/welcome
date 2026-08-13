@@ -22,7 +22,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return buildPageMetadata({ locale, path: PATH, namespace: "metadata.comparison" });
+  const metadata = await buildPageMetadata({
+    locale,
+    path: PATH,
+    namespace: "metadata.comparison",
+  });
+
+  return { ...metadata, robots: { index: false, follow: true } };
 }
 
 export default async function ComparisonPage({ params }: { params: Promise<{ locale: string }> }) {
