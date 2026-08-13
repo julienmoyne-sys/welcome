@@ -114,12 +114,12 @@ Trois visuels ne sont importés par aucun composant et peuvent être supprimés 
 Le formulaire de contact envoie ses e-mails en SMTP direct (nodemailer) sur le
 serveur OVH Email Pro.
 
-| Variable | Rôle |
-| --- | --- |
-| `SMTP_PASSWORD` | requise — mot de passe de la boîte `contact@welcome-coworking.com` |
-| `SMTP_HOST` | optionnelle — défaut `pro1.mail.ovh.net` |
-| `SMTP_PORT` | optionnelle — défaut `587` (STARTTLS) ; `465` bascule en TLS implicite |
-| `SMTP_USER` | optionnelle — défaut `contact@welcome-coworking.com` |
+| Variable        | Rôle                                                                   |
+| --------------- | ---------------------------------------------------------------------- |
+| `SMTP_PASSWORD` | requise — mot de passe de la boîte `contact@welcome-coworking.com`     |
+| `SMTP_HOST`     | optionnelle — défaut `pro1.mail.ovh.net`                               |
+| `SMTP_PORT`     | optionnelle — défaut `587` (STARTTLS) ; `465` bascule en TLS implicite |
+| `SMTP_USER`     | optionnelle — défaut `contact@welcome-coworking.com`                   |
 
 ## Construit avec
 

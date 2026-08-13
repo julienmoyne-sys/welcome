@@ -114,9 +114,7 @@ export function ReferencesSection() {
           >
             <span className="flex h-14 w-14 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-welcome-gold/10 text-welcome-gold">
               <Trophy size={22} strokeWidth={2} />
-              <span className="font-manrope text-xs font-bold">
-                {t("awards.coworker.year")}
-              </span>
+              <span className="font-manrope text-xs font-bold">{t("awards.coworker.year")}</span>
             </span>
             <div>
               <p className="font-manrope text-base font-semibold leading-snug text-welcome-black sm:text-lg">

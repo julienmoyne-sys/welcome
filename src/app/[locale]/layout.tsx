@@ -5,6 +5,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
@@ -106,6 +107,7 @@ export default async function LocaleLayout({
           <ThemeProvider>
             {children}
             <SpeedInsights />
+            <Analytics />
             <CookieBanner />
           </ThemeProvider>
         </NextIntlClientProvider>
