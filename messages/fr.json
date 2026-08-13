@@ -196,20 +196,20 @@
     "detailsText": "L'open space vous offre un cadre professionnel à moindre coût. Retrouvez votre espace attitré et intiministe à tout moment.",
     "features": [
       {
-        "title": "Accès flexible",
-        "text": "Un espace disponible selon votre rythme et votre formule."
+        "title": "Mobilier",
+        "text": "Un bureau chaleureux, végétalisé, en bois et métal, pourvu d'une étagère et d'un caisson de rangement ou d'une armoire."
       },
       {
-        "title": "Internet fibre",
-        "text": "Une connexion rapide et stable pour travailler sereinement."
+        "title": "Internet",
+        "text": "Connexion fibre professionnelle et sécurisée en WIFI ou RJ45."
       },
       {
-        "title": "Café à disposition",
-        "text": "De quoi faire une vraie pause, comme à la maison."
+        "title": "Confort",
+        "text": "Un fauteuil ergonomique, paramètrable, qui épouse les lignes de votre dos."
       },
       {
-        "title": "Impression",
-        "text": "Les équipements utiles sont accessibles directement sur place."
+        "title": "Services",
+        "text": "Salle de réunion, cuisine, machine à café, imprimante, scanner, relieuse..."
       }
     ],
     "ctaTitle": "Envie de découvrir votre futur espace de travail ?",
@@ -279,7 +279,6 @@
   "comparisonPage": {
     "back": "Revenir aux solutions",
     "eyebrow": "Comparatif des solutions",
-    "status": "Page en cours d'élaboration",
     "titleLead": "Trouvez la formule",
     "titleHighlight": "faite pour vous.",
     "lead": "Comparez en un coup d'œil les trois façons de travailler chez Welcome et identifiez celle qui correspond le mieux à votre rythme.",
