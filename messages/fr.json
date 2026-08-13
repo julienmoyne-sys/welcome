@@ -220,17 +220,17 @@
     "eyebrow": "Les bureaux privatifs",
     "titleLead": "Un bureau à vous,",
     "titleHighlight": "sans les contraintes.",
-    "lead": "Profitez d'un espace fermé, calme et confortable pour travailler en équipe, recevoir vos clients et préserver votre confidentialité.",
+    "lead": "Profitez d'un espace fermé, calme et confortable pour travailler efficacement et préserver votre confidentialité.",
     "visit": "Organiser une visite",
     "imageAlt": "Bureau privatif Welcome avec cloison vitrée, bureau en bois et éclairage chaleureux",
     "detailsEyebrow": "Votre espace",
-    "detailsTitle": "La tranquillité d'un bureau, l'énergie de Welcome.",
-    "detailsText": "Installez votre équipe dans un bureau prêt à travailler et profitez de tous les espaces et services du coworking.",
+    "detailsTitle": "La tranquillité d'un bureau fermé",
+    "detailsText": "Nos bureaux fermés bénéficient du meilleur confort possible avec lumière naturelle directe.",
     "features": [
-      { "title": "Confidentialité", "text": "Un espace fermé pour travailler sereinement." },
-      { "title": "Internet fibre", "text": "Une connexion rapide et stable pour votre équipe." },
-      { "title": "Mobilier confortable", "text": "Un bureau aménagé et prêt dès votre arrivée." },
-      { "title": "Accès sécurisé", "text": "Un environnement professionnel et maîtrisé." }
+      { "title": "Mobilier", "text": "Un bureau décoré, végétalisé, en bois et métal, pourvu d'une étagère et d'un caisson de rangement." },
+      { "title": "Internet", "text": "Connexion fibre professionnelle et sécurisée en WIFI." },
+      { "title": "Confort", "text": "Fauteuil ergonomique, fenêtre, climatisation et éclairage individuels." },
+      { "title": "Services", "text": "Salle de réunion, cuisine, machine à café, imprimante, scanner, relieuse..." }
     ],
     "ctaTitle": "Votre prochain bureau est peut-être ici.",
     "ctaText": "Venez découvrir les volumes et imaginer votre équipe chez Welcome."

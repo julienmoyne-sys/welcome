@@ -3,14 +3,13 @@ import { Suspense } from "react";
 import Image from "next/image";
 import {
   Armchair,
-  Clock3,
   Coffee,
-  LockKeyhole,
+  ConciergeBell,
   MessageCircle,
   Monitor,
   Presentation,
-  Printer,
   Sofa,
+  Table2,
   UtensilsCrossed,
   Video,
   Wifi,
@@ -30,8 +29,8 @@ type SpaceNamespace =
   "openSpacePage" | "privateOfficesPage" | "meetingRoomPage" | "kitchenLoungePage";
 
 const FEATURE_ICONS = {
-  openSpace: [Clock3, Wifi, Coffee, Printer],
-  privateOffices: [LockKeyhole, Wifi, Armchair, Clock3],
+  openSpace: [Table2, Wifi, Armchair, ConciergeBell],
+  privateOffices: [Table2, Wifi, Armchair, ConciergeBell],
   meetingRoom: [Presentation, Monitor, Video, Wifi],
   kitchenLounge: [Coffee, Sofa, UtensilsCrossed, MessageCircle],
 } as const;
