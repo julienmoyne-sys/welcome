@@ -76,6 +76,9 @@ export async function generateMetadata({
       description: t("ogDescription"),
     },
     twitter: { card: "summary_large_image" },
+    verification: {
+      google: "FLutgEx-FpgmWVENiDRkxQ3CwDY2hIGIxEHe0TpM-Ac",
+    },
     // Pas d'`icons` ici : `src/app/favicon.ico`, `icon.png` et `apple-icon.png`
     // sont détectés par convention de fichier et émettent leurs `sizes`/`type`.
   };
