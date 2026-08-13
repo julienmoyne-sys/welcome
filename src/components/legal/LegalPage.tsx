@@ -26,7 +26,11 @@ export function LegalPage({ namespace, jsonLd }: { namespace: string; jsonLd: Re
   const rowsKey = t.has("publisherRows") ? "publisherRows" : "controllerRows";
   const hasRows = t.has("publisherRows") || t.has("controllerRows");
   const rows = hasRows ? (t.raw(rowsKey) as Row[]) : [];
-  const rowsTitle = t.has("publisherTitle") ? t("publisherTitle") : t.has("controllerTitle") ? t("controllerTitle") : "";
+  const rowsTitle = t.has("publisherTitle")
+    ? t("publisherTitle")
+    : t.has("controllerTitle")
+      ? t("controllerTitle")
+      : "";
 
   const rightsTitle = t.has("rightsSectionTitle") ? t("rightsSectionTitle") : null;
   const rights = rightsTitle ? (t.raw("rights") as string[]) : [];
@@ -180,10 +184,7 @@ function CookieTable({ namespace }: { namespace: string }) {
       <div className="mt-6 overflow-hidden rounded-[20px] border border-welcome-black/[0.06] bg-welcome-cream/60 shadow-[0_2px_20px_rgba(11,11,11,0.04)]">
         <div className="hidden grid-cols-[1.4fr_0.9fr_0.7fr_1.8fr] gap-6 px-6 py-4 sm:grid">
           {columns.map((column) => (
-            <span
-              key={column}
-              className="font-inter text-[13px] font-semibold text-welcome-black"
-            >
+            <span key={column} className="font-inter text-[13px] font-semibold text-welcome-black">
               {t(`tableHeaders.${column}`)}
             </span>
           ))}

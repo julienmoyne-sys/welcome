@@ -18,7 +18,11 @@ const PAGES = [
   { path: "/cuisine-detente", changeFrequency: "monthly" as const, priority: 0.7 },
   { path: "/faq", changeFrequency: "monthly" as const, priority: 0.7 },
   { path: "/mentions-legales", changeFrequency: "yearly" as const, priority: 0.3 },
-  { path: "/conditions-generales-d-utilisation", changeFrequency: "yearly" as const, priority: 0.3 },
+  {
+    path: "/conditions-generales-d-utilisation",
+    changeFrequency: "yearly" as const,
+    priority: 0.3,
+  },
   { path: "/politique-de-confidentialite", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/politique-de-cookies", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/gestion-des-cookies", changeFrequency: "yearly" as const, priority: 0.3 },

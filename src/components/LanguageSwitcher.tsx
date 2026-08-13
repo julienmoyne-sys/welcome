@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
-import {  LOCALE_LABELS, LOCALES, type Locale } from "@/i18n/routing";
+import { LOCALE_LABELS, LOCALES, type Locale } from "@/i18n/routing";
 
 /**
  * Sélecteur de langue.

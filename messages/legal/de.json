@@ -405,7 +405,9 @@
       },
       {
         "title": "Umgesetzte Maßnahmen",
-        "paragraphs": ["Die folgenden Vorkehrungen wurden bei der Gestaltung der Website getroffen:"],
+        "paragraphs": [
+          "Die folgenden Vorkehrungen wurden bei der Gestaltung der Website getroffen:"
+        ],
         "list": [
           "Semantische Struktur der Inhalte (hierarchische Überschriften, Navigationsbereiche, ein einziger Hauptinhalt pro Seite).",
           "Textalternativen für informationstragende Bilder und zugängliche Bezeichnungen für Schaltflächen mit reinen Symbolen.",

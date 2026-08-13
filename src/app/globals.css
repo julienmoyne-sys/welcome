@@ -330,8 +330,8 @@ html {
 .theme-transition *,
 .theme-transition *::before,
 .theme-transition *::after {
-  transition-property: color, background-color, border-color, fill, stroke,
-    box-shadow, opacity, filter !important;
+  transition-property:
+    color, background-color, border-color, fill, stroke, box-shadow, opacity, filter !important;
   transition-duration: 300ms !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-delay: 0ms !important;
@@ -347,8 +347,12 @@ html {
 }
 
 @keyframes welcome-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .welcome-marquee-track {
@@ -360,5 +364,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .welcome-marquee-track { animation: none; }
+  .welcome-marquee-track {
+    animation: none;
+  }
 }
