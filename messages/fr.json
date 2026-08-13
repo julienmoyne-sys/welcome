@@ -266,14 +266,14 @@
     "imageAlt": "Cuisine et espace détente Welcome avec canapés clairs, bar en bois et plantes vertes",
     "detailsEyebrow": "Entre deux projets",
     "detailsTitle": "Un espace pour se retrouver et respirer.",
-    "detailsText": "La cuisine et le salon prolongent l'expérience Welcome dans une ambiance simple et conviviale.",
+    "detailsText": "La cuisine et le bar prolongent l'expérience Welcome! dans une ambiance simple et conviviale.",
     "features": [
       { "title": "Café à disposition", "text": "Une pause agréable à tout moment de la journée." },
-      { "title": "Coin salon", "text": "Des assises confortables pour changer de cadre." },
-      { "title": "Espace cuisine", "text": "Un lieu pratique pour déjeuner sur place." },
+      { "title": "Bar lounge", "text": "Installez vous au bar pour travailler ou vous détendre." },
+      { "title": "Espace cuisine", "text": "Un lieu pratique pour déjeuner sur place : micro-ondes, refrigérateur, four..." },
       { "title": "Moments partagés", "text": "Un cadre naturel pour échanger entre membres." }
     ],
-    "ctaTitle": "Venez ressentir l'ambiance Welcome.",
+    "ctaTitle": "Venez ressentir l'ambiance Welcome!",
     "ctaText": "Une visite reste la meilleure façon de découvrir tous les espaces."
   },
   "comparisonPage": {
