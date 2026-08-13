@@ -10,6 +10,25 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
  */
 const SECTION_REDIRECTS = ["acces", "contact", "espaces", "formules", "references"];
 
+const WORDPRESS_REDIRECTS = [
+  {
+    source: "/coworking-strasbourg-espaces",
+    destination: "/comparatif-solutions",
+  },
+  {
+    source: "/coworking-strasbourg-meinau",
+    destination: "/",
+  },
+  {
+    source: "/offres-tarifs-coworking-strasbourg-bureaux-postes-travail-coworking",
+    destination: "/comparatif-solutions",
+  },
+  {
+    source: "/avis",
+    destination: "/#references",
+  },
+] as const;
+
 const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
@@ -32,11 +51,17 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
-    return SECTION_REDIRECTS.map((section) => ({
-      source: `/${section}`,
-      destination: `/#${section}`,
-      permanent: true,
-    }));
+    return [
+      ...SECTION_REDIRECTS.map((section) => ({
+        source: `/${section}`,
+        destination: `/#${section}`,
+        permanent: true,
+      })),
+      ...WORDPRESS_REDIRECTS.map((redirect) => ({
+        ...redirect,
+        permanent: true,
+      })),
+    ];
   },
 };
 
