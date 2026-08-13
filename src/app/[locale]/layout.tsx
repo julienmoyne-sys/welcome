@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
@@ -95,11 +96,16 @@ export default async function LocaleLayout({
   // `suppressHydrationWarning` est requis par next-themes : il écrit la classe de
   // thème sur <html> avant l'hydratation, donc le serveur ne peut pas la connaître.
   return (
-    <html lang={locale} className={`${manrope.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={`${manrope.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <NextIntlClientProvider>
           <ThemeProvider>
             {children}
+            <SpeedInsights />
             <CookieBanner />
           </ThemeProvider>
         </NextIntlClientProvider>
