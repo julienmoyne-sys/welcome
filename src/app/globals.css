@@ -122,6 +122,10 @@
   --welcome-ink-fg: #ffffff;
   --welcome-line: rgba(11, 11, 11, 0.08);
   --welcome-photo-filter: none;
+  --comparison-criteria-bg: #f1f3f1;
+  --comparison-criteria-header-bg: #edf0ed;
+  --comparison-criteria-hover-bg: #e8ece8;
+  --comparison-criteria-highlight-bg: #f7f3df;
 }
 
 .dark {
@@ -169,6 +173,10 @@
   --welcome-ink-fg: #121212;
   --welcome-line: rgba(255, 255, 255, 0.12);
   --welcome-photo-filter: brightness(0.8) contrast(1.05);
+  --comparison-criteria-bg: #272a27;
+  --comparison-criteria-header-bg: #292d29;
+  --comparison-criteria-hover-bg: #2e332e;
+  --comparison-criteria-highlight-bg: #211f18;
 }
 
 @layer base {
@@ -363,6 +371,22 @@ html {
   animation-play-state: paused;
 }
 
+.comparison-criteria-header {
+  background-color: var(--comparison-criteria-header-bg);
+}
+
+.comparison-criteria-cell {
+  background-color: var(--comparison-criteria-bg);
+}
+
+.comparison-criteria-cell.comparison-criteria-highlight {
+  background-color: var(--comparison-criteria-highlight-bg);
+}
+
+.group:hover .comparison-criteria-cell {
+  background-color: var(--comparison-criteria-hover-bg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .welcome-marquee-track {
     animation: none;
@@ -425,6 +449,10 @@ html {
     --welcome-header: #ffffff;
     --welcome-ink-fg: #ffffff;
     --welcome-line: rgba(11, 11, 11, 0.08);
+    --comparison-criteria-bg: #f1f3f1;
+    --comparison-criteria-header-bg: #edf0ed;
+    --comparison-criteria-hover-bg: #e8ece8;
+    --comparison-criteria-highlight-bg: #f7f3df;
     transform: translateX(-50%);
     transform-origin: top center;
     print-color-adjust: exact;

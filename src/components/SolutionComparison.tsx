@@ -155,7 +155,7 @@ export function SolutionComparison() {
           <div className="max-w-full overflow-x-auto overscroll-x-contain lg:overflow-visible">
             <div className="min-w-[1120px]">
               <div className="comparison-sticky-header grid grid-cols-[240px_repeat(4,minmax(0,1fr))] border-b border-welcome-black/[0.09] bg-welcome-white lg:sticky lg:top-[90px] lg:z-30 lg:shadow-[0_14px_28px_-22px_rgba(11,11,11,0.45)]">
-                <div className="sticky left-0 z-20 flex flex-col items-start justify-between bg-welcome-sage/[0.12] p-6 lg:p-7">
+                <div className="comparison-criteria-header sticky left-0 z-20 flex flex-col items-start justify-between p-6 lg:p-7">
                   <Image
                     src={welcomeCoworkingCapsuleNoire}
                     alt="Welcome! Coworking"
@@ -214,8 +214,8 @@ export function SolutionComparison() {
                         }`}
                       >
                         <div
-                          className={`sticky left-0 z-10 flex items-center gap-3 px-6 py-4 transition-colors group-hover:bg-welcome-sage/[0.16] lg:px-7 ${
-                            isChatGpt ? "bg-[#f7f3df] dark:bg-[#211f18]" : "bg-welcome-sage/[0.1]"
+                          className={`comparison-criteria-cell sticky left-0 z-10 flex items-center gap-3 px-6 py-4 transition-colors lg:px-7 ${
+                            isChatGpt ? "comparison-criteria-highlight" : ""
                           }`}
                         >
                           {isChatGpt ? (
