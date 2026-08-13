@@ -43,9 +43,9 @@
     },
     "comparison": {
       "title": "Comparatif des formules de coworking — Welcome Strasbourg",
-      "description": "Comparez les formules Nomade, Open Space et Bureau privatif de Welcome Coworking Strasbourg : accès, services, engagement et espaces inclus.",
+      "description": "Comparez les quatre formules Welcome Coworking à Strasbourg : Nomade Flex, Nomade Résident, Open Space et Bureau privatif.",
       "ogTitle": "Comparez les solutions Welcome Coworking",
-      "ogDescription": "Un comparatif clair des formules Nomade, Open Space et Bureau privatif à Strasbourg."
+      "ogDescription": "Comparez prix, accès, espaces et services des quatre formules Welcome Coworking à Strasbourg."
     },
     "faq": {
       "title": "FAQ — Questions fréquentes sur Welcome Coworking Strasbourg",
@@ -303,13 +303,193 @@
     "ctaTitle": "Venez ressentir l'ambiance Welcome!",
     "ctaText": "Une visite reste la meilleure façon de découvrir tous les espaces."
   },
+  "comparisonTable": {
+    "criteria": "Critères",
+    "printButton": "Imprimer le tableau en PDF",
+    "priceSuffix": "HT / poste / mois",
+    "swipe": "Faites défiler pour comparer les offres",
+    "plans": [
+      { "kicker": "Flexible", "name": "Nomade Flex", "price": "45 €" },
+      { "kicker": "Flexible +", "name": "Nomade Résident", "price": "90 €" },
+      { "kicker": "Premium", "name": "Résident Open Space", "price": "190 à 300 €" },
+      { "kicker": "Signature", "name": "Résident Bureau privatif", "price": "425 à 700 €" }
+    ],
+    "groups": [
+      {
+        "title": "Formule et flexibilité",
+        "rows": [
+          {
+            "label": "Rythme",
+            "cells": [
+              { "type": "text", "label": "Temps plein" },
+              { "type": "text", "label": "Temps plein" },
+              { "type": "text", "label": "50 % ou temps plein" },
+              { "type": "text", "label": "Temps plein" }
+            ]
+          },
+          {
+            "label": "Engagement",
+            "cells": [
+              { "type": "text", "label": "Sans engagement" },
+              { "type": "text", "label": "Sans engagement" },
+              { "type": "text", "label": "Sans engagement" },
+              { "type": "text", "label": "Sans engagement" }
+            ]
+          },
+          {
+            "label": "Poste attitré",
+            "cells": [
+              { "type": "excluded" },
+              { "type": "excluded" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Accès au site 24/24",
+            "cells": [
+              { "type": "text", "label": "9 h – 18 h" },
+              { "type": "text", "label": "9 h – 18 h" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Espaces de travail",
+        "rows": [
+          {
+            "label": "Bar de travail",
+            "cells": [
+              { "type": "bookable" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Bureau open space",
+            "cells": [
+              { "type": "bookable" },
+              { "type": "bookable" },
+              { "type": "included" },
+              { "type": "excluded" }
+            ]
+          },
+          {
+            "label": "Bureau privatif",
+            "cells": [
+              { "type": "bookable" },
+              { "type": "bookable" },
+              { "type": "bookable" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Salle de réunion",
+            "cells": [
+              { "type": "bookable" },
+              { "type": "bookable" },
+              { "type": "text", "label": "10 h / mois offertes" },
+              { "type": "text", "label": "10 h / mois offertes" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Services inclus",
+        "rows": [
+          {
+            "label": "Accès autonome",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Planning de réservation",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Wi-Fi fibre",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Cuisine",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "Forfait impressions / mois",
+            "cells": [
+              { "type": "text", "label": "PRINT1" },
+              { "type": "text", "label": "PRINT5" },
+              { "type": "text", "label": "PRINT20" },
+              { "type": "text", "label": "PRINT20" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Confort et avantages premium",
+        "rows": [
+          {
+            "label": "Climatisation",
+            "cells": [
+              { "type": "text", "label": "Mutuelle" },
+              { "type": "text", "label": "Mutuelle" },
+              { "type": "text", "label": "Mutuelle" },
+              { "type": "text", "label": "Individuelle" }
+            ]
+          },
+          {
+            "label": "Boissons chaudes illimitées",
+            "cells": [
+              { "type": "text", "label": "1" },
+              { "type": "text", "label": "1" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
+            "label": "ChatGPT Business",
+            "cells": [
+              { "type": "excluded" },
+              { "type": "excluded" },
+              { "type": "conditional" },
+              { "type": "conditional" }
+            ]
+          }
+        ]
+      }
+    ],
+    "legend": { "included": "Inclus", "bookable": "Sur réservation (€)", "excluded": "Non inclus" },
+    "condition": "* Sous condition"
+  },
   "comparisonPage": {
     "back": "Revenir aux solutions",
     "eyebrow": "Comparatif des solutions",
     "status": "Page en cours d'élaboration",
     "titleLead": "Trouvez la formule",
     "titleHighlight": "faite pour vous.",
-    "lead": "Comparez en un coup d'œil les trois façons de travailler chez Welcome et identifiez celle qui correspond le mieux à votre rythme.",
+    "lead": "Choisissez le niveau de flexibilité, d'espace et de services qui correspond à votre activité. Quatre formules, une même qualité d'accueil.",
     "criteria": "Critères",
     "tableCaption": "Comparaison des formules Nomade, Open Space et Bureau privatif",
     "offers": [
@@ -456,7 +636,7 @@
       "excluded": "Non inclus"
     },
     "note": "Ce comparatif constitue un premier aperçu. Les disponibilités, modalités d'accès et services précis peuvent varier selon la formule retenue et seront confirmés lors de votre échange avec Welcome.",
-    "ctaTitle": "Encore un doute entre deux formules ?",
+    "ctaTitle": "Vous hésitez entre deux solutions ?",
     "ctaText": "Parlons de votre rythme, de votre équipe et de vos besoins pour identifier la solution la plus simple.",
     "ctaVisit": "Organiser une visite",
     "ctaFaq": "Consulter la FAQ"

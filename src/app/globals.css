@@ -330,8 +330,8 @@ html {
 .theme-transition *,
 .theme-transition *::before,
 .theme-transition *::after {
-  transition-property: color, background-color, border-color, fill, stroke,
-    box-shadow, opacity, filter !important;
+  transition-property:
+    color, background-color, border-color, fill, stroke, box-shadow, opacity, filter !important;
   transition-duration: 300ms !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-delay: 0ms !important;
@@ -347,8 +347,12 @@ html {
 }
 
 @keyframes welcome-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .welcome-marquee-track {
@@ -360,5 +364,128 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .welcome-marquee-track { animation: none; }
+  .welcome-marquee-track {
+    animation: none;
+  }
+}
+
+/* Comparateur : sortie PDF A4 portrait, centrée et limitée à une seule page. */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 7mm;
+  }
+
+  html,
+  body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  body *:has(.comparison-print-root) {
+    min-height: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body
+    *:has(.comparison-print-root)
+    > *:not(:has(.comparison-print-root)):not(.comparison-print-root) {
+    display: none !important;
+  }
+
+  .comparison-print-root,
+  .comparison-print-root * {
+    visibility: visible !important;
+  }
+
+  .comparison-print-root {
+    position: absolute !important;
+    top: 95px !important;
+    left: 50% !important;
+    width: 716.8px !important;
+    height: 880px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    color-scheme: light;
+    --welcome-black: #0b0b0b;
+    --welcome-gold: #c6b24a;
+    --welcome-white: #ffffff;
+    --welcome-cream: #fafaf8;
+    --welcome-sage: #6f8471;
+    --welcome-body: #2a2a2a;
+    --welcome-header: #ffffff;
+    --welcome-ink-fg: #ffffff;
+    --welcome-line: rgba(11, 11, 11, 0.08);
+    transform: translateX(-50%);
+    transform-origin: top center;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .comparison-print-action {
+    display: none !important;
+  }
+
+  .comparison-print-content {
+    width: 1120px !important;
+    transform: scale(0.64);
+    transform-origin: top left;
+  }
+
+  .comparison-print-sheet {
+    overflow: visible !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+  }
+
+  .comparison-print-sheet > div {
+    overflow: visible !important;
+  }
+
+  .comparison-sticky-header {
+    position: static !important;
+    box-shadow: none !important;
+  }
+
+  .comparison-print-root .min-h-\[210px\] {
+    min-height: 150px !important;
+  }
+
+  .comparison-print-root .min-h-\[76px\] {
+    min-height: 58px !important;
+  }
+
+  .comparison-print-root .py-4 {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .comparison-print-legend {
+    margin-top: 14px !important;
+  }
+
+  .comparison-print-root .dark\:bg-\[\#211f18\] {
+    background-color: #f7f3df !important;
+  }
+
+  .comparison-print-root .dark\:bg-white {
+    background-color: #0b0b0b !important;
+  }
+
+  .comparison-print-root .dark\:text-\[\#0b0b0b\] {
+    color: #ffffff !important;
+  }
+
+  .comparison-print-root .dark\:text-amber-400 {
+    color: #b45309 !important;
+  }
 }
