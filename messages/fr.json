@@ -193,7 +193,7 @@
     "imageAlt": "Open space lumineux de Welcome Coworking avec tables en bois, verrières noires et plantes suspendues",
     "detailsEyebrow": "Au quotidien",
     "detailsTitle": "Tout ce qu'il faut pour bien travailler.",
-    "detailsText": "Choisissez votre place, branchez-vous et commencez votre journée. L'open space offre un cadre professionnel à taille humaine, avec les services essentiels à portée de main.",
+    "detailsText": "L'open space vous offre un cadre professionnel à moindre coût. Retrouvez votre espace attitré et intiministe à tout moment.",
     "features": [
       {
         "title": "Accès flexible",
@@ -279,6 +279,7 @@
   "comparisonPage": {
     "back": "Revenir aux solutions",
     "eyebrow": "Comparatif des solutions",
+    "status": "Page en cours d'élaboration",
     "titleLead": "Trouvez la formule",
     "titleHighlight": "faite pour vous.",
     "lead": "Comparez en un coup d'œil les trois façons de travailler chez Welcome et identifiez celle qui correspond le mieux à votre rythme.",
@@ -444,7 +445,7 @@
       "nomad": {
         "name": "Nomade",
         "availability": "8 postes restants",
-        "features": ["Flex ou Résident", "Tout espace réservable", "45 à 90 € HT /mois"]
+        "features": ["Flex ou Résident", "Tout espace réservable", "45 ou 90 € HT /mois"]
       },
       "openSpace": {
         "name": "Open Space",
@@ -455,7 +456,7 @@
           "Bureau dédié",
           "Crédit réunion inclus",
           "ChatGPT Business*",
-          "270 à 300 € HT /mois"
+          "190 à 300 € HT /mois"
         ]
       },
       "privateOffice": {

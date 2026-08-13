@@ -20,7 +20,7 @@
     {
       "category": "space",
       "question": "Quels équipements sont mis à disposition des coworkers ?",
-      "answer": "Wi-Fi fibre, cuisine équipée, salle de réunion, espaces détente, imprimante, casiers, vélos en libre-service et stationnement gratuit autour de l'immeuble."
+      "answer": "Wi-Fi fibre, cuisine équipée, salle de réunion, espace bar, imprimante, armoires, relieuse et stationnement gratuit autour de l'immeuble."
     },
     {
       "category": "space",
@@ -35,17 +35,17 @@
     {
       "category": "space",
       "question": "Proposez-vous des événements ou des moments de rencontre entre coworkers ?",
-      "answer": "Welcome organise régulièrement des afterworks, petits-déjeuners et moments d'échange pour favoriser les rencontres professionnelles et la convivialité."
+      "answer": "Welcome organise régulièrement des repas et moments d'échange pour favoriser les rencontres professionnelles et la convivialité. A Noel, l'espace est décoré et une raclette traditionnelle est organisée."
     },
     {
       "category": "pricing",
       "question": "Quelles solutions de travail propose Welcome Coworking ?",
-      "answer": "Trois solutions : l'open space en coworking pour les indépendants, les bureaux privatifs fermés pour les équipes, et la location de salle de réunion à l'heure ou à la journée. Cuisine, espace détente et Wi-Fi fibre sont inclus."
+      "answer": "Trois solutions : l'open space en coworking, les bureaux privatifs fermés, et la location de salle de réunion à l'heure ou à la journée. Cuisine, espace détente et Wi-Fi fibre sont inclus."
     },
     {
       "category": "pricing",
-      "question": "Puis-je venir travailler une seule journée ou à l'heure ?",
-      "answer": "Oui, la formule Nomade permet de réserver à l'heure sans engagement, idéale pour une journée ponctuelle ou un créneau de quelques heures."
+      "question": "Peut-on venir travailler spontanément ou pour quelques heures sans contrat ?",
+      "answer": "Non. Notre espace n'est pas accessible à tous à tout moment. Seule la salle de réunion peut être réservée par des personnes extérieures, sur devis et pour une demi-journée au minimum. Les autres espaces sont strictement réservés à nos clients sous contrat. Des formules flexibles existent pour les nomades : consultez-nous."
     },
     {
       "category": "pricing",
@@ -60,12 +60,12 @@
     {
       "category": "pricing",
       "question": "Puis-je utiliser Welcome comme adresse commerciale de mon entreprise ?",
-      "answer": "Oui, selon la formule choisie, Welcome peut servir d'adresse de domiciliation commerciale. Renseignez-vous auprès de notre équipe pour les conditions."
+      "answer": "Welcome! Coworking dispose de l'agrément préfectoral pour la domicilication. Renseignez-vous auprès de notre équipe pour les conditions."
     },
     {
       "category": "pricing",
       "question": "Puis-je recevoir du courrier professionnel à Welcome ?",
-      "answer": "Oui, les formules incluent généralement une domiciliation d'entreprise et la réception de courrier. Contactez-nous pour connaître les modalités exactes."
+      "answer": "Oui, contactez-nous pour connaître les modalités exactes."
     },
     {
       "category": "access",
@@ -75,7 +75,7 @@
     {
       "category": "access",
       "question": "Comment se rendre à Welcome depuis la gare de Strasbourg ?",
-      "answer": "En tram A ou E direction Robertsau, arrêt Couffignal situé au pied de l'immeuble. Comptez environ 15 minutes depuis la gare de Strasbourg."
+      "answer": "En tram A ou E, arrêt Couffignal situé au pied de l'immeuble. Comptez environ 15 minutes depuis la gare de Strasbourg."
     },
     {
       "category": "access",
