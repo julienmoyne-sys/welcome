@@ -49,4 +49,7 @@ export const routing = defineRouting({
    * imposerait des redirections sur l'intégralité du site.
    */
   localePrefix: "as-needed",
+  // La racine et les URL sans préfixe restent toujours en français, quelle que
+  // soit la langue du navigateur ou une préférence mémorisée précédemment.
+  localeDetection: false,
 });
