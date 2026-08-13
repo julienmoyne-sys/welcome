@@ -246,15 +246,15 @@
     "imageAlt": "Salle de réunion Welcome avec grande table en bois, chaises noires et écran",
     "detailsEyebrow": "Vos rendez-vous",
     "detailsTitle": "Tout est prêt pour vous réunir.",
-    "detailsText": "Réunion d'équipe, présentation client ou visioconférence : installez-vous dans un environnement professionnel et calme.",
+    "detailsText": "Réunion d'équipe, présentation client ou visioconférence : installez-vous dans un environnement professionnel et calme, au sein d'une verrière climatisée.",
     "features": [
-      { "title": "Jusqu'à 12 personnes", "text": "Une capacité adaptée aux réunions et ateliers." },
-      { "title": "Écran", "text": "Présentez vos contenus dans de bonnes conditions." },
-      { "title": "Visioconférence", "text": "Intégrez pleinement vos interlocuteurs à distance." },
-      { "title": "Internet fibre", "text": "Une connexion fiable sans interruption." }
+      { "title": "Jusqu'à 9 personnes", "text": "Une capacité adaptée aux réunions et formations à taille humaine ainsi qu'aux entretiens individuels." },
+      { "title": "Écran mural & Paperboard", "text": "Présentez vos contenus dans de bonnes conditions." },
+      { "title": "Services", "text": "Cuisine, boissons chaudes et froides, relieuse..." },
+      { "title": "Internet", "text": "Connexion fibre professionnelle et sécurisée en WIFI ou RJ45." }
     ],
     "ctaTitle": "Une réunion à organiser à Strasbourg ?",
-    "ctaText": "Découvrez la salle et parlons de votre prochain rendez-vous."
+    "ctaText": "Discutons de votre projet ensemble."
   },
   "kitchenLoungePage": {
     "back": "Revenir aux espaces",
