@@ -5,7 +5,7 @@ import { HomeLogoLink } from "./HomeLogoLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 
-const NAV_HASHES = ["espaces", "solutions", "references", "acces", "contact"] as const;
+const NAV_HASHES = ["espaces", "solutions", "references", "acces"] as const;
 
 export function Header() {
   const t = useTranslations("nav");
@@ -26,13 +26,19 @@ export function Header() {
               {t(hash)}
             </Link>
           ))}
+          <Link
+            href="/contact"
+            className="font-manrope text-[16px] font-semibold text-welcome-black transition-opacity duration-200 hover:opacity-60"
+          >
+            {t("contact")}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3 sm:gap-4">
           <LanguageSwitcher />
           <ThemeToggle />
           <Link
-            href="/#contact"
+            href="/contact"
             className="hidden h-[48px] items-center justify-center rounded-[12px] bg-welcome-gold px-4 font-manrope text-[15px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg md:inline-flex md:px-6 md:text-[16px]"
           >
             {t("cta")}

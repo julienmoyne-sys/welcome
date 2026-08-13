@@ -11,6 +11,12 @@
       "ogTitle": "Coworking in Strasbourg — Welcome Coworking",
       "ogDescription": "Open space, private offices and a meeting room in a bright, welcoming setting in Strasbourg. More than 100 companies hosted since 2017."
     },
+    "contact": {
+      "title": "Contact | Welcome! Coworking Strasbourg",
+      "description": "Contact Welcome! Coworking in Strasbourg to discover our offices, workstations, meeting room and coworking solutions.",
+      "ogTitle": "Contact | Welcome! Coworking Strasbourg",
+      "ogDescription": "Tell us about your office, workstation or meeting room requirements in Strasbourg."
+    },
     "openSpace": {
       "title": "Open space in Strasbourg — Welcome Coworking",
       "description": "Discover the Welcome Coworking open space in Strasbourg: a bright, quiet workspace with flexible access, fibre internet, coffee and printing.",
@@ -546,6 +552,15 @@
     "ctaRoute": "Get directions"
   },
 
+  "homeContact": {
+    "title": "A question? Would you like to discover Welcome!?",
+    "button": "Contact us"
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "title": "Let's talk about the way you work.",
+    "lead": "An office for a few days or for the long term? A workstation, a room to bring your team together, or simply curious to discover Welcome!? Tell us what you need."
+  },
   "contact": {
     "eyebrow": "Contact",
     "titleLead": "What if your next working day started",

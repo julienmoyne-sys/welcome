@@ -62,7 +62,7 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
               {t("cta.lead")}
             </p>
             <Link
-              href="/#contact"
+              href="/contact"
               className="mt-8 inline-flex h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg"
             >
               {t("cta.button")}

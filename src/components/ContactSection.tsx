@@ -8,7 +8,7 @@ import { useReveal } from "../hooks/useReveal";
 import { submitContact } from "../lib/contact.actions";
 import contactPhoto from "../assets/contact-photo-real.png";
 
-export function ContactSection() {
+export function ContactSection({ showHeader = true }: { showHeader?: boolean }) {
   const t = useTranslations("contact");
   const locale = useLocale();
   const needs = t.raw("form.needs") as string[];
@@ -74,27 +74,28 @@ export function ContactSection() {
   return (
     <section ref={ref} className="bg-welcome-cream py-[100px] lg:py-[140px]">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-        {/* anchor aligné sur le titre de la section */}
-        <span id="contact" className="block scroll-mt-[120px]" aria-hidden="true" />
-        {/* header */}
-        <div
-          className={`mx-auto max-w-2xl text-center transition-all duration-700 ${
-            visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-          }`}
-        >
-          <p className="font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage">
-            {t("eyebrow")}
-          </p>
-          <h2 className="mt-4 font-manrope text-4xl font-semibold leading-[1.12] tracking-tight text-welcome-black md:text-5xl">
-            {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
-          </h2>
-          <p className="mt-5 font-inter text-lg leading-relaxed text-welcome-body/80">
-            {t("lead")}
-          </p>
-        </div>
+        {showHeader && (
+          <div
+            className={`mx-auto max-w-2xl text-center transition-all duration-700 ${
+              visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
+            <p className="font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage">
+              {t("eyebrow")}
+            </p>
+            <h2 className="mt-4 font-manrope text-4xl font-semibold leading-[1.12] tracking-tight text-welcome-black md:text-5xl">
+              {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
+            </h2>
+            <p className="mt-5 font-inter text-lg leading-relaxed text-welcome-body/80">
+              {t("lead")}
+            </p>
+          </div>
+        )}
 
         {/* two columns */}
-        <div className="mt-16 grid items-stretch gap-12 lg:mt-20 lg:grid-cols-[45%_55%] lg:gap-20">
+        <div
+          className={`${showHeader ? "mt-16 lg:mt-20" : ""} grid items-stretch gap-12 lg:grid-cols-[45%_55%] lg:gap-20`}
+        >
           {/* left column */}
           <div
             className={`flex flex-col transition-all duration-700 delay-100 ${

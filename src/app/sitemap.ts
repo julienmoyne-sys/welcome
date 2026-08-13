@@ -5,7 +5,7 @@ import { localePath } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/seo";
 
 /**
- * Les routes `/acces`, `/contact`, `/espaces`, `/formules` et `/references`
+ * Les routes `/acces`, `/espaces`, `/formules` et `/references`
  * n'apparaissent pas ici : ce sont des redirections 308 vers des sections de
  * l'accueil (voir `next.config.ts`), pas des URL indexables.
  */
@@ -16,9 +16,14 @@ const PAGES = [
   { path: "/bureaux-privatifs", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/salle-de-reunion", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/cuisine-detente", changeFrequency: "weekly" as const, priority: 0.7 },
+  { path: "/contact", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/faq", changeFrequency: "weekly" as const, priority: 0.7 },
   { path: "/mentions-legales", changeFrequency: "yearly" as const, priority: 0.3 },
-  { path: "/conditions-generales-d-utilisation", changeFrequency: "yearly" as const, priority: 0.3 },
+  {
+    path: "/conditions-generales-d-utilisation",
+    changeFrequency: "yearly" as const,
+    priority: 0.3,
+  },
   { path: "/politique-de-confidentialite", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/politique-de-cookies", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/gestion-des-cookies", changeFrequency: "yearly" as const, priority: 0.3 },

@@ -29,12 +29,7 @@ function MapIllustration({ visible }: { visible: boolean }) {
 
   return (
     <div className="relative overflow-hidden rounded-[20px] border border-welcome-black/[0.07] bg-welcome-white p-4 shadow-[0_18px_50px_-30px_rgba(11,11,11,0.28)] sm:p-8">
-      <svg
-        viewBox="0 0 600 460"
-        className="h-auto w-full"
-        role="img"
-        aria-label={t("ariaLabel")}
-      >
+      <svg viewBox="0 0 600 460" className="h-auto w-full" role="img" aria-label={t("ariaLabel")}>
         {/* subtle grid */}
         <g stroke="var(--welcome-black)" strokeOpacity="0.04">
           {Array.from({ length: 11 }).map((_, i) => (
@@ -204,29 +199,29 @@ export function AccessSection() {
             {cards.map(({ title, text }, i) => {
               const Icon = CARD_ICONS[i];
               return (
-              <div
-                key={title}
-                className="group rounded-[20px] border border-welcome-black/[0.07] bg-welcome-white p-6 shadow-[0_10px_30px_-24px_rgba(11,11,11,0.35)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_18px_40px_-24px_rgba(11,11,11,0.35)]"
-                style={{
-                  opacity: grid.visible ? 1 : 0,
-                  transform: grid.visible ? "none" : "translateY(20px)",
-                  transitionDelay: `${150 + i * 110}ms`,
-                }}
-              >
-                <div className="flex items-start gap-4">
-                  <span className="mt-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-welcome-gold/10">
-                    <Icon className="h-5 w-5 text-welcome-gold" strokeWidth={1.5} />
-                  </span>
-                  <div>
-                    <h3 className="font-manrope text-[17px] font-semibold text-welcome-black">
-                      {title}
-                    </h3>
-                    <p className="mt-2 font-inter text-[15px] leading-[1.6] text-welcome-body/80">
-                      {text}
-                    </p>
+                <div
+                  key={title}
+                  className="group rounded-[20px] border border-welcome-black/[0.07] bg-welcome-white p-6 shadow-[0_10px_30px_-24px_rgba(11,11,11,0.35)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_18px_40px_-24px_rgba(11,11,11,0.35)]"
+                  style={{
+                    opacity: grid.visible ? 1 : 0,
+                    transform: grid.visible ? "none" : "translateY(20px)",
+                    transitionDelay: `${150 + i * 110}ms`,
+                  }}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="mt-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-welcome-gold/10">
+                      <Icon className="h-5 w-5 text-welcome-gold" strokeWidth={1.5} />
+                    </span>
+                    <div>
+                      <h3 className="font-manrope text-[17px] font-semibold text-welcome-black">
+                        {title}
+                      </h3>
+                      <p className="mt-2 font-inter text-[15px] leading-[1.6] text-welcome-body/80">
+                        {text}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
               );
             })}
           </div>
@@ -252,7 +247,7 @@ export function AccessSection() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              href="/#contact"
+              href="/contact"
               className="inline-flex h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg active:scale-[0.99]"
             >
               {t("ctaVisit")}

@@ -11,6 +11,12 @@
       "ogTitle": "Coworking in Straßburg — Welcome Coworking",
       "ogDescription": "Open Space, private Büros und Besprechungsraum in einer hellen, einladenden Umgebung in Straßburg. Über 100 Unternehmen seit 2017."
     },
+    "contact": {
+      "title": "Kontakt | Welcome! Coworking Straßburg",
+      "description": "Kontaktieren Sie Welcome! Coworking in Straßburg und entdecken Sie unsere Büros, Arbeitsplätze, unseren Besprechungsraum und unsere Coworking-Lösungen.",
+      "ogTitle": "Kontakt | Welcome! Coworking Straßburg",
+      "ogDescription": "Sprechen Sie mit uns über Ihren Bedarf an Büro, Arbeitsplatz oder Besprechungsraum in Straßburg."
+    },
     "openSpace": {
       "title": "Open Space in Straßburg — Welcome Coworking",
       "description": "Entdecken Sie den Open Space von Welcome Coworking in Straßburg: hell, ruhig und flexibel mit Glasfaser, Kaffee und Druckmöglichkeit.",
@@ -561,6 +567,15 @@
     "ctaRoute": "Route anzeigen"
   },
 
+  "homeContact": {
+    "title": "Eine Frage? Möchten Sie Welcome! entdecken?",
+    "button": "Kontakt aufnehmen"
+  },
+  "contactPage": {
+    "eyebrow": "Kontakt",
+    "title": "Sprechen wir darüber, wie Sie arbeiten.",
+    "lead": "Ein Büro für einige Tage oder langfristig? Ein Arbeitsplatz, ein Raum für Ihr Team oder einfach Lust, Welcome! kennenzulernen? Sagen Sie uns, was Sie brauchen."
+  },
   "contact": {
     "eyebrow": "Kontakt",
     "titleLead": "Und wenn Ihr nächster Arbeitstag",

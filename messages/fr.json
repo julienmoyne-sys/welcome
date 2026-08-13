@@ -11,6 +11,12 @@
       "ogTitle": "Coworking à Strasbourg — Welcome Coworking",
       "ogDescription": "Open space, bureaux privatifs et salle de réunion dans un lieu lumineux et chaleureux à Strasbourg. Plus de 100 entreprises accueillies depuis 2017."
     },
+    "contact": {
+      "title": "Contact | Welcome! Coworking Strasbourg",
+      "description": "Contactez Welcome! Coworking à Strasbourg pour découvrir nos bureaux, postes de travail, salle de réunion et solutions de coworking.",
+      "ogTitle": "Contact | Welcome! Coworking Strasbourg",
+      "ogDescription": "Échangeons sur vos besoins en bureau, poste de travail ou salle de réunion à Strasbourg."
+    },
     "openSpace": {
       "title": "Open space à Strasbourg — Welcome Coworking",
       "description": "Découvrez l'open space de Welcome Coworking à Strasbourg : un espace lumineux et calme, avec accès flexible, fibre, café et impression.",
@@ -227,10 +233,19 @@
     "detailsTitle": "La tranquillité d'un bureau fermé",
     "detailsText": "Nos bureaux fermés bénéficient du meilleur confort possible avec lumière naturelle directe.",
     "features": [
-      { "title": "Mobilier", "text": "Un bureau décoré, végétalisé, en bois et métal, pourvu d'une étagère et d'un caisson de rangement." },
+      {
+        "title": "Mobilier",
+        "text": "Un bureau décoré, végétalisé, en bois et métal, pourvu d'une étagère et d'un caisson de rangement."
+      },
       { "title": "Internet", "text": "Connexion fibre professionnelle et sécurisée en WIFI." },
-      { "title": "Confort", "text": "Fauteuil ergonomique, fenêtre, climatisation et éclairage individuels." },
-      { "title": "Services", "text": "Salle de réunion, cuisine, machine à café, imprimante, scanner, relieuse..." }
+      {
+        "title": "Confort",
+        "text": "Fauteuil ergonomique, fenêtre, climatisation et éclairage individuels."
+      },
+      {
+        "title": "Services",
+        "text": "Salle de réunion, cuisine, machine à café, imprimante, scanner, relieuse..."
+      }
     ],
     "ctaTitle": "Votre prochain bureau est peut-être ici.",
     "ctaText": "Venez découvrir les volumes et imaginer votre équipe chez Welcome."
@@ -248,10 +263,19 @@
     "detailsTitle": "Tout est prêt pour vous réunir.",
     "detailsText": "Réunion d'équipe, présentation client ou visioconférence : installez-vous dans un environnement professionnel et calme, au sein d'une verrière climatisée.",
     "features": [
-      { "title": "Jusqu'à 9 personnes", "text": "Une capacité adaptée aux réunions et formations à taille humaine ainsi qu'aux entretiens individuels." },
-      { "title": "Écran mural & Paperboard", "text": "Présentez vos contenus dans de bonnes conditions." },
+      {
+        "title": "Jusqu'à 9 personnes",
+        "text": "Une capacité adaptée aux réunions et formations à taille humaine ainsi qu'aux entretiens individuels."
+      },
+      {
+        "title": "Écran mural & Paperboard",
+        "text": "Présentez vos contenus dans de bonnes conditions."
+      },
       { "title": "Services", "text": "Cuisine, boissons chaudes et froides, relieuse..." },
-      { "title": "Internet", "text": "Connexion fibre professionnelle et sécurisée en WIFI ou RJ45." }
+      {
+        "title": "Internet",
+        "text": "Connexion fibre professionnelle et sécurisée en WIFI ou RJ45."
+      }
     ],
     "ctaTitle": "Une réunion à organiser à Strasbourg ?",
     "ctaText": "Discutons de votre projet ensemble."
@@ -270,7 +294,10 @@
     "features": [
       { "title": "Café à disposition", "text": "Une pause agréable à tout moment de la journée." },
       { "title": "Bar lounge", "text": "Installez vous au bar pour travailler ou vous détendre." },
-      { "title": "Espace cuisine", "text": "Un lieu pratique pour déjeuner sur place : micro-ondes, refrigérateur, four..." },
+      {
+        "title": "Espace cuisine",
+        "text": "Un lieu pratique pour déjeuner sur place : micro-ondes, refrigérateur, four..."
+      },
       { "title": "Moments partagés", "text": "Un cadre naturel pour échanger entre membres." }
     ],
     "ctaTitle": "Venez ressentir l'ambiance Welcome!",
@@ -544,6 +571,15 @@
     "ctaRoute": "Voir l’itinéraire"
   },
 
+  "homeContact": {
+    "title": "Une question ? Envie de découvrir Welcome! ?",
+    "button": "Nous contacter"
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "title": "Parlons de votre façon de travailler.",
+    "lead": "Un bureau pour quelques jours ou pour longtemps ? Un poste de travail, une salle pour réunir votre équipe ou simplement envie de découvrir Welcome! ? Dites-nous ce dont vous avez besoin."
+  },
   "contact": {
     "eyebrow": "Contact",
     "titleLead": "Et si votre prochaine journée de travail commençait",

@@ -8,7 +8,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
  * ciblent des sections de l'accueil. Redirection 308 côté serveur pour que les
  * moteurs consolident le signal sur `/` au lieu de découvrir des pages vides.
  */
-const SECTION_REDIRECTS = ["acces", "contact", "espaces", "formules", "references"];
+const SECTION_REDIRECTS = ["acces", "espaces", "formules", "references"];
 
 const WORDPRESS_REDIRECTS = [
   {

@@ -3,11 +3,11 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { AccessSection } from "@/components/AccessSection";
-import { ContactSection } from "@/components/ContactSection";
 import { EditorialSection } from "@/components/EditorialSection";
 import { ExploreSection } from "@/components/ExploreSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { HomeContactSection } from "@/components/HomeContactSection";
 import { JsonLd } from "@/components/JsonLd";
 import { PricingSection } from "@/components/PricingSection";
 import { ReassuranceSection } from "@/components/ReassuranceSection";
@@ -84,7 +84,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
-                  href="/#contact"
+                  href="/contact"
                   className="hidden h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg lg:inline-flex"
                 >
                   {t("ctaVisit")}
@@ -113,7 +113,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <PricingSection />
         <ReferencesSection />
         <AccessSection />
-        <ContactSection />
+        <HomeContactSection />
       </main>
       <Footer />
     </div>
