@@ -101,7 +101,7 @@
     "eyebrow": "Willkommen bei Welcome.",
     "titleLine1": "Wie zu Hause.",
     "titleLine2": "Nur viel inspirierender.",
-    "lead": "Entdecken Sie den Komfort und die Wärme eines wohnlichen Interieurs, verbunden mit der Ausstattung und den Services eines echten professionellen Premium-Arbeitsumfelds.",
+    "lead": "Entdecken Sie den Komfort und die Wärme eines wohnlichen Interieurs, verbunden mit der Ausstattung und den Services eines echten professionellen Premium-Arbeitsumfelds in <strong>Straßburg</strong>.",
     "ctaVisit": "Besichtigung buchen",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Welcome entdecken",
@@ -119,12 +119,12 @@
       {
         "icon": "profiles",
         "title": "Alle Profile",
-        "text": "Für Nomaden und feste Mieter mit Vertrag"
+        "text": "Für Nomaden und feste Mieter, ausschließlich mit Vertrag"
       },
       {
         "icon": "workspace",
-        "title": "Arbeitslösungen",
-        "text": "Besprechungsraum, private Büros oder Open Space"
+        "title": "Ein Bedarf, eine Lösung",
+        "text": "Besprechungsraum, private Büros oder Open Space, in Voll- oder Teilzeit"
       },
       { "icon": "history", "title": "Seit 2017", "text": "Mehr als 100 Unternehmen empfangen" }
     ]
@@ -137,9 +137,9 @@
     "lead": "Welcome! entstand aus einer einfachen Überzeugung: Unser Arbeitsplatz sollte kein Ort sein, den wir jeden Morgen nur ertragen.",
     "lead2": "Wir wollten einen Ort schaffen, an dem man sich wohlfühlt. Richtig wohl. Einen Ort, an den man zum Arbeiten kommt, aber auch wegen der Atmosphäre, der Begegnungen und all der kleinen Dinge bleibt, die einen Tag verändern.",
     "benefits": [
-      { "title": "Konzentrieren", "text": "Räume für jede Art zu arbeiten." },
+      { "title": "Konzentrieren", "text": "Ruhige Räume für jede Art zu arbeiten." },
       { "title": "Aufatmen", "text": "Eine warme Atmosphäre voller Pflanzen und Tageslicht." },
-      { "title": "Teilen", "text": "Ein Ort mit menschlichem Maß, gemacht für Begegnungen." }
+      { "title": "Teilen", "text": "Ein Ort mit menschlichem Maß, an dem jeder jeden kennt." }
     ],
     "cta": "Räume entdecken",
     "imageAlt": "Heller Coworking-Space mit Holz, Pflanzen und schwarzen Sprossenfenstern"
@@ -155,7 +155,7 @@
     "cards": {
       "openSpace": {
         "title": "Open Space",
-        "text": "Arbeiten Sie in einer hellen und ruhigen Umgebung.",
+        "text": "Profitieren Sie von einem komfortablen und kostengünstigen Arbeitsplatz.",
         "alt": "Heller Open Space mit Holztischen, schwarzen Sprossenfenstern und Hängepflanzen"
       },
       "privateOffices": {
@@ -169,9 +169,9 @@
         "alt": "Hochwertiger Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm"
       },
       "kitchenLounge": {
-        "title": "Küche & Lounge",
+        "title": "Loungebereich",
         "text": "Machen Sie Pause wie zu Hause.",
-        "alt": "Küchen- und Loungebereich mit hellen Sofas, Holztheke und grünen Pflanzen"
+        "alt": "Küchen- und Loungebereich mit voll ausgestatteter Küche, Holztheke und Pflanzen"
       }
     }
   },
@@ -186,18 +186,24 @@
     "imageAlt": "Heller Open Space von Welcome Coworking mit Holztischen, schwarzen Sprossenfenstern und Hängepflanzen",
     "detailsEyebrow": "Im Alltag",
     "detailsTitle": "Alles, was Sie für gutes Arbeiten brauchen.",
-    "detailsText": "Wählen Sie Ihren Platz, schließen Sie sich an und starten Sie in den Tag. Der Open Space bietet einen professionellen Rahmen mit persönlicher Atmosphäre und allen wichtigen Services.",
+    "detailsText": "Der Open Space bietet Ihnen ein professionelles Umfeld zu geringeren Kosten. Ihr fester, persönlicher Arbeitsplatz steht Ihnen jederzeit zur Verfügung.",
     "features": [
       {
-        "title": "Flexibler Zugang",
-        "text": "Ein Arbeitsplatz passend zu Ihrem Rhythmus und Ihrem Tarif."
+        "title": "Mobiliar",
+        "text": "Ein einladender, begrünter Schreibtisch aus Holz und Metall mit Regal und Rollcontainer oder Schrank."
       },
       {
-        "title": "Glasfaser-Internet",
-        "text": "Eine schnelle, stabile Verbindung für entspanntes Arbeiten."
+        "title": "Internet",
+        "text": "Professionelle, sichere Glasfaserverbindung über WLAN oder RJ45."
       },
-      { "title": "Kaffee inklusive", "text": "Alles für eine echte Pause, fast wie zu Hause." },
-      { "title": "Drucken", "text": "Die wichtigsten Bürogeräte stehen direkt vor Ort bereit." }
+      {
+        "title": "Komfort",
+        "text": "Ein verstellbarer ergonomischer Stuhl, der die natürliche Form Ihres Rückens unterstützt."
+      },
+      {
+        "title": "Services",
+        "text": "Besprechungsraum, Küche, Kaffeemaschine, Drucker, Scanner, Bindegerät und mehr."
+      }
     ],
     "ctaTitle": "Möchten Sie Ihren zukünftigen Arbeitsplatz entdecken?",
     "ctaText": "Erleben Sie die Welcome-Atmosphäre und finden Sie das passende Angebot."
@@ -207,17 +213,26 @@
     "eyebrow": "Private Büros",
     "titleLead": "Ihr eigenes Büro,",
     "titleHighlight": "ganz ohne Aufwand.",
-    "lead": "Arbeiten Sie mit Ihrem Team in einem ruhigen, komfortablen Raum, empfangen Sie Kunden und bewahren Sie Vertraulichkeit.",
+    "lead": "Nutzen Sie einen geschlossenen, ruhigen und komfortablen Raum, um effizient zu arbeiten und Ihre Privatsphäre zu wahren.",
     "visit": "Besichtigung buchen",
     "imageAlt": "Privates Welcome Büro mit Glastrennwand, Holztisch und warmer Beleuchtung",
     "detailsEyebrow": "Ihr Raum",
-    "detailsTitle": "Die Ruhe eines Büros, die Energie von Welcome.",
-    "detailsText": "Beziehen Sie ein startbereites Büro und nutzen Sie alle Coworking-Bereiche und Services.",
+    "detailsTitle": "Die Ruhe eines geschlossenen Büros",
+    "detailsText": "Unsere geschlossenen Büros bieten bestmöglichen Komfort mit direktem Tageslicht.",
     "features": [
-      { "title": "Privatsphäre", "text": "Ein geschlossener Raum für konzentriertes Arbeiten." },
-      { "title": "Glasfaser-Internet", "text": "Eine schnelle, stabile Verbindung für Ihr Team." },
-      { "title": "Komfortable Möbel", "text": "Ein eingerichtetes, startbereites Büro." },
-      { "title": "Gesicherter Zugang", "text": "Eine kontrollierte professionelle Umgebung." }
+      {
+        "title": "Mobiliar",
+        "text": "Ein dekorierter, begrünter Schreibtisch aus Holz und Metall mit Regal und Rollcontainer."
+      },
+      { "title": "Internet", "text": "Professionelle, sichere Glasfaserverbindung über WLAN." },
+      {
+        "title": "Komfort",
+        "text": "Ergonomischer Stuhl, Fenster, individuelle Klimatisierung und Beleuchtung."
+      },
+      {
+        "title": "Services",
+        "text": "Besprechungsraum, Küche, Kaffeemaschine, Drucker, Scanner, Bindegerät und mehr."
+      }
     ],
     "ctaTitle": "Ihr nächstes Büro könnte hier sein.",
     "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor."
@@ -233,15 +248,24 @@
     "imageAlt": "Welcome Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm",
     "detailsEyebrow": "Ihre Termine",
     "detailsTitle": "Alles ist bereit für Ihr Meeting.",
-    "detailsText": "Teammeeting, Kundenpräsentation oder Videokonferenz: arbeiten Sie in einer ruhigen, professionellen Umgebung.",
+    "detailsText": "Teammeeting, Kundenpräsentation oder Videokonferenz: arbeiten Sie in einem ruhigen, professionellen und klimatisierten Raum mit Glaswänden.",
     "features": [
-      { "title": "Bis zu 12 Personen", "text": "Ideal für Meetings und kleine Workshops." },
-      { "title": "Bildschirm", "text": "Präsentieren Sie Ihre Inhalte komfortabel." },
-      { "title": "Videokonferenz", "text": "Binden Sie entfernte Teilnehmer vollständig ein." },
-      { "title": "Glasfaser-Internet", "text": "Eine zuverlässige Verbindung ohne Unterbrechung." }
+      {
+        "title": "Bis zu 9 Personen",
+        "text": "Ideal für Meetings und Schulungen im kleinen Kreis sowie für Einzelgespräche."
+      },
+      {
+        "title": "Wandbildschirm & Flipchart",
+        "text": "Präsentieren Sie Ihre Inhalte komfortabel."
+      },
+      { "title": "Services", "text": "Küche, heiße und kalte Getränke, Bindegerät und mehr." },
+      {
+        "title": "Internet",
+        "text": "Professionelle, sichere Glasfaserverbindung über WLAN oder RJ45."
+      }
     ],
     "ctaTitle": "Planen Sie ein Meeting in Straßburg?",
-    "ctaText": "Entdecken Sie den Raum und erzählen Sie uns von Ihrem Termin."
+    "ctaText": "Lassen Sie uns gemeinsam über Ihr Vorhaben sprechen."
   },
   "kitchenLoungePage": {
     "back": "Zurück zu den Räumen",
@@ -253,14 +277,20 @@
     "imageAlt": "Welcome Küche und Lounge mit hellen Sofas, Holztheke und grünen Pflanzen",
     "detailsEyebrow": "Zwischen Projekten",
     "detailsTitle": "Ein Raum zum Austauschen und Auftanken.",
-    "detailsText": "Küche und Lounge verlängern das Welcome-Erlebnis in einer einfachen, entspannten Atmosphäre.",
+    "detailsText": "Küche und Bar verlängern das Welcome!-Erlebnis in einer einfachen, geselligen Atmosphäre.",
     "features": [
       { "title": "Kaffee verfügbar", "text": "Eine angenehme Pause zu jeder Tageszeit." },
-      { "title": "Loungebereich", "text": "Bequeme Sitzplätze für einen Ortswechsel." },
-      { "title": "Küchenbereich", "text": "Ein praktischer Ort für das Mittagessen." },
+      {
+        "title": "Lounge-Bar",
+        "text": "Nehmen Sie an der Bar Platz, um zu arbeiten oder zu entspannen."
+      },
+      {
+        "title": "Küchenbereich",
+        "text": "Ein praktischer Ort für das Mittagessen vor Ort – mit Mikrowelle, Kühlschrank, Backofen und mehr."
+      },
       { "title": "Gemeinsame Momente", "text": "Ein natürlicher Rahmen für Gespräche." }
     ],
-    "ctaTitle": "Erleben Sie die Welcome-Atmosphäre.",
+    "ctaTitle": "Erleben Sie die Welcome!-Atmosphäre.",
     "ctaText": "Bei einer Besichtigung entdecken Sie alle Räume am besten."
   },
   "comparisonPage": {
@@ -424,40 +454,44 @@
   "pricing": {
     "eyebrow": "Unsere Angebote",
     "title": "Wählen Sie Ihren Rhythmus.",
-    "lead": "Ob Sie gelegentlich vorbeikommen oder das ganze Jahr bleiben: wir haben einfache Angebote in intimen Räumen ab 20 € netto / Monat gestaltet. Alle unsere Angebote sind <strong>ohne Bindung</strong>.",
+    "lead": "Ob Sie gelegentlich vorbeikommen oder das ganze Jahr bleiben: Wir bieten einfache Lösungen ab 45 € netto pro Monat. Alle unsere Angebote sind <strong>ohne Bindung</strong>.",
     "compare": "Vergleichen",
     "learnMore": "Entdecken",
-    "commitmentNote": "* : mit teilweiser Bindung",
+    "commitmentNote": "*: unter Vorbehalt bestimmter Bedingungen",
     "plans": {
       "nomad": {
         "name": "Nomade",
-        "availability": "5 Plätze verfügbar",
-        "features": [
-          "Ohne Mindestlaufzeit",
-          "Glasfaser-Internet",
-          "Eigenständiger Zugang",
-          "Stundenweise buchbar"
-        ]
+        "availability": "8 Plätze frei",
+        "features": ["Flex oder Resident", "Alle Räume buchbar", "45 oder 90 € netto / Monat"]
       },
       "openSpace": {
         "name": "Open Space",
-        "availability": "5 Plätze verfügbar",
-        "features": ["Flexibler Zugang", "Glasfaser-Internet", "Kaffee", "Drucken"]
+        "availability": "2 Plätze frei",
+        "features": [
+          "Resident",
+          "Vollzeit/Teilzeit",
+          "Fester Schreibtisch",
+          "Meeting-Guthaben inklusive",
+          "ChatGPT Business*",
+          "190 bis 300 € netto / Monat"
+        ]
       },
       "privateOffice": {
         "name": "Privates Büro",
-        "availability": "5 Plätze verfügbar",
+        "availability": "5 Plätze frei",
         "features": [
-          "Geschlossenes Büro",
-          "Gesicherter Zugang",
-          "Hochwertiges Mobiliar",
-          "Glasfaser-Internet"
+          "Resident",
+          "Vollzeit/Teilzeit",
+          "Fester Schreibtisch",
+          "Meeting-Guthaben inklusive",
+          "ChatGPT Business*",
+          "425 bis 700 € netto / Monat"
         ]
       },
       "meetingRoom": {
         "name": "Besprechungsraum",
-        "availability": "5 Plätze verfügbar",
-        "features": ["Bildschirm", "Videokonferenz", "Bis zu 12 Personen", "Einfache Buchung"]
+        "availability": "je nach Verfügbarkeit",
+        "features": ["Wandbildschirm", "HDMI und Chromecast", "Bis zu 9 Personen", "Auf Anfrage"]
       }
     }
   },
@@ -496,18 +530,18 @@
     "cards": [
       {
         "title": "Tram vor der Tür",
-        "text": "Die Haltestelle Couffignal liegt wenige Meter vom Eingang entfernt."
+        "text": "Die Haltestelle Couffignal (Linien A und E) liegt 150 Meter von Ihrem Büro entfernt."
       },
       {
-        "title": "Radschnellweg",
-        "text": "Über den Radschnellweg schnell in die Straßburger Innenstadt oder nach Illkirch."
+        "title": "Schneller Zweirichtungsradweg",
+        "text": "Über die Colmarienne gelangen Sie schnell in die Straßburger Innenstadt oder nach Illkirch."
       },
       {
-        "title": "Sofort erreichbar",
+        "title": "Schnelle Autobahnanbindung",
         "text": "Autobahn in wenigen Minuten und kostenlose Parkplätze."
       },
       {
-        "title": "Ein lebendiges Viertel",
+        "title": "Eine erstklassige Adresse",
         "text": "Direkt neben dem Stade de la Meinau, Geschäften, Restaurants und Dienstleistern."
       }
     ],
@@ -521,7 +555,7 @@
         "tram": { "label": "Tram Couffignal", "sub": "Direkt vor der Tür" }
       }
     },
-    "transitLine": "Tram A und E (Haltestelle Couffignal) | Bahnhof Straßburg 15 Min. | Flughafen Straßburg 20 Min.",
+    "transitLine": "Tram A und E (Haltestelle Couffignal) | Bahnhof und Flughafen Straßburg 15 Min.",
     "mapTitle": "Lagekarte von Welcome Coworking, 204 avenue de Colmar, Straßburg",
     "ctaVisit": "Besichtigung buchen",
     "ctaRoute": "Route anzeigen"
@@ -531,7 +565,7 @@
     "eyebrow": "Kontakt",
     "titleLead": "Und wenn Ihr nächster Arbeitstag",
     "titleHighlight": "hier",
-    "lead": "Möchten Sie Welcome besichtigen, einen Raum buchen oder sich einfach umsehen? Wir freuen uns auf Sie.",
+    "lead": "Möchten Sie über einen Einzug sprechen, den Space besichtigen oder einfach unseren Besprechungsraum buchen? Kontaktieren Sie uns noch heute:",
     "photoAlt": "Coworking-Space Welcome",
     "whatsapp": {
       "title": "Eine Frage stellen",
@@ -546,7 +580,7 @@
       "phone": "+33 6 22 80 55 36",
       "emailLabel": "E-Mail-Adresse",
       "hoursLabel": "Öffnungszeiten",
-      "hours": "Mitglieder: rund um die Uhr / Besichtigungen: <strong>nach Vereinbarung</strong>"
+      "hours": "Mitglieder: rund um die Uhr | Besichtigungen: <strong>nach Vereinbarung</strong>"
     },
     "form": {
       "title": "Besichtigung buchen",

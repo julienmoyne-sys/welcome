@@ -20,7 +20,7 @@
     {
       "category": "space",
       "question": "Welche Ausstattung steht den Coworkern zur Verfügung?",
-      "answer": "Glasfaser-WLAN, voll ausgestattete Küche, Besprechungsraum, Loungebereiche, Drucker, Schließfächer, Fahrräder zur freien Nutzung und kostenlose Parkplätze rund um das Gebäude."
+      "answer": "Glasfaser-WLAN, voll ausgestattete Küche, Besprechungsraum, Barbereich, Drucker, Schränke, Bindegerät und kostenlose Parkplätze rund um das Gebäude."
     },
     {
       "category": "space",
@@ -35,17 +35,17 @@
     {
       "category": "space",
       "question": "Gibt es Veranstaltungen oder Gelegenheiten, andere Coworker kennenzulernen?",
-      "answer": "Welcome veranstaltet regelmäßig Afterworks, Frühstücke und informelle Treffen, um berufliche Begegnungen und ein gutes Miteinander zu fördern."
+      "answer": "Welcome organisiert regelmäßig gemeinsame Mahlzeiten und informelle Treffen, um berufliche Begegnungen und ein gutes Miteinander zu fördern. Zu Weihnachten wird der Raum dekoriert und ein traditionelles Raclette veranstaltet."
     },
     {
       "category": "pricing",
       "question": "Welche Arbeitsangebote bietet Welcome Coworking?",
-      "answer": "Drei Angebote: Coworking im Open Space für Selbstständige, geschlossene private Büros für Teams sowie die Vermietung des Besprechungsraums stunden- oder tageweise. Küche, Loungebereich und Glasfaser-WLAN sind inbegriffen."
+      "answer": "Drei Angebote: Coworking im Open Space, geschlossene private Büros sowie die Vermietung des Besprechungsraums stunden- oder tageweise. Küche, Loungebereich und Glasfaser-WLAN sind inbegriffen."
     },
     {
       "category": "pricing",
-      "question": "Kann ich auch nur einen Tag oder stundenweise arbeiten?",
-      "answer": "Ja, mit dem Tarif Nomade können Sie ohne Bindung stundenweise buchen — ideal für einen einzelnen Tag oder ein paar Stunden."
+      "question": "Kann ich spontan oder für einige Stunden ohne Vertrag zum Arbeiten kommen?",
+      "answer": "Nein. Unser Space ist nicht jederzeit für alle zugänglich. Nur der Besprechungsraum kann von externen Personen gebucht werden, nach Angebot und mindestens für einen halben Tag. Alle anderen Bereiche sind ausschließlich unseren Kunden mit Vertrag vorbehalten. Für Nomaden gibt es flexible Angebote: Sprechen Sie uns an."
     },
     {
       "category": "pricing",
@@ -60,12 +60,12 @@
     {
       "category": "pricing",
       "question": "Kann ich Welcome als Geschäftsadresse meines Unternehmens nutzen?",
-      "answer": "Ja, je nach gewähltem Tarif kann Welcome als Geschäftsadresse dienen. Erkundigen Sie sich bei unserem Team nach den Bedingungen."
+      "answer": "Welcome! Coworking verfügt über die behördliche Zulassung zur Geschäftsdomizilierung. Erkundigen Sie sich bei unserem Team nach den Bedingungen."
     },
     {
       "category": "pricing",
       "question": "Kann ich Geschäftspost bei Welcome empfangen?",
-      "answer": "Ja, die Tarife umfassen in der Regel eine Geschäftsadresse und die Annahme von Post. Kontaktieren Sie uns für die genauen Modalitäten."
+      "answer": "Ja. Kontaktieren Sie uns für die genauen Modalitäten."
     },
     {
       "category": "access",
@@ -75,7 +75,7 @@
     {
       "category": "access",
       "question": "Wie komme ich vom Straßburger Bahnhof zu Welcome?",
-      "answer": "Mit der Tram A oder E Richtung Robertsau bis zur Haltestelle Couffignal, direkt am Gebäude. Rechnen Sie mit etwa 15 Minuten ab dem Bahnhof Straßburg."
+      "answer": "Mit der Tram A oder E bis zur Haltestelle Couffignal, direkt am Gebäude. Rechnen Sie mit etwa 15 Minuten ab dem Bahnhof Straßburg."
     },
     {
       "category": "access",
@@ -85,7 +85,7 @@
     {
       "category": "access",
       "question": "Gibt es Geschäfte oder Restaurants in der Nähe?",
-      "answer": "Das Viertel Robertsau und die Gegend um die Place de Haguenau bieten Bäckereien, Restaurants und Geschäfte, wenige Minuten zu Fuß oder mit der Tram entfernt."
+      "answer": "Im Viertel Meinau finden Sie Bäckereien, Restaurants und Geschäfte in unmittelbarer Nähe."
     },
     {
       "category": "booking",

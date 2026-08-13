@@ -101,7 +101,7 @@
     "eyebrow": "Welcome to Welcome.",
     "titleLine1": "Just like home.",
     "titleLine2": "Only far more inspiring.",
-    "lead": "Discover the comfort and warmth of a welcoming interior, combined with the amenities and services of a truly premium professional environment.",
+    "lead": "Discover the comfort and warmth of a welcoming interior, combined with the amenities and services of a truly premium professional environment in <strong>Strasbourg</strong>.",
     "ctaVisit": "Book a visit",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Discover Welcome",
@@ -119,12 +119,12 @@
       {
         "icon": "profiles",
         "title": "All profiles",
-        "text": "For nomads and residents, under contract"
+        "text": "For nomads and residents, exclusively under contract"
       },
       {
         "icon": "workspace",
-        "title": "Work solutions",
-        "text": "Meeting room, private offices or open space"
+        "title": "One need, one solution",
+        "text": "Meeting room, private offices or open space, full-time or part-time"
       },
       { "icon": "history", "title": "Since 2017", "text": "More than 100 companies welcomed" }
     ]
@@ -137,9 +137,9 @@
     "lead": "Welcome! was born from a simple belief: our workplace should not be somewhere we endure every morning.",
     "lead2": "We wanted to create a place where people feel good. Really good. A place people come to work, but also stay for the atmosphere, the connections and all those little things that can transform a day.",
     "benefits": [
-      { "title": "Focus", "text": "Spaces suited to every way of working." },
+      { "title": "Focus", "text": "Quiet spaces suited to every way of working." },
       { "title": "Breathe", "text": "A warm atmosphere, full of plants and daylight." },
-      { "title": "Share", "text": "A human-sized place, made for meeting people." }
+      { "title": "Share", "text": "A human-sized place where everyone knows one another." }
     ],
     "cta": "Explore the spaces",
     "imageAlt": "Bright coworking space with wood, plants and black steel glazing"
@@ -155,7 +155,7 @@
     "cards": {
       "openSpace": {
         "title": "Open space",
-        "text": "Work in a bright and quiet environment.",
+        "text": "Enjoy a comfortable, affordable workstation.",
         "alt": "Bright open space with wooden desks, black steel glazing and hanging plants"
       },
       "privateOffices": {
@@ -169,9 +169,9 @@
         "alt": "Premium meeting room with a large wooden table, black chairs and a screen"
       },
       "kitchenLounge": {
-        "title": "Kitchen & lounge",
+        "title": "Lounge area",
         "text": "Take a break just like at home.",
-        "alt": "Kitchen and lounge area with light sofas, a wooden bar and green plants"
+        "alt": "Kitchen and lounge area with a fully equipped kitchen, wooden bar and greenery"
       }
     }
   },
@@ -186,18 +186,21 @@
     "imageAlt": "Bright Welcome Coworking open space with wooden tables, black-framed windows and hanging plants",
     "detailsEyebrow": "Every day",
     "detailsTitle": "Everything you need to work well.",
-    "detailsText": "Choose your seat, plug in and start your day. The open space offers a professional, human-scale setting with all the essential services close at hand.",
+    "detailsText": "The open space gives you a professional setting at a lower cost. Return to your own dedicated, intimate workspace whenever you like.",
     "features": [
       {
-        "title": "Flexible access",
-        "text": "A workspace available according to your schedule and plan."
+        "title": "Furniture",
+        "text": "A warm, plant-filled wood-and-metal desk with a shelf and either a drawer unit or cupboard."
       },
-      { "title": "Fibre internet", "text": "A fast, stable connection for stress-free work." },
+      { "title": "Internet", "text": "Professional, secure fibre connection via Wi-Fi or RJ45." },
       {
-        "title": "Coffee included",
-        "text": "Everything you need for a proper break, just like home."
+        "title": "Comfort",
+        "text": "An adjustable ergonomic chair designed to support the natural curve of your back."
       },
-      { "title": "Printing", "text": "Useful office equipment is available directly on site." }
+      {
+        "title": "Services",
+        "text": "Meeting room, kitchen, coffee machine, printer, scanner, binding machine and more."
+      }
     ],
     "ctaTitle": "Ready to discover your future workspace?",
     "ctaText": "Come and experience the Welcome atmosphere and find the plan that suits you."
@@ -207,17 +210,26 @@
     "eyebrow": "Private offices",
     "titleLead": "An office of your own,",
     "titleHighlight": "without the hassle.",
-    "lead": "Enjoy a quiet, comfortable enclosed space where your team can work, welcome clients and keep conversations confidential.",
+    "lead": "Enjoy a quiet, comfortable enclosed space where you can work efficiently and preserve your privacy.",
     "visit": "Book a visit",
     "imageAlt": "Welcome private office with glass partition, wooden desk and warm lighting",
     "detailsEyebrow": "Your space",
-    "detailsTitle": "The privacy of an office, the energy of Welcome.",
-    "detailsText": "Settle your team into a ready-to-use office and enjoy all the coworking spaces and services.",
+    "detailsTitle": "The peace and quiet of an enclosed office",
+    "detailsText": "Our enclosed offices provide the best possible comfort, with direct natural light.",
     "features": [
-      { "title": "Privacy", "text": "An enclosed space for focused work." },
-      { "title": "Fibre internet", "text": "A fast, stable connection for your team." },
-      { "title": "Comfortable furniture", "text": "A fitted office ready when you arrive." },
-      { "title": "Secure access", "text": "A controlled professional environment." }
+      {
+        "title": "Furniture",
+        "text": "A decorated, plant-filled wood-and-metal desk with a shelf and drawer unit."
+      },
+      { "title": "Internet", "text": "Professional, secure fibre connection via Wi-Fi." },
+      {
+        "title": "Comfort",
+        "text": "Ergonomic chair, window, individual air conditioning and lighting."
+      },
+      {
+        "title": "Services",
+        "text": "Meeting room, kitchen, coffee machine, printer, scanner, binding machine and more."
+      }
     ],
     "ctaTitle": "Your next office could be here.",
     "ctaText": "Come and picture your team at Welcome."
@@ -233,15 +245,18 @@
     "imageAlt": "Welcome meeting room with large wooden table, black chairs and display",
     "detailsEyebrow": "Your meetings",
     "detailsTitle": "Everything is ready when you are.",
-    "detailsText": "Team meeting, client presentation or video call: settle into a quiet, professional setting.",
+    "detailsText": "Team meeting, client presentation or video call: settle into a quiet, professional air-conditioned glass-partitioned room.",
     "features": [
-      { "title": "Up to 12 people", "text": "Ideal for meetings and small workshops." },
-      { "title": "Display", "text": "Present your content comfortably." },
-      { "title": "Video conferencing", "text": "Keep remote participants fully involved." },
-      { "title": "Fibre internet", "text": "A reliable connection without interruptions." }
+      {
+        "title": "Up to 9 people",
+        "text": "Ideal for small-scale meetings and training sessions, as well as one-to-one interviews."
+      },
+      { "title": "Wall-mounted screen & flip chart", "text": "Present your content comfortably." },
+      { "title": "Services", "text": "Kitchen, hot and cold drinks, binding machine and more." },
+      { "title": "Internet", "text": "Professional, secure fibre connection via Wi-Fi or RJ45." }
     ],
     "ctaTitle": "Planning a meeting in Strasbourg?",
-    "ctaText": "Discover the room and tell us about your next event."
+    "ctaText": "Let's discuss your project together."
   },
   "kitchenLoungePage": {
     "back": "Back to the spaces",
@@ -253,14 +268,17 @@
     "imageAlt": "Welcome kitchen and lounge with light sofas, wooden counter and green plants",
     "detailsEyebrow": "Between projects",
     "detailsTitle": "A space to connect and recharge.",
-    "detailsText": "The kitchen and lounge extend the Welcome experience in a simple, friendly atmosphere.",
+    "detailsText": "The kitchen and bar extend the Welcome! experience in a simple, friendly atmosphere.",
     "features": [
       { "title": "Coffee available", "text": "An enjoyable break at any time of day." },
-      { "title": "Lounge area", "text": "Comfortable seating for a change of scene." },
-      { "title": "Kitchen space", "text": "A practical place to enjoy lunch." },
+      { "title": "Lounge bar", "text": "Settle in at the bar to work or relax." },
+      {
+        "title": "Kitchen space",
+        "text": "A practical place to have lunch on site, with a microwave, refrigerator, oven and more."
+      },
       { "title": "Shared moments", "text": "A natural setting for connecting with members." }
     ],
-    "ctaTitle": "Come and experience Welcome.",
+    "ctaTitle": "Come and experience Welcome!",
     "ctaText": "A visit is the best way to discover every space."
   },
   "comparisonPage": {
@@ -424,30 +442,44 @@
   "pricing": {
     "eyebrow": "Our solutions",
     "title": "Choose your own pace.",
-    "lead": "Whether you drop in occasionally or stay all year round, we have designed straightforward solutions in intimate spaces from €20 excl. VAT / month. All our plans are <strong>commitment-free</strong>.",
+    "lead": "Whether you visit occasionally or stay all year, we offer straightforward solutions from €45 excl. VAT per month. All our plans are <strong>commitment-free</strong>.",
     "compare": "Compare",
     "learnMore": "Discover",
-    "commitmentNote": "* : with a partial commitment",
+    "commitmentNote": "*: subject to conditions",
     "plans": {
       "nomad": {
         "name": "Nomad",
-        "availability": "5 spaces available",
-        "features": ["No minimum", "Fibre internet", "Self-service access", "Book by the hour"]
+        "availability": "8 spaces remaining",
+        "features": ["Flex or Resident", "All spaces bookable", "€45 or €90 excl. VAT / month"]
       },
       "openSpace": {
         "name": "Open space",
-        "availability": "5 spaces available",
-        "features": ["Flexible access", "Fibre internet", "Coffee", "Printing"]
+        "availability": "2 spaces remaining",
+        "features": [
+          "Resident",
+          "Full-time/part-time",
+          "Dedicated desk",
+          "Meeting credit included",
+          "ChatGPT Business*",
+          "€190 to €300 excl. VAT / month"
+        ]
       },
       "privateOffice": {
         "name": "Private office",
-        "availability": "5 spaces available",
-        "features": ["Enclosed office", "Secure access", "Premium furniture", "Fibre internet"]
+        "availability": "5 spaces remaining",
+        "features": [
+          "Resident",
+          "Full-time/part-time",
+          "Dedicated desk",
+          "Meeting credit included",
+          "ChatGPT Business*",
+          "€425 to €700 excl. VAT / month"
+        ]
       },
       "meetingRoom": {
         "name": "Meeting room",
-        "availability": "5 spaces available",
-        "features": ["Screen", "Video conferencing", "Up to 12 people", "Simple booking"]
+        "availability": "subject to availability",
+        "features": ["Wall-mounted screen", "HDMI and Chromecast", "Up to 9 people", "On request"]
       }
     }
   },
@@ -486,15 +518,15 @@
     "cards": [
       {
         "title": "Tram at the door",
-        "text": "The Couffignal stop drops you a few metres from the entrance."
+        "text": "The Couffignal stop (lines A and E) is 150 metres from your office."
       },
       {
-        "title": "Cycle highway",
-        "text": "Reach central Strasbourg or Illkirch quickly via the express cycle path."
+        "title": "Fast two-way cycle path",
+        "text": "Reach central Strasbourg or Illkirch quickly via the Colmarienne cycle route."
       },
-      { "title": "Immediate access", "text": "Motorway minutes away and free parking." },
+      { "title": "Quick motorway access", "text": "Motorway minutes away and free parking." },
       {
-        "title": "A lively neighbourhood",
+        "title": "A prestigious address",
         "text": "Right next to the Meinau stadium, shops, restaurants and services."
       }
     ],
@@ -508,7 +540,7 @@
         "tram": { "label": "Couffignal tram", "sub": "Right at the door" }
       }
     },
-    "transitLine": "Tram A and E (Couffignal stop) | Strasbourg station 15 min | Strasbourg airport 20 min",
+    "transitLine": "Tram A and E (Couffignal stop) | Strasbourg station and airport 15 min",
     "mapTitle": "Location map for Welcome Coworking, 204 avenue de Colmar, Strasbourg",
     "ctaVisit": "Book a visit",
     "ctaRoute": "Get directions"
@@ -518,7 +550,7 @@
     "eyebrow": "Contact",
     "titleLead": "What if your next working day started",
     "titleHighlight": "right here",
-    "lead": "Would you like to visit Welcome, book a space or simply see the place for yourself? We would be delighted to have you.",
+    "lead": "Would you like to discuss moving in, visit the space or simply book our meeting room? Contact us today:",
     "photoAlt": "Welcome coworking space",
     "whatsapp": {
       "title": "Ask a question",
@@ -533,7 +565,7 @@
       "phone": "+33 6 22 80 55 36",
       "emailLabel": "Email address",
       "hoursLabel": "Opening hours",
-      "hours": "Members: 24/7 / Visits: <strong>by appointment</strong>"
+      "hours": "Members: 24/7 | Visits: <strong>by appointment</strong>"
     },
     "form": {
       "title": "Book a visit",
