@@ -2,7 +2,12 @@ import "server-only";
 
 import { google, type calendar_v3 } from "googleapis";
 
-import type { DisplayEvent, DisplayEventsResponse } from "@/features/display/types";
+import type {
+  DisplayEvent,
+  DisplayEventsResponse,
+  ResourceReservation,
+} from "@/features/display/types";
+import { matchDisplayResource } from "@/lib/display-resources";
 
 const CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
 const DISPLAY_TIME_ZONE = "Europe/Paris";
@@ -89,6 +94,25 @@ function toDisplayEvent(event: calendar_v3.Schema$Event): DisplayEvent | null {
   };
 }
 
+function toResourceReservation(event: calendar_v3.Schema$Event): ResourceReservation | null {
+  if (event.status === "cancelled" || !event.id || !event.summary || !event.start) return null;
+  const mapping = matchDisplayResource(event.summary);
+  if (!mapping) return null;
+
+  const allDay = Boolean(event.start.date);
+  if (!allDay && (!event.start.dateTime || !event.end?.dateTime)) return null;
+
+  return {
+    id: event.id,
+    resource: mapping.resource,
+    resourceName: mapping.resourceName,
+    reservationTitle: mapping.reservationTitle,
+    start: allDay ? "00:00" : formatTime(event.start.dateTime!),
+    end: allDay ? "24:00" : formatTime(event.end!.dateTime!),
+    allDay,
+  };
+}
+
 function credentials() {
   const calendarId = process.env.GOOGLE_CALENDAR_ID;
   const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -118,14 +142,20 @@ async function requestGoogleEvents(date: string): Promise<DisplayEventsResponse>
     maxResults: 50,
     fields: "items(id,summary,status,start(date,dateTime),end(date,dateTime))",
   });
-  const events = (response.data.items ?? [])
+  const items = response.data.items ?? [];
+  const reservations = items
+    .map(toResourceReservation)
+    .filter((reservation): reservation is ResourceReservation => reservation !== null)
+    .sort((left, right) => left.start.localeCompare(right.start));
+  const events = items
+    .filter((event) => !event.summary || !matchDisplayResource(event.summary))
     .map(toDisplayEvent)
     .filter((event): event is DisplayEvent => event !== null)
     .sort(
       (left, right) =>
         Number(right.allDay) - Number(left.allDay) || left.start.localeCompare(right.start),
     );
-  return { date, events };
+  return { date, events, reservations };
 }
 
 export async function getDisplayEvents(): Promise<DisplayEventsResponse> {
@@ -146,5 +176,5 @@ export async function getDisplayEvents(): Promise<DisplayEventsResponse> {
 }
 
 export function emptyDisplayEvents(): DisplayEventsResponse {
-  return { date: parisDate(), events: [] };
+  return { date: parisDate(), events: [], reservations: [] };
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import {
   BadgeCheck,
+  Building2,
   CalendarDays,
   Coffee,
   DoorOpen,
@@ -20,6 +21,7 @@ import heroImage from "@/assets/hero-welcome-real.png";
 import logo from "@/assets/welcome-logo-cropped.png";
 
 import { DISPLAY_ANNOUNCEMENT, DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
+import { getParisMinutes, getReservationState, timeToMinutes } from "./availability";
 import styles from "./display.module.css";
 import type { DisplayEventsResponse, DisplaySlideId } from "./types";
 
@@ -98,6 +100,14 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
     day: "numeric",
     month: "long",
   });
+  const meetingReservations = eventsData.reservations.filter(
+    ({ resource }) => resource === "meeting-room",
+  );
+  const nowMinutes = now ? getParisMinutes(now) : 0;
+  const roomState = getReservationState(meetingReservations, nowMinutes);
+  const remainingReservations = roomState.ordered.filter(
+    (reservation) => reservation.allDay || timeToMinutes(reservation.end) > nowMinutes,
+  );
 
   const content: Record<DisplaySlideId, React.ReactNode> = {
     welcome: (
@@ -128,6 +138,80 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
               <span>{event.title}</span>
             </div>
           ))}
+        </div>
+      </div>
+    ),
+    availability: (
+      <div className={styles.availabilitySlide}>
+        <header className={styles.availabilityHeader}>
+          <Building2 />
+          <div>
+            <p className={styles.eyebrow}>Disponibilité des espaces</p>
+            <h2>Salle de réunion</h2>
+          </div>
+        </header>
+
+        <div className={styles.availabilityBody}>
+          <div className={styles.roomStatusCard}>
+            <div
+              className={`${styles.statusPill} ${roomState.current ? styles.statusBusy : styles.statusAvailable}`}
+            >
+              <span />
+              {roomState.current
+                ? "Réservée"
+                : meetingReservations.length === 0
+                  ? "Disponible aujourd’hui"
+                  : "Disponible actuellement"}
+            </div>
+
+            {roomState.current ? (
+              <div className={styles.currentReservation}>
+                <p>{roomState.current.reservationTitle}</p>
+                <strong>
+                  {roomState.current.allDay
+                    ? "Toute la journée"
+                    : `${roomState.current.start} — ${roomState.current.end}`}
+                </strong>
+                <small>
+                  {roomState.current.allDay
+                    ? "Réservée pour la journée"
+                    : `Disponible à partir de ${roomState.availableAt}`}
+                </small>
+              </div>
+            ) : roomState.next ? (
+              <div className={styles.nextReservation}>
+                <small>Prochaine réservation</small>
+                <p>{roomState.next.reservationTitle}</p>
+                <strong>
+                  {roomState.next.start} — {roomState.next.end}
+                </strong>
+              </div>
+            ) : null}
+          </div>
+
+          {remainingReservations.length > 0 && (
+            <div className={styles.daySchedule}>
+              <p className={styles.scheduleTitle}>Réservations restantes aujourd’hui</p>
+              <div className={styles.scheduleList}>
+                {remainingReservations.map((reservation) => {
+                  const isCurrent = roomState.current?.id === reservation.id;
+                  return (
+                    <div
+                      className={`${styles.scheduleItem} ${isCurrent ? styles.scheduleCurrent : ""}`}
+                      key={reservation.id}
+                    >
+                      <time>
+                        {reservation.allDay
+                          ? "Toute la journée"
+                          : `${reservation.start} — ${reservation.end}`}
+                      </time>
+                      <strong>{reservation.reservationTitle}</strong>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     ),

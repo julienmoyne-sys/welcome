@@ -163,6 +163,157 @@
   color: #d4bf63;
   stroke-width: 1.4;
 }
+.availabilitySlide {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.availabilityHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.availabilityHeader > svg {
+  width: clamp(2.5rem, 3vw, 4rem);
+  height: auto;
+  color: #d4bf63;
+  stroke-width: 1.2;
+}
+.availabilityHeader h2 {
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2.8rem, 4.5vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+.availabilityBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(24rem, 0.95fr);
+  flex: 1;
+  gap: clamp(3rem, 6vw, 8rem);
+  align-items: center;
+  min-height: 0;
+  padding-top: clamp(2rem, 4vh, 4rem);
+}
+.roomStatusCard {
+  padding: clamp(2.5rem, 4vw, 5rem);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.2);
+}
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2.4rem, 4.5vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.statusPill > span {
+  width: clamp(1rem, 1.35vw, 1.6rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 0 0 2rem currentColor;
+}
+.statusAvailable {
+  color: #8fc69a;
+  font-size: clamp(2rem, 3.3vw, 4rem);
+}
+.statusAvailable > span {
+  background: #8fc69a;
+}
+.statusBusy {
+  color: #e58c82;
+}
+.statusBusy > span {
+  background: #e58c82;
+}
+.currentReservation,
+.nextReservation {
+  display: flex;
+  flex-direction: column;
+  margin-top: clamp(2.5rem, 5vh, 5rem);
+}
+.currentReservation p,
+.nextReservation p {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.7rem, 2.6vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.currentReservation strong,
+.nextReservation strong {
+  margin-top: 1rem;
+  color: #d4bf63;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.5rem, 2.15vw, 2.6rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.currentReservation small,
+.nextReservation small {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: clamp(0.8rem, 1vw, 1.1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.currentReservation small {
+  margin-top: 1.5rem;
+}
+.nextReservation p {
+  margin-top: 0.8rem;
+}
+.daySchedule {
+  min-height: 0;
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+.scheduleTitle {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.scheduleList {
+  display: flex;
+  flex-direction: column;
+}
+.scheduleItem {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.65fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: clamp(1rem, 1.8vh, 1.6rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  transition: opacity 0.5s ease;
+}
+.scheduleItem time {
+  color: #d4bf63;
+  font-size: clamp(1rem, 1.25vw, 1.4rem);
+  font-variant-numeric: tabular-nums;
+}
+.scheduleItem strong {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.55rem);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scheduleCurrent {
+  margin: 0 -1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-radius: 0.75rem;
+  background: rgba(229, 140, 130, 0.08);
+}
 .practicalSlide {
   display: grid;
   grid-template-columns: 1.3fr 0.65fr;
@@ -316,6 +467,18 @@
   }
   .serviceGrid {
     grid-template-columns: 1fr 1fr;
+  }
+  .availabilityBody {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .roomStatusCard {
+    padding: 2.5rem;
+  }
+  .daySchedule {
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
