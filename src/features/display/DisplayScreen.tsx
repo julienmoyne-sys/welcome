@@ -1,30 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { Building2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-
-import logo from "@/assets/welcome-logo.png";
 
 import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
 import { getReservationState } from "./availability";
 import styles from "./display.module.css";
 import type { DisplayEventsResponse, DisplaySlideId } from "./types";
-
-function Brand() {
-  return (
-    <span className={styles.lineLogoPanel}>
-      <Image
-        src={logo}
-        alt="Welcome! Coworking"
-        fill
-        sizes="240px"
-        className={styles.lineLogoImage}
-        priority
-      />
-    </span>
-  );
-}
 
 export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsResponse }) {
   const [now, setNow] = useState<Date | null>(null);
@@ -86,7 +68,6 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
     welcome: (
       <div className={styles.welcomeSlide}>
         <div className={styles.welcomeCopy}>
-          <Brand />
           <p className={styles.eyebrow}>Coworking · Strasbourg</p>
           <h1>Bienvenue chez Welcome!</h1>
           <p className={styles.lead}>Le prolongement de votre chez vous.</p>

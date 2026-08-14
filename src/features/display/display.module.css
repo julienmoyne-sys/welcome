@@ -51,25 +51,6 @@
   font-size: clamp(1.25rem, 2vw, 2.35rem);
   line-height: 1.45;
 }
-.lineLogoPanel {
-  position: relative;
-  display: block;
-  width: clamp(30rem, 42vw, 50rem);
-  aspect-ratio: 5 / 1;
-  overflow: hidden;
-  border: 1px solid rgba(198, 178, 74, 0.2);
-  border-radius: clamp(1rem, 1.4vw, 1.6rem);
-  background: #2b2b29;
-  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.3);
-}
-.lineLogoImage {
-  width: calc(100% - 1.2rem) !important;
-  height: calc(100% - 1.2rem) !important;
-  inset: 0.6rem !important;
-  border-radius: clamp(0.6rem, 0.8vw, 0.9rem);
-  object-fit: cover;
-  object-position: center;
-}
 .welcomeSlide {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -86,11 +67,6 @@
 .welcomeCopy h1 {
   max-width: 65rem;
   font-size: clamp(4rem, 7.2vw, 9rem);
-}
-.welcomeCopy .lineLogoPanel {
-  position: absolute;
-  top: clamp(3rem, 5vw, 7rem);
-  left: clamp(3rem, 5vw, 7rem);
 }
 .clock {
   display: flex;
