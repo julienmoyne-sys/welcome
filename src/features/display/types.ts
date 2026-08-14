@@ -22,8 +22,7 @@ export type DisplayEventsResponse = {
   reservations: ResourceReservation[];
 };
 
-export type DisplaySlideId =
-  "welcome" | "today" | "availability" | "services" | "practical" | "announcement" | "branding";
+export type DisplaySlideId = "welcome" | "availability";
 
 export type DisplaySlideConfig = {
   id: DisplaySlideId;

@@ -9,17 +9,5 @@ export const DISPLAY_REFRESH_MS = 5 * 60 * 1_000;
  */
 export const DISPLAY_SLIDES: DisplaySlideConfig[] = [
   { id: "welcome", enabled: true, durationMs: 10_000 },
-  { id: "today", enabled: true, durationMs: 10_000 },
   { id: "availability", enabled: true, durationMs: 12_000 },
-  { id: "services", enabled: true, durationMs: 10_000 },
-  { id: "practical", enabled: true, durationMs: 10_000 },
-  { id: "announcement", enabled: true, durationMs: 10_000 },
-  { id: "branding", enabled: true, durationMs: 10_000 },
 ];
-
-export const DISPLAY_ANNOUNCEMENT = {
-  eyebrow: "La vie chez Welcome!",
-  title: "Un espace qui s’adapte à votre journée.",
-  body: "Réunion, concentration ou échange informel : choisissez l’ambiance qui vous ressemble.",
-  label: "Annonce Welcome!",
-};

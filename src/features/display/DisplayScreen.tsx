@@ -1,47 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import {
-  BadgeCheck,
-  Building2,
-  CalendarDays,
-  Coffee,
-  DoorOpen,
-  Gift,
-  Info,
-  MessageSquareText,
-  Printer,
-  QrCode,
-  Sparkles,
-  Wifi,
-} from "lucide-react";
+import { Building2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-import heroImage from "@/assets/hero-welcome-real.png";
 import logo from "@/assets/welcome-coworking-capsule-noire.png";
 
-import { DISPLAY_ANNOUNCEMENT, DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
+import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
 import { getParisMinutes, getReservationState, timeToMinutes } from "./availability";
 import styles from "./display.module.css";
 import type { DisplayEventsResponse, DisplaySlideId } from "./types";
 
-const services = [
-  { icon: Wifi, label: "Wi-Fi haut débit" },
-  { icon: Coffee, label: "Café & thé" },
-  { icon: DoorOpen, label: "Espaces de réunion" },
-  { icon: Printer, label: "Impressions" },
-  { icon: BadgeCheck, label: "Services professionnels" },
-  { icon: Gift, label: "Avantages membres" },
-];
-
-function Brand({ compact = false }: { compact?: boolean }) {
+function Brand() {
   return (
-    <span className={`${styles.capsuleLogo} ${compact ? styles.capsuleLogoCompact : ""}`}>
+    <span className={styles.capsuleLogo}>
       <Image
         src={logo}
         alt="Welcome! Coworking"
         fill
-        sizes={compact ? "140px" : "240px"}
+        sizes="240px"
         className={styles.capsuleLogoImage}
         priority
       />
@@ -54,13 +31,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
   const [eventsData, setEventsData] = useState(initialEvents);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const slides = useMemo(
-    () =>
-      DISPLAY_SLIDES.filter(
-        (slide) => slide.enabled && (slide.id !== "today" || eventsData.events.length > 0),
-      ),
-    [eventsData.events.length],
-  );
+  const slides = useMemo(() => DISPLAY_SLIDES.filter((slide) => slide.enabled), []);
 
   useEffect(() => {
     const initialClock = window.setTimeout(() => setNow(new Date()), 0);
@@ -124,23 +95,6 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
         <div className={styles.clock} aria-label={`${time}, ${date ?? ""}`}>
           <span>{time}</span>
           <small>{date}</small>
-        </div>
-      </div>
-    ),
-    today: (
-      <div className={styles.contentSlide}>
-        <header>
-          <CalendarDays />
-          <p className={styles.eyebrow}>Le programme</p>
-          <h2>Aujourd’hui chez Welcome!</h2>
-        </header>
-        <div className={styles.events}>
-          {eventsData.events.map((event) => (
-            <div className={styles.event} key={event.id}>
-              <time>{event.start}</time>
-              <span>{event.title}</span>
-            </div>
-          ))}
         </div>
       </div>
     ),
@@ -216,82 +170,6 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
             </div>
           )}
         </div>
-      </div>
-    ),
-    services: (
-      <div className={styles.contentSlide}>
-        <header>
-          <Sparkles />
-          <p className={styles.eyebrow}>À votre disposition</p>
-          <h2>Les services Welcome!</h2>
-        </header>
-        <div className={styles.serviceGrid}>
-          {services.map(({ icon: Icon, label }) => (
-            <div className={styles.service} key={label}>
-              <Icon />
-              <span>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-    practical: (
-      <div className={styles.practicalSlide}>
-        <div>
-          <Info />
-          <p className={styles.eyebrow}>Informations pratiques</p>
-          <h2>
-            Tout ce qu’il vous faut,
-            <br />
-            au bon endroit.
-          </h2>
-          <p className={styles.lead}>
-            Horaires, consignes et actualités pourront être partagés ici.
-          </p>
-        </div>
-        <div className={styles.qrPlaceholder}>
-          <QrCode />
-          <strong>Informations membres</strong>
-          <span>QR code à configurer</span>
-        </div>
-        <div className={styles.wifiCard}>
-          <Wifi />
-          <div>
-            <small>Réseau Wi-Fi</small>
-            <strong>Demandez vos accès à l’équipe</strong>
-          </div>
-        </div>
-      </div>
-    ),
-    announcement: (
-      <div className={styles.announcementSlide}>
-        <MessageSquareText />
-        <p className={styles.eyebrow}>{DISPLAY_ANNOUNCEMENT.eyebrow}</p>
-        <h2>{DISPLAY_ANNOUNCEMENT.title}</h2>
-        <p className={styles.lead}>{DISPLAY_ANNOUNCEMENT.body}</p>
-        <span className={styles.announcementLabel}>{DISPLAY_ANNOUNCEMENT.label}</span>
-      </div>
-    ),
-    branding: (
-      <div className={styles.brandingSlide}>
-        <Image
-          src={heroImage}
-          alt="Espace Welcome! Coworking à Strasbourg"
-          fill
-          sizes="100vw"
-          quality={60}
-          priority
-          className={styles.brandingImage}
-        />
-        <div className={styles.brandingShade} />
-        <Brand compact />
-        <h2>
-          Travaillez.
-          <br />
-          Échangez.
-          <br />
-          <em>Développez.</em>
-        </h2>
       </div>
     ),
   };
