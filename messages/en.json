@@ -326,8 +326,8 @@
           {
             "label": "24/7 site access",
             "cells": [
-              { "type": "text", "label": "9 am – 6 pm" },
-              { "type": "text", "label": "9 am – 6 pm" },
+              { "type": "text", "label": "Mon–Fri, 9 am–6 pm" },
+              { "type": "text", "label": "Mon–Fri, 9 am–6 pm" },
               { "type": "included" },
               { "type": "included" }
             ]

@@ -342,8 +342,8 @@
           {
             "label": "Accès au site 24/24",
             "cells": [
-              { "type": "text", "label": "9 h – 18 h" },
-              { "type": "text", "label": "9 h – 18 h" },
+              { "type": "text", "label": "lun. à ven. 9 h – 18 h" },
+              { "type": "text", "label": "lun. à ven. 9 h – 18 h" },
               { "type": "included" },
               { "type": "included" }
             ]

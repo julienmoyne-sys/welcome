@@ -338,8 +338,8 @@
           {
             "label": "Zugang rund um die Uhr",
             "cells": [
-              { "type": "text", "label": "9–18 Uhr" },
-              { "type": "text", "label": "9–18 Uhr" },
+              { "type": "text", "label": "Mo.–Fr., 9–18 Uhr" },
+              { "type": "text", "label": "Mo.–Fr., 9–18 Uhr" },
               { "type": "included" },
               { "type": "included" }
             ]
