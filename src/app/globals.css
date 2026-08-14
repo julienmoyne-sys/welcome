@@ -448,7 +448,7 @@ html {
     top: 95px !important;
     left: 50% !important;
     width: 716.8px !important;
-    height: 880px !important;
+    height: 970px !important;
     margin: 0 !important;
     overflow: hidden !important;
     color-scheme: light;
@@ -465,8 +465,8 @@ html {
     --comparison-criteria-header-bg: #edf0ed;
     --comparison-criteria-hover-bg: #e8ece8;
     --comparison-criteria-highlight-bg: #f7f3df;
-    --comparison-cse-bg: #f1e7aa;
-    --comparison-cse-hover-bg: #eadc8f;
+    --comparison-cse-bg: var(--comparison-criteria-bg);
+    --comparison-cse-hover-bg: var(--comparison-criteria-bg);
     transform: translateX(-50%);
     transform-origin: top center;
     print-color-adjust: exact;
@@ -508,11 +508,11 @@ html {
   }
 
   .comparison-print-root .min-h-\[210px\] {
-    min-height: 150px !important;
+    min-height: 145px !important;
   }
 
   .comparison-print-root .min-h-\[76px\] {
-    min-height: 58px !important;
+    min-height: 54px !important;
   }
 
   .comparison-print-root .py-4 {
@@ -521,7 +521,25 @@ html {
   }
 
   .comparison-print-legend {
-    margin-top: 14px !important;
+    margin-top: 10px !important;
+  }
+
+  .comparison-contact-cta {
+    break-inside: avoid !important;
+    margin-top: 10px !important;
+    padding: 10px 24px !important;
+    border: 0 !important;
+    background-color: #f7f3df !important;
+  }
+
+  .comparison-contact-cta h2 {
+    font-size: 20px !important;
+  }
+
+  .comparison-contact-cta a {
+    margin-top: 6px !important;
+    padding: 7px 18px !important;
+    font-size: 14px !important;
   }
 
   .comparison-print-root .dark\:bg-\[\#211f18\] {
