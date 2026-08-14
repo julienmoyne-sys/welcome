@@ -238,6 +238,10 @@
   border-radius: 0.75rem;
   background: rgba(229, 140, 130, 0.08);
 }
+.schedulePast {
+  opacity: 0.38;
+  filter: grayscale(1);
+}
 .progress {
   position: absolute;
   right: clamp(3rem, 5vw, 7rem);

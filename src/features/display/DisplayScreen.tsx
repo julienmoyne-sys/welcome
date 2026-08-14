@@ -3,7 +3,7 @@
 import { Building2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
+import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES, DISPLAY_STATE_TICK_MS } from "./config";
 import { getReservationState } from "./availability";
 import styles from "./display.module.css";
 import type { DisplayEventsResponse, DisplaySlideId } from "./types";
@@ -17,7 +17,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
 
   useEffect(() => {
     const initialClock = window.setTimeout(() => setNow(new Date()), 0);
-    const clock = window.setInterval(() => setNow(new Date()), 1_000);
+    const clock = window.setInterval(() => setNow(new Date()), DISPLAY_STATE_TICK_MS);
     return () => {
       window.clearTimeout(initialClock);
       window.clearInterval(clock);
@@ -25,17 +25,40 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
   }, []);
 
   useEffect(() => {
+    let activeController: AbortController | null = null;
+
     const refresh = async () => {
+      activeController?.abort();
+      const controller = new AbortController();
+      activeController = controller;
+
       try {
-        const response = await fetch("/api/display/events", { cache: "no-store" });
-        if (response.ok) setEventsData((await response.json()) as DisplayEventsResponse);
-      } catch {
-        // Une coupure réseau ne doit jamais interrompre l'affichage : on garde le dernier état connu.
+        const response = await fetch("/api/display/events", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const nextEvents = (await response.json()) as DisplayEventsResponse;
+        if (!Array.isArray(nextEvents.events) || !Array.isArray(nextEvents.reservations)) {
+          throw new Error("Invalid display events response");
+        }
+
+        // Remplacement atomique : les modifications et suppressions Google remplacent l'ancien état.
+        setEventsData(nextEvents);
+      } catch (error) {
+        if (controller.signal.aborted) return;
+        console.warn("Échec temporaire de la synchronisation Google Calendar", {
+          errorType: error instanceof Error ? error.name : "UnknownError",
+        });
       }
     };
     void refresh();
     const polling = window.setInterval(refresh, DISPLAY_REFRESH_MS);
-    return () => window.clearInterval(polling);
+    return () => {
+      window.clearInterval(polling);
+      activeController?.abort();
+    };
   }, []);
 
   useEffect(() => {
@@ -60,9 +83,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
     ({ resource }) => resource === "meeting-room",
   );
   const roomState = getReservationState(meetingReservations, now ?? new Date(0));
-  const remainingReservations = roomState.ordered.filter(
-    (reservation) => new Date(reservation.endAt).getTime() > (now?.getTime() ?? 0),
-  );
+  const dayReservations = roomState.ordered;
 
   const content: Record<DisplaySlideId, React.ReactNode> = {
     welcome: (
@@ -126,15 +147,16 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
             ) : null}
           </div>
 
-          {remainingReservations.length > 0 && (
+          {dayReservations.length > 0 && (
             <div className={styles.daySchedule}>
-              <p className={styles.scheduleTitle}>Réservations restantes aujourd’hui</p>
+              <p className={styles.scheduleTitle}>Réservations du jour</p>
               <div className={styles.scheduleList}>
-                {remainingReservations.map((reservation) => {
+                {dayReservations.map((reservation) => {
                   const isCurrent = roomState.current?.id === reservation.id;
+                  const isPast = new Date(reservation.endAt).getTime() <= (now?.getTime() ?? 0);
                   return (
                     <div
-                      className={`${styles.scheduleItem} ${isCurrent ? styles.scheduleCurrent : ""}`}
+                      className={`${styles.scheduleItem} ${isCurrent ? styles.scheduleCurrent : ""} ${isPast ? styles.schedulePast : ""}`}
                       key={reservation.id}
                     >
                       <time>

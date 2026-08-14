@@ -11,10 +11,6 @@ import { matchDisplayResource } from "@/lib/display-resources";
 
 const CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
 const DISPLAY_TIME_ZONE = "Europe/Paris";
-const CACHE_TTL_MS = 5 * 60 * 1_000;
-
-type CalendarCache = { expiresAt: number; value: DisplayEventsResponse };
-let cache: CalendarCache | null = null;
 
 export class DisplayCalendarConfigurationError extends Error {
   constructor() {
@@ -162,17 +158,12 @@ async function requestGoogleEvents(date: string): Promise<DisplayEventsResponse>
 
 export async function getDisplayEvents(): Promise<DisplayEventsResponse> {
   const date = parisDate();
-  const now = Date.now();
-  if (cache?.value.date === date && cache.expiresAt > now) return cache.value;
   try {
-    const value = await requestGoogleEvents(date);
-    cache = { value, expiresAt: now + CACHE_TTL_MS };
-    return value;
+    return await requestGoogleEvents(date);
   } catch (error) {
     console.error("Unable to refresh public display events from Google Calendar", {
       errorType: error instanceof Error ? error.name : "UnknownError",
     });
-    if (cache?.value.date === date) return cache.value;
     throw error;
   }
 }

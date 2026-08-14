@@ -4,11 +4,18 @@ import { DisplayCalendarConfigurationError, getDisplayEvents } from "@/lib/googl
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+export const revalidate = 0;
+
+const NO_STORE_HEADERS = {
+  "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+  "CDN-Cache-Control": "no-store",
+  "Vercel-CDN-Cache-Control": "no-store",
+};
 
 export async function GET() {
   try {
     return NextResponse.json(await getDisplayEvents(), {
-      headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=60" },
+      headers: NO_STORE_HEADERS,
     });
   } catch (error) {
     const configurationError = error instanceof DisplayCalendarConfigurationError;
@@ -20,7 +27,7 @@ export async function GET() {
       },
       {
         status: configurationError ? 500 : 503,
-        headers: { "Cache-Control": "no-store" },
+        headers: NO_STORE_HEADERS,
       },
     );
   }
