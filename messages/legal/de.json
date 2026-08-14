@@ -28,8 +28,8 @@
       {
         "title": "Hosting der Website",
         "paragraphs": [
-          "Die Website wird von OVHcloud gehostet, einer vereinfachten Aktiengesellschaft mit einem einzigen Gesellschafter, eingetragen im Handelsregister Lille Métropole unter der Nummer 424 761 419 00045, mit Sitz in 2 rue Kellermann, 59100 Roubaix, Frankreich.",
-          "Kontakt Hoster: support@ovhcloud.com — Telefon: +33 9 72 10 10 07."
+          "Die Website wird von Vercel Inc. gehostet, einem im US-Bundesstaat Delaware unter der Nummer 5857312 eingetragenen Unternehmen mit der Anschrift 440 N Barranca Avenue #4133, Covina, CA 91723, Vereinigte Staaten.",
+          "Kontakt zum Hosting-Anbieter: https://vercel.com/help."
         ]
       },
       {
@@ -200,7 +200,7 @@
         "title": "Empfänger der Daten",
         "paragraphs": [
           "Nur die zur Bearbeitung Ihrer Anfrage befugten Verantwortlichen und Mitarbeitenden von Welcome Coworking haben Zugang zu Ihren Daten. Sie werden nicht verkauft, vermietet oder zu kommerziellen Zwecken an Dritte weitergegeben.",
-          "Das Hosting der Website erfolgt bei OVHcloud, das gegebenenfalls die technischen Daten der Nachrichten hostet. Dieser Auftragsverarbeiter handelt unter der Verantwortung von BUZZ CAPITAL und unter Einhaltung der Pflichten der DSGVO."
+          "Das Hosting der Website erfolgt bei Vercel Inc., das gegebenenfalls die technischen Daten der Nachrichten hostet. Dieser Auftragsverarbeiter handelt unter der Verantwortung von BUZZ CAPITAL und unter Einhaltung der Pflichten der DSGVO."
         ]
       },
       {
@@ -405,7 +405,9 @@
       },
       {
         "title": "Umgesetzte Maßnahmen",
-        "paragraphs": ["Die folgenden Vorkehrungen wurden bei der Gestaltung der Website getroffen:"],
+        "paragraphs": [
+          "Die folgenden Vorkehrungen wurden bei der Gestaltung der Website getroffen:"
+        ],
         "list": [
           "Semantische Struktur der Inhalte (hierarchische Überschriften, Navigationsbereiche, ein einziger Hauptinhalt pro Seite).",
           "Textalternativen für informationstragende Bilder und zugängliche Bezeichnungen für Schaltflächen mit reinen Symbolen.",

@@ -313,7 +313,7 @@
     "swipe": "Faites défiler pour comparer les offres",
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
-      { "kicker": "Nomade", "name": "Flex Plus", "price": "90 €" },
+      { "kicker": "Résident", "name": "Flex Plus", "price": "90 €" },
       { "kicker": "Résident", "name": "Open Space", "price": "190 à 300 €" },
       { "kicker": "Résident", "name": "Bureau privatif", "price": "425 à 700 €" }
     ],

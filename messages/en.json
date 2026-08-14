@@ -297,7 +297,7 @@
     "swipe": "Swipe to compare plans",
     "plans": [
       { "kicker": "Nomad", "name": "Flex", "price": "€45" },
-      { "kicker": "Nomad", "name": "Flex Plus", "price": "€90" },
+      { "kicker": "Resident", "name": "Flex Plus", "price": "€90" },
       { "kicker": "Resident", "name": "Open Space", "price": "€190 to €300" },
       { "kicker": "Resident", "name": "Private Office", "price": "€425 to €700" }
     ],

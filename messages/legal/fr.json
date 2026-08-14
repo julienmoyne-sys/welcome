@@ -28,8 +28,8 @@
       {
         "title": "Hébergement du site",
         "paragraphs": [
-          "Le site est hébergé par OVHcloud, société par actions simplifiée à associé unique, immatriculée au RCS de Lille Métropole sous le numéro 424 761 419 00045, dont le siège social est situé 2 rue Kellermann, 59100 Roubaix, France.",
-          "Contact hébergeur : support@ovhcloud.com — Téléphone : +33 9 72 10 10 07."
+          "Le site est hébergé par Vercel Inc., société immatriculée dans l'État du Delaware sous le numéro 5857312, dont l'adresse est située 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis.",
+          "Contact hébergeur : https://vercel.com/help."
         ]
       },
       {
@@ -200,7 +200,7 @@
         "title": "Destinataires des données",
         "paragraphs": [
           "Seuls les responsables et collaborateurs de Welcome Coworking habilités à traiter votre demande ont accès à vos données. Elles ne sont pas vendues, louées ni cédées à des tiers à des fins commerciales.",
-          "L'hébergement du site est assuré par OVHcloud, qui peut être amené à héberger les données techniques liées aux messages. Ce sous-traitant agit sous la responsabilité de BUZZ CAPITAL et dans le respect des obligations du RGPD."
+          "L'hébergement du site est assuré par Vercel Inc., qui peut être amenée à héberger les données techniques liées aux messages. Ce sous-traitant agit sous la responsabilité de BUZZ CAPITAL et dans le respect des obligations du RGPD."
         ]
       },
       {
