@@ -4,22 +4,22 @@ import Image from "next/image";
 import { Building2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-import logo from "@/assets/welcome-coworking-capsule-noire.png";
+import logo from "@/assets/welcome-logo.png";
 
 import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
-import { getParisMinutes, getReservationState, timeToMinutes } from "./availability";
+import { getReservationState } from "./availability";
 import styles from "./display.module.css";
 import type { DisplayEventsResponse, DisplaySlideId } from "./types";
 
 function Brand() {
   return (
-    <span className={styles.capsuleLogo}>
+    <span className={styles.lineLogoPanel}>
       <Image
         src={logo}
         alt="Welcome! Coworking"
         fill
         sizes="240px"
-        className={styles.capsuleLogoImage}
+        className={styles.lineLogoImage}
         priority
       />
     </span>
@@ -77,10 +77,9 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
   const meetingReservations = eventsData.reservations.filter(
     ({ resource }) => resource === "meeting-room",
   );
-  const nowMinutes = now ? getParisMinutes(now) : 0;
-  const roomState = getReservationState(meetingReservations, nowMinutes);
+  const roomState = getReservationState(meetingReservations, now ?? new Date(0));
   const remainingReservations = roomState.ordered.filter(
-    (reservation) => reservation.allDay || timeToMinutes(reservation.end) > nowMinutes,
+    (reservation) => new Date(reservation.endAt).getTime() > (now?.getTime() ?? 0),
   );
 
   const content: Record<DisplaySlideId, React.ReactNode> = {

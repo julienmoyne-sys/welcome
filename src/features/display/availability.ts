@@ -16,34 +16,37 @@ export function getParisMinutes(date: Date) {
   return Number(values.hour) * 60 + Number(values.minute);
 }
 
-export function getReservationState(reservations: ResourceReservation[], nowMinutes: number) {
+export function getReservationState(reservations: ResourceReservation[], now: Date) {
+  const nowTimestamp = now.getTime();
   const ordered = [...reservations].sort(
-    (left, right) => timeToMinutes(left.start) - timeToMinutes(right.start),
+    (left, right) => new Date(left.startAt).getTime() - new Date(right.startAt).getTime(),
   );
   const current = ordered.find(
     (reservation) =>
-      reservation.allDay ||
-      (timeToMinutes(reservation.start) <= nowMinutes &&
-        nowMinutes < timeToMinutes(reservation.end)),
+      new Date(reservation.startAt).getTime() <= nowTimestamp &&
+      nowTimestamp < new Date(reservation.endAt).getTime(),
   );
   const next = ordered.find(
-    (reservation) => !reservation.allDay && timeToMinutes(reservation.start) > nowMinutes,
+    (reservation) => new Date(reservation.startAt).getTime() > nowTimestamp,
   );
 
   if (!current) return { current: null, next, availableAt: null, ordered };
   if (current.allDay) return { current, next: undefined, availableAt: null, ordered };
 
-  let availableAt = timeToMinutes(current.end);
+  let availableTimestamp = new Date(current.endAt).getTime();
   for (const reservation of ordered) {
-    const start = timeToMinutes(reservation.start);
-    if (start <= availableAt && timeToMinutes(reservation.end) > availableAt) {
-      availableAt = timeToMinutes(reservation.end);
+    const startTimestamp = new Date(reservation.startAt).getTime();
+    const endTimestamp = new Date(reservation.endAt).getTime();
+    if (startTimestamp <= availableTimestamp && endTimestamp > availableTimestamp) {
+      availableTimestamp = endTimestamp;
     }
   }
 
-  const hours = Math.floor(availableAt / 60)
-    .toString()
-    .padStart(2, "0");
-  const minutes = (availableAt % 60).toString().padStart(2, "0");
-  return { current, next: undefined, availableAt: `${hours}:${minutes}`, ordered };
+  const availableAt = new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Europe/Paris",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).format(new Date(availableTimestamp));
+  return { current, next: undefined, availableAt, ordered };
 }

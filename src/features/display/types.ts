@@ -13,6 +13,8 @@ export type ResourceReservation = {
   reservationTitle: string;
   start: string;
   end: string;
+  startAt: string;
+  endAt: string;
   allDay: boolean;
 };
 

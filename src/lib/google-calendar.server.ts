@@ -109,6 +109,8 @@ function toResourceReservation(event: calendar_v3.Schema$Event): ResourceReserva
     reservationTitle: mapping.reservationTitle,
     start: allDay ? "00:00" : formatTime(event.start.dateTime!),
     end: allDay ? "24:00" : formatTime(event.end!.dateTime!),
+    startAt: allDay ? parisMidnightUtc(event.start.date!).toISOString() : event.start.dateTime!,
+    endAt: allDay ? parisMidnightUtc(event.end!.date!).toISOString() : event.end!.dateTime!,
     allDay,
   };
 }
