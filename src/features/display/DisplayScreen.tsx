@@ -1,7 +1,10 @@
 "use client";
 
 import { Building2 } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+
+import websitePreview from "@/assets/hero-welcome-real.png";
 
 import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES, DISPLAY_STATE_TICK_MS } from "./config";
 import { getReservationState } from "./availability";
@@ -171,6 +174,46 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
               </div>
             </div>
           )}
+        </div>
+      </div>
+    ),
+    website: (
+      <div className={styles.websiteSlide}>
+        <div className={styles.websiteCopy}>
+          <p className={styles.eyebrow}>Nouveau</p>
+          <h2>Notre nouveau site est en ligne.</h2>
+          <p className={styles.websiteLead}>
+            Découvrez les espaces, les services et toute l’expérience Welcome! Coworking.
+          </p>
+          <div className={styles.websiteAddress}>www.welcome-coworking.com</div>
+        </div>
+
+        <div
+          className={styles.browserPreview}
+          aria-label="Aperçu du nouveau site Welcome! Coworking"
+        >
+          <div className={styles.browserBar}>
+            <div className={styles.browserDots} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className={styles.browserUrl}>welcome-coworking.com</div>
+          </div>
+          <div className={styles.browserContent}>
+            <Image
+              src={websitePreview}
+              alt="Aperçu des espaces Welcome! Coworking"
+              fill
+              sizes="58vw"
+              className={styles.websitePreviewImage}
+            />
+            <div className={styles.previewOverlay}>
+              <span>WELCOME!</span>
+              <strong>Le prolongement de votre chez vous.</strong>
+              <small>Strasbourg · Meinau</small>
+            </div>
+          </div>
         </div>
       </div>
     ),

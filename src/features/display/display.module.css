@@ -242,6 +242,124 @@
   opacity: 0.38;
   filter: grayscale(1);
 }
+.websiteSlide {
+  display: grid;
+  grid-template-columns: minmax(22rem, 0.72fr) minmax(36rem, 1.28fr);
+  align-items: center;
+  gap: clamp(3rem, 5vw, 7rem);
+  height: 100%;
+}
+.websiteCopy h2 {
+  max-width: 42rem;
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(3.2rem, 5vw, 6.5rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+}
+.websiteLead {
+  max-width: 36rem;
+  margin: 2rem 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(1rem, 1.35vw, 1.55rem);
+  line-height: 1.5;
+}
+.websiteAddress {
+  display: inline-flex;
+  margin-top: clamp(2.5rem, 4vw, 4.5rem);
+  padding: 1rem 1.35rem;
+  border: 1px solid rgba(212, 191, 99, 0.35);
+  border-radius: 0.85rem;
+  background: rgba(212, 191, 99, 0.1);
+  color: #d4bf63;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: 0.015em;
+}
+.browserPreview {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: clamp(1rem, 1.5vw, 1.7rem);
+  background: #171716;
+  box-shadow: 0 2.5rem 7rem rgba(0, 0, 0, 0.46);
+  transform: perspective(100rem) rotateY(-3deg) rotateX(1deg);
+}
+.browserBar {
+  display: grid;
+  grid-template-columns: 5rem 1fr 5rem;
+  align-items: center;
+  min-height: 3.5rem;
+  padding: 0 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.browserDots {
+  display: flex;
+  gap: 0.4rem;
+}
+.browserDots span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.26);
+}
+.browserDots span:nth-child(2) {
+  background: rgba(212, 191, 99, 0.7);
+}
+.browserUrl {
+  justify-self: center;
+  padding: 0.48rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+}
+.browserContent {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.websitePreviewImage {
+  object-fit: cover;
+}
+.browserContent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(9, 9, 9, 0.84), rgba(9, 9, 9, 0.12) 60%);
+}
+.previewOverlay {
+  position: absolute;
+  top: 50%;
+  left: clamp(2rem, 4vw, 4.5rem);
+  z-index: 1;
+  display: flex;
+  max-width: 55%;
+  flex-direction: column;
+  transform: translateY(-50%);
+}
+.previewOverlay span {
+  margin-bottom: 1rem;
+  color: #d4bf63;
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.previewOverlay strong {
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+}
+.previewOverlay small {
+  margin-top: 1.25rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(0.7rem, 0.9vw, 1rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
 .progress {
   position: absolute;
   right: clamp(3rem, 5vw, 7rem);
@@ -275,6 +393,19 @@
   .availabilityBody {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .websiteSlide {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 3rem;
+  }
+  .websiteCopy h2,
+  .websiteLead {
+    max-width: 60rem;
+  }
+  .browserPreview {
+    width: min(100%, 60rem);
+    transform: none;
   }
   .roomStatusCard {
     padding: 2.5rem;

@@ -11,4 +11,5 @@ export const DISPLAY_STATE_TICK_MS = 10_000;
 export const DISPLAY_SLIDES: DisplaySlideConfig[] = [
   { id: "welcome", enabled: true, durationMs: 10_000 },
   { id: "availability", enabled: true, durationMs: 12_000 },
+  { id: "website", enabled: true, durationMs: 12_000 },
 ];
