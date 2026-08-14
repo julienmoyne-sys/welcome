@@ -1,0 +1,326 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #0b0b0b;
+  color: #fff;
+  font-family: var(--font-inter-sans), sans-serif;
+}
+.screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(198, 178, 74, 0.15), transparent 34%),
+    radial-gradient(circle at 4% 92%, rgba(111, 132, 113, 0.15), transparent 30%);
+  z-index: 1;
+  pointer-events: none;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: clamp(3rem, 5vw, 7rem);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.015) translateY(12px);
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease,
+    visibility 1.2s;
+}
+.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+.eyebrow {
+  margin: 0 0 1.1rem;
+  color: #d4bf63;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(0.75rem, 1vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.lead {
+  max-width: 56rem;
+  margin: 1.8rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.25rem, 2vw, 2.35rem);
+  line-height: 1.45;
+}
+.logo,
+.logoLight {
+  width: clamp(13rem, 20vw, 24rem);
+  height: auto;
+  object-fit: contain;
+}
+.logoLight {
+  filter: invert(1);
+}
+.welcomeSlide {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  height: 100%;
+}
+.welcomeCopy h1,
+.contentSlide h2,
+.practicalSlide h2,
+.announcementSlide h2,
+.brandingSlide h2 {
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+.welcomeCopy h1 {
+  max-width: 65rem;
+  font-size: clamp(4rem, 7.2vw, 9rem);
+}
+.welcomeCopy .logoLight {
+  margin-bottom: clamp(4rem, 9vh, 8rem);
+}
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-left: 4rem;
+}
+.clock span {
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(5rem, 10vw, 12rem);
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: -0.07em;
+}
+.clock small {
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: clamp(1rem, 1.35vw, 1.6rem);
+  text-transform: capitalize;
+}
+.contentSlide {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 8vw;
+  height: 100%;
+}
+.contentSlide header > svg,
+.practicalSlide > div:first-child > svg,
+.announcementSlide > svg {
+  width: clamp(2.5rem, 3vw, 4rem);
+  height: auto;
+  margin-bottom: 3rem;
+  color: #d4bf63;
+  stroke-width: 1.2;
+}
+.contentSlide h2,
+.practicalSlide h2,
+.announcementSlide h2 {
+  font-size: clamp(3.5rem, 6vw, 7rem);
+}
+.events {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+.event {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: clamp(1.6rem, 2.5vh, 2.5rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.6rem, 2.3vw, 2.8rem);
+}
+.event time {
+  color: #d4bf63;
+  font-variant-numeric: tabular-nums;
+}
+.serviceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.service {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  min-height: 8rem;
+  padding: 1.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.045);
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.65rem);
+}
+.service svg {
+  width: 2.2rem;
+  color: #d4bf63;
+  stroke-width: 1.4;
+}
+.practicalSlide {
+  display: grid;
+  grid-template-columns: 1.3fr 0.65fr;
+  grid-template-rows: 1fr auto;
+  gap: 3rem 7vw;
+  align-items: center;
+  height: 100%;
+}
+.qrPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+.qrPlaceholder svg {
+  width: 42%;
+  height: auto;
+  margin-bottom: 1.5rem;
+  color: #d4bf63;
+  stroke-width: 0.8;
+}
+.qrPlaceholder strong {
+  font-size: clamp(1.1rem, 1.5vw, 1.7rem);
+}
+.qrPlaceholder span {
+  margin-top: 0.55rem;
+  color: rgba(255, 255, 255, 0.48);
+}
+.wifiCard {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-left: 3px solid #d4bf63;
+  background: rgba(255, 255, 255, 0.05);
+}
+.wifiCard svg {
+  width: 2.2rem;
+  color: #d4bf63;
+}
+.wifiCard div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.wifiCard small {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.wifiCard strong {
+  font-size: clamp(1.1rem, 1.5vw, 1.65rem);
+  font-weight: 500;
+}
+.announcementSlide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 88rem;
+  height: 100%;
+}
+.announcementSlide h2 {
+  max-width: 75rem;
+  font-size: clamp(4rem, 7.5vw, 9rem);
+}
+.announcementLabel {
+  margin-top: 3.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(212, 191, 99, 0.45);
+  border-radius: 999px;
+  color: #d4bf63;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.brandingSlide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  overflow: hidden;
+}
+.brandingImage {
+  z-index: -2;
+  object-fit: cover;
+}
+.brandingShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 6, 6, 0.85) 0%,
+      rgba(6, 6, 6, 0.32) 55%,
+      rgba(6, 6, 6, 0.12) 100%
+    ),
+    linear-gradient(0deg, rgba(6, 6, 6, 0.45), transparent 50%);
+}
+.brandingSlide .logo {
+  filter: invert(1);
+}
+.brandingSlide h2 {
+  align-self: flex-start;
+  font-size: clamp(4.5rem, 8vw, 9.5rem);
+  text-shadow: 0 3px 30px rgba(0, 0, 0, 0.28);
+}
+.brandingSlide em {
+  color: #d4bf63;
+  font-style: normal;
+}
+.progress {
+  position: absolute;
+  right: clamp(3rem, 5vw, 7rem);
+  bottom: 2.5rem;
+  z-index: 5;
+  display: flex;
+  gap: 0.55rem;
+}
+.progress span {
+  width: clamp(1.6rem, 2vw, 2.5rem);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.24);
+  transition:
+    background 500ms ease,
+    width 500ms ease;
+}
+.progress .progressActive {
+  width: clamp(3rem, 4vw, 5rem);
+  background: #d4bf63;
+}
+@media (max-aspect-ratio: 4/3) {
+  .welcomeSlide,
+  .contentSlide {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 4rem;
+  }
+  .clock {
+    align-items: flex-start;
+    padding-left: 0;
+  }
+  .serviceGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition-duration: 0.01ms;
+    transform: none;
+  }
+}

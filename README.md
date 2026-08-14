@@ -120,6 +120,9 @@ serveur OVH Email Pro.
 | `SMTP_HOST`     | optionnelle — défaut `pro1.mail.ovh.net`                               |
 | `SMTP_PORT`     | optionnelle — défaut `587` (STARTTLS) ; `465` bascule en TLS implicite |
 | `SMTP_USER`     | optionnelle — défaut `contact@welcome-coworking.com`                   |
+| `GOOGLE_CALENDAR_ID` | requise pour `/display` — identifiant de l’agenda privé partagé |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | requise pour `/display` — email du service account en lecture seule |
+| `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | requise pour `/display` — clé privée PEM, avec retours à la ligne réels ou encodés en `\\n` |
 
 ## Construit avec
 

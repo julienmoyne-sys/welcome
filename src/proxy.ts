@@ -11,5 +11,5 @@ export const config = {
    * racine (robots.txt, sitemap.xml, favicon, icônes, visuel de partage) et plus
    * généralement tout chemin comportant un point, donc tout fichier statique.
    */
-  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+  matcher: "/((?!api|trpc|display(?:/|$)|_next|_vercel|.*\\..*).*)",
 };
