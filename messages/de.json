@@ -43,7 +43,7 @@
     },
     "comparison": {
       "title": "Coworking-Angebote im Vergleich — Welcome Straßburg",
-      "description": "Vergleichen Sie vier Angebote von Welcome Coworking in Straßburg: Nomade Flex, Nomade Resident, Open Space und privates Büro.",
+      "description": "Vergleichen Sie vier Angebote von Welcome Coworking in Straßburg: Flex, Work Bar, Open Space und privates Büro.",
       "ogTitle": "Welcome Coworking Angebote vergleichen",
       "ogDescription": "Vergleichen Sie Preise, Zugang, Arbeitsbereiche und Services der vier Welcome Coworking Angebote in Straßburg."
     },
@@ -309,7 +309,7 @@
     "swipe": "Wischen Sie, um die Angebote zu vergleichen",
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
-      { "kicker": "Resident", "name": "Flex Plus", "price": "90 €" },
+      { "kicker": "Resident", "name": "Work Bar", "price": "90 €" },
       { "kicker": "Resident", "name": "Open Space", "price": "190 bis 300 €" },
       { "kicker": "Resident", "name": "Privates Büro", "price": "425 bis 700 €" }
     ],
@@ -479,10 +479,10 @@
           {
             "label": "ChatGPT Business",
             "cells": [
-              { "type": "text", "label": "+5€ *" },
-              { "type": "conditional" },
-              { "type": "conditional" },
-              { "type": "conditional" }
+              { "type": "text", "label": "+5€" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
             ]
           }
         ]

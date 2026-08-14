@@ -126,8 +126,8 @@
   --comparison-criteria-header-bg: #edf0ed;
   --comparison-criteria-hover-bg: #e8ece8;
   --comparison-criteria-highlight-bg: #f7f3df;
-  --comparison-cse-bg: #f1e7aa;
-  --comparison-cse-hover-bg: #eadc8f;
+  --comparison-cse-bg: var(--comparison-criteria-bg);
+  --comparison-cse-hover-bg: var(--comparison-criteria-hover-bg);
 }
 
 .dark {

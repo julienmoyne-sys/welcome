@@ -43,7 +43,7 @@
     },
     "comparison": {
       "title": "Coworking plan comparison — Welcome Strasbourg",
-      "description": "Compare four Welcome Coworking plans in Strasbourg: Nomad Flex, Nomad Resident, Open Space and Private Office.",
+      "description": "Compare four Welcome Coworking plans in Strasbourg: Flex, Work Bar, Open Space and Private Office.",
       "ogTitle": "Compare Welcome Coworking plans",
       "ogDescription": "Compare pricing, access, workspaces and services across four Welcome Coworking plans in Strasbourg."
     },
@@ -297,7 +297,7 @@
     "swipe": "Swipe to compare plans",
     "plans": [
       { "kicker": "Nomad", "name": "Flex", "price": "€45" },
-      { "kicker": "Resident", "name": "Flex Plus", "price": "€90" },
+      { "kicker": "Resident", "name": "Work Bar", "price": "€90" },
       { "kicker": "Resident", "name": "Open Space", "price": "€190 to €300" },
       { "kicker": "Resident", "name": "Private Office", "price": "€425 to €700" }
     ],
@@ -467,10 +467,10 @@
           {
             "label": "ChatGPT Business",
             "cells": [
-              { "type": "text", "label": "+5€ *" },
-              { "type": "conditional" },
-              { "type": "conditional" },
-              { "type": "conditional" }
+              { "type": "text", "label": "+5€" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
             ]
           }
         ]

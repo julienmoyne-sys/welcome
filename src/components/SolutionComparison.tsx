@@ -249,7 +249,7 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
             >
               <span
                 className={`inline-flex rounded-full px-2.5 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.08em] text-welcome-black ${
-                  index >= 2 ? "bg-welcome-gold/20" : "bg-welcome-sage/12"
+                  index >= 2 ? "bg-welcome-sage/12 dark:bg-welcome-gold/20" : "bg-welcome-sage/12"
                 }`}
               >
                 {plan.kicker}
@@ -320,7 +320,7 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                         />
                       ) : isChatGpt ? (
                         <PopupLabel
-                          label={row.label}
+                          label={`${row.label}*`}
                           viewLabel={t("cseView")}
                           modalTitle={t("chatGptModalTitle")}
                           image={chatGptBusiness}
@@ -407,7 +407,9 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                   >
                     <span
                       className={`inline-flex rounded-full px-3 py-1 font-inter text-[11px] font-semibold uppercase tracking-[0.1em] text-welcome-black ${
-                        index >= 2 ? "bg-welcome-gold/20" : "bg-welcome-sage/12"
+                        index >= 2
+                          ? "bg-welcome-sage/12 dark:bg-welcome-gold/20"
+                          : "bg-welcome-sage/12"
                       }`}
                     >
                       {plan.kicker}
@@ -479,7 +481,7 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                             />
                           ) : isChatGpt ? (
                             <PopupLabel
-                              label={row.label}
+                              label={`${row.label}*`}
                               viewLabel={t("cseView")}
                               modalTitle={t("chatGptModalTitle")}
                               image={chatGptBusiness}
