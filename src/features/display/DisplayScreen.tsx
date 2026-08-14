@@ -18,7 +18,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import heroImage from "@/assets/hero-welcome-real.png";
-import logo from "@/assets/welcome-logo-cropped.png";
+import logo from "@/assets/welcome-coworking-capsule-noire.png";
 
 import { DISPLAY_ANNOUNCEMENT, DISPLAY_REFRESH_MS, DISPLAY_SLIDES } from "./config";
 import { getParisMinutes, getReservationState, timeToMinutes } from "./availability";
@@ -34,15 +34,18 @@ const services = [
   { icon: Gift, label: "Avantages membres" },
 ];
 
-function Brand({ light = true }: { light?: boolean }) {
+function Brand({ compact = false }: { compact?: boolean }) {
   return (
-    <Image
-      src={logo}
-      alt="Welcome! Coworking"
-      className={light ? styles.logoLight : styles.logo}
-      width={330}
-      priority
-    />
+    <span className={`${styles.capsuleLogo} ${compact ? styles.capsuleLogoCompact : ""}`}>
+      <Image
+        src={logo}
+        alt="Welcome! Coworking"
+        fill
+        sizes={compact ? "140px" : "240px"}
+        className={styles.capsuleLogoImage}
+        priority
+      />
+    </span>
   );
 }
 
@@ -281,7 +284,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
           className={styles.brandingImage}
         />
         <div className={styles.brandingShade} />
-        <Brand light={false} />
+        <Brand compact />
         <h2>
           Travaillez.
           <br />

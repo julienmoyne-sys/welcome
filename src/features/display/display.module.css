@@ -51,14 +51,24 @@
   font-size: clamp(1.25rem, 2vw, 2.35rem);
   line-height: 1.45;
 }
-.logo,
-.logoLight {
-  width: clamp(13rem, 20vw, 24rem);
-  height: auto;
-  object-fit: contain;
+.capsuleLogo {
+  position: relative;
+  display: block;
+  width: clamp(10rem, 13vw, 15rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10%;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
 }
-.logoLight {
-  filter: invert(1);
+.capsuleLogoCompact {
+  width: clamp(6rem, 8vw, 9rem);
+}
+.capsuleLogoImage {
+  width: 130% !important;
+  max-width: none !important;
+  height: 130% !important;
+  inset: -15% !important;
+  object-fit: fill;
 }
 .welcomeSlide {
   display: grid;
@@ -81,7 +91,7 @@
   max-width: 65rem;
   font-size: clamp(4rem, 7.2vw, 9rem);
 }
-.welcomeCopy .logoLight {
+.welcomeCopy .capsuleLogo {
   margin-bottom: clamp(4rem, 9vh, 8rem);
 }
 .clock {
@@ -421,9 +431,6 @@
       rgba(6, 6, 6, 0.12) 100%
     ),
     linear-gradient(0deg, rgba(6, 6, 6, 0.45), transparent 50%);
-}
-.brandingSlide .logo {
-  filter: invert(1);
 }
 .brandingSlide h2 {
   align-self: flex-start;
