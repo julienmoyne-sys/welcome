@@ -290,13 +290,16 @@
   "comparisonTable": {
     "criteria": "Features",
     "printButton": "Print table as PDF",
+    "cseView": "View",
+    "cseModalTitle": "Major brand discounts",
+    "chatGptModalTitle": "ChatGPT Business at Welcome! Coworking Strasbourg",
     "priceSuffix": "excl. VAT / desk / month",
     "swipe": "Swipe to compare plans",
     "plans": [
-      { "kicker": "Flexible", "name": "Nomad Flex", "price": "€45" },
-      { "kicker": "Flexible +", "name": "Nomad Resident", "price": "€90" },
-      { "kicker": "Premium", "name": "Resident Open Space", "price": "€190 to €300" },
-      { "kicker": "Signature", "name": "Resident Private Office", "price": "€425 to €700" }
+      { "kicker": "Nomad", "name": "Flex", "price": "€45" },
+      { "kicker": "Nomad", "name": "Flex Plus", "price": "€90" },
+      { "kicker": "Resident", "name": "Open Space", "price": "€190 to €300" },
+      { "kicker": "Resident", "name": "Private Office", "price": "€425 to €700" }
     ],
     "groups": [
       {
@@ -309,15 +312,6 @@
               { "type": "text", "label": "Full-time" },
               { "type": "text", "label": "50% or full-time" },
               { "type": "text", "label": "Full-time" }
-            ]
-          },
-          {
-            "label": "Commitment",
-            "cells": [
-              { "type": "text", "label": "No commitment" },
-              { "type": "text", "label": "No commitment" },
-              { "type": "text", "label": "No commitment" },
-              { "type": "text", "label": "No commitment" }
             ]
           },
           {
@@ -337,11 +331,20 @@
               { "type": "included" },
               { "type": "included" }
             ]
+          },
+          {
+            "label": "No commitment",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
           }
         ]
       },
       {
-        "title": "Workspaces",
+        "title": "Access to workspaces",
         "rows": [
           {
             "label": "Work bar",
@@ -374,8 +377,8 @@
             "label": "Meeting room",
             "cells": [
               { "type": "bookable" },
-              { "type": "bookable" },
-              { "type": "text", "label": "10 hours free / month" },
+              { "type": "text", "label": "5 hours free / month" },
+              { "type": "text", "label": "5 or 10 hours free / month" },
               { "type": "text", "label": "10 hours free / month" }
             ]
           }
@@ -421,11 +424,11 @@
             ]
           },
           {
-            "label": "Monthly print allowance",
+            "label": "Monthly print allowance / desk",
             "cells": [
               { "type": "text", "label": "PRINT1" },
               { "type": "text", "label": "PRINT5" },
-              { "type": "text", "label": "PRINT20" },
+              { "type": "text", "label": "PRINT10 or 20" },
               { "type": "text", "label": "PRINT20" }
             ]
           }
@@ -444,7 +447,7 @@
             ]
           },
           {
-            "label": "Unlimited hot drinks",
+            "label": "Daily hot drinks",
             "cells": [
               { "type": "text", "label": "1" },
               { "type": "text", "label": "1" },
@@ -453,10 +456,19 @@
             ]
           },
           {
+            "label": "Major brand discounts",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
             "label": "ChatGPT Business",
             "cells": [
-              { "type": "excluded" },
-              { "type": "excluded" },
+              { "type": "text", "label": "+5€ *" },
+              { "type": "conditional" },
               { "type": "conditional" },
               { "type": "conditional" }
             ]

@@ -21,9 +21,14 @@ import {
   Wifi,
 } from "lucide-react";
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { useTranslations } from "next-intl";
 
+import avantagesCseLogo from "@/assets/avantages-cse-monochrome.png";
+import chatGptBusiness from "@/assets/chatgpt-business-welcome-strasbourg.png";
+import reductionsGrandesEnseignes from "@/assets/reductions-grandes-enseignes.png";
 import welcomeCoworkingCapsuleNoire from "@/assets/welcome-coworking-capsule-noire.png";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 type Cell = {
   type: "included" | "bookable" | "excluded" | "text" | "conditional";
@@ -42,9 +47,9 @@ type ComparisonGroup = {
 
 const ROW_ICONS = [
   Clock3,
-  Handshake,
   UserRoundCheck,
   Clock3,
+  Handshake,
   GlassWater,
   LayoutGrid,
   DoorOpen,
@@ -56,6 +61,7 @@ const ROW_ICONS = [
   Printer,
   Snowflake,
   Coffee,
+  BadgeEuro,
 ] as const;
 
 const PLAN_STYLES = [
@@ -68,7 +74,11 @@ const PLAN_STYLES = [
 function StatusMark({ cell, labels }: { cell: Cell; labels: Record<string, string> }) {
   if (cell.type === "included" || cell.type === "conditional") {
     return (
-      <span className="inline-flex items-center gap-1.5" aria-label={labels.included}>
+      <span
+        className="inline-flex items-center gap-1.5"
+        aria-label={labels.included}
+        title={labels.included}
+      >
         <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-emerald-600 text-white shadow-[0_4px_14px_-6px_rgba(5,150,105,0.9)]">
           <Check className="h-4 w-4" strokeWidth={2.4} aria-hidden="true" />
         </span>
@@ -84,6 +94,7 @@ function StatusMark({ cell, labels }: { cell: Cell; labels: Record<string, strin
       <span
         className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-amber-500/35 bg-amber-500/15"
         aria-label={labels.bookable}
+        title={labels.bookable}
       >
         <CalendarDays
           className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400"
@@ -124,6 +135,60 @@ function ChatGptLogo() {
   );
 }
 
+function CseLogo() {
+  return (
+    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-welcome-gold/45 bg-white p-1 shadow-sm">
+      <Image
+        src={avantagesCseLogo}
+        alt="Avantages CSE"
+        className="h-full w-full rounded-full object-cover object-center"
+        sizes="36px"
+      />
+    </span>
+  );
+}
+
+function PopupLabel({
+  label,
+  viewLabel,
+  modalTitle,
+  image,
+}: {
+  label: string;
+  viewLabel: string;
+  modalTitle: string;
+  image: StaticImageData;
+}) {
+  return (
+    <span className="font-inter text-[14px] font-semibold leading-snug text-welcome-black">
+      {label}{" "}
+      <Dialog>
+        <span className="comparison-cse-view whitespace-nowrap">
+          (
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              className="font-semibold text-welcome-sage underline decoration-welcome-gold/70 underline-offset-2 transition-colors hover:text-welcome-gold focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-welcome-gold"
+            >
+              {viewLabel}
+            </button>
+          </DialogTrigger>
+          )
+        </span>
+        <DialogContent className="max-h-[92vh] w-[94vw] max-w-[900px] overflow-y-auto border-welcome-gold/30 bg-white p-2 sm:rounded-[20px] sm:p-4">
+          <DialogTitle className="sr-only">{modalTitle}</DialogTitle>
+          <Image
+            src={image}
+            alt={modalTitle}
+            className="h-auto w-full rounded-[12px]"
+            sizes="(max-width: 640px) 94vw, 900px"
+          />
+        </DialogContent>
+      </Dialog>
+    </span>
+  );
+}
+
 export function SolutionComparison() {
   const t = useTranslations("comparisonTable");
   const plans = t.raw("plans") as { kicker: string; name: string; price: string }[];
@@ -145,12 +210,150 @@ export function SolutionComparison() {
           {t("printButton")}
         </button>
       </div>
-      <div className="comparison-print-action mb-5 flex items-center justify-between gap-4 lg:hidden">
-        <p className="font-inter text-[13px] font-medium text-welcome-body/70">{t("swipe")}</p>
-        <span className="h-px flex-1 bg-welcome-line" aria-hidden="true" />
+      <div className="comparison-mobile-view space-y-8 lg:hidden">
+        <div className="grid grid-cols-2 gap-3">
+          {plans.map((plan, index) => (
+            <article
+              key={plan.name}
+              className={`rounded-[18px] border border-welcome-black/[0.08] p-4 text-center ${PLAN_STYLES[index]}`}
+            >
+              <span
+                className={`inline-flex rounded-full px-2.5 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.08em] text-welcome-black ${
+                  index >= 2 ? "bg-welcome-gold/20" : "bg-welcome-sage/12"
+                }`}
+              >
+                {plan.kicker}
+              </span>
+              <h2 className="mt-3 min-h-10 font-manrope text-[15px] font-bold leading-snug text-welcome-black">
+                {plan.name}
+              </h2>
+              <p className="mt-3 font-manrope text-[21px] font-bold leading-tight text-welcome-black">
+                {plan.price}
+              </p>
+              <p className="mt-1 font-inter text-[10px] leading-snug text-welcome-body/60">
+                {t("priceSuffix")}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        {groups.map((group, groupIndex) => (
+          <section key={group.title} aria-labelledby={`mobile-group-${groupIndex}`}>
+            <h3
+              id={`mobile-group-${groupIndex}`}
+              className="mb-3 font-manrope text-[13px] font-bold uppercase tracking-[0.1em] text-welcome-sage"
+            >
+              {group.title}
+            </h3>
+            <div className="space-y-3">
+              {group.rows.map((row, index) => {
+                const rowIndex = groupOffsets[groupIndex] + index;
+                const isChatGpt = row.label === "ChatGPT Business";
+                const Icon = ROW_ICONS[rowIndex] ?? Coffee;
+                const isCse = Icon === BadgeEuro;
+
+                return (
+                  <article
+                    key={row.label}
+                    className={`overflow-hidden rounded-[18px] border border-welcome-black/[0.08] bg-welcome-white ${
+                      isChatGpt || isCse ? "ring-1 ring-welcome-gold/25" : ""
+                    }`}
+                  >
+                    <div
+                      className={`flex items-center gap-3 border-b border-welcome-black/[0.07] px-4 py-3.5 ${
+                        isCse
+                          ? "comparison-cse-cell"
+                          : isChatGpt
+                            ? "comparison-criteria-highlight"
+                            : "comparison-criteria-header"
+                      }`}
+                    >
+                      {isCse ? (
+                        <CseLogo />
+                      ) : isChatGpt ? (
+                        <ChatGptLogo />
+                      ) : (
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-welcome-sage/10 text-welcome-sage">
+                          <Icon
+                            className="h-[18px] w-[18px]"
+                            strokeWidth={1.7}
+                            aria-hidden="true"
+                          />
+                        </span>
+                      )}
+                      {isCse ? (
+                        <PopupLabel
+                          label={row.label}
+                          viewLabel={t("cseView")}
+                          modalTitle={t("cseModalTitle")}
+                          image={reductionsGrandesEnseignes}
+                        />
+                      ) : isChatGpt ? (
+                        <PopupLabel
+                          label={row.label}
+                          viewLabel={t("cseView")}
+                          modalTitle={t("chatGptModalTitle")}
+                          image={chatGptBusiness}
+                        />
+                      ) : (
+                        <span className="font-inter text-[14px] font-semibold leading-snug text-welcome-black">
+                          {row.label}
+                        </span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-2">
+                      {row.cells.map((cell, planIndex) => (
+                        <div
+                          key={`${row.label}-mobile-${planIndex}`}
+                          className={`flex min-h-[82px] flex-col items-center justify-center gap-2 border-welcome-black/[0.07] px-2 py-3 text-center odd:border-r [&:nth-child(n+3)]:border-t ${PLAN_STYLES[planIndex]}`}
+                        >
+                          <span className="font-inter text-[9px] font-bold uppercase tracking-[0.07em] text-welcome-body/55">
+                            {plans[planIndex].name}
+                          </span>
+                          <StatusMark cell={cell} labels={labels} />
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-[16px] bg-welcome-white p-4">
+          <span className="inline-flex items-center gap-2 font-inter text-[12px] text-welcome-body">
+            <span
+              className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-white"
+              title={labels.included}
+            >
+              <Check className="h-3.5 w-3.5" aria-hidden="true" />
+            </span>
+            {labels.included}
+          </span>
+          <span className="inline-flex items-center gap-2 font-inter text-[12px] text-welcome-body">
+            <span
+              className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-amber-500/35 bg-amber-500/15"
+              title={labels.bookable}
+            >
+              <CalendarDays
+                className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400"
+                aria-hidden="true"
+              />
+            </span>
+            {labels.bookable}
+          </span>
+          <span className="inline-flex items-center gap-2 font-inter text-[12px] text-welcome-body">
+            <Minus className="h-5 w-5 text-welcome-body/35" aria-hidden="true" />
+            {labels.excluded}
+          </span>
+          <span className="w-full font-inter text-[12px] font-medium text-welcome-body">
+            {t("condition")}
+          </span>
+        </div>
       </div>
 
-      <div className="comparison-print-content">
+      <div className="comparison-print-content hidden lg:block">
         <div className="comparison-print-sheet max-w-full overflow-hidden rounded-[24px] border border-welcome-black/[0.08] bg-welcome-white shadow-[0_28px_80px_-48px_rgba(11,11,11,0.35)] lg:overflow-visible">
           <div className="max-w-full overflow-x-auto overscroll-x-contain lg:overflow-visible">
             <div className="min-w-[1120px]">
@@ -205,20 +408,27 @@ export function SolutionComparison() {
                     const rowIndex = groupOffsets[groupIndex] + index;
                     const isChatGpt = row.label === "ChatGPT Business";
                     const Icon = ROW_ICONS[rowIndex] ?? Coffee;
+                    const isCse = Icon === BadgeEuro;
 
                     return (
                       <div
                         key={row.label}
                         className={`group grid min-h-[76px] grid-cols-[240px_repeat(4,minmax(0,1fr))] border-b border-welcome-black/[0.07] last:border-b-0 ${
-                          isChatGpt ? "bg-welcome-gold/[0.055]" : ""
+                          isCse ? "comparison-cse-row" : ""
                         }`}
                       >
                         <div
                           className={`comparison-criteria-cell sticky left-0 z-10 flex items-center gap-3 px-6 py-4 transition-colors lg:px-7 ${
-                            isChatGpt ? "comparison-criteria-highlight" : ""
+                            isCse
+                              ? "comparison-cse-cell"
+                              : isChatGpt
+                                ? "comparison-criteria-highlight"
+                                : ""
                           }`}
                         >
-                          {isChatGpt ? (
+                          {isCse ? (
+                            <CseLogo />
+                          ) : isChatGpt ? (
                             <ChatGptLogo />
                           ) : (
                             <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-welcome-sage/10 text-welcome-sage">
@@ -229,9 +439,25 @@ export function SolutionComparison() {
                               />
                             </span>
                           )}
-                          <span className="font-inter text-[14px] font-semibold leading-snug text-welcome-black">
-                            {row.label}
-                          </span>
+                          {isCse ? (
+                            <PopupLabel
+                              label={row.label}
+                              viewLabel={t("cseView")}
+                              modalTitle={t("cseModalTitle")}
+                              image={reductionsGrandesEnseignes}
+                            />
+                          ) : isChatGpt ? (
+                            <PopupLabel
+                              label={row.label}
+                              viewLabel={t("cseView")}
+                              modalTitle={t("chatGptModalTitle")}
+                              image={chatGptBusiness}
+                            />
+                          ) : (
+                            <span className="font-inter text-[14px] font-semibold leading-snug text-welcome-black">
+                              {row.label}
+                            </span>
+                          )}
                         </div>
                         {row.cells.map((cell, index) => (
                           <div
@@ -252,13 +478,19 @@ export function SolutionComparison() {
 
         <div className="comparison-print-legend mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
           <span className="inline-flex items-center gap-2 font-inter text-[13px] text-welcome-body">
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-white">
+            <span
+              className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-white"
+              title={labels.included}
+            >
               <Check className="h-3.5 w-3.5" aria-hidden="true" />
             </span>
             {labels.included}
           </span>
           <span className="inline-flex items-center gap-2 font-inter text-[13px] text-welcome-body">
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-amber-500/35 bg-amber-500/15">
+            <span
+              className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-amber-500/35 bg-amber-500/15"
+              title={labels.bookable}
+            >
               <CalendarDays
                 className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400"
                 aria-hidden="true"

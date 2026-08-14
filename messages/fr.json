@@ -306,13 +306,16 @@
   "comparisonTable": {
     "criteria": "Critères",
     "printButton": "Imprimer le tableau en PDF",
+    "cseView": "Voir",
+    "cseModalTitle": "Réductions grandes enseignes",
+    "chatGptModalTitle": "ChatGPT Business chez Welcome! Coworking Strasbourg",
     "priceSuffix": "HT / poste / mois",
     "swipe": "Faites défiler pour comparer les offres",
     "plans": [
-      { "kicker": "Flexible", "name": "Nomade Flex", "price": "45 €" },
-      { "kicker": "Flexible +", "name": "Nomade Résident", "price": "90 €" },
-      { "kicker": "Premium", "name": "Résident Open Space", "price": "190 à 300 €" },
-      { "kicker": "Signature", "name": "Résident Bureau privatif", "price": "425 à 700 €" }
+      { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
+      { "kicker": "Nomade", "name": "Flex Plus", "price": "90 €" },
+      { "kicker": "Résident", "name": "Open Space", "price": "190 à 300 €" },
+      { "kicker": "Résident", "name": "Bureau privatif", "price": "425 à 700 €" }
     ],
     "groups": [
       {
@@ -325,15 +328,6 @@
               { "type": "text", "label": "Temps plein" },
               { "type": "text", "label": "50 % ou temps plein" },
               { "type": "text", "label": "Temps plein" }
-            ]
-          },
-          {
-            "label": "Engagement",
-            "cells": [
-              { "type": "text", "label": "Sans engagement" },
-              { "type": "text", "label": "Sans engagement" },
-              { "type": "text", "label": "Sans engagement" },
-              { "type": "text", "label": "Sans engagement" }
             ]
           },
           {
@@ -353,11 +347,20 @@
               { "type": "included" },
               { "type": "included" }
             ]
+          },
+          {
+            "label": "Sans engagement",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
           }
         ]
       },
       {
-        "title": "Espaces de travail",
+        "title": "Accès aux espaces de travail",
         "rows": [
           {
             "label": "Bar de travail",
@@ -390,8 +393,8 @@
             "label": "Salle de réunion",
             "cells": [
               { "type": "bookable" },
-              { "type": "bookable" },
-              { "type": "text", "label": "10 h / mois offertes" },
+              { "type": "text", "label": "5 h / mois offertes" },
+              { "type": "text", "label": "5 ou 10 h / mois offertes" },
               { "type": "text", "label": "10 h / mois offertes" }
             ]
           }
@@ -437,11 +440,11 @@
             ]
           },
           {
-            "label": "Forfait impressions / mois",
+            "label": "Forfait mensuel impressions / poste",
             "cells": [
               { "type": "text", "label": "PRINT1" },
               { "type": "text", "label": "PRINT5" },
-              { "type": "text", "label": "PRINT20" },
+              { "type": "text", "label": "PRINT10 ou 20" },
               { "type": "text", "label": "PRINT20" }
             ]
           }
@@ -460,7 +463,7 @@
             ]
           },
           {
-            "label": "Boissons chaudes illimitées",
+            "label": "Boissons chaudes journalières",
             "cells": [
               { "type": "text", "label": "1" },
               { "type": "text", "label": "1" },
@@ -469,10 +472,19 @@
             ]
           },
           {
+            "label": "Réductions grandes enseignes",
+            "cells": [
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" },
+              { "type": "included" }
+            ]
+          },
+          {
             "label": "ChatGPT Business",
             "cells": [
-              { "type": "excluded" },
-              { "type": "excluded" },
+              { "type": "text", "label": "+5€ *" },
+              { "type": "conditional" },
               { "type": "conditional" },
               { "type": "conditional" }
             ]
