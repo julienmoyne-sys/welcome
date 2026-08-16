@@ -114,22 +114,15 @@ Trois visuels ne sont importés par aucun composant et peuvent être supprimés 
 Le formulaire de contact envoie ses e-mails en SMTP direct (nodemailer) sur le
 serveur OVH Email Pro.
 
-| Variable                             | Rôle                                                                                                                                                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SMTP_PASSWORD`                      | requise — mot de passe de la boîte `contact@welcome-coworking.com`                                                                                      |
-| `SMTP_HOST`                          | optionnelle — défaut `pro1.mail.ovh.net`                                                                                                                |
-| `SMTP_PORT`                          | optionnelle — défaut `587` (STARTTLS) ; `465` bascule en TLS implicite                                                                                  |
-| `SMTP_USER`                          | optionnelle — défaut `contact@welcome-coworking.com`                                                                                                    |
-| `GOOGLE_CALENDAR_ID`                 | requise pour `/display` — identifiant de l’agenda privé partagé                                                                                         |
-| `GOOGLE_SERVICE_ACCOUNT_EMAIL`       | requise pour `/display` — email du service account en lecture seule                                                                                     |
-| `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | requise pour `/display` — clé privée PEM, avec retours à la ligne réels ou encodés en `\\n`                                                             |
-| `VTC_LOCATION_SECRET`                | requise pour le relais GPS — secret partagé de 24 caractères minimum, saisi une fois sur le téléphone et l’iPad puis remplacé par une session HTTP-only |
-| `UPSTASH_REDIS_REST_URL`             | requise pour le relais GPS — URL REST de la base Upstash Redis liée au projet Vercel                                                                    |
-| `UPSTASH_REDIS_REST_TOKEN`           | requise pour le relais GPS — jeton privé REST Upstash Redis                                                                                             |
-
-Le relais GPS conserve uniquement la valeur `welcome:vtc:last-location` dans Redis : chaque
-transmission remplace la précédente, sans historique de déplacement. Ces trois variables doivent
-être configurées dans les environnements Development, Preview et Production de Vercel.
+| Variable                             | Rôle                                                                                        |
+| ------------------------------------ | ------------------------------------------------------------------------------------------- |
+| `SMTP_PASSWORD`                      | requise — mot de passe de la boîte `contact@welcome-coworking.com`                          |
+| `SMTP_HOST`                          | optionnelle — défaut `pro1.mail.ovh.net`                                                    |
+| `SMTP_PORT`                          | optionnelle — défaut `587` (STARTTLS) ; `465` bascule en TLS implicite                      |
+| `SMTP_USER`                          | optionnelle — défaut `contact@welcome-coworking.com`                                        |
+| `GOOGLE_CALENDAR_ID`                 | requise pour `/display` — identifiant de l’agenda privé partagé                             |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL`       | requise pour `/display` — email du service account en lecture seule                         |
+| `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | requise pour `/display` — clé privée PEM, avec retours à la ligne réels ou encodés en `\\n` |
 
 ## Construit avec
 
