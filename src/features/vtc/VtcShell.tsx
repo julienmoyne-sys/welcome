@@ -8,7 +8,6 @@ import {
   Home,
   MapPin,
   Moon,
-  Navigation,
   QrCode,
   Thermometer,
   Wind,
@@ -130,6 +129,7 @@ function JourneyScreen() {
   const [route, setRoute] = useState<NavigationRoute | null>(null);
   const [navigationStatus, setNavigationStatus] = useState<"idle" | "loading" | "error">("idle");
   const [navigationError, setNavigationError] = useState("");
+  const [cityPhotoFailedFor, setCityPhotoFailedFor] = useState<string | null>(null);
   const [nearbyPoints, setNearbyPoints] = useState<
     Array<{ id: string; name: string; category: string; distanceMeters: number }>
   >([]);
@@ -147,16 +147,27 @@ function JourneyScreen() {
   useEffect(() => {
     if (!nearbyLatitude || !nearbyLongitude) return;
     const controller = new AbortController();
-    const params = new URLSearchParams({
-      lat: nearbyLatitude,
-      lon: nearbyLongitude,
-    });
-    void fetch(`/api/vtc/nearby?${params}`, { signal: controller.signal })
+    const request = route
+      ? fetch("/api/vtc/nearby", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            latitude: Number(nearbyLatitude),
+            longitude: Number(nearbyLongitude),
+            route: route.geometry,
+          }),
+          signal: controller.signal,
+        })
+      : fetch(
+          `/api/vtc/nearby?${new URLSearchParams({ lat: nearbyLatitude, lon: nearbyLongitude })}`,
+          { signal: controller.signal },
+        );
+    void request
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data: { points?: typeof nearbyPoints }) => setNearbyPoints(data.points ?? []))
       .catch(() => undefined);
     return () => controller.abort();
-  }, [nearbyLatitude, nearbyLongitude]);
+  }, [nearbyLatitude, nearbyLongitude, route]);
 
   return (
     <div className={`${styles.detailBody} ${styles.cockpitBody}`}>
@@ -218,47 +229,32 @@ function JourneyScreen() {
       </div>
       <div className={styles.cockpitGrid}>
         <section className={styles.altitudePanel} aria-label="Altitude et profil du parcours">
-          <div className={styles.locationLine}>
-            <MapPin aria-hidden="true" />
-            <span>
+          <Image
+            src={
+              gps?.city && cityPhotoFailedFor !== gps.city
+                ? `/api/vtc/city-image?city=${encodeURIComponent(gps.city)}`
+                : journeyCardImage
+            }
+            alt=""
+            fill
+            sizes="(max-width: 900px) 100vw, 50vw"
+            className={styles.cityImage}
+            unoptimized={Boolean(gps?.city && cityPhotoFailedFor !== gps.city)}
+            onError={() => setCityPhotoFailedFor(gps?.city ?? null)}
+          />
+          <span className={styles.cityImageShade} aria-hidden="true" />
+          <div className={styles.cityCurrentContent}>
+            <span className={styles.locationLine}>
+              <MapPin aria-hidden="true" />
+              Ville actuelle
+            </span>
+            <strong>
               {gps?.city ??
                 (gps
                   ? `${gps.latitude.toFixed(4)}, ${gps.longitude.toFixed(4)}`
                   : "GPS en attente")}
-            </span>
-          </div>
-          <div className={styles.altitudeValue}>
-            <span>Altitude actuelle</span>
-            <strong>{gps?.altitude == null ? "—" : Math.round(gps.altitude)}</strong>
-            <small>m</small>
-          </div>
-          <svg
-            className={styles.elevationChart}
-            viewBox="0 0 620 100"
-            role="img"
-            aria-label="Profil d’altitude de démonstration sur les 30 prochains kilomètres"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="elevation-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#d4bf63" stopOpacity="0.38" />
-                <stop offset="100%" stopColor="#d4bf63" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0 72 C55 68 72 54 118 59 S184 78 235 61 S315 31 364 43 S420 67 468 54 S548 25 620 35 L620 100 L0 100 Z"
-              fill="url(#elevation-fill)"
-            />
-            <path
-              d="M0 72 C55 68 72 54 118 59 S184 78 235 61 S315 31 364 43 S420 67 468 54 S548 25 620 35"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-            />
-          </svg>
-          <div className={styles.chartLegend}>
-            <span>Maintenant</span>
-            <span>+30 km · 218 m</span>
+            </strong>
+            <small>Altitude {gps?.altitude == null ? "—" : `${Math.round(gps.altitude)} m`}</small>
           </div>
         </section>
 
@@ -266,6 +262,7 @@ function JourneyScreen() {
           {[
             { label: "Température", value: "18 °C", icon: Thermometer },
             { label: "Pression", value: "1 016 hPa", icon: Gauge },
+            { label: "Qualité de l’air", value: "Bonne", icon: Wind },
           ].map(({ label, value, icon: Icon }) => (
             <article className={styles.cockpitDial} key={label}>
               <Icon aria-hidden="true" />
@@ -277,22 +274,15 @@ function JourneyScreen() {
       </div>
 
       <div className={styles.cockpitFacts}>
-        {[
-          {
-            label: "Vitesse GPS",
-            value: gps?.speed == null ? "—" : `${Math.round(gps.speed * 3.6)} km/h`,
-            icon: Gauge,
-          },
-          { label: "Ville proche", value: "Obernai · 18 km", icon: Navigation },
-          { label: "Qualité de l’air", value: "Bonne", icon: Wind },
-          { label: "Temps restant", value: remainingTime, icon: Clock3 },
-        ].map(({ label, value, icon: Icon }) => (
-          <article key={label}>
-            <Icon aria-hidden="true" />
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </article>
-        ))}
+        {[{ label: "Temps restant", value: remainingTime, icon: Clock3 }].map(
+          ({ label, value, icon: Icon }) => (
+            <article key={label}>
+              <Icon aria-hidden="true" />
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </article>
+          ),
+        )}
       </div>
 
       <VtcLiveMap route={route} onPosition={updateGps} />
