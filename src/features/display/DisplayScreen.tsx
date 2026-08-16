@@ -384,10 +384,6 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
             <TrafficMap segments={liveInfo.traffic} />
             <div className={styles.trafficLegend}>
               <span>
-                <i className={styles.legendFluid} />
-                Fluide
-              </span>
-              <span>
                 <i className={styles.legendDense} />
                 Dense
               </span>

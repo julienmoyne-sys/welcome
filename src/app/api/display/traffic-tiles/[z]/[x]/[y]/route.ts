@@ -23,38 +23,22 @@ export async function GET(_request: Request, context: { params: Promise<TilePara
     return NextResponse.json({ error: "Traffic service unavailable" }, { status: 503 });
   }
 
-  const orbisUrl = new URL(
-    `https://api.tomtom.com/maps/orbis/traffic/tile/flow/${zoom}/${column}/${row}.png`,
+  const tileUrl = new URL(
+    `https://api.tomtom.com/traffic/map/4/tile/flow/relative-delay/${zoom}/${column}/${row}.png`,
   );
-  orbisUrl.searchParams.set("apiVersion", "1");
-  orbisUrl.searchParams.set("key", apiKey);
-  orbisUrl.searchParams.set("style", "light");
-  orbisUrl.searchParams.set("tileSize", "256");
+  tileUrl.searchParams.set("key", apiKey);
+  tileUrl.searchParams.set("tileSize", "256");
+  tileUrl.searchParams.set("thickness", "12");
 
-  const legacyUrl = new URL(
-    `https://api.tomtom.com/traffic/map/4/tile/flow/relative0/${zoom}/${column}/${row}.png`,
-  );
-  legacyUrl.searchParams.set("key", apiKey);
-  legacyUrl.searchParams.set("tileSize", "256");
+  const response = await fetch(tileUrl, {
+    headers: { Accept: "image/png, application/json" },
+    next: { revalidate: 60 },
+  });
 
-  const upstreamStatuses: number[] = [];
-  let response: Response | null = null;
-  for (const tileUrl of [orbisUrl, legacyUrl]) {
-    const candidate = await fetch(tileUrl, {
-      headers: { Accept: "image/png, application/json" },
-      next: { revalidate: 60 },
-    });
-    upstreamStatuses.push(candidate.status);
-    if (candidate.ok && candidate.headers.get("content-type")?.includes("image/png")) {
-      response = candidate;
-      break;
-    }
-  }
-
-  if (!response) {
-    console.error("TomTom traffic tile unavailable", { upstreamStatuses, zoom });
+  if (!response.ok || !response.headers.get("content-type")?.includes("image/png")) {
+    console.error("TomTom traffic tile unavailable", { upstreamStatus: response.status, zoom });
     return NextResponse.json(
-      { error: "Traffic tile unavailable", upstreamStatuses },
+      { error: "Traffic tile unavailable", upstreamStatus: response.status },
       { status: 502 },
     );
   }
