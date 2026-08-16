@@ -749,6 +749,9 @@
   .liveHeader h2 {
     font-size: clamp(2rem, 3.4vw, 3rem);
   }
+  .liveGrid {
+    grid-template-rows: minmax(0, 0.52fr) minmax(0, 1fr);
+  }
   .weatherPanel,
   .newsPanel,
   .trafficPanel {
@@ -768,8 +771,13 @@
     font-size: clamp(0.9rem, 1.2vw, 1.1rem);
   }
   .weatherDetails {
-    gap: 0.65rem;
-    font-size: 0.78rem;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+  .weatherDetails span {
+    gap: 0.3rem;
+    white-space: nowrap;
   }
   .headlineList article {
     gap: 0.55rem;
