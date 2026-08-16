@@ -384,12 +384,15 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
             <TrafficMap />
             <div className={styles.trafficLegend}>
               <span>
-                <i className={styles.legendDense} />
-                Dense
+                <i className={styles.legendSlow} />
+                Ralentissement
               </span>
               <span>
-                <i className={styles.legendBlocked} />
-                Saturé
+                <i className={styles.legendCongested} />
+                Fort ralentissement
+              </span>
+              <span>
+                <i className={styles.legendStopped} /> À l’arrêt
               </span>
             </div>
             <small className={styles.trafficSource}>Source : TomTom Traffic</small>
