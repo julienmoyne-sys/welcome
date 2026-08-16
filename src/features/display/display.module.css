@@ -755,37 +755,52 @@
   .weatherPanel,
   .newsPanel,
   .trafficPanel {
-    --live-panel-padding: 1.15rem;
+    --live-panel-padding: 1rem;
     padding: var(--live-panel-padding);
+  }
+  .weatherPanel .liveSectionTitle,
+  .newsPanel .liveSectionTitle {
+    gap: 0.55rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+  .weatherPanel .liveSectionTitle svg,
+  .newsPanel .liveSectionTitle svg {
+    width: 1rem;
   }
   .weatherPictogram {
     margin-bottom: 0;
   }
   .weatherPictogram svg {
-    width: 2.75rem;
+    width: 2.35rem;
   }
   .weatherTemperature {
-    font-size: clamp(3.25rem, 5vw, 4.25rem);
+    font-size: clamp(2.75rem, 4.3vw, 3.6rem);
   }
   .weatherCondition {
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-size: clamp(0.78rem, 1vw, 0.92rem);
+    line-height: 1.25;
   }
   .weatherDetails {
     flex-wrap: nowrap;
     gap: 0.5rem;
-    font-size: 0.72rem;
+    font-size: 0.64rem;
   }
   .weatherDetails span {
     gap: 0.3rem;
     white-space: nowrap;
   }
   .headlineList article {
-    gap: 0.55rem;
-    padding: 0.65rem 0;
+    gap: 0.45rem;
+    padding: 0.5rem 0;
   }
   .headlineList strong {
-    font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+    font-size: clamp(0.78rem, 0.95vw, 0.9rem);
+    line-height: 1.22;
     -webkit-line-clamp: 2;
+  }
+  .headlineList small {
+    font-size: 0.6rem;
   }
   .headlineList article:nth-child(n + 3) {
     display: none;
