@@ -596,7 +596,7 @@ export function VtcShell() {
                 ? "GPS en attente"
                 : remoteLocationState === "offline"
                   ? "Signal GPS perdu"
-                  : "Connecter GPS"}
+                  : "GPS"}
           </button>
           <button className={styles.sleepButton} type="button" onClick={enterSleep}>
             <Moon aria-hidden="true" />
