@@ -48,10 +48,24 @@
   justify-content: space-between;
   gap: 2rem;
 }
+.logoFrame {
+  position: relative;
+  display: block;
+  width: clamp(10rem, 16vw, 14rem);
+  aspect-ratio: 5 / 1;
+  margin-bottom: clamp(0.65rem, 1.2vh, 1rem);
+  overflow: hidden;
+  border-radius: 0.35rem;
+  background: rgba(246, 245, 240, 0.94);
+}
 .logo {
-  width: clamp(8rem, 13vw, 12.5rem);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
   height: auto;
-  filter: brightness(0) invert(1);
+  object-fit: contain;
+  transform: translateY(-50%);
 }
 .eyebrow {
   margin: clamp(0.8rem, 1.5vh, 1.25rem) 0 0.55rem;
@@ -128,7 +142,10 @@
 }
 .menuCard:focus-visible,
 .backButton:focus-visible,
-.floatingHome:focus-visible {
+.floatingHome:focus-visible,
+.sleepButton:focus-visible,
+.refreshButton:focus-visible,
+.sleepOverlay:focus-visible {
   outline: 3px solid var(--vtc-gold);
   outline-offset: 3px;
 }
@@ -183,9 +200,10 @@
   padding-bottom: clamp(1rem, 2vh, 1.8rem);
   border-bottom: 1px solid var(--vtc-line);
 }
-.sectionHeader .logo {
+.sectionHeader .logoFrame {
   justify-self: center;
-  width: clamp(7rem, 10vw, 9rem);
+  width: clamp(8rem, 11vw, 10rem);
+  margin-bottom: 0;
 }
 .sectionHeader p {
   justify-self: end;
@@ -425,6 +443,92 @@
   height: 3.5rem;
   border-radius: 50%;
 }
+.utilityControls {
+  position: fixed;
+  z-index: 3;
+  top: max(clamp(5.1rem, 11vh, 7rem), calc(env(safe-area-inset-top) + 4rem));
+  right: max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-right));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.sleepButton,
+.refreshButton {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 999px;
+  background: rgba(8, 9, 9, 0.72);
+  color: rgba(255, 255, 255, 0.58);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+.refreshButton {
+  width: 44px;
+  padding: 0;
+}
+.sleepButton svg,
+.refreshButton svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.5;
+}
+.sleepOverlay {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  width: 100vw;
+  max-width: 100%;
+  height: 100dvh;
+  place-items: center;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: #202020;
+  cursor: default;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 280ms ease,
+    visibility 0s linear 280ms;
+}
+.sleepOverlay[data-active="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 280ms ease,
+    visibility 0s linear 0s;
+}
+.sleepContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: clamp(1rem, 2vh, 1.5rem);
+  color: #242424;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.logoFrameSubdued {
+  width: clamp(11rem, 20vw, 16rem);
+  margin: 0;
+  background: transparent;
+  opacity: 0.18;
+}
+.logoFrameSubdued .logo {
+  filter: brightness(0) invert(1);
+}
 @media (max-width: 1080px), (max-height: 700px) {
   .homeScreen,
   .detailScreen {
@@ -522,7 +626,8 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .menuCard {
+  .menuCard,
+  .sleepOverlay {
     transition: none;
   }
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import { ArrowLeft, Home, QrCode } from "lucide-react";
+import { ArrowLeft, Home, Moon, QrCode, RotateCw } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import coworkingImage from "@/assets/hero-welcome-real.png";
-import welcomeLogo from "@/assets/welcome-logo-cropped.png";
+import welcomeLogo from "@/assets/welcome-vtc-logo.png";
 
 import {
   COWORKING_FEATURES,
@@ -18,10 +18,15 @@ import {
 } from "./content";
 import styles from "./vtc.module.css";
 
-const HOME_TIMEOUT_MS = 2 * 60 * 1_000;
+export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
+const SLEEP_AFTER_RELOAD_KEY = "welcome-vtc-sleep-after-reload";
 
-function VtcLogo() {
-  return <Image src={welcomeLogo} alt="Welcome!" priority className={styles.logo} />;
+function VtcLogo({ subdued = false }: { subdued?: boolean }) {
+  return (
+    <span className={`${styles.logoFrame} ${subdued ? styles.logoFrameSubdued : ""}`}>
+      <Image src={welcomeLogo} alt="Welcome! VTC" priority className={styles.logo} />
+    </span>
+  );
 }
 
 function SectionHeader({ title, onHome }: { title: string; onHome: () => void }) {
@@ -48,7 +53,6 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
       <header className={styles.homeHeader}>
         <div>
           <VtcLogo />
-          <p className={styles.eyebrow}>Welcome VTC</p>
           <h1 id="vtc-welcome-title">Bienvenue à bord</h1>
           <p className={styles.tagline}>Votre trajet, en toute sérénité.</p>
         </div>
@@ -205,7 +209,51 @@ function CoworkingScreen() {
 export function VtcShell() {
   const [activeSection, setActiveSection] = useState<VtcSectionId | null>(null);
   const [time, setTime] = useState("--:--");
-  const goHome = useCallback(() => setActiveSection(null), []);
+  const [isSleeping, setIsSleeping] = useState(false);
+  const inactivityTimer = useRef<number | null>(null);
+  const clearInactivityTimer = useCallback(() => {
+    if (inactivityTimer.current !== null) {
+      window.clearTimeout(inactivityTimer.current);
+      inactivityTimer.current = null;
+    }
+  }, []);
+  const reloadToHome = useCallback(
+    (sleepAfterReload: boolean) => {
+      clearInactivityTimer();
+      setActiveSection(null);
+      if (sleepAfterReload) {
+        setIsSleeping(true);
+        window.sessionStorage.setItem(SLEEP_AFTER_RELOAD_KEY, "1");
+        window.setTimeout(() => window.location.reload(), 80);
+        return;
+      }
+      window.sessionStorage.removeItem(SLEEP_AFTER_RELOAD_KEY);
+      window.location.reload();
+    },
+    [clearInactivityTimer],
+  );
+  const goHome = useCallback(() => reloadToHome(false), [reloadToHome]);
+  const enterSleep = useCallback(() => {
+    reloadToHome(true);
+  }, [reloadToHome]);
+  const wake = useCallback(() => {
+    setActiveSection(null);
+    setIsSleeping(false);
+  }, []);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem(SLEEP_AFTER_RELOAD_KEY) !== "1") return;
+    window.sessionStorage.removeItem(SLEEP_AFTER_RELOAD_KEY);
+    let active = true;
+    window.queueMicrotask(() => {
+      if (!active) return;
+      setActiveSection(null);
+      setIsSleeping(true);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     const updateClock = () =>
@@ -218,18 +266,20 @@ export function VtcShell() {
   }, []);
 
   useEffect(() => {
-    let timeout = window.setTimeout(goHome, HOME_TIMEOUT_MS);
     const reset = () => {
-      window.clearTimeout(timeout);
-      timeout = window.setTimeout(goHome, HOME_TIMEOUT_MS);
+      clearInactivityTimer();
+      if (!isSleeping) {
+        inactivityTimer.current = window.setTimeout(enterSleep, INACTIVITY_TIMEOUT_MS);
+      }
     };
-    const events: Array<keyof WindowEventMap> = ["pointerdown", "touchstart", "keydown"];
+    const events: Array<keyof WindowEventMap> = ["pointerdown", "touchstart", "click", "keydown"];
     events.forEach((event) => window.addEventListener(event, reset, { passive: true }));
+    reset();
     return () => {
-      window.clearTimeout(timeout);
+      clearInactivityTimer();
       events.forEach((event) => window.removeEventListener(event, reset));
     };
-  }, [goHome]);
+  }, [clearInactivityTimer, enterSleep, isSleeping]);
 
   const title = VTC_MENU.find((item) => item.id === activeSection)?.title ?? "";
 
@@ -258,6 +308,48 @@ export function VtcShell() {
           </button>
         </section>
       )}
+      {!isSleeping && (
+        <div className={styles.utilityControls}>
+          {activeSection === null && (
+            <button
+              className={styles.refreshButton}
+              type="button"
+              onClick={() => reloadToHome(false)}
+              aria-label="Actualiser Welcome VTC"
+              title="Actualiser"
+            >
+              <RotateCw aria-hidden="true" />
+            </button>
+          )}
+          <button className={styles.sleepButton} type="button" onClick={enterSleep}>
+            <Moon aria-hidden="true" />
+            <span>Veille</span>
+          </button>
+        </div>
+      )}
+      <button
+        className={styles.sleepOverlay}
+        data-active={isSleeping}
+        type="button"
+        tabIndex={isSleeping ? 0 : -1}
+        aria-hidden={!isSleeping}
+        aria-label="Réveiller Welcome VTC"
+        onPointerDown={(event) => {
+          if (!isSleeping) return;
+          event.preventDefault();
+          event.stopPropagation();
+          wake();
+        }}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
+        <span className={styles.sleepContent}>
+          <VtcLogo subdued />
+          <span>Touchez l’écran pour commencer</span>
+        </span>
+      </button>
     </main>
   );
 }
