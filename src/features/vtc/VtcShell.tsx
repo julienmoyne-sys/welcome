@@ -25,7 +25,12 @@ import servicesCardImage from "@/assets/vtc-card-services.png";
 import strasbourgCardImage from "@/assets/vtc-card-strasbourg.png";
 import welcomeLogo from "@/assets/welcome-vtc-logo.png";
 
-import { VtcLiveMap, type GpsSnapshot, type NavigationRoute } from "./VtcLiveMap";
+import {
+  VtcLiveMap,
+  type GpsSnapshot,
+  type LocationStatus,
+  type NavigationRoute,
+} from "./VtcLiveMap";
 
 import {
   COWORKING_FEATURES,
@@ -127,6 +132,7 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
 function JourneyScreen() {
   const [destinationInput, setDestinationInput] = useState("");
   const [gps, setGps] = useState<GpsSnapshot | null>(null);
+  const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
   const [route, setRoute] = useState<NavigationRoute | null>(null);
   const [navigationStatus, setNavigationStatus] = useState<"idle" | "loading" | "error">("idle");
   const [navigationError, setNavigationError] = useState("");
@@ -135,6 +141,16 @@ function JourneyScreen() {
     Array<{ id: string; name: string; category: string; distanceMeters: number }>
   >([]);
   const updateGps = useCallback((snapshot: GpsSnapshot) => setGps(snapshot), []);
+  const updateLocationStatus = useCallback(
+    (status: LocationStatus) => setLocationStatus(status),
+    [],
+  );
+  const locationPlaceholder =
+    locationStatus === "denied"
+      ? "Localisation refusée"
+      : locationStatus === "unavailable"
+        ? "Position indisponible"
+        : "Localisation en attente";
   const nearbyLatitude = gps?.latitude.toFixed(3);
   const nearbyLongitude = gps?.longitude.toFixed(3);
   const remainingTime = route
@@ -253,7 +269,7 @@ function JourneyScreen() {
               {gps?.city ??
                 (gps
                   ? `${gps.latitude.toFixed(4)}, ${gps.longitude.toFixed(4)}`
-                  : "GPS en attente")}
+                  : locationPlaceholder)}
             </strong>
             <small>Altitude {gps?.altitude == null ? "—" : `${Math.round(gps.altitude)} m`}</small>
           </div>
@@ -286,14 +302,14 @@ function JourneyScreen() {
         )}
       </div>
 
-      <VtcLiveMap route={route} onPosition={updateGps} />
+      <VtcLiveMap route={route} onPosition={updateGps} onStatusChange={updateLocationStatus} />
 
       <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
         <span className={styles.timelineLabel}>Sur votre route</span>
         <div className={styles.timelineTrack}>
           {nearbyPoints.length === 0 ? (
             <span className={styles.poiEmpty}>
-              {gps ? "Recherche à proximité…" : "GPS en attente"}
+              {gps ? "Recherche à proximité…" : locationPlaceholder}
             </span>
           ) : (
             nearbyPoints.map((point) => (

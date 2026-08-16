@@ -13,6 +13,8 @@ export type GpsSnapshot = {
   city: string | null;
 };
 
+export type LocationStatus = "loading" | "ready" | "denied" | "unavailable";
+
 export type NavigationRoute = {
   destination: { label: string; latitude: number; longitude: number };
   durationSeconds: number;
@@ -23,18 +25,21 @@ export type NavigationRoute = {
 type VtcLiveMapProps = {
   route: NavigationRoute | null;
   onPosition: (snapshot: GpsSnapshot) => void;
+  onStatusChange: (status: LocationStatus) => void;
 };
 
 const FALLBACK_POSITION: [number, number] = [48.5734, 7.7521];
 
-export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
+export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onPositionRef = useRef(onPosition);
-  const [status, setStatus] = useState<"loading" | "ready" | "denied" | "unavailable">("loading");
+  const onStatusChangeRef = useRef(onStatusChange);
+  const [status, setStatus] = useState<LocationStatus>("loading");
 
   useEffect(() => {
     onPositionRef.current = onPosition;
-  }, [onPosition]);
+    onStatusChangeRef.current = onStatusChange;
+  }, [onPosition, onStatusChange]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -50,6 +55,11 @@ export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
     let currentPosition: [number, number] | null = null;
     let lastCityLookup = 0;
     let currentCity: string | null = null;
+
+    const changeStatus = (nextStatus: LocationStatus) => {
+      setStatus(nextStatus);
+      onStatusChangeRef.current(nextStatus);
+    };
 
     const updateRoute = (L: typeof import("leaflet"), position: [number, number]) => {
       routeLine?.remove();
@@ -106,7 +116,7 @@ export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
           iconAnchor: [17, 17],
         });
 
-        const updatePosition = async (position: GeolocationPosition) => {
+        const updatePosition = (position: GeolocationPosition) => {
           if (disposed || !map) return;
           const { latitude, longitude, accuracy, altitude, speed } = position.coords;
           const latLng: [number, number] = [latitude, longitude];
@@ -136,43 +146,49 @@ export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
           }
 
           updateRoute(L, latLng);
-          setStatus("ready");
+          changeStatus("ready");
 
-          const now = Date.now();
-          if (now - lastCityLookup > 5 * 60_000) {
-            lastCityLookup = now;
-            try {
-              const response = await fetch(
-                `/api/vtc/commune?lat=${latitude.toFixed(5)}&lon=${longitude.toFixed(5)}`,
-              );
-              if (response.ok) {
-                const data = (await response.json()) as { city?: string | null };
-                currentCity = data.city ?? null;
-              }
-            } catch {
-              currentCity = null;
-            }
-          }
-
-          onPositionRef.current({
+          const snapshot = (city: string | null): GpsSnapshot => ({
             latitude,
             longitude,
             accuracy,
             altitude,
             speed,
-            city: currentCity,
+            city,
           });
+
+          // La position peut provenir du Wi-Fi ou du réseau. Ne pas bloquer son
+          // affichage pendant la résolution, plus lente, du nom de la commune.
+          onPositionRef.current(snapshot(currentCity));
+
+          const now = Date.now();
+          if (now - lastCityLookup > 5 * 60_000) {
+            lastCityLookup = now;
+            void fetch(`/api/vtc/commune?lat=${latitude.toFixed(5)}&lon=${longitude.toFixed(5)}`)
+              .then((response) =>
+                response.ok
+                  ? (response.json() as Promise<{ city?: string | null }>)
+                  : Promise.reject(),
+              )
+              .then((data) => {
+                if (disposed) return;
+                currentCity = data.city ?? null;
+                onPositionRef.current(snapshot(currentCity));
+              })
+              .catch(() => undefined);
+          }
         };
 
         if (!("geolocation" in navigator)) {
-          setStatus("unavailable");
+          changeStatus("unavailable");
           return;
         }
 
         watchId = navigator.geolocation.watchPosition(
-          (position) => void updatePosition(position),
-          (error) => setStatus(error.code === error.PERMISSION_DENIED ? "denied" : "unavailable"),
-          { enableHighAccuracy: true, maximumAge: 5_000, timeout: 20_000 },
+          updatePosition,
+          (error) =>
+            changeStatus(error.code === error.PERMISSION_DENIED ? "denied" : "unavailable"),
+          { enableHighAccuracy: false, maximumAge: 5 * 60_000, timeout: 20_000 },
         );
 
         const refreshSize = () => map?.invalidateSize(false);
@@ -181,7 +197,7 @@ export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
         resizeObserver = new ResizeObserver(refreshSize);
         resizeObserver.observe(containerRef.current);
       } catch {
-        if (!disposed) setStatus("unavailable");
+        if (!disposed) changeStatus("unavailable");
       }
     };
 
