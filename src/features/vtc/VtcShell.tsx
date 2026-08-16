@@ -3,9 +3,7 @@
 import {
   ArrowLeft,
   ArrowRight,
-  CloudSun,
   Clock3,
-  Compass,
   Gauge,
   Home,
   MapPin,
@@ -132,7 +130,12 @@ function JourneyScreen() {
   const [route, setRoute] = useState<NavigationRoute | null>(null);
   const [navigationStatus, setNavigationStatus] = useState<"idle" | "loading" | "error">("idle");
   const [navigationError, setNavigationError] = useState("");
+  const [nearbyPoints, setNearbyPoints] = useState<
+    Array<{ id: string; name: string; category: string; distanceMeters: number }>
+  >([]);
   const updateGps = useCallback((snapshot: GpsSnapshot) => setGps(snapshot), []);
+  const nearbyLatitude = gps?.latitude.toFixed(3);
+  const nearbyLongitude = gps?.longitude.toFixed(3);
   const remainingTime = route
     ? route.durationSeconds < 3600
       ? `${Math.max(1, Math.round(route.durationSeconds / 60))} min`
@@ -141,12 +144,26 @@ function JourneyScreen() {
         )} min`
     : "—";
 
+  useEffect(() => {
+    if (!nearbyLatitude || !nearbyLongitude) return;
+    const controller = new AbortController();
+    const params = new URLSearchParams({
+      lat: nearbyLatitude,
+      lon: nearbyLongitude,
+    });
+    void fetch(`/api/vtc/nearby?${params}`, { signal: controller.signal })
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data: { points?: typeof nearbyPoints }) => setNearbyPoints(data.points ?? []))
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, [nearbyLatitude, nearbyLongitude]);
+
   return (
     <div className={`${styles.detailBody} ${styles.cockpitBody}`}>
       <div className={styles.cockpitHeading}>
         <div className={styles.introBlock}>
           <p className={styles.eyebrow}>Navigation</p>
-          <h2>Cockpit</h2>
+          <h2>COCKPIT</h2>
         </div>
         <div className={styles.destinationEntry}>
           <span className={styles.destinationHint} data-hidden={Boolean(route)} aria-hidden="true">
@@ -249,8 +266,6 @@ function JourneyScreen() {
           {[
             { label: "Température", value: "18 °C", icon: Thermometer },
             { label: "Pression", value: "1 016 hPa", icon: Gauge },
-            { label: "Cap", value: "Nord-Est", icon: Compass },
-            { label: "Météo", value: "Éclaircies", icon: CloudSun },
           ].map(({ label, value, icon: Icon }) => (
             <article className={styles.cockpitDial} key={label}>
               <Icon aria-hidden="true" />
@@ -282,22 +297,27 @@ function JourneyScreen() {
 
       <VtcLiveMap route={route} onPosition={updateGps} />
 
-      <section className={styles.routeTimeline} aria-label="Prochaines villes du parcours">
+      <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
         <span className={styles.timelineLabel}>Sur votre route</span>
         <div className={styles.timelineTrack}>
-          <span className={styles.timelineProgress} />
-          {[
-            ["Strasbourg", "maintenant"],
-            ["Obernai", "18 km"],
-            ["Sélestat", "48 km"],
-            ["Colmar", "72 km"],
-          ].map(([city, distance], index) => (
-            <div className={styles.timelineStop} data-current={index === 0} key={city}>
-              <span className={styles.timelineDot} />
-              <strong>{city}</strong>
-              <small>{distance}</small>
-            </div>
-          ))}
+          {nearbyPoints.length === 0 ? (
+            <span className={styles.poiEmpty}>
+              {gps ? "Recherche à proximité…" : "GPS en attente"}
+            </span>
+          ) : (
+            nearbyPoints.map((point) => (
+              <div className={styles.timelineStop} key={point.id}>
+                <span className={styles.timelineDot} />
+                <strong title={point.name}>{point.name}</strong>
+                <small>
+                  {point.category} ·{" "}
+                  {point.distanceMeters < 1000
+                    ? `${point.distanceMeters} m`
+                    : `${(point.distanceMeters / 1000).toFixed(1).replace(".", ",")} km`}
+                </small>
+              </div>
+            ))
+          )}
         </div>
       </section>
     </div>
@@ -428,6 +448,8 @@ export function VtcShell() {
   const [time, setTime] = useState("--:--");
   const [isSleeping, setIsSleeping] = useState(false);
   const inactivityTimer = useRef<number | null>(null);
+  const sleepStartedAt = useRef(0);
+  const wakePointerStarted = useRef(false);
   const clearInactivityTimer = useCallback(() => {
     if (inactivityTimer.current !== null) {
       window.clearTimeout(inactivityTimer.current);
@@ -441,6 +463,8 @@ export function VtcShell() {
   }, [clearInactivityTimer]);
   const enterSleep = useCallback(() => {
     clearInactivityTimer();
+    sleepStartedAt.current = Date.now();
+    wakePointerStarted.current = false;
     setActiveSection(null);
     setIsSleeping(true);
     window.sessionStorage.setItem(SLEEP_STATE_KEY, "1");
@@ -452,6 +476,7 @@ export function VtcShell() {
 
   useEffect(() => {
     if (window.sessionStorage.getItem(SLEEP_STATE_KEY) !== "1") return;
+    sleepStartedAt.current = Date.now();
     let active = true;
     window.queueMicrotask(() => {
       if (!active) return;
@@ -536,6 +561,13 @@ export function VtcShell() {
           if (!isSleeping) return;
           event.preventDefault();
           event.stopPropagation();
+          if (Date.now() - sleepStartedAt.current >= 1500) wakePointerStarted.current = true;
+        }}
+        onPointerUp={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (!isSleeping || !wakePointerStarted.current) return;
+          wakePointerStarted.current = false;
           wake();
         }}
         onClick={(event) => {

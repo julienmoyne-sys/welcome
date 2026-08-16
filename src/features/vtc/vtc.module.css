@@ -837,6 +837,12 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+.poiEmpty {
+  grid-column: 1 / -1;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.75rem;
+  text-align: center;
+}
 .timelineTrack::before,
 .timelineProgress {
   position: absolute;
