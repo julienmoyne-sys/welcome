@@ -37,6 +37,12 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
           attribution: "© OpenStreetMap",
           maxZoom: 19,
         }).addTo(map);
+        L.tileLayer("/api/display/traffic-tiles/{z}/{x}/{y}", {
+          attribution: "Traffic © TomTom",
+          maxZoom: 19,
+          opacity: 0.9,
+          pane: "overlayPane",
+        }).addTo(map);
 
         for (const segment of segments) {
           L.polyline(
