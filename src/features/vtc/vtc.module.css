@@ -1,0 +1,528 @@
+.shell {
+  --vtc-gold: #d4bf63;
+  --vtc-surface: rgba(255, 255, 255, 0.055);
+  --vtc-line: rgba(255, 255, 255, 0.11);
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #090a0a;
+  color: #f7f6f2;
+  font-family: var(--font-inter-sans), sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.ambientLight {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 8%, rgba(212, 191, 99, 0.16), transparent 35%),
+    radial-gradient(circle at 5% 100%, rgba(111, 132, 113, 0.13), transparent 32%);
+  pointer-events: none;
+}
+.homeScreen,
+.detailScreen {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 100dvh;
+  padding: max(clamp(1.5rem, 3.2vh, 3.5rem), env(safe-area-inset-top))
+    max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-right))
+    max(clamp(1.5rem, 3vh, 3rem), env(safe-area-inset-bottom))
+    max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-left));
+}
+.homeScreen {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.2rem, 2.5vh, 2.5rem);
+}
+.homeHeader {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.logo {
+  width: clamp(8rem, 13vw, 12.5rem);
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+.eyebrow {
+  margin: clamp(0.8rem, 1.5vh, 1.25rem) 0 0.55rem;
+  color: var(--vtc-gold);
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.homeHeader h1 {
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2.5rem, min(5vw, 7vh), 5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+.tagline {
+  margin: 0.65rem 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(0.95rem, 1.35vw, 1.3rem);
+}
+.clock {
+  color: var(--vtc-gold);
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.menuGrid {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.4vw, 1.35rem);
+}
+.menuCard {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 8rem;
+  align-items: flex-end;
+  gap: clamp(0.8rem, 1.5vw, 1.4rem);
+  overflow: hidden;
+  padding: clamp(1.1rem, 2vw, 2rem);
+  border: 1px solid var(--vtc-line);
+  border-radius: clamp(1.1rem, 2vw, 1.8rem);
+  background: var(--vtc-surface);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+.menuCard:nth-child(1),
+.menuCard:nth-child(2),
+.menuCard:nth-child(3) {
+  grid-column: span 2;
+}
+.menuCard:nth-child(4) {
+  grid-column: span 3;
+}
+.menuCard:nth-child(5) {
+  grid-column: span 3;
+}
+.menuCard:active {
+  transform: scale(0.985);
+  background: rgba(212, 191, 99, 0.11);
+  border-color: rgba(212, 191, 99, 0.55);
+}
+.menuCard:focus-visible,
+.backButton:focus-visible,
+.floatingHome:focus-visible {
+  outline: 3px solid var(--vtc-gold);
+  outline-offset: 3px;
+}
+.cardNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+.cardIcon {
+  width: clamp(1.8rem, 2.7vw, 2.7rem);
+  height: auto;
+  flex: 0 0 auto;
+  color: var(--vtc-gold);
+  stroke-width: 1.4;
+}
+.cardCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.cardCopy strong {
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1rem, min(1.65vw, 2.6vh), 1.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.cardCopy small {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: clamp(0.72rem, 0.95vw, 0.9rem);
+  line-height: 1.35;
+}
+.cardArrow {
+  margin-left: auto;
+  color: var(--vtc-gold);
+  font-size: 1.6rem;
+}
+.detailScreen {
+  display: flex;
+  flex-direction: column;
+}
+.sectionHeader {
+  display: grid;
+  min-width: 0;
+  flex: 0 0 auto;
+  grid-template-columns: minmax(8rem, 1fr) auto minmax(8rem, 1fr);
+  align-items: center;
+  padding-bottom: clamp(1rem, 2vh, 1.8rem);
+  border-bottom: 1px solid var(--vtc-line);
+}
+.sectionHeader .logo {
+  justify-self: center;
+  width: clamp(7rem, 10vw, 9rem);
+}
+.sectionHeader p {
+  justify-self: end;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.backButton,
+.floatingHome {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--vtc-line);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.backButton {
+  width: fit-content;
+  gap: 0.65rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  font: inherit;
+}
+.backButton svg,
+.floatingHome svg {
+  width: 1.2rem;
+}
+.detailViewport {
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.detailViewport::-webkit-scrollbar {
+  display: none;
+}
+.detailBody {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vh, 3.5rem);
+  padding-block: clamp(1.5rem, 4vh, 3.5rem);
+}
+.introBlock {
+  max-width: 52rem;
+}
+.introBlock h2,
+.visualCopy h2 {
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2.1rem, min(4vw, 6vh), 4.4rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+.introBlock > p:last-child,
+.visualCopy > p:last-child {
+  max-width: 46rem;
+  margin: 0.85rem 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+  line-height: 1.5;
+}
+.infoGrid,
+.safetyGrid,
+.serviceGrid,
+.categoryGrid {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  gap: clamp(0.8rem, 1.5vw, 1.4rem);
+}
+.infoGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.infoCard,
+.safetyCard,
+.serviceCard,
+.categoryCard {
+  min-width: 0;
+  border: 1px solid var(--vtc-line);
+  border-radius: clamp(1rem, 1.8vw, 1.6rem);
+  background: var(--vtc-surface);
+}
+.infoCard {
+  display: flex;
+  min-height: 10rem;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2.2vw, 2rem);
+}
+.infoCard svg,
+.serviceCard svg,
+.categoryCard svg {
+  width: clamp(1.7rem, 2.4vw, 2.5rem);
+  color: var(--vtc-gold);
+  stroke-width: 1.4;
+}
+.infoCard span {
+  margin-top: auto;
+  color: rgba(255, 255, 255, 0.5);
+}
+.infoCard strong {
+  margin-top: 0.4rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+}
+.safetyGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.safetyCard {
+  display: flex;
+  min-height: 9rem;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: clamp(1.2rem, 2.2vw, 2rem);
+}
+.safetyCard > svg {
+  width: clamp(2rem, 3vw, 2.8rem);
+  flex: 0 0 auto;
+  color: var(--vtc-gold);
+  stroke-width: 1.3;
+}
+.safetyCard h3 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  text-transform: uppercase;
+}
+.safetyCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.56);
+  line-height: 1.45;
+}
+.serviceGrid,
+.categoryGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.serviceCard,
+.categoryCard {
+  display: flex;
+  min-height: 11rem;
+  flex-direction: column;
+  padding: clamp(1.1rem, 2vw, 1.8rem);
+}
+.serviceCard strong,
+.categoryCard strong {
+  margin-top: auto;
+  font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+}
+.serviceCard small,
+.categoryCard small {
+  margin-top: 0.45rem;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.35;
+}
+.coworkingBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(16rem, 0.75fr);
+  align-items: stretch;
+}
+.coworkingVisual {
+  position: relative;
+  min-width: 0;
+  min-height: 28rem;
+  overflow: hidden;
+  border-radius: clamp(1.2rem, 2vw, 2rem);
+}
+.coworkingVisual img {
+  object-fit: cover;
+}
+.visualShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5, 6, 6, 0.88), rgba(5, 6, 6, 0.12));
+}
+.visualCopy {
+  position: absolute;
+  inset: auto auto clamp(1.5rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  width: min(78%, 44rem);
+}
+.coworkingAside {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.coworkingAside ul {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.coworkingAside li {
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--vtc-line);
+  color: rgba(255, 255, 255, 0.68);
+}
+.qrPlaceholder {
+  display: flex;
+  min-height: 7rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px dashed rgba(212, 191, 99, 0.5);
+  border-radius: 1.2rem;
+  color: var(--vtc-gold);
+}
+.qrPlaceholder svg {
+  width: 3rem;
+  height: 3rem;
+}
+.qrPlaceholder div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.qrPlaceholder small {
+  color: rgba(255, 255, 255, 0.42);
+}
+.floatingHome {
+  position: absolute;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+@media (max-width: 1080px), (max-height: 700px) {
+  .homeScreen,
+  .detailScreen {
+    padding: max(1.1rem, env(safe-area-inset-top)) max(1.2rem, env(safe-area-inset-right))
+      max(1.1rem, env(safe-area-inset-bottom)) max(1.2rem, env(safe-area-inset-left));
+  }
+  .homeScreen {
+    gap: 1rem;
+  }
+  .homeHeader h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  .tagline {
+    font-size: 0.85rem;
+  }
+  .menuGrid {
+    gap: 0.7rem;
+  }
+  .menuCard {
+    min-height: 6.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  .cardCopy strong {
+    font-size: clamp(0.85rem, 1.55vw, 1.05rem);
+  }
+  .cardCopy small {
+    font-size: 0.68rem;
+  }
+  .cardIcon {
+    width: 1.7rem;
+  }
+  .detailBody {
+    gap: 1.25rem;
+    padding-block: 1.2rem;
+  }
+  .introBlock h2,
+  .visualCopy h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  }
+  .infoCard,
+  .serviceCard,
+  .categoryCard {
+    min-height: 8rem;
+  }
+  .safetyCard {
+    min-height: 7rem;
+    padding: 1rem;
+  }
+  .safetyCard p {
+    font-size: 0.8rem;
+  }
+  .coworkingVisual {
+    min-height: 20rem;
+  }
+}
+@media (max-width: 900px) {
+  .serviceGrid,
+  .categoryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .infoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .coworkingBody {
+    grid-template-columns: minmax(0, 1.25fr) minmax(14rem, 0.75fr);
+  }
+}
+@media (orientation: portrait) {
+  .shell {
+    position: relative;
+    min-height: 100dvh;
+  }
+  .homeScreen,
+  .detailScreen {
+    min-height: 100dvh;
+    height: auto;
+  }
+  .menuGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+  .menuCard:nth-child(n) {
+    grid-column: span 1;
+    min-height: 10rem;
+  }
+  .menuCard:last-child {
+    grid-column: 1 / -1;
+  }
+  .coworkingBody {
+    grid-template-columns: 1fr;
+  }
+  .coworkingVisual {
+    min-height: 24rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menuCard {
+    transition: none;
+  }
+}

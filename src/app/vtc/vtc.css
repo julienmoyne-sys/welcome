@@ -1,0 +1,24 @@
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #090a0a;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+button {
+  font: inherit;
+}
+img,
+svg,
+canvas,
+video,
+iframe {
+  max-width: 100%;
+}
