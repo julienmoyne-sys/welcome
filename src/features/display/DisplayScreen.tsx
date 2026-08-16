@@ -335,18 +335,20 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
                     {Math.round(liveInfo.weather.temperature)}°
                   </strong>
                 </div>
-                <p className={styles.weatherCondition}>
-                  {weatherLabel(liveInfo.weather.weatherCode)}
-                </p>
-                <div className={styles.weatherDetails}>
-                  <span>
-                    <Droplets />
-                    {liveInfo.weather.humidity}%
-                  </span>
-                  <span>
-                    <Wind />
-                    {Math.round(liveInfo.weather.windSpeed)} km/h
-                  </span>
+                <div className={styles.weatherInfo}>
+                  <p className={styles.weatherCondition}>
+                    {weatherLabel(liveInfo.weather.weatherCode)}
+                  </p>
+                  <div className={styles.weatherDetails}>
+                    <span>
+                      <Droplets />
+                      {liveInfo.weather.humidity}%
+                    </span>
+                    <span>
+                      <Wind />
+                      {Math.round(liveInfo.weather.windSpeed)} km/h
+                    </span>
+                  </div>
                 </div>
               </>
             ) : (

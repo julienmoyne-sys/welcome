@@ -524,20 +524,25 @@
   line-height: 0.8;
 }
 .weatherCondition {
-  grid-column: 2;
-  grid-row: 2;
   margin: 0;
   color: #d4bf63;
   font-family: var(--font-manrope-sans), sans-serif;
   font-size: clamp(1.1rem, 1.5vw, 1.7rem);
 }
-.weatherDetails {
+.weatherInfo {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 2 / 4;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.65rem;
+}
+.weatherDetails {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0;
   color: rgba(255, 255, 255, 0.58);
 }
 .weatherDetails span {
@@ -553,7 +558,8 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  height: calc(100% - 2rem);
+  min-height: 0;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
 }
@@ -605,6 +611,9 @@
 }
 .newsPanel {
   grid-area: news;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
 }
 .trafficMapFrame {
   position: relative;
@@ -746,20 +755,20 @@
     padding: var(--live-panel-padding);
   }
   .weatherPictogram {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
   }
   .weatherPictogram svg {
-    width: 3.25rem;
+    width: 2.75rem;
   }
   .weatherTemperature {
-    font-size: clamp(4rem, 6vw, 5.25rem);
+    font-size: clamp(3.25rem, 5vw, 4.25rem);
   }
   .weatherCondition {
-    margin-top: 1rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
   }
   .weatherDetails {
-    gap: 0.75rem;
-    margin-top: 0.75rem;
+    gap: 0.65rem;
+    font-size: 0.78rem;
   }
   .headlineList article {
     gap: 0.55rem;
@@ -767,6 +776,10 @@
   }
   .headlineList strong {
     font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+    -webkit-line-clamp: 2;
+  }
+  .headlineList article:nth-child(n + 3) {
+    display: none;
   }
 }
 @media (max-aspect-ratio: 4/3) {
