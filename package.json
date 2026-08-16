@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "test": "node --test --experimental-strip-types src/lib/vtc-location.test.ts",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write ."
   },
@@ -41,6 +42,7 @@
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@types/nodemailer": "^8.0.1",
+    "@upstash/redis": "^1.35.8",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",

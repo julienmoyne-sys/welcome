@@ -37,6 +37,7 @@ import {
   type VtcSectionId,
 } from "./content";
 import styles from "./vtc.module.css";
+import type { VtcLocation, VtcLocationState } from "@/lib/vtc-location";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
 const SLEEP_STATE_KEY = "welcome-vtc-sleeping";
@@ -124,7 +125,7 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
   );
 }
 
-function JourneyScreen() {
+function JourneyScreen({ externalPosition }: { externalPosition: VtcLocation | null }) {
   const [destinationInput, setDestinationInput] = useState("");
   const [gps, setGps] = useState<GpsSnapshot | null>(null);
   const [route, setRoute] = useState<NavigationRoute | null>(null);
@@ -286,7 +287,7 @@ function JourneyScreen() {
         )}
       </div>
 
-      <VtcLiveMap route={route} onPosition={updateGps} />
+      <VtcLiveMap route={route} onPosition={updateGps} externalPosition={externalPosition} />
 
       <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
         <span className={styles.timelineLabel}>Sur votre route</span>
@@ -438,6 +439,14 @@ export function VtcShell() {
   const [activeSection, setActiveSection] = useState<VtcSectionId | null>(null);
   const [time, setTime] = useState("--:--");
   const [isSleeping, setIsSleeping] = useState(false);
+  const [remoteLocation, setRemoteLocation] = useState<VtcLocation | null>(null);
+  const [remoteLocationState, setRemoteLocationState] = useState<VtcLocationState | "waiting">(
+    "waiting",
+  );
+  const [locationAuthOpen, setLocationAuthOpen] = useState(false);
+  const [locationAccessCode, setLocationAccessCode] = useState("");
+  const [locationAuthError, setLocationAuthError] = useState("");
+  const [locationPollVersion, setLocationPollVersion] = useState(0);
   const inactivityTimer = useRef<number | null>(null);
   const sleepStartedAt = useRef(0);
   const wakePointerStarted = useRef(false);
@@ -504,6 +513,42 @@ export function VtcShell() {
     };
   }, [clearInactivityTimer, enterSleep, isSleeping]);
 
+  useEffect(() => {
+    let disposed = false;
+    const poll = async () => {
+      if (document.visibilityState === "hidden") return;
+      try {
+        const response = await fetch("/api/vtc/location", { cache: "no-store" });
+        if (disposed) return;
+        if (response.status === 401) {
+          setRemoteLocation(null);
+          setRemoteLocationState("waiting");
+          return;
+        }
+        if (!response.ok) throw new Error();
+        const data = (await response.json()) as {
+          location?: VtcLocation | null;
+          state?: VtcLocationState;
+        };
+        setRemoteLocation(data.location ?? null);
+        setRemoteLocationState(data.state ?? "offline");
+      } catch {
+        if (!disposed) setRemoteLocationState("offline");
+      }
+    };
+    void poll();
+    const timer = window.setInterval(poll, isSleeping ? 30_000 : 10_000);
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") void poll();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      disposed = true;
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [isSleeping, locationPollVersion]);
+
   const title = VTC_MENU.find((item) => item.id === activeSection)?.title ?? "";
 
   return (
@@ -515,7 +560,11 @@ export function VtcShell() {
         <section className={styles.detailScreen}>
           <SectionHeader title={title} onHome={goHome} />
           <div className={styles.detailViewport}>
-            {activeSection === "journey" && <JourneyScreen />}
+            {activeSection === "journey" && (
+              <JourneyScreen
+                externalPosition={remoteLocationState === "offline" ? null : remoteLocation}
+              />
+            )}
             {activeSection === "live" && <LiveScreen />}
             {activeSection === "entertainment" && <EntertainmentScreen />}
             {activeSection === "services" && <ServicesScreen />}
@@ -534,10 +583,71 @@ export function VtcShell() {
       )}
       {!isSleeping && (
         <div className={styles.utilityControls}>
+          <button
+            className={styles.gpsLinkStatus}
+            data-state={remoteLocationState}
+            type="button"
+            onClick={() => setLocationAuthOpen(true)}
+          >
+            <span aria-hidden="true" />
+            {remoteLocationState === "live"
+              ? "GPS actif"
+              : remoteLocationState === "stale"
+                ? "GPS en attente"
+                : remoteLocationState === "offline"
+                  ? "Signal GPS perdu"
+                  : "Connecter GPS"}
+          </button>
           <button className={styles.sleepButton} type="button" onClick={enterSleep}>
             <Moon aria-hidden="true" />
             <span>Veille</span>
           </button>
+        </div>
+      )}
+      {locationAuthOpen && !isSleeping && (
+        <div
+          className={styles.locationAuthBackdrop}
+          role="presentation"
+          onPointerDown={() => setLocationAuthOpen(false)}
+        >
+          <form
+            className={styles.locationAuthPanel}
+            onPointerDown={(event) => event.stopPropagation()}
+            onSubmit={async (event) => {
+              event.preventDefault();
+              setLocationAuthError("");
+              const response = await fetch("/api/vtc/location/session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ secret: locationAccessCode, role: "viewer" }),
+              });
+              if (response.ok) {
+                setLocationAccessCode("");
+                setLocationAuthOpen(false);
+                setRemoteLocationState("waiting");
+                setLocationPollVersion((version) => version + 1);
+              } else setLocationAuthError("Code d’accès incorrect ou service non configuré.");
+            }}
+          >
+            <strong>Connexion GPS véhicule</strong>
+            <input
+              type="password"
+              value={locationAccessCode}
+              onChange={(event) => setLocationAccessCode(event.target.value)}
+              placeholder="Code d’accès"
+              aria-label="Code d’accès GPS"
+              autoFocus
+            />
+            <div>
+              <button type="button" onClick={() => setLocationAuthOpen(false)}>
+                Annuler
+              </button>
+              <button type="submit" disabled={!locationAccessCode}>
+                Connecter
+              </button>
+            </div>
+            {locationAuthError && <small>{locationAuthError}</small>}
+          </form>
         </div>
       )}
       {!isSleeping && (

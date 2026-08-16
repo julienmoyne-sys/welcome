@@ -23,11 +23,18 @@ export type NavigationRoute = {
 type VtcLiveMapProps = {
   route: NavigationRoute | null;
   onPosition: (snapshot: GpsSnapshot) => void;
+  externalPosition?: {
+    latitude: number;
+    longitude: number;
+    accuracy: number;
+    speed: number | null;
+    timestamp: number;
+  } | null;
 };
 
 const FALLBACK_POSITION: [number, number] = [48.5734, 7.7521];
 
-export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
+export function VtcLiveMap({ route, onPosition, externalPosition }: VtcLiveMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onPositionRef = useRef(onPosition);
   const [status, setStatus] = useState<"loading" | "ready" | "denied" | "unavailable">("loading");
@@ -164,16 +171,28 @@ export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
           });
         };
 
-        if (!("geolocation" in navigator)) {
+        if (externalPosition) {
+          await updatePosition({
+            coords: {
+              ...externalPosition,
+              altitude: null,
+              altitudeAccuracy: null,
+              heading: null,
+              toJSON: () => ({}),
+            },
+            timestamp: externalPosition.timestamp,
+            toJSON: () => ({}),
+          });
+        } else if (externalPosition === null || !("geolocation" in navigator)) {
           setStatus("unavailable");
           return;
+        } else {
+          watchId = navigator.geolocation.watchPosition(
+            (position) => void updatePosition(position),
+            (error) => setStatus(error.code === error.PERMISSION_DENIED ? "denied" : "unavailable"),
+            { enableHighAccuracy: true, maximumAge: 5_000, timeout: 20_000 },
+          );
         }
-
-        watchId = navigator.geolocation.watchPosition(
-          (position) => void updatePosition(position),
-          (error) => setStatus(error.code === error.PERMISSION_DENIED ? "denied" : "unavailable"),
-          { enableHighAccuracy: true, maximumAge: 5_000, timeout: 20_000 },
-        );
 
         const refreshSize = () => map?.invalidateSize(false);
         window.setTimeout(refreshSize, 0);
@@ -193,7 +212,7 @@ export function VtcLiveMap({ route, onPosition }: VtcLiveMapProps) {
       resizeObserver?.disconnect();
       map?.remove();
     };
-  }, [route]);
+  }, [route, externalPosition]);
 
   return (
     <section className={styles.cockpitMap} aria-label="Carte GPS en temps réel">
