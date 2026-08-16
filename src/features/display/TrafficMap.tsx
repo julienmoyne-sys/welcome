@@ -56,7 +56,7 @@ export function TrafficMap() {
 
         L.circleMarker([48.5572, 7.74742], {
           radius: 8,
-          color: "#d4bf63",
+          color: "#39ff14",
           weight: 3,
           fillColor: "#ffffff",
           fillOpacity: 1,
