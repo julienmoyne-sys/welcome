@@ -5,7 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./display.module.css";
 import type { LiveInfoResponse } from "./types";
 
-const STATUS_COLORS = ["#75807d", "#54bd78", "#e0b84f", "#df756b"] as const;
+const SIRAC_ALERT_COLORS: Record<number, string> = {
+  2: "#ffc247",
+  3: "#ff443d",
+};
 
 export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,6 +36,12 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
           zoomSnap: 0.01,
           keyboard: false,
         });
+        map.createPane("trafficFlowPane");
+        const trafficFlowPane = map.getPane("trafficFlowPane");
+        if (trafficFlowPane) {
+          trafficFlowPane.style.zIndex = "350";
+          trafficFlowPane.style.pointerEvents = "none";
+        }
         L.tileLayer("/api/display/map-tiles/{z}/{x}/{y}", {
           attribution: "© OpenStreetMap",
           maxZoom: 19,
@@ -40,17 +49,19 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
         L.tileLayer("/api/display/traffic-tiles/{z}/{x}/{y}", {
           attribution: "Traffic © TomTom",
           maxZoom: 19,
-          opacity: 0.9,
-          pane: "overlayPane",
+          opacity: 1,
+          pane: "trafficFlowPane",
         }).addTo(map);
 
         for (const segment of segments) {
+          const color = SIRAC_ALERT_COLORS[segment.status];
+          if (!color) continue;
           L.polyline(
             segment.coordinates.map(([lon, lat]) => [lat, lon] as [number, number]),
             {
-              color: STATUS_COLORS[Math.min(segment.status, 3)],
-              weight: 4,
-              opacity: segment.status === 0 ? 0.45 : 0.95,
+              color,
+              weight: 5,
+              opacity: 0.95,
               lineCap: "round",
               lineJoin: "round",
             },
@@ -72,7 +83,13 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
           })
           .addTo(map);
 
-        map.setView([48.5734, 7.7521], 13.53, { animate: false });
+        map.fitBounds(
+          [
+            [48.535, 7.63],
+            [48.65, 7.82],
+          ],
+          { animate: false, padding: [16, 16] },
+        );
 
         const refreshSize = () => {
           const container = containerRef.current;

@@ -105,6 +105,8 @@ async function getTraffic(): Promise<LiveInfoResponse["traffic"]> {
       (item) =>
         item.ident !== undefined &&
         item.name &&
+        item.etat !== undefined &&
+        item.etat >= 2 &&
         !item.name.toLowerCase().startsWith("cycl") &&
         item.geo_shape?.geometry?.type === "LineString" &&
         item.geo_shape.geometry.coordinates,

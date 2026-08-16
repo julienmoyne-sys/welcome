@@ -397,7 +397,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
               </span>
             </div>
             <small className={styles.trafficSource}>
-              Source : Eurométropole de Strasbourg · SIRAC
+              Sources : TomTom Traffic · SIRAC (perturbations uniquement)
             </small>
           </section>
         </div>

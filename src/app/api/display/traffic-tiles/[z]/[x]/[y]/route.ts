@@ -24,7 +24,7 @@ export async function GET(_request: Request, context: { params: Promise<TilePara
   }
 
   const tileUrl = new URL(
-    `https://api.tomtom.com/traffic/map/4/tile/flow/relative0-dark/${zoom}/${column}/${row}.png`,
+    `https://api.tomtom.com/traffic/map/4/tile/flow/relative0/${zoom}/${column}/${row}.png`,
   );
   tileUrl.searchParams.set("key", apiKey);
   tileUrl.searchParams.set("tileSize", "256");
