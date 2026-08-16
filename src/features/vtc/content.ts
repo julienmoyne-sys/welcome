@@ -6,9 +6,13 @@ import {
   Building2,
   CarFront,
   DoorOpen,
+  Gamepad2,
+  Headphones,
   Landmark,
   MapPinned,
   Music2,
+  Newspaper,
+  Radio,
   Route,
   ShieldCheck,
   ShoppingBag,
@@ -20,7 +24,8 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export type VtcSectionId = "journey" | "safety" | "services" | "strasbourg" | "coworking";
+export type VtcSectionId =
+  "journey" | "live" | "entertainment" | "alsace" | "services" | "coworking";
 
 export type VtcMenuItem = {
   id: VtcSectionId;
@@ -33,40 +38,59 @@ export type VtcMenuItem = {
 export const VTC_MENU: VtcMenuItem[] = [
   {
     id: "journey",
-    title: "Votre trajet",
+    title: "Trajet",
     description: "Les informations utiles de votre parcours.",
     icon: Route,
     accent: "01",
   },
   {
-    id: "safety",
-    title: "Sécurité",
-    description: "Les consignes essentielles à bord.",
-    icon: ShieldCheck,
+    id: "live",
+    title: "En direct",
+    description: "Actualités et météo",
+    icon: Radio,
     accent: "02",
+  },
+  {
+    id: "entertainment",
+    title: "Divertissements",
+    description: "Musique, lecture et jeux à bord.",
+    icon: Headphones,
+    accent: "03",
+  },
+  {
+    id: "alsace",
+    title: "Alsace",
+    description: "Nos suggestions pour découvrir la région.",
+    icon: MapPinned,
+    accent: "04",
   },
   {
     id: "services",
     title: "Services à bord",
     description: "Votre confort pendant le trajet.",
     icon: Armchair,
-    accent: "03",
-  },
-  {
-    id: "strasbourg",
-    title: "Découvrir Strasbourg",
-    description: "Quelques pistes pour profiter de la ville.",
-    icon: MapPinned,
-    accent: "04",
+    accent: "05",
   },
   {
     id: "coworking",
-    title: "Welcome! Coworking",
+    title: "Coworking",
     description: "Un lieu de travail premium à Strasbourg.",
     icon: BriefcaseBusiness,
-    accent: "05",
+    accent: "06",
   },
 ];
+
+export const LIVE_ITEMS = [
+  { title: "Trafic", icon: CarFront },
+  { title: "Temps de trajet", icon: Route },
+  { title: "Heure d’arrivée", icon: MapPinned },
+] as const;
+
+export const ENTERTAINMENT_ITEMS = [
+  { title: "Musique", icon: Music2 },
+  { title: "Presse", icon: Newspaper },
+  { title: "Jeux", icon: Gamepad2 },
+] as const;
 
 export const SAFETY_ITEMS = [
   {

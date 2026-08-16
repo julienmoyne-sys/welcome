@@ -6,17 +6,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import coworkingImage from "@/assets/hero-welcome-real.png";
 import coworkingCardImage from "@/assets/vtc-card-coworking.png";
+import entertainmentCardImage from "@/assets/vtc-card-entertainment.png";
 import journeyCardImage from "@/assets/vtc-card-journey.png";
-import safetyCardImage from "@/assets/vtc-card-safety.png";
+import liveCardImage from "@/assets/vtc-card-live.png";
 import servicesCardImage from "@/assets/vtc-card-services.png";
 import strasbourgCardImage from "@/assets/vtc-card-strasbourg.png";
 import welcomeLogo from "@/assets/welcome-vtc-logo.png";
 
 import {
   COWORKING_FEATURES,
+  ENTERTAINMENT_ITEMS,
   JOURNEY_FIELDS,
+  LIVE_ITEMS,
   ONBOARD_SERVICES,
-  SAFETY_ITEMS,
   STRASBOURG_CATEGORIES,
   VTC_MENU,
   type VtcSectionId,
@@ -24,12 +26,12 @@ import {
 import styles from "./vtc.module.css";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
-const SLEEP_AFTER_RELOAD_KEY = "welcome-vtc-sleep-after-reload";
 const VTC_CARD_IMAGES = {
   journey: journeyCardImage,
-  safety: safetyCardImage,
+  live: liveCardImage,
+  entertainment: entertainmentCardImage,
   services: servicesCardImage,
-  strasbourg: strasbourgCardImage,
+  alsace: strasbourgCardImage,
   coworking: coworkingCardImage,
 } as const;
 
@@ -127,21 +129,41 @@ function JourneyScreen() {
   );
 }
 
-function SafetyScreen() {
+function LiveScreen() {
   return (
     <div className={styles.detailBody}>
       <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Voyagez sereinement</p>
-        <h2>Quelques gestes essentiels</h2>
+        <p className={styles.eyebrow}>En direct</p>
+        <h2>Votre trajet en temps réel</h2>
+        <p>Les informations de circulation seront actualisées tout au long de votre trajet.</p>
       </div>
-      <div className={styles.safetyGrid}>
-        {SAFETY_ITEMS.map(({ title, text, icon: Icon }) => (
-          <article className={styles.safetyCard} key={title}>
+      <div className={styles.serviceGrid}>
+        {LIVE_ITEMS.map(({ title, icon: Icon }) => (
+          <article className={styles.serviceCard} key={title}>
             <Icon aria-hidden="true" />
-            <div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
+            <strong>{title}</strong>
+            <small>Mise à jour en direct</small>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EntertainmentScreen() {
+  return (
+    <div className={styles.detailBody}>
+      <div className={styles.introBlock}>
+        <p className={styles.eyebrow}>Pendant le trajet</p>
+        <h2>Divertissements</h2>
+        <p>Profitez d’une sélection pensée pour rendre votre voyage encore plus agréable.</p>
+      </div>
+      <div className={styles.serviceGrid}>
+        {ENTERTAINMENT_ITEMS.map(({ title, icon: Icon }) => (
+          <article className={styles.serviceCard} key={title}>
+            <Icon aria-hidden="true" />
+            <strong>{title}</strong>
+            <small>Sélection à venir</small>
           </article>
         ))}
       </div>
@@ -174,9 +196,9 @@ function StrasbourgScreen() {
   return (
     <div className={styles.detailBody}>
       <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Escapade locale</p>
-        <h2>Découvrir Strasbourg</h2>
-        <p>Une sélection locale pourra prochainement enrichir chacune de ces catégories.</p>
+        <p className={styles.eyebrow}>Escapade régionale</p>
+        <h2>Découvrir l’Alsace</h2>
+        <p>Une sélection régionale pourra prochainement enrichir chacune de ces catégories.</p>
       </div>
       <div className={styles.categoryGrid}>
         {STRASBOURG_CATEGORIES.map(({ title, icon: Icon }) => (
@@ -237,42 +259,18 @@ export function VtcShell() {
       inactivityTimer.current = null;
     }
   }, []);
-  const reloadToHome = useCallback(
-    (sleepAfterReload: boolean) => {
-      clearInactivityTimer();
-      setActiveSection(null);
-      if (sleepAfterReload) {
-        setIsSleeping(true);
-        window.sessionStorage.setItem(SLEEP_AFTER_RELOAD_KEY, "1");
-        window.setTimeout(() => window.location.reload(), 80);
-        return;
-      }
-      window.sessionStorage.removeItem(SLEEP_AFTER_RELOAD_KEY);
-      window.location.reload();
-    },
-    [clearInactivityTimer],
-  );
-  const goHome = useCallback(() => reloadToHome(false), [reloadToHome]);
-  const enterSleep = useCallback(() => {
-    reloadToHome(true);
-  }, [reloadToHome]);
-  const wake = useCallback(() => {
+  const goHome = useCallback(() => {
+    clearInactivityTimer();
     setActiveSection(null);
-    setIsSleeping(false);
-  }, []);
-
-  useEffect(() => {
-    if (window.sessionStorage.getItem(SLEEP_AFTER_RELOAD_KEY) !== "1") return;
-    window.sessionStorage.removeItem(SLEEP_AFTER_RELOAD_KEY);
-    let active = true;
-    window.queueMicrotask(() => {
-      if (!active) return;
-      setActiveSection(null);
-      setIsSleeping(true);
-    });
-    return () => {
-      active = false;
-    };
+    window.location.reload();
+  }, [clearInactivityTimer]);
+  const enterSleep = useCallback(() => {
+    clearInactivityTimer();
+    setActiveSection(null);
+    setIsSleeping(true);
+  }, [clearInactivityTimer]);
+  const wake = useCallback(() => {
+    window.location.reload();
   }, []);
 
   useEffect(() => {
@@ -313,9 +311,10 @@ export function VtcShell() {
           <SectionHeader title={title} onHome={goHome} />
           <div className={styles.detailViewport}>
             {activeSection === "journey" && <JourneyScreen />}
-            {activeSection === "safety" && <SafetyScreen />}
+            {activeSection === "live" && <LiveScreen />}
+            {activeSection === "entertainment" && <EntertainmentScreen />}
             {activeSection === "services" && <ServicesScreen />}
-            {activeSection === "strasbourg" && <StrasbourgScreen />}
+            {activeSection === "alsace" && <StrasbourgScreen />}
             {activeSection === "coworking" && <CoworkingScreen />}
           </div>
           <button
