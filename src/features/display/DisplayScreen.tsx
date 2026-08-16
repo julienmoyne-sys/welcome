@@ -381,7 +381,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
               <Map />
               <span>Grands axes</span>
             </div>
-            <TrafficMap segments={liveInfo.traffic} />
+            <TrafficMap />
             <div className={styles.trafficLegend}>
               <span>
                 <i className={styles.legendDense} />
@@ -392,9 +392,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
                 Saturé
               </span>
             </div>
-            <small className={styles.trafficSource}>
-              Sources : TomTom Traffic · SIRAC (perturbations uniquement)
-            </small>
+            <small className={styles.trafficSource}>Source : TomTom Traffic</small>
           </section>
         </div>
       </div>

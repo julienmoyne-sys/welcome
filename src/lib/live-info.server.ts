@@ -6,8 +6,6 @@ const WEATHER_URL =
   "https://api.open-meteo.com/v1/forecast?latitude=48.5734&longitude=7.7521&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Europe%2FParis";
 const LOCAL_NEWS_URL = "https://actu.fr/strasbourg/rss.xml";
 const FALLBACK_NEWS_URL = "https://www.france24.com/fr/rss";
-const TRAFFIC_URL =
-  "https://data.strasbourg.eu/api/explore/v2.1/catalog/datasets/sirac_flux_trafic/records";
 
 type WeatherApiResponse = {
   current?: {
@@ -17,15 +15,6 @@ type WeatherApiResponse = {
     weather_code?: number;
     wind_speed_10m?: number;
   };
-};
-
-type TrafficApiResponse = {
-  results?: Array<{
-    ident?: number;
-    name?: string;
-    etat?: number;
-    geo_shape?: { geometry?: { type?: string; coordinates?: Array<[number, number]> } };
-  }>;
 };
 
 function decodeXml(value: string) {
@@ -88,48 +77,13 @@ async function getHeadlines(): Promise<LiveInfoResponse["headlines"]> {
   return headlines;
 }
 
-async function getTraffic(): Promise<LiveInfoResponse["traffic"]> {
-  const pages = await Promise.all(
-    [0, 100, 200, 300, 400].map(async (offset) => {
-      const response = await fetch(`${TRAFFIC_URL}?limit=100&offset=${offset}`, {
-        cache: "no-store",
-      });
-      if (!response.ok) throw new Error(`Traffic HTTP ${response.status}`);
-      return ((await response.json()) as TrafficApiResponse).results ?? [];
-    }),
-  );
-
-  return pages
-    .flat()
-    .filter(
-      (item) =>
-        item.ident !== undefined &&
-        item.name &&
-        item.etat !== undefined &&
-        item.etat >= 2 &&
-        !item.name.toLowerCase().startsWith("cycl") &&
-        item.geo_shape?.geometry?.type === "LineString" &&
-        item.geo_shape.geometry.coordinates,
-    )
-    .map((item) => ({
-      id: item.ident!,
-      name: item.name!,
-      status: item.etat ?? 0,
-      coordinates: item.geo_shape!.geometry!.coordinates!,
-    }));
-}
-
 export async function getLiveInfo(): Promise<LiveInfoResponse> {
-  const [weather, headlines, traffic] = await Promise.allSettled([
-    getWeather(),
-    getHeadlines(),
-    getTraffic(),
-  ]);
+  const [weather, headlines] = await Promise.allSettled([getWeather(), getHeadlines()]);
 
   return {
     updatedAt: new Date().toISOString(),
     weather: weather.status === "fulfilled" ? weather.value : null,
     headlines: headlines.status === "fulfilled" ? headlines.value : [],
-    traffic: traffic.status === "fulfilled" ? traffic.value : [],
+    traffic: [],
   };
 }

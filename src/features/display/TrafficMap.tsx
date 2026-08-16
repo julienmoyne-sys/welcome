@@ -3,14 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./display.module.css";
-import type { LiveInfoResponse } from "./types";
 
-const SIRAC_ALERT_COLORS: Record<number, string> = {
-  2: "#ffc247",
-  3: "#ff443d",
-};
-
-export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"] }) {
+export function TrafficMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
 
@@ -53,21 +47,6 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
           pane: "trafficFlowPane",
         }).addTo(map);
 
-        for (const segment of segments) {
-          const color = SIRAC_ALERT_COLORS[segment.status];
-          if (!color) continue;
-          L.polyline(
-            segment.coordinates.map(([lon, lat]) => [lat, lon] as [number, number]),
-            {
-              color,
-              weight: 5,
-              opacity: 0.95,
-              lineCap: "round",
-              lineJoin: "round",
-            },
-          ).addTo(map);
-        }
-
         L.circleMarker([48.5572, 7.74742], {
           radius: 8,
           color: "#d4bf63",
@@ -85,8 +64,8 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
 
         map.fitBounds(
           [
-            [48.535, 7.63],
-            [48.65, 7.82],
+            [48.545, 7.65],
+            [48.63, 7.805],
           ],
           { animate: false, padding: [16, 16] },
         );
@@ -119,7 +98,7 @@ export function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"]
       if (sizePolling !== null) window.clearInterval(sizePolling);
       map?.remove();
     };
-  }, [segments]);
+  }, []);
 
   return (
     <div className={styles.trafficMapFrame} ref={containerRef}>
