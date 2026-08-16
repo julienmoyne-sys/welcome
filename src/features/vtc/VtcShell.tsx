@@ -1,6 +1,20 @@
 "use client";
 
-import { ArrowLeft, Home, Moon, QrCode } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CloudSun,
+  Clock3,
+  Compass,
+  Gauge,
+  Home,
+  MapPin,
+  Moon,
+  Navigation,
+  QrCode,
+  Thermometer,
+  Wind,
+} from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -13,10 +27,11 @@ import servicesCardImage from "@/assets/vtc-card-services.png";
 import strasbourgCardImage from "@/assets/vtc-card-strasbourg.png";
 import welcomeLogo from "@/assets/welcome-vtc-logo.png";
 
+import { VtcLiveMap, type GpsSnapshot, type NavigationRoute } from "./VtcLiveMap";
+
 import {
   COWORKING_FEATURES,
   ENTERTAINMENT_ITEMS,
-  JOURNEY_FIELDS,
   LIVE_ITEMS,
   ONBOARD_SERVICES,
   STRASBOURG_CATEGORIES,
@@ -26,6 +41,7 @@ import {
 import styles from "./vtc.module.css";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
+const SLEEP_STATE_KEY = "welcome-vtc-sleeping";
 const VTC_CARD_IMAGES = {
   journey: journeyCardImage,
   live: liveCardImage,
@@ -92,10 +108,12 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
               />
               <span className={styles.cardShade} aria-hidden="true" />
               <span className={styles.cardNumber}>{item.accent}</span>
-              <Icon className={styles.cardIcon} aria-hidden="true" />
-              <span className={styles.cardCopy}>
-                <strong>{item.title}</strong>
-                <small>{item.description}</small>
+              <span className={styles.cardTextGroup}>
+                <Icon className={styles.cardIcon} aria-hidden="true" />
+                <span className={styles.cardCopy}>
+                  <strong>{item.title}</strong>
+                  <small>{item.description}</small>
+                </span>
               </span>
               <span className={styles.cardArrow} aria-hidden="true">
                 →
@@ -109,22 +127,179 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
 }
 
 function JourneyScreen() {
+  const [destinationInput, setDestinationInput] = useState("");
+  const [gps, setGps] = useState<GpsSnapshot | null>(null);
+  const [route, setRoute] = useState<NavigationRoute | null>(null);
+  const [navigationStatus, setNavigationStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [navigationError, setNavigationError] = useState("");
+  const updateGps = useCallback((snapshot: GpsSnapshot) => setGps(snapshot), []);
+  const remainingTime = route
+    ? route.durationSeconds < 3600
+      ? `${Math.max(1, Math.round(route.durationSeconds / 60))} min`
+      : `${Math.floor(route.durationSeconds / 3600)} h ${Math.round(
+          (route.durationSeconds % 3600) / 60,
+        )} min`
+    : "—";
+
   return (
-    <div className={styles.detailBody}>
-      <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Votre trajet</p>
-        <h2>Informations sur votre trajet</h2>
-        <p>Cette interface est prête à recevoir les données de course en temps réel.</p>
+    <div className={`${styles.detailBody} ${styles.cockpitBody}`}>
+      <div className={styles.cockpitHeading}>
+        <div className={styles.introBlock}>
+          <p className={styles.eyebrow}>Navigation</p>
+          <h2>Cockpit</h2>
+        </div>
+        <div className={styles.destinationEntry}>
+          <span className={styles.destinationHint} data-hidden={Boolean(route)} aria-hidden="true">
+            <ArrowRight />
+          </span>
+          <form
+            className={styles.destinationForm}
+            onSubmit={async (event) => {
+              event.preventDefault();
+              if (!gps || !destinationInput.trim()) return;
+              setNavigationStatus("loading");
+              setNavigationError("");
+              try {
+                const params = new URLSearchParams({
+                  q: destinationInput.trim(),
+                  lat: String(gps.latitude),
+                  lon: String(gps.longitude),
+                });
+                const response = await fetch(`/api/vtc/navigation?${params}`);
+                const data = (await response.json()) as NavigationRoute & { error?: string };
+                if (!response.ok) throw new Error(data.error ?? "Impossible de calculer le trajet");
+                setRoute(data);
+                setDestinationInput(data.destination.label);
+                setNavigationStatus("idle");
+              } catch (error) {
+                setRoute(null);
+                setNavigationStatus("error");
+                setNavigationError(
+                  error instanceof Error ? error.message : "Impossible de calculer le trajet",
+                );
+              }
+            }}
+          >
+            <input
+              type="text"
+              value={destinationInput}
+              onChange={(event) => setDestinationInput(event.target.value)}
+              placeholder="Adresse de destination"
+              aria-label="Adresse de destination"
+            />
+            <button
+              type="submit"
+              disabled={!destinationInput.trim() || !gps || navigationStatus === "loading"}
+            >
+              {navigationStatus === "loading" ? "Recherche…" : "Tracer"}
+            </button>
+            {navigationStatus === "error" && (
+              <small className={styles.navigationError}>{navigationError}</small>
+            )}
+          </form>
+        </div>
       </div>
-      <div className={styles.infoGrid}>
-        {JOURNEY_FIELDS.map(({ label, icon: Icon }) => (
-          <article className={styles.infoCard} key={label}>
+      <div className={styles.cockpitGrid}>
+        <section className={styles.altitudePanel} aria-label="Altitude et profil du parcours">
+          <div className={styles.locationLine}>
+            <MapPin aria-hidden="true" />
+            <span>
+              {gps?.city ??
+                (gps
+                  ? `${gps.latitude.toFixed(4)}, ${gps.longitude.toFixed(4)}`
+                  : "GPS en attente")}
+            </span>
+          </div>
+          <div className={styles.altitudeValue}>
+            <span>Altitude actuelle</span>
+            <strong>{gps?.altitude == null ? "—" : Math.round(gps.altitude)}</strong>
+            <small>m</small>
+          </div>
+          <svg
+            className={styles.elevationChart}
+            viewBox="0 0 620 100"
+            role="img"
+            aria-label="Profil d’altitude de démonstration sur les 30 prochains kilomètres"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="elevation-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#d4bf63" stopOpacity="0.38" />
+                <stop offset="100%" stopColor="#d4bf63" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 72 C55 68 72 54 118 59 S184 78 235 61 S315 31 364 43 S420 67 468 54 S548 25 620 35 L620 100 L0 100 Z"
+              fill="url(#elevation-fill)"
+            />
+            <path
+              d="M0 72 C55 68 72 54 118 59 S184 78 235 61 S315 31 364 43 S420 67 468 54 S548 25 620 35"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+            />
+          </svg>
+          <div className={styles.chartLegend}>
+            <span>Maintenant</span>
+            <span>+30 km · 218 m</span>
+          </div>
+        </section>
+
+        <div className={styles.cockpitDials}>
+          {[
+            { label: "Température", value: "18 °C", icon: Thermometer },
+            { label: "Pression", value: "1 016 hPa", icon: Gauge },
+            { label: "Cap", value: "Nord-Est", icon: Compass },
+            { label: "Météo", value: "Éclaircies", icon: CloudSun },
+          ].map(({ label, value, icon: Icon }) => (
+            <article className={styles.cockpitDial} key={label}>
+              <Icon aria-hidden="true" />
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.cockpitFacts}>
+        {[
+          {
+            label: "Vitesse GPS",
+            value: gps?.speed == null ? "—" : `${Math.round(gps.speed * 3.6)} km/h`,
+            icon: Gauge,
+          },
+          { label: "Ville proche", value: "Obernai · 18 km", icon: Navigation },
+          { label: "Qualité de l’air", value: "Bonne", icon: Wind },
+          { label: "Temps restant", value: remainingTime, icon: Clock3 },
+        ].map(({ label, value, icon: Icon }) => (
+          <article key={label}>
             <Icon aria-hidden="true" />
             <span>{label}</span>
-            <strong>À venir</strong>
+            <strong>{value}</strong>
           </article>
         ))}
       </div>
+
+      <VtcLiveMap route={route} onPosition={updateGps} />
+
+      <section className={styles.routeTimeline} aria-label="Prochaines villes du parcours">
+        <span className={styles.timelineLabel}>Sur votre route</span>
+        <div className={styles.timelineTrack}>
+          <span className={styles.timelineProgress} />
+          {[
+            ["Strasbourg", "maintenant"],
+            ["Obernai", "18 km"],
+            ["Sélestat", "48 km"],
+            ["Colmar", "72 km"],
+          ].map(([city, distance], index) => (
+            <div className={styles.timelineStop} data-current={index === 0} key={city}>
+              <span className={styles.timelineDot} />
+              <strong>{city}</strong>
+              <small>{distance}</small>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
@@ -268,9 +443,24 @@ export function VtcShell() {
     clearInactivityTimer();
     setActiveSection(null);
     setIsSleeping(true);
+    window.sessionStorage.setItem(SLEEP_STATE_KEY, "1");
   }, [clearInactivityTimer]);
   const wake = useCallback(() => {
+    window.sessionStorage.removeItem(SLEEP_STATE_KEY);
     window.location.reload();
+  }, []);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem(SLEEP_STATE_KEY) !== "1") return;
+    let active = true;
+    window.queueMicrotask(() => {
+      if (!active) return;
+      setActiveSection(null);
+      setIsSleeping(true);
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {

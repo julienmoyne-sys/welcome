@@ -163,6 +163,7 @@
   pointer-events: none;
 }
 .cardNumber,
+.cardTextGroup,
 .cardIcon,
 .cardCopy,
 .cardArrow {
@@ -192,6 +193,12 @@
   color: var(--vtc-gold);
   stroke-width: 1.4;
 }
+.cardTextGroup {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: clamp(0.8rem, 1.5vw, 1.4rem);
+}
 .cardCopy {
   display: flex;
   min-width: 0;
@@ -206,9 +213,14 @@
   text-transform: uppercase;
 }
 .cardCopy small {
+  display: -webkit-box;
+  min-height: 2.7em;
+  overflow: hidden;
   color: rgba(255, 255, 255, 0.48);
   font-size: clamp(0.72rem, 0.95vw, 0.9rem);
   line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .cardArrow {
   margin-left: auto;
@@ -317,6 +329,561 @@
 }
 .infoGrid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.cockpitBody {
+  display: grid;
+  grid-template-areas:
+    "heading heading"
+    "map overview"
+    "map facts"
+    "map timeline";
+  grid-template-columns: minmax(25rem, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  justify-content: flex-start;
+  gap: clamp(0.8rem, 1.6vh, 1.25rem);
+  padding-block: clamp(1rem, 2vh, 1.5rem);
+}
+.cockpitHeading {
+  grid-area: heading;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+.cockpitHeading > div:first-child,
+.destinationEntry {
+  grid-area: 1 / 1;
+}
+.cockpitHeading > div:first-child {
+  justify-self: start;
+}
+.destinationEntry {
+  display: grid;
+  width: 50%;
+  min-width: 22rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  justify-self: center;
+  gap: 0.5rem;
+}
+.cockpitHeading .eyebrow {
+  margin-top: 0;
+}
+.destinationForm {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.45rem;
+}
+.destinationForm input,
+.destinationForm button {
+  min-height: 2.8rem;
+  border: 1px solid var(--vtc-line);
+  font: inherit;
+}
+.destinationForm input {
+  min-width: 0;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.destinationForm input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.destinationForm input:focus {
+  border-color: var(--vtc-gold);
+  box-shadow: 0 0 0 3px rgba(212, 191, 99, 0.12);
+}
+.destinationForm button {
+  padding: 0.65rem 1rem;
+  border-color: rgba(212, 191, 99, 0.4);
+  border-radius: 999px;
+  background: var(--vtc-gold);
+  color: #111;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.destinationForm button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+.navigationError {
+  grid-column: 1 / -1;
+  color: #e9a8a8;
+  font-size: 0.7rem;
+}
+.destinationHint {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--vtc-gold);
+  opacity: 0.58;
+  transition:
+    opacity 220ms ease,
+    visibility 220ms ease;
+}
+.destinationHint svg {
+  width: 3.4rem;
+  height: 3.4rem;
+  animation: destination-hint 1.25s ease-in-out infinite;
+  stroke-width: 1.25;
+}
+.destinationHint[data-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+}
+@keyframes destination-hint {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(-5px) scale(0.94);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(5px) scale(1.04);
+  }
+}
+.cockpitGrid {
+  display: grid;
+  grid-area: overview;
+  grid-template-columns: 1fr;
+  gap: clamp(0.8rem, 1.4vw, 1.2rem);
+}
+.altitudePanel,
+.cockpitDial,
+.cockpitFacts article,
+.routeTimeline {
+  border: 1px solid var(--vtc-line);
+  background: rgba(255, 255, 255, 0.045);
+}
+.altitudePanel {
+  min-height: 13rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2vw, 1.7rem);
+  border-radius: clamp(1rem, 1.8vw, 1.6rem);
+}
+.locationLine {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.locationLine svg {
+  width: 1rem;
+  color: var(--vtc-gold);
+}
+.altitudeValue {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+.altitudeValue span {
+  align-self: center;
+  margin-right: auto;
+  color: rgba(255, 255, 255, 0.45);
+}
+.altitudeValue strong {
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+}
+.altitudeValue small {
+  color: var(--vtc-gold);
+  font-size: 1rem;
+}
+.elevationChart {
+  width: 100%;
+  height: clamp(3.5rem, 8vh, 5.5rem);
+  margin-top: 0.7rem;
+  color: var(--vtc-gold);
+}
+.chartLegend {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+.cockpitDials {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1vw, 0.9rem);
+}
+.cockpitDial {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  gap: 0.25rem 0.65rem;
+  padding: clamp(0.9rem, 1.5vw, 1.25rem);
+  border-radius: 1.1rem;
+}
+.cockpitDial svg {
+  width: 1.35rem;
+  grid-row: span 2;
+  align-self: center;
+  color: var(--vtc-gold);
+}
+.cockpitDial span,
+.cockpitFacts span {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+.cockpitDial strong,
+.cockpitFacts strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cockpitDial strong {
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+}
+.cockpitFacts {
+  display: grid;
+  grid-area: facts;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1vw, 0.9rem);
+}
+.cockpitFacts article {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.65rem;
+  padding: clamp(0.8rem, 1.25vw, 1rem);
+  border-radius: 1rem;
+}
+.cockpitFacts svg {
+  width: 1.2rem;
+  grid-row: span 2;
+  align-self: center;
+  color: var(--vtc-gold);
+}
+.cockpitFacts strong {
+  font-size: 0.86rem;
+}
+.cockpitMap {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 28rem;
+  aspect-ratio: 1;
+  grid-area: map;
+  justify-self: center;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid var(--vtc-line);
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(90deg, rgba(12, 13, 13, 0.98), rgba(12, 13, 13, 0.58)),
+    rgba(255, 255, 255, 0.045);
+}
+.liveMapCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.liveMapCanvas :global(.leaflet-tile-pane) {
+  filter: grayscale(0.78) invert(0.9) hue-rotate(145deg) brightness(0.72) contrast(1.08);
+  opacity: 0.86;
+}
+.liveMapCanvas :global(.leaflet-control-attribution) {
+  background: rgba(10, 11, 11, 0.76);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 8px;
+}
+.liveMapCanvas :global(.leaflet-control-attribution a) {
+  color: rgba(255, 255, 255, 0.66);
+}
+.liveMapCanvas :global(.leaflet-tooltip) {
+  border: 1px solid rgba(212, 191, 99, 0.38);
+  border-radius: 999px;
+  background: rgba(10, 11, 11, 0.88);
+  color: #fff;
+  font-family: var(--font-inter-sans), sans-serif;
+  font-size: 0.72rem;
+  box-shadow: none;
+}
+.livePositionIcon {
+  position: relative;
+  border: 0;
+  background: transparent;
+}
+.livePositionPulse,
+.livePositionCore {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: var(--vtc-gold);
+  transform: translate(-50%, -50%);
+}
+.livePositionPulse {
+  width: 34px;
+  height: 34px;
+  opacity: 0;
+  animation: live-gps-pulse 1.8s ease-out infinite;
+}
+.livePositionCore {
+  width: 12px;
+  height: 12px;
+  border: 3px solid #fff;
+  box-shadow:
+    0 0 0 4px rgba(212, 191, 99, 0.28),
+    0 0 16px rgba(212, 191, 99, 0.8);
+}
+.liveMapStatus {
+  position: absolute;
+  z-index: 500;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 999px;
+  background: rgba(8, 9, 9, 0.88);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.75rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+.liveMapStatus[data-status="ready"] {
+  display: none;
+}
+@keyframes live-gps-pulse {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+}
+.mapCopy {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+.mapEyebrow {
+  color: var(--vtc-gold);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.mapCopy strong {
+  margin-top: 0.35rem;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  font-weight: 500;
+}
+.mapCopy small {
+  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.48);
+}
+.mapRouteStatus {
+  max-width: 18rem;
+  margin-top: 0.8rem;
+  overflow: hidden;
+  color: var(--vtc-gold);
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mapCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mapRiver,
+.mapRoad,
+.mapStreet,
+.positionLink,
+.gpsRoute,
+.gpsRouteOutline {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.mapRiver {
+  stroke: rgba(86, 128, 139, 0.38);
+  stroke-width: 12;
+}
+.mapRoad {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 4;
+}
+.mapStreet {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2;
+}
+.positionLink {
+  stroke: rgba(212, 191, 99, 0.7);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 6;
+}
+.gpsRouteOutline {
+  stroke: rgba(5, 6, 6, 0.9);
+  stroke-width: 9;
+}
+.gpsRoute {
+  stroke: var(--vtc-gold);
+  stroke-width: 5;
+  stroke-dasharray: 10 5;
+  animation: route-flow 1.2s linear infinite;
+}
+.destinationMarker circle:first-child {
+  fill: #111;
+  stroke: var(--vtc-gold);
+  stroke-width: 3;
+}
+.destinationMarker circle:nth-child(2) {
+  fill: var(--vtc-gold);
+}
+.destinationMarker text {
+  fill: rgba(255, 255, 255, 0.84);
+  font-family: var(--font-inter-sans), sans-serif;
+  font-size: 12px;
+}
+.cityMarker circle {
+  fill: var(--vtc-gold);
+}
+.cityMarker text,
+.currentPosition text,
+.mapDistrict {
+  fill: rgba(255, 255, 255, 0.74);
+  font-family: var(--font-inter-sans), sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.cityMarker .mapSubLabel,
+.mapDistrict {
+  fill: rgba(255, 255, 255, 0.34);
+  font-size: 10px;
+}
+.positionPulse,
+.positionHalo,
+.positionCore {
+  fill: var(--vtc-gold);
+}
+.positionPulse {
+  opacity: 0;
+  transform-origin: center;
+  animation: position-pulse 1.8s ease-out infinite;
+}
+.positionHalo {
+  opacity: 0.2;
+}
+.positionCore {
+  filter: drop-shadow(0 0 5px rgba(212, 191, 99, 0.9));
+}
+.mapDemo {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.55rem;
+  color: rgba(255, 255, 255, 0.24);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+@keyframes position-pulse {
+  0% {
+    opacity: 0.46;
+    transform: scale(0.35);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+@keyframes route-flow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+.routeTimeline {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding: 0.85rem clamp(1rem, 1.8vw, 1.5rem);
+  border-radius: 1rem;
+  grid-area: timeline;
+}
+.timelineLabel {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.timelineTrack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.timelineTrack::before,
+.timelineProgress {
+  position: absolute;
+  top: 0.32rem;
+  right: 12.5%;
+  left: 12.5%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  content: "";
+}
+.timelineProgress {
+  right: auto;
+  width: 25%;
+  background: var(--vtc-gold);
+}
+.timelineStop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-direction: column;
+}
+.timelineDot {
+  width: 0.68rem;
+  height: 0.68rem;
+  margin-bottom: 0.35rem;
+  border: 2px solid #777;
+  border-radius: 50%;
+  background: #151616;
+}
+.timelineStop[data-current="true"] .timelineDot {
+  border-color: var(--vtc-gold);
+  background: var(--vtc-gold);
+  box-shadow: 0 0 0 4px rgba(212, 191, 99, 0.14);
+}
+.timelineStop strong {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.timelineStop small {
+  margin-top: 0.15rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.64rem;
 }
 .infoCard,
 .safetyCard,
@@ -587,6 +1154,18 @@
     gap: 1.25rem;
     padding-block: 1.2rem;
   }
+  .cockpitBody {
+    gap: 0.65rem;
+    padding-block: 0.8rem;
+  }
+  .altitudePanel {
+    min-height: 10.5rem;
+    padding: 1rem;
+  }
+  .elevationChart {
+    height: 3.3rem;
+    margin-top: 0.4rem;
+  }
   .introBlock h2,
   .visualCopy h2 {
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
@@ -608,6 +1187,50 @@
   }
 }
 @media (max-width: 900px) {
+  .cockpitBody {
+    grid-template-areas:
+      "heading"
+      "map"
+      "overview"
+      "facts"
+      "timeline";
+    grid-template-columns: 1fr;
+  }
+  .cockpitGrid {
+    grid-template-columns: 1fr;
+  }
+  .cockpitFacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cockpitHeading {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .cockpitHeading > div:first-child {
+    grid-area: auto;
+    grid-column: 1 / -1;
+  }
+  .destinationEntry {
+    width: min(100%, 34rem);
+    min-width: 0;
+    grid-area: auto;
+    justify-self: center;
+  }
+  .destinationForm {
+    width: 100%;
+  }
+  .routeTimeline {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+  .cockpitMap {
+    width: min(100%, 31rem);
+    min-height: 24rem;
+  }
+  .mapCanvas {
+    min-height: 100%;
+  }
   .serviceGrid,
   .categoryGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -651,5 +1274,17 @@
   .menuCard,
   .sleepOverlay {
     transition: none;
+  }
+  .positionPulse {
+    animation: none;
+  }
+  .livePositionPulse {
+    animation: none;
+  }
+  .gpsRoute {
+    animation: none;
+  }
+  .destinationHint svg {
+    animation: none;
   }
 }
