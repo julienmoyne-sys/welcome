@@ -1,3 +1,5 @@
+import "leaflet/dist/leaflet.css";
+
 import { DisplayScreen } from "@/features/display/DisplayScreen";
 import { emptyDisplayEvents } from "@/lib/google-calendar.server";
 

@@ -424,8 +424,19 @@
   width: 1.25rem;
   color: #d4bf63;
 }
-.weatherTemperature {
+.weatherVisual {
   margin-top: auto;
+}
+.weatherPictogram {
+  margin-bottom: clamp(1rem, 1.8vh, 1.6rem);
+  color: #d4bf63;
+}
+.weatherPictogram svg {
+  width: clamp(3.5rem, 4.5vw, 5.5rem);
+  height: auto;
+  stroke-width: 1.35;
+}
+.weatherTemperature {
   font-family: var(--font-manrope-sans), sans-serif;
   font-size: clamp(6rem, 9vw, 11rem);
   font-weight: 400;
@@ -498,49 +509,56 @@
   flex-direction: column;
   padding: clamp(1.5rem, 2vw, 2.2rem);
 }
-.trafficMap {
+.trafficMapFrame {
+  position: relative;
   width: 100%;
   min-height: 0;
+  overflow: hidden;
   flex: 1;
   margin: 0.75rem 0;
   border-radius: 1rem;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px), #101413;
-  background-size: 2.5rem 2.5rem;
+  background: #101413;
 }
-.river {
-  fill: none;
-  stroke: rgba(66, 153, 225, 0.22);
-  stroke-width: 7;
+.trafficMapFrame :global(.leaflet-tile-pane) {
+  filter: grayscale(0.8) invert(0.88) hue-rotate(145deg) brightness(0.58) contrast(1.15);
+  opacity: 0.72;
 }
-.trafficSegment {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3;
+.trafficMapFrame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 250;
+  background: rgba(3, 18, 17, 0.28);
+  pointer-events: none;
 }
-.trafficStatus0 {
-  stroke: rgba(255, 255, 255, 0.18);
-}
-.trafficStatus1 {
-  stroke: #54bd78;
-}
-.trafficStatus2 {
-  stroke: #e0b84f;
-}
-.trafficStatus3 {
-  stroke: #df756b;
-}
-.cityMarker {
-  fill: #fff;
-  stroke: #d4bf63;
-  stroke-width: 3;
-}
-.cityLabel {
-  fill: rgba(255, 255, 255, 0.78);
-  font-size: 14px;
+.trafficMapFrame :global(.leaflet-tooltip) {
+  border: 0;
+  background: rgba(16, 20, 19, 0.88);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-inter-sans), sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
+  box-shadow: none;
+}
+.trafficMapFrame :global(.leaflet-tooltip).locationTooltip {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(212, 191, 99, 0.45);
+}
+.trafficMapFrame :global(.leaflet-tooltip).locationTooltip strong {
+  color: #d4bf63;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.trafficMapFrame :global(.leaflet-control-attribution) {
+  background: rgba(16, 20, 19, 0.72);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 8px;
+}
+.trafficMapFrame :global(.leaflet-control-attribution a) {
+  color: rgba(255, 255, 255, 0.6);
 }
 .trafficLegend {
   display: flex;

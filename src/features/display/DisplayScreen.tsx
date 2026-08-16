@@ -1,6 +1,19 @@
 "use client";
 
-import { Building2, CloudSun, Droplets, Map, Newspaper, Wind } from "lucide-react";
+import {
+  Building2,
+  Cloud,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
+  CloudSun,
+  Droplets,
+  Map,
+  Newspaper,
+  Sun,
+  Wind,
+} from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
@@ -14,6 +27,7 @@ import {
 } from "./config";
 import { getReservationState } from "./availability";
 import styles from "./display.module.css";
+import { TrafficMap } from "./TrafficMap";
 import type { DisplayEventsResponse, DisplaySlideId, LiveInfoResponse } from "./types";
 
 const EMPTY_LIVE_INFO: LiveInfoResponse = {
@@ -34,46 +48,14 @@ function weatherLabel(code: number) {
   return "Orages";
 }
 
-function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"] }) {
-  const minLon = 7.64;
-  const maxLon = 7.84;
-  const minLat = 48.5;
-  const maxLat = 48.68;
-  const project = ([lon, lat]: [number, number]) => [
-    ((lon - minLon) / (maxLon - minLon)) * 640,
-    ((maxLat - lat) / (maxLat - minLat)) * 390,
-  ];
-
-  return (
-    <svg
-      className={styles.trafficMap}
-      viewBox="0 0 640 390"
-      role="img"
-      aria-label="Trafic routier dans l’Eurométropole de Strasbourg"
-    >
-      <path
-        className={styles.river}
-        d="M350 -20 C310 70 370 135 330 215 C300 275 330 330 300 420"
-      />
-      {segments.map((segment) => {
-        const points = segment.coordinates
-          .map(project)
-          .map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`)
-          .join(" ");
-        return (
-          <polyline
-            className={`${styles.trafficSegment} ${styles[`trafficStatus${Math.min(segment.status, 3)}`]}`}
-            points={points}
-            key={segment.id}
-          />
-        );
-      })}
-      <circle className={styles.cityMarker} cx="358" cy="215" r="6" />
-      <text className={styles.cityLabel} x="372" y="220">
-        Strasbourg
-      </text>
-    </svg>
-  );
+function WeatherPictogram({ code }: { code: number }) {
+  if (code === 0) return <Sun />;
+  if (code <= 3) return <CloudSun />;
+  if (code <= 48) return <CloudFog />;
+  if (code <= 67 || (code >= 80 && code <= 82)) return <CloudRain />;
+  if (code <= 86) return <CloudSnow />;
+  if (code >= 95) return <CloudLightning />;
+  return <Cloud />;
 }
 
 export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsResponse }) {
@@ -331,9 +313,14 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
             </div>
             {liveInfo.weather ? (
               <>
-                <strong className={styles.weatherTemperature}>
-                  {Math.round(liveInfo.weather.temperature)}°
-                </strong>
+                <div className={styles.weatherVisual}>
+                  <div className={styles.weatherPictogram} aria-hidden="true">
+                    <WeatherPictogram code={liveInfo.weather.weatherCode} />
+                  </div>
+                  <strong className={styles.weatherTemperature}>
+                    {Math.round(liveInfo.weather.temperature)}°
+                  </strong>
+                </div>
                 <p className={styles.weatherCondition}>
                   {weatherLabel(liveInfo.weather.weatherCode)}
                 </p>
