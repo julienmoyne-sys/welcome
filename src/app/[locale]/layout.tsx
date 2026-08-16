@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -14,23 +13,6 @@ import { LOCALE_TAGS, routing, type Locale } from "@/i18n/routing";
 import { organizationJsonLd, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 import "../globals.css";
-
-// Polices auto-hébergées : Next les télécharge au build et les sert depuis le
-// domaine du site. Supprime deux préconnexions et une requête CSS bloquante vers
-// Google Fonts, et `display: swap` évite le décalage de mise en page.
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope-sans",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter-sans",
-  display: "swap",
-});
 
 /** Prérend les trois langues au build plutôt qu'à la première requête. */
 export function generateStaticParams() {
@@ -100,11 +82,7 @@ export default async function LocaleLayout({
   // `suppressHydrationWarning` est requis par next-themes : il écrit la classe de
   // thème sur <html> avant l'hydratation, donc le serveur ne peut pas la connaître.
   return (
-    <html
-      lang={locale}
-      className={`${manrope.variable} ${inter.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider>
           <ThemeProvider>

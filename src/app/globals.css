@@ -1,3 +1,5 @@
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/inter";
 @import "tailwindcss" source(none);
 /* Chemin relatif à ce fichier : couvre src/app, src/components, src/lib, src/hooks. */
 @source "../";
@@ -72,8 +74,9 @@
   --color-welcome-footer-bg: #0b0b0b;
   --color-welcome-footer-text: #f5f5f5;
   --color-welcome-footer-muted: #b5b5b5;
-  /* Polices auto-hébergées par `next/font` (voir src/app/layout.tsx) : plus de
-     requête vers fonts.googleapis.com, donc un LCP plus rapide et pas de CLS. */
+  /* Polices embarquées dans le bundle : aucun téléchargement Google au build. */
+  --font-manrope-sans: "Manrope Variable";
+  --font-inter-sans: "Inter Variable";
   --font-manrope: var(--font-manrope-sans), "Manrope", sans-serif;
   --font-inter: var(--font-inter-sans), "Inter", sans-serif;
 }
