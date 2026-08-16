@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 
 type TileParams = { z: string; x: string; y: string };
 
-export async function GET(_request: Request, context: { params: Promise<TileParams> }) {
+export async function GET(request: Request, context: { params: Promise<TileParams> }) {
   const { z, x, y } = await context.params;
   if (![z, x, y].every((value) => /^\d+$/.test(value))) {
     return NextResponse.json({ error: "Invalid tile coordinates" }, { status: 400 });
@@ -24,12 +24,17 @@ export async function GET(_request: Request, context: { params: Promise<TilePara
     return NextResponse.json({ error: "Traffic service unavailable" }, { status: 503 });
   }
 
+  const requestedThickness = Number(new URL(request.url).searchParams.get("thickness"));
+  const thickness = Number.isFinite(requestedThickness)
+    ? Math.max(4, Math.min(7, Math.round(requestedThickness)))
+    : 5;
+
   const tileUrl = new URL(
     `https://api.tomtom.com/traffic/map/4/tile/flow/relative-delay/${zoom}/${column}/${row}.png`,
   );
   tileUrl.searchParams.set("key", apiKey);
   tileUrl.searchParams.set("tileSize", "256");
-  tileUrl.searchParams.set("thickness", "10");
+  tileUrl.searchParams.set("thickness", String(thickness));
 
   const response = await fetch(tileUrl, {
     headers: { Accept: "image/png, application/json" },

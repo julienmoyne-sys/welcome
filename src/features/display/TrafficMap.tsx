@@ -40,7 +40,14 @@ export function TrafficMap() {
           attribution: "© OpenStreetMap",
           maxZoom: 19,
         }).addTo(map);
-        L.tileLayer("/api/display/traffic-tiles/{z}/{x}/{y}", {
+        const mapWidth = containerRef.current.clientWidth;
+        const mapHeight = containerRef.current.clientHeight;
+        const density = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+        const trafficThickness = Math.max(
+          4,
+          Math.min(7, Math.round(Math.min(mapWidth / 150, mapHeight / 90) / Math.sqrt(density))),
+        );
+        L.tileLayer(`/api/display/traffic-tiles/{z}/{x}/{y}?thickness=${trafficThickness}`, {
           attribution: "Traffic © TomTom",
           maxZoom: 19,
           opacity: 1,
