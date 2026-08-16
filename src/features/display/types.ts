@@ -24,7 +24,25 @@ export type DisplayEventsResponse = {
   reservations: ResourceReservation[];
 };
 
-export type DisplaySlideId = "welcome" | "availability" | "website";
+export type LiveInfoResponse = {
+  updatedAt: string;
+  weather: {
+    temperature: number;
+    apparentTemperature: number;
+    humidity: number;
+    windSpeed: number;
+    weatherCode: number;
+  } | null;
+  headlines: Array<{ title: string; source: string }>;
+  traffic: Array<{
+    id: number;
+    name: string;
+    status: number;
+    coordinates: Array<[number, number]>;
+  }>;
+};
+
+export type DisplaySlideId = "welcome" | "availability" | "website" | "live";
 
 export type DisplaySlideConfig = {
   id: DisplaySlideId;

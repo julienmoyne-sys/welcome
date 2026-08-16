@@ -1,19 +1,85 @@
 "use client";
 
-import { Building2 } from "lucide-react";
+import { Building2, CloudSun, Droplets, Map, Newspaper, Wind } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 import websitePreview from "@/assets/hero-welcome-real.png";
 
-import { DISPLAY_REFRESH_MS, DISPLAY_SLIDES, DISPLAY_STATE_TICK_MS } from "./config";
+import {
+  DISPLAY_LIVE_REFRESH_MS,
+  DISPLAY_REFRESH_MS,
+  DISPLAY_SLIDES,
+  DISPLAY_STATE_TICK_MS,
+} from "./config";
 import { getReservationState } from "./availability";
 import styles from "./display.module.css";
-import type { DisplayEventsResponse, DisplaySlideId } from "./types";
+import type { DisplayEventsResponse, DisplaySlideId, LiveInfoResponse } from "./types";
+
+const EMPTY_LIVE_INFO: LiveInfoResponse = {
+  updatedAt: "",
+  weather: null,
+  headlines: [],
+  traffic: [],
+};
+
+function weatherLabel(code: number) {
+  if (code === 0) return "Ciel dégagé";
+  if (code <= 3) return "Partiellement nuageux";
+  if (code <= 48) return "Brume ou brouillard";
+  if (code <= 67) return "Pluie";
+  if (code <= 77) return "Neige";
+  if (code <= 82) return "Averses";
+  if (code <= 86) return "Averses de neige";
+  return "Orages";
+}
+
+function TrafficMap({ segments }: { segments: LiveInfoResponse["traffic"] }) {
+  const minLon = 7.64;
+  const maxLon = 7.84;
+  const minLat = 48.5;
+  const maxLat = 48.68;
+  const project = ([lon, lat]: [number, number]) => [
+    ((lon - minLon) / (maxLon - minLon)) * 640,
+    ((maxLat - lat) / (maxLat - minLat)) * 390,
+  ];
+
+  return (
+    <svg
+      className={styles.trafficMap}
+      viewBox="0 0 640 390"
+      role="img"
+      aria-label="Trafic routier dans l’Eurométropole de Strasbourg"
+    >
+      <path
+        className={styles.river}
+        d="M350 -20 C310 70 370 135 330 215 C300 275 330 330 300 420"
+      />
+      {segments.map((segment) => {
+        const points = segment.coordinates
+          .map(project)
+          .map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`)
+          .join(" ");
+        return (
+          <polyline
+            className={`${styles.trafficSegment} ${styles[`trafficStatus${Math.min(segment.status, 3)}`]}`}
+            points={points}
+            key={segment.id}
+          />
+        );
+      })}
+      <circle className={styles.cityMarker} cx="358" cy="215" r="6" />
+      <text className={styles.cityLabel} x="372" y="220">
+        Strasbourg
+      </text>
+    </svg>
+  );
+}
 
 export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsResponse }) {
   const [now, setNow] = useState<Date | null>(null);
   const [eventsData, setEventsData] = useState(initialEvents);
+  const [liveInfo, setLiveInfo] = useState<LiveInfoResponse>(EMPTY_LIVE_INFO);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const slides = useMemo(() => DISPLAY_SLIDES.filter((slide) => slide.enabled), []);
@@ -24,6 +90,36 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
     return () => {
       window.clearTimeout(initialClock);
       window.clearInterval(clock);
+    };
+  }, []);
+
+  useEffect(() => {
+    let controller: AbortController | null = null;
+    const refresh = async () => {
+      controller?.abort();
+      const activeController = new AbortController();
+      controller = activeController;
+      try {
+        const response = await fetch("/api/display/live", {
+          cache: "no-store",
+          signal: activeController.signal,
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const nextInfo = (await response.json()) as LiveInfoResponse;
+        setLiveInfo(nextInfo);
+      } catch (error) {
+        if (!activeController.signal.aborted) {
+          console.warn("Échec temporaire des informations en direct", {
+            errorType: error instanceof Error ? error.name : "UnknownError",
+          });
+        }
+      }
+    };
+    void refresh();
+    const polling = window.setInterval(refresh, DISPLAY_LIVE_REFRESH_MS);
+    return () => {
+      window.clearInterval(polling);
+      controller?.abort();
     };
   }, []);
 
@@ -214,6 +310,95 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
               <small>Strasbourg · Meinau</small>
             </div>
           </div>
+        </div>
+      </div>
+    ),
+    live: (
+      <div className={styles.liveSlide}>
+        <header className={styles.liveHeader}>
+          <div>
+            <p className={styles.eyebrow}>Strasbourg en direct</p>
+            <h2>L’essentiel, en un coup d’œil.</h2>
+          </div>
+          <span>{time}</span>
+        </header>
+
+        <div className={styles.liveGrid}>
+          <section className={styles.weatherPanel}>
+            <div className={styles.liveSectionTitle}>
+              <CloudSun />
+              <span>Météo locale</span>
+            </div>
+            {liveInfo.weather ? (
+              <>
+                <strong className={styles.weatherTemperature}>
+                  {Math.round(liveInfo.weather.temperature)}°
+                </strong>
+                <p className={styles.weatherCondition}>
+                  {weatherLabel(liveInfo.weather.weatherCode)}
+                </p>
+                <div className={styles.weatherDetails}>
+                  <span>
+                    <Droplets />
+                    {liveInfo.weather.humidity}%
+                  </span>
+                  <span>
+                    <Wind />
+                    {Math.round(liveInfo.weather.windSpeed)} km/h
+                  </span>
+                </div>
+              </>
+            ) : (
+              <p className={styles.liveUnavailable}>Météo en cours de chargement…</p>
+            )}
+          </section>
+
+          <section className={styles.newsPanel}>
+            <div className={styles.liveSectionTitle}>
+              <Newspaper />
+              <span>À la une</span>
+            </div>
+            <div className={styles.headlineList}>
+              {liveInfo.headlines.length > 0 ? (
+                liveInfo.headlines.slice(0, 4).map((headline, index) => (
+                  <article key={`${headline.title}-${index}`}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{headline.title}</strong>
+                      <small>{headline.source}</small>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <p className={styles.liveUnavailable}>Actualités en cours de chargement…</p>
+              )}
+            </div>
+          </section>
+
+          <section className={styles.trafficPanel}>
+            <div className={styles.liveSectionTitle}>
+              <Map />
+              <span>Grands axes</span>
+            </div>
+            <TrafficMap segments={liveInfo.traffic} />
+            <div className={styles.trafficLegend}>
+              <span>
+                <i className={styles.legendFluid} />
+                Fluide
+              </span>
+              <span>
+                <i className={styles.legendDense} />
+                Dense
+              </span>
+              <span>
+                <i className={styles.legendBlocked} />
+                Saturé
+              </span>
+            </div>
+            <small className={styles.trafficSource}>
+              Source : Eurométropole de Strasbourg · SIRAC
+            </small>
+          </section>
         </div>
       </div>
     ),

@@ -360,6 +360,222 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+.liveSlide {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.liveHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(2rem, 3vh, 3.5rem);
+}
+.liveHeader h2 {
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2.5rem, 4vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+.liveHeader > span {
+  color: #d4bf63;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2rem, 3vw, 4rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.liveGrid {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(15rem, 0.62fr) minmax(25rem, 1fr) minmax(31rem, 1.25fr);
+  gap: clamp(1.2rem, 2vw, 2.5rem);
+}
+.weatherPanel,
+.newsPanel,
+.trafficPanel {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: clamp(1rem, 1.4vw, 1.5rem);
+  background: rgba(255, 255, 255, 0.045);
+}
+.weatherPanel,
+.newsPanel {
+  padding: clamp(1.5rem, 2.2vw, 2.6rem);
+}
+.weatherPanel {
+  display: flex;
+  flex-direction: column;
+}
+.liveSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(0.8rem, 0.9vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.liveSectionTitle svg {
+  width: 1.25rem;
+  color: #d4bf63;
+}
+.weatherTemperature {
+  margin-top: auto;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(6rem, 9vw, 11rem);
+  font-weight: 400;
+  letter-spacing: -0.09em;
+  line-height: 0.8;
+}
+.weatherCondition {
+  margin: 2rem 0 0;
+  color: #d4bf63;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.7rem);
+}
+.weatherDetails {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.58);
+}
+.weatherDetails span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.weatherDetails svg {
+  width: 1rem;
+}
+.headlineList {
+  display: flex;
+  height: calc(100% - 2rem);
+  flex-direction: column;
+  justify-content: center;
+}
+.headlineList article {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.8rem;
+  padding: clamp(0.85rem, 1.45vh, 1.35rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.headlineList article > span {
+  color: #d4bf63;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+.headlineList article div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.headlineList strong {
+  display: -webkit-box;
+  overflow: hidden;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(0.95rem, 1.18vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.headlineList small {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.trafficPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 2vw, 2.2rem);
+}
+.trafficMap {
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  margin: 0.75rem 0;
+  border-radius: 1rem;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px), #101413;
+  background-size: 2.5rem 2.5rem;
+}
+.river {
+  fill: none;
+  stroke: rgba(66, 153, 225, 0.22);
+  stroke-width: 7;
+}
+.trafficSegment {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+.trafficStatus0 {
+  stroke: rgba(255, 255, 255, 0.18);
+}
+.trafficStatus1 {
+  stroke: #54bd78;
+}
+.trafficStatus2 {
+  stroke: #e0b84f;
+}
+.trafficStatus3 {
+  stroke: #df756b;
+}
+.cityMarker {
+  fill: #fff;
+  stroke: #d4bf63;
+  stroke-width: 3;
+}
+.cityLabel {
+  fill: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 600;
+}
+.trafficLegend {
+  display: flex;
+  gap: 1.25rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.75rem;
+}
+.trafficLegend span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.trafficLegend i {
+  width: 1.2rem;
+  height: 3px;
+  border-radius: 999px;
+}
+.legendFluid {
+  background: #54bd78;
+}
+.legendDense {
+  background: #e0b84f;
+}
+.legendBlocked {
+  background: #df756b;
+}
+.trafficSource {
+  margin-top: 0.7rem;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 0.65rem;
+}
+.liveUnavailable {
+  margin: auto 0;
+  color: rgba(255, 255, 255, 0.42);
+}
 .progress {
   position: absolute;
   right: clamp(3rem, 5vw, 7rem);
@@ -406,6 +622,13 @@
   .browserPreview {
     width: min(100%, 60rem);
     transform: none;
+  }
+  .liveGrid {
+    grid-template-columns: 0.65fr 1.35fr;
+  }
+  .trafficPanel {
+    min-height: 24rem;
+    grid-column: 1 / -1;
   }
   .roomStatusCard {
     padding: 2.5rem;
