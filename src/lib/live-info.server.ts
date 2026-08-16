@@ -4,7 +4,8 @@ import type { LiveInfoResponse } from "@/features/display/types";
 
 const WEATHER_URL =
   "https://api.open-meteo.com/v1/forecast?latitude=48.5734&longitude=7.7521&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Europe%2FParis";
-const NEWS_URL = "https://www.france24.com/fr/rss";
+const LOCAL_NEWS_URL = "https://actu.fr/strasbourg/rss.xml";
+const FALLBACK_NEWS_URL = "https://www.france24.com/fr/rss";
 const TRAFFIC_URL =
   "https://data.strasbourg.eu/api/explore/v2.1/catalog/datasets/sirac_flux_trafic/records";
 
@@ -60,17 +61,31 @@ async function getWeather(): Promise<LiveInfoResponse["weather"]> {
   };
 }
 
-async function getHeadlines(): Promise<LiveInfoResponse["headlines"]> {
-  const response = await fetch(NEWS_URL, { cache: "no-store" });
+async function getHeadlineFeed(
+  url: string,
+  source: string,
+  scope: "local" | "world",
+): Promise<LiveInfoResponse["headlines"]> {
+  const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error(`News HTTP ${response.status}`);
   const xml = await response.text();
   return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)]
     .slice(0, 4)
     .map(([, item]) => {
       const title = item.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? "";
-      return { title: decodeXml(title).trim(), source: "France 24" };
+      return { title: decodeXml(title).trim(), source, scope };
     })
     .filter(({ title }) => title.length > 0);
+}
+
+async function getHeadlines(): Promise<LiveInfoResponse["headlines"]> {
+  const feeds = await Promise.allSettled([
+    getHeadlineFeed(LOCAL_NEWS_URL, "Actu Strasbourg", "local"),
+    getHeadlineFeed(FALLBACK_NEWS_URL, "France 24", "world"),
+  ]);
+  const headlines = feeds.flatMap((feed) => (feed.status === "fulfilled" ? feed.value : []));
+  if (headlines.length === 0) throw new Error("No news source available");
+  return headlines;
 }
 
 async function getTraffic(): Promise<LiveInfoResponse["traffic"]> {

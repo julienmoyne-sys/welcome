@@ -33,7 +33,7 @@ export type LiveInfoResponse = {
     windSpeed: number;
     weatherCode: number;
   } | null;
-  headlines: Array<{ title: string; source: string }>;
+  headlines: Array<{ title: string; source: string; scope: "local" | "world" }>;
   traffic: Array<{
     id: number;
     name: string;

@@ -63,6 +63,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
   const [eventsData, setEventsData] = useState(initialEvents);
   const [liveInfo, setLiveInfo] = useState<LiveInfoResponse>(EMPTY_LIVE_INFO);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showLocalNews, setShowLocalNews] = useState(true);
 
   const slides = useMemo(() => DISPLAY_SLIDES.filter((slide) => slide.enabled), []);
 
@@ -153,6 +154,23 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
   }, [activeIndex, slides]);
 
   const visibleIndex = slides.length > 0 ? activeIndex % slides.length : 0;
+
+  useEffect(() => {
+    if (slides[visibleIndex]?.id !== "live") return;
+    const alternation = window.setInterval(() => setShowLocalNews((local) => !local), 10_000);
+    return () => window.clearInterval(alternation);
+  }, [slides, visibleIndex]);
+
+  const localHeadlines = liveInfo.headlines.filter((headline) => headline.scope === "local");
+  const worldHeadlines = liveInfo.headlines.filter((headline) => headline.scope === "world");
+  const displayedHeadlines = showLocalNews
+    ? localHeadlines.length > 0
+      ? localHeadlines
+      : worldHeadlines
+    : worldHeadlines.length > 0
+      ? worldHeadlines
+      : localHeadlines;
+  const displayingLocalNews = displayedHeadlines[0]?.scope === "local";
 
   const time = now?.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) ?? "--:--";
   const date = now?.toLocaleDateString("fr-FR", {
@@ -260,10 +278,6 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
         <div className={styles.websiteCopy}>
           <p className={styles.eyebrow}>Nouveau</p>
           <h2>Notre nouveau site est en ligne.</h2>
-          <p className={styles.websiteLead}>
-            Découvrez les espaces, les services et toute l’expérience Welcome! Coworking.
-          </p>
-          <div className={styles.websiteAddress}>www.welcome-coworking.com</div>
         </div>
 
         <div
@@ -276,7 +290,7 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
               <span />
               <span />
             </div>
-            <div className={styles.browserUrl}>welcome-coworking.com</div>
+            <div className={styles.browserUrl}>www.welcome-coworking.com</div>
           </div>
           <div className={styles.browserContent}>
             <Image
@@ -343,11 +357,11 @@ export function DisplayScreen({ initialEvents }: { initialEvents: DisplayEventsR
           <section className={styles.newsPanel}>
             <div className={styles.liveSectionTitle}>
               <Newspaper />
-              <span>À la une</span>
+              <span>{displayingLocalNews ? "À Strasbourg" : "Dans le monde"}</span>
             </div>
             <div className={styles.headlineList}>
-              {liveInfo.headlines.length > 0 ? (
-                liveInfo.headlines.slice(0, 4).map((headline, index) => (
+              {displayedHeadlines.length > 0 ? (
+                displayedHeadlines.slice(0, 3).map((headline, index) => (
                   <article key={`${headline.title}-${index}`}>
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <div>

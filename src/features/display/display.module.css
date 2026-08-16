@@ -1,6 +1,9 @@
 .screen {
   position: fixed;
   inset: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   overflow: hidden;
   background: #0b0b0b;
   color: #fff;
@@ -20,19 +23,30 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  padding: clamp(3rem, 5vw, 7rem);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  padding-block: clamp(2rem, 5vh, 7rem);
+  padding-left: max(clamp(1.5rem, 3vw, 4.5rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1.5rem, 3vw, 4.5rem), env(safe-area-inset-right));
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.015) translateY(12px);
+  transform: translateY(12px);
   transition:
     opacity 1.2s ease,
     transform 1.2s ease,
     visibility 1.2s;
 }
+.slide > * {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
 .active {
   opacity: 1;
   visibility: visible;
-  transform: scale(1) translateY(0);
+  transform: translateY(0);
 }
 .eyebrow {
   margin: 0 0 1.1rem;
@@ -53,9 +67,16 @@
 }
 .welcomeSlide {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
   align-items: end;
+  gap: clamp(2rem, 4vw, 6rem);
   height: 100%;
+}
+.welcomeCopy,
+.websiteCopy,
+.availabilityHeader > div,
+.liveHeader > div {
+  min-width: 0;
 }
 .welcomeCopy h1 {
   margin: 0;
@@ -72,7 +93,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding-left: 4rem;
+  min-width: 0;
 }
 .clock span {
   font-family: var(--font-manrope-sans), sans-serif;
@@ -97,6 +118,14 @@
   align-items: flex-start;
   gap: 2rem;
 }
+.availabilityHeader > *,
+.availabilityBody > *,
+.websiteSlide > *,
+.liveHeader > *,
+.liveGrid > * {
+  max-width: 100%;
+  min-width: 0;
+}
 .availabilityHeader > svg {
   width: clamp(2.5rem, 3vw, 4rem);
   height: auto;
@@ -113,7 +142,7 @@
 }
 .availabilityBody {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(24rem, 0.95fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   flex: 1;
   gap: clamp(3rem, 6vw, 8rem);
   align-items: center;
@@ -121,6 +150,9 @@
   padding-top: clamp(2rem, 4vh, 4rem);
 }
 .roomStatusCard {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: clamp(2.5rem, 4vw, 5rem);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 2rem;
@@ -135,6 +167,8 @@
   font-size: clamp(2.4rem, 4.5vw, 5.5rem);
   font-weight: 500;
   letter-spacing: -0.04em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 .statusPill > span {
   width: clamp(1rem, 1.35vw, 1.6rem);
@@ -169,6 +203,7 @@
   font-size: clamp(1.7rem, 2.6vw, 3.2rem);
   font-weight: 500;
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 .currentReservation strong,
 .nextReservation strong {
@@ -193,6 +228,9 @@
   margin-top: 0.8rem;
 }
 .daySchedule {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 0;
   padding-left: clamp(1.5rem, 3vw, 3rem);
   border-left: 1px solid rgba(255, 255, 255, 0.15);
@@ -211,7 +249,7 @@
 }
 .scheduleItem {
   display: grid;
-  grid-template-columns: minmax(10rem, 0.65fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1fr);
   gap: 1.5rem;
   padding: clamp(1rem, 1.8vh, 1.6rem) 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -243,54 +281,53 @@
   filter: grayscale(1);
 }
 .websiteSlide {
-  display: grid;
-  grid-template-columns: minmax(22rem, 0.72fr) minmax(36rem, 1.28fr);
+  display: flex;
+  width: 92%;
+  max-width: 92%;
+  min-width: 0;
+  margin-inline: auto;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: clamp(3rem, 5vw, 7rem);
+  gap: clamp(1.25rem, 2.5vh, 2.5rem);
   height: 100%;
 }
+.websiteCopy {
+  display: flex;
+  width: 90%;
+  max-width: 90%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 .websiteCopy h2 {
-  max-width: 42rem;
+  max-width: 100%;
   margin: 0;
   font-family: var(--font-manrope-sans), sans-serif;
-  font-size: clamp(3.2rem, 5vw, 6.5rem);
+  font-size: clamp(2rem, 3.3vw, 4.25rem);
   font-weight: 500;
   letter-spacing: -0.05em;
   line-height: 0.98;
 }
-.websiteLead {
-  max-width: 36rem;
-  margin: 2rem 0 0;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: clamp(1rem, 1.35vw, 1.55rem);
-  line-height: 1.5;
-}
-.websiteAddress {
-  display: inline-flex;
-  margin-top: clamp(2.5rem, 4vw, 4.5rem);
-  padding: 1rem 1.35rem;
-  border: 1px solid rgba(212, 191, 99, 0.35);
-  border-radius: 0.85rem;
-  background: rgba(212, 191, 99, 0.1);
-  color: #d4bf63;
-  font-family: var(--font-manrope-sans), sans-serif;
-  font-size: clamp(1.05rem, 1.35vw, 1.5rem);
-  font-weight: 600;
-  letter-spacing: 0.015em;
-}
 .browserPreview {
+  width: min(90%, 116vh);
+  max-width: 90%;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: clamp(1rem, 1.5vw, 1.7rem);
   background: #171716;
   box-shadow: 0 2.5rem 7rem rgba(0, 0, 0, 0.46);
-  transform: perspective(100rem) rotateY(-3deg) rotateX(1deg);
 }
 .browserBar {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: grid;
-  grid-template-columns: 5rem 1fr 5rem;
+  grid-template-columns: minmax(0, 5rem) minmax(0, 1fr) minmax(0, 5rem);
   align-items: center;
-  min-height: 3.5rem;
+  min-height: clamp(2.25rem, 4.5vh, 3.5rem);
   padding: 0 1.1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -309,14 +346,25 @@
 }
 .browserUrl {
   justify-self: center;
-  padding: 0.48rem 1.5rem;
+  padding: 0.5rem clamp(1.5rem, 3vw, 3rem);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.07);
-  color: rgba(255, 255, 255, 0.55);
-  font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+  border: 1px solid rgba(212, 191, 99, 0.38);
+  background: rgba(212, 191, 99, 0.14);
+  color: #f1dd7d;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(0.9rem, 1.25vw, 1.35rem);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .browserContent {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
@@ -333,6 +381,7 @@
   position: absolute;
   top: 50%;
   left: clamp(2rem, 4vw, 4.5rem);
+  right: 1rem;
   z-index: 1;
   display: flex;
   max-width: 55%;
@@ -362,6 +411,10 @@
 }
 .liveSlide {
   display: flex;
+  width: 92%;
+  max-width: 92%;
+  min-width: 0;
+  margin-inline: auto;
   height: 100%;
   flex-direction: column;
 }
@@ -370,6 +423,7 @@
   align-items: flex-end;
   justify-content: space-between;
   margin-bottom: clamp(2rem, 3vh, 3.5rem);
+  gap: 2rem;
 }
 .liveHeader h2 {
   margin: 0;
@@ -388,14 +442,23 @@
 }
 .liveGrid {
   display: grid;
+  width: 100%;
+  max-width: 100%;
   min-height: 0;
+  min-width: 0;
   flex: 1;
-  grid-template-columns: minmax(15rem, 0.62fr) minmax(25rem, 1fr) minmax(31rem, 1.25fr);
-  gap: clamp(1.2rem, 2vw, 2.5rem);
+  grid-template-areas:
+    "traffic weather"
+    "traffic news";
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: clamp(0.8rem, 1.4vw, 1.75rem);
 }
 .weatherPanel,
 .newsPanel,
 .trafficPanel {
+  width: 100%;
+  max-width: 100%;
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -408,8 +471,15 @@
   padding: var(--live-panel-padding);
 }
 .weatherPanel {
-  display: flex;
-  flex-direction: column;
+  grid-area: weather;
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  column-gap: clamp(1rem, 1.5vw, 1.5rem);
+  align-items: center;
+}
+.weatherPanel .liveSectionTitle {
+  grid-column: 1 / -1;
 }
 .liveSectionTitle {
   display: flex;
@@ -420,40 +490,54 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .liveSectionTitle svg {
   width: 1.25rem;
   color: #d4bf63;
 }
 .weatherVisual {
-  margin-top: auto;
+  grid-column: 1;
+  grid-row: 2 / 4;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: clamp(0.75rem, 1.2vw, 1.25rem);
 }
 .weatherPictogram {
-  margin-bottom: clamp(1rem, 1.8vh, 1.6rem);
+  margin: 0;
   color: #d4bf63;
 }
 .weatherPictogram svg {
-  width: clamp(5.5rem, 7vw, 8.5rem);
+  width: clamp(2.75rem, 4vw, 5rem);
   height: auto;
   stroke-width: 1.35;
 }
 .weatherTemperature {
+  display: block;
+  max-width: 100%;
   font-family: var(--font-manrope-sans), sans-serif;
-  font-size: clamp(6rem, 9vw, 11rem);
+  font-size: clamp(3.5rem, 5vw, 7rem);
   font-weight: 400;
   letter-spacing: -0.09em;
   line-height: 0.8;
 }
 .weatherCondition {
-  margin: 2rem 0 0;
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
   color: #d4bf63;
   font-family: var(--font-manrope-sans), sans-serif;
   font-size: clamp(1.1rem, 1.5vw, 1.7rem);
 }
 .weatherDetails {
+  grid-column: 2;
+  grid-row: 3;
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   color: rgba(255, 255, 255, 0.58);
 }
 .weatherDetails span {
@@ -466,13 +550,19 @@
 }
 .headlineList {
   display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: calc(100% - 2rem);
   flex-direction: column;
   justify-content: center;
 }
 .headlineList article {
   display: grid;
-  grid-template-columns: 2.2rem 1fr;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  grid-template-columns: clamp(1.25rem, 1.5vw, 1.75rem) minmax(0, 1fr);
   gap: 0.8rem;
   padding: clamp(0.85rem, 1.45vh, 1.35rem) 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -496,23 +586,30 @@
   font-weight: 500;
   line-height: 1.3;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
+  overflow-wrap: anywhere;
 }
 .headlineList small {
   color: rgba(255, 255, 255, 0.38);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 .trafficPanel {
+  grid-area: traffic;
   position: relative;
   display: flex;
   flex-direction: column;
   padding: clamp(1.5rem, 2vw, 2.2rem);
 }
+.newsPanel {
+  grid-area: news;
+}
 .trafficMapFrame {
   position: relative;
   width: 100%;
+  max-width: 100%;
   min-height: 0;
   overflow: hidden;
   flex: 1;
@@ -520,16 +617,25 @@
   border-radius: 1rem;
   background: #101413;
 }
+.mapUnavailable {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.58);
+  text-align: center;
+}
 .trafficMapFrame :global(.leaflet-tile-pane) {
-  filter: grayscale(0.8) invert(0.88) hue-rotate(145deg) brightness(0.58) contrast(1.15);
-  opacity: 0.72;
+  filter: grayscale(0.72) invert(0.88) hue-rotate(145deg) brightness(0.7) contrast(1.1);
+  opacity: 0.8;
 }
 .trafficMapFrame::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 250;
-  background: rgba(3, 18, 17, 0.28);
+  background: rgba(3, 18, 17, 0.18);
   pointer-events: none;
 }
 .trafficMapFrame :global(.leaflet-tooltip) {
@@ -563,6 +669,7 @@
 }
 .trafficLegend {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.25rem;
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.75rem;
@@ -597,7 +704,8 @@
 }
 .progress {
   position: absolute;
-  right: clamp(3rem, 5vw, 7rem);
+  right: max(clamp(1.5rem, 3vw, 4.5rem), env(safe-area-inset-right));
+  max-width: calc(100% - max(clamp(3rem, 6vw, 9rem), env(safe-area-inset-left)));
   bottom: 2.5rem;
   z-index: 5;
   display: flex;
@@ -615,6 +723,52 @@
   width: clamp(3rem, 4vw, 5rem);
   background: #d4bf63;
 }
+@media (max-width: 1400px) and (max-height: 800px) {
+  .websiteSlide {
+    gap: 1rem;
+  }
+  .websiteCopy h2 {
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+  }
+  .browserPreview {
+    width: min(90%, 110vh);
+  }
+  .liveHeader {
+    margin-bottom: 1.15rem;
+  }
+  .liveHeader h2 {
+    font-size: clamp(2rem, 3.4vw, 3rem);
+  }
+  .weatherPanel,
+  .newsPanel,
+  .trafficPanel {
+    --live-panel-padding: 1.15rem;
+    padding: var(--live-panel-padding);
+  }
+  .weatherPictogram {
+    margin-bottom: 0.75rem;
+  }
+  .weatherPictogram svg {
+    width: 3.25rem;
+  }
+  .weatherTemperature {
+    font-size: clamp(4rem, 6vw, 5.25rem);
+  }
+  .weatherCondition {
+    margin-top: 1rem;
+  }
+  .weatherDetails {
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .headlineList article {
+    gap: 0.55rem;
+    padding: 0.65rem 0;
+  }
+  .headlineList strong {
+    font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+  }
+}
 @media (max-aspect-ratio: 4/3) {
   .welcomeSlide {
     grid-template-columns: 1fr;
@@ -630,24 +784,28 @@
     gap: 2rem;
   }
   .websiteSlide {
-    grid-template-columns: 1fr;
-    align-content: center;
     gap: 3rem;
   }
-  .websiteCopy h2,
-  .websiteLead {
+  .websiteCopy {
+    width: 100%;
+    max-width: 100%;
+  }
+  .websiteCopy h2 {
     max-width: 60rem;
   }
   .browserPreview {
-    width: min(100%, 60rem);
-    transform: none;
+    width: min(90%, 60rem);
   }
   .liveGrid {
-    grid-template-columns: 0.65fr 1.35fr;
+    grid-template-areas:
+      "traffic"
+      "weather"
+      "news";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(24rem, 1.5fr) minmax(0, 0.5fr) minmax(0, 1fr);
   }
   .trafficPanel {
     min-height: 24rem;
-    grid-column: 1 / -1;
   }
   .roomStatusCard {
     padding: 2.5rem;

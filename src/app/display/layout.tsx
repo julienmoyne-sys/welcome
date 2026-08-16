@@ -3,6 +3,7 @@ import { Inter, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "../globals.css";
+import "./display.css";
 
 const manrope = Manrope({
   subsets: ["latin"],

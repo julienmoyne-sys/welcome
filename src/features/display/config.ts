@@ -10,8 +10,8 @@ export const DISPLAY_LIVE_REFRESH_MS = 2 * 60 * 1_000;
  * d'affichage ; `enabled` et `durationMs` pourront ensuite venir de l'admin.
  */
 export const DISPLAY_SLIDES: DisplaySlideConfig[] = [
-  { id: "welcome", enabled: true, durationMs: 7_000 },
+  { id: "welcome", enabled: true, durationMs: 5_000 },
   { id: "availability", enabled: true, durationMs: 12_000 },
-  { id: "website", enabled: true, durationMs: 8_000 },
-  { id: "live", enabled: true, durationMs: 15_000 },
+  { id: "website", enabled: true, durationMs: 6_000 },
+  { id: "live", enabled: true, durationMs: 30_000 },
 ];
