@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import sharp from "sharp";
 
 export const runtime = "nodejs";
 
@@ -28,7 +29,7 @@ export async function GET(_request: Request, context: { params: Promise<TilePara
   );
   tileUrl.searchParams.set("key", apiKey);
   tileUrl.searchParams.set("tileSize", "256");
-  tileUrl.searchParams.set("thickness", "12");
+  tileUrl.searchParams.set("thickness", "10");
 
   const response = await fetch(tileUrl, {
     headers: { Accept: "image/png, application/json" },
@@ -43,7 +44,25 @@ export async function GET(_request: Request, context: { params: Promise<TilePara
     );
   }
 
-  return new NextResponse(await response.arrayBuffer(), {
+  const { data, info } = await sharp(Buffer.from(await response.arrayBuffer()))
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  for (let index = 0; index < data.length; index += 4) {
+    const red = data[index];
+    const green = data[index + 1];
+    const blue = data[index + 2];
+    if (green > red * 1.12 && green > blue * 1.12) data[index + 3] = 0;
+  }
+
+  const filteredTile = await sharp(data, {
+    raw: { width: info.width, height: info.height, channels: 4 },
+  })
+    .png()
+    .toBuffer();
+
+  return new NextResponse(new Uint8Array(filteredTile), {
     headers: {
       "Cache-Control": "public, max-age=60, s-maxage=60, stale-while-revalidate=120",
       "Content-Type": "image/png",
