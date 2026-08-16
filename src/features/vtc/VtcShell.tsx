@@ -1,10 +1,15 @@
 "use client";
 
-import { ArrowLeft, Home, Moon, QrCode, RotateCw } from "lucide-react";
+import { ArrowLeft, Home, Moon, QrCode } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import coworkingImage from "@/assets/hero-welcome-real.png";
+import coworkingCardImage from "@/assets/vtc-card-coworking.png";
+import journeyCardImage from "@/assets/vtc-card-journey.png";
+import safetyCardImage from "@/assets/vtc-card-safety.png";
+import servicesCardImage from "@/assets/vtc-card-services.png";
+import strasbourgCardImage from "@/assets/vtc-card-strasbourg.png";
 import welcomeLogo from "@/assets/welcome-vtc-logo.png";
 
 import {
@@ -20,6 +25,13 @@ import styles from "./vtc.module.css";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
 const SLEEP_AFTER_RELOAD_KEY = "welcome-vtc-sleep-after-reload";
+const VTC_CARD_IMAGES = {
+  journey: journeyCardImage,
+  safety: safetyCardImage,
+  services: servicesCardImage,
+  strasbourg: strasbourgCardImage,
+  coworking: coworkingCardImage,
+} as const;
 
 function VtcLogo({ subdued = false }: { subdued?: boolean }) {
   return (
@@ -69,6 +81,14 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
               type="button"
               onClick={() => onOpen(item.id)}
             >
+              <Image
+                src={VTC_CARD_IMAGES[item.id]}
+                alt=""
+                fill
+                sizes="(max-width: 900px) 50vw, 33vw"
+                className={styles.cardImage}
+              />
+              <span className={styles.cardShade} aria-hidden="true" />
               <span className={styles.cardNumber}>{item.accent}</span>
               <Icon className={styles.cardIcon} aria-hidden="true" />
               <span className={styles.cardCopy}>
@@ -310,17 +330,6 @@ export function VtcShell() {
       )}
       {!isSleeping && (
         <div className={styles.utilityControls}>
-          {activeSection === null && (
-            <button
-              className={styles.refreshButton}
-              type="button"
-              onClick={() => reloadToHome(false)}
-              aria-label="Actualiser Welcome VTC"
-              title="Actualiser"
-            >
-              <RotateCw aria-hidden="true" />
-            </button>
-          )}
           <button className={styles.sleepButton} type="button" onClick={enterSleep}>
             <Moon aria-hidden="true" />
             <span>Veille</span>
