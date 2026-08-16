@@ -404,7 +404,8 @@
 }
 .weatherPanel,
 .newsPanel {
-  padding: clamp(1.5rem, 2.2vw, 2.6rem);
+  --live-panel-padding: clamp(1.5rem, 2.2vw, 2.6rem);
+  padding: var(--live-panel-padding);
 }
 .weatherPanel {
   display: flex;
@@ -432,7 +433,7 @@
   color: #d4bf63;
 }
 .weatherPictogram svg {
-  width: clamp(3.5rem, 4.5vw, 5.5rem);
+  width: clamp(5.5rem, 7vw, 8.5rem);
   height: auto;
   stroke-width: 1.35;
 }
