@@ -9,6 +9,7 @@ import {
   MapPin,
   Moon,
   QrCode,
+  RefreshCw,
   Thermometer,
   Wind,
 } from "lucide-react";
@@ -447,10 +448,8 @@ export function VtcShell() {
     }
   }, []);
   const goHome = useCallback(() => {
-    clearInactivityTimer();
     setActiveSection(null);
-    window.location.reload();
-  }, [clearInactivityTimer]);
+  }, []);
   const enterSleep = useCallback(() => {
     clearInactivityTimer();
     sleepStartedAt.current = Date.now();
@@ -461,7 +460,8 @@ export function VtcShell() {
   }, [clearInactivityTimer]);
   const wake = useCallback(() => {
     window.sessionStorage.removeItem(SLEEP_STATE_KEY);
-    window.location.reload();
+    setActiveSection(null);
+    setIsSleeping(false);
   }, []);
 
   useEffect(() => {
@@ -539,6 +539,17 @@ export function VtcShell() {
             <span>Veille</span>
           </button>
         </div>
+      )}
+      {!isSleeping && (
+        <button
+          className={styles.manualRefresh}
+          type="button"
+          onClick={() => window.location.reload()}
+          aria-label="Rafraîchir l’interface"
+          title="Rafraîchir"
+        >
+          <RefreshCw aria-hidden="true" />
+        </button>
       )}
       <button
         className={styles.sleepOverlay}
