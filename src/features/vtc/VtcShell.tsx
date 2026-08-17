@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  ArrowLeft,
   ArrowRight,
+  Building2,
   Cloud,
   CloudFog,
   CloudLightning,
@@ -177,20 +177,10 @@ function VtcLogo({ subdued = false }: { subdued?: boolean }) {
   );
 }
 
-function SectionHeader({ title, onHome }: { title: string; onHome: () => void }) {
+function SectionHeader() {
   return (
     <header className={styles.sectionHeader}>
-      <button
-        className={styles.backButton}
-        type="button"
-        onClick={onHome}
-        aria-label="Retour à l’accueil"
-      >
-        <ArrowLeft aria-hidden="true" />
-        <span>Accueil</span>
-      </button>
       <VtcLogo />
-      <p>{title}</p>
     </header>
   );
 }
@@ -209,10 +199,12 @@ function VtcHome({
       <header className={styles.homeHeader}>
         <div>
           <VtcLogo />
-          <h1 id="vtc-welcome-title">Bienvenue à bord</h1>
+          <div className={styles.homeTitleRow}>
+            <h1 id="vtc-welcome-title">Bienvenue à bord</h1>
+            <time className={styles.clock}>{time}</time>
+          </div>
           <p className={styles.tagline}>Votre trajet, en toute sérénité.</p>
         </div>
-        <time className={styles.clock}>{time}</time>
       </header>
 
       <nav className={styles.menuGrid} aria-label="Services passagers">
@@ -373,7 +365,6 @@ function JourneyScreen() {
     <div className={`${styles.detailBody} ${styles.cockpitBody}`}>
       <div className={styles.cockpitHeading}>
         <div className={styles.introBlock}>
-          <p className={styles.eyebrow}>Navigation</p>
           <h2>Cockpit</h2>
         </div>
         <div className={styles.destinationEntry}>
@@ -525,7 +516,6 @@ function JourneyScreen() {
                   <span className={styles.timelineDot} />
                   <strong title={point.name}>{point.name}</strong>
                   <small>
-                    {point.category} ·{" "}
                     {point.distanceMeters < 1000
                       ? `${point.distanceMeters} m`
                       : `${(point.distanceMeters / 1000).toFixed(1).replace(".", ",")} km`}
@@ -540,13 +530,7 @@ function JourneyScreen() {
   );
 }
 
-function LiveScreen({
-  location,
-  isLocating,
-}: {
-  location: ReturnType<typeof useVtcLocation>["location"];
-  isLocating: boolean;
-}) {
+function LiveScreen({ location }: { location: ReturnType<typeof useVtcLocation>["location"] }) {
   const [data, setData] = useState<LiveDashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshKey, setRefreshKey] = useState(0);
@@ -582,17 +566,13 @@ function LiveScreen({
   return (
     <div className={`${styles.detailBody} ${styles.liveDashboard}`}>
       <header className={styles.liveDashboardHeader}>
+        <h2>Météo</h2>
         <div>
-          <p className={styles.eyebrow}>En direct</p>
-          <h2>Météo & actualités</h2>
-          <span>
-            <MapPin aria-hidden="true" />
-            {isLocating ? "Localisation…" : location.city}
-          </span>
+          <h2>Actualités</h2>
+          <button type="button" onClick={() => setRefreshKey((value) => value + 1)}>
+            <RefreshCw aria-hidden="true" /> Actualiser
+          </button>
         </div>
-        <button type="button" onClick={() => setRefreshKey((value) => value + 1)}>
-          <RefreshCw aria-hidden="true" /> Actualiser
-        </button>
       </header>
 
       <div className={styles.liveDashboardGrid}>
@@ -609,6 +589,7 @@ function LiveScreen({
                     <span>{weatherLabel(current.weather_code)}</span>
                     <small>Ressenti {Math.round(current.apparent_temperature)} °C</small>
                   </div>
+                  <strong className={styles.weatherLocation}>{location.city}</strong>
                 </div>
                 <div className={styles.weatherMetrics}>
                   {[
@@ -692,9 +673,11 @@ function LiveScreen({
 
         <section className={styles.newsDashboard} aria-label="Fil d’actualité">
           <div className={styles.newsHeading}>
-            <div>
-              <Newspaper aria-hidden="true" />
-              <span>Le fil du moment</span>
+            <div className={styles.newsHeadingTitle}>
+              <div>
+                <Newspaper aria-hidden="true" />
+                <span>Le fil du moment</span>
+              </div>
             </div>
             <small>France 24 + une pause insolite</small>
           </div>
@@ -732,61 +715,60 @@ function LiveScreen({
 
 function ServicesScreen({ content }: { content: DriverContent }) {
   return (
-    <div className={styles.detailBody}>
+    <div className={`${styles.detailBody} ${styles.servicesBody}`}>
       <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Sécurité et confort</p>
         <h2>Services à bord</h2>
-        <p>Les services ci-dessous sont renseignés directement par votre chauffeur.</p>
       </div>
-      <section className={styles.safetySection} aria-label="Consignes de sécurité">
-        <div className={styles.driverSectionHeading}>
-          <span>Les bons réflexes à bord</span>
-          <small>Consignes de sécurité VTC</small>
-        </div>
-        <div className={styles.safetyGrid}>
-          {SAFETY_ITEMS.map(({ title, text, image }) => (
-            <article className={styles.safetyCard} key={title}>
-              <div className={styles.safetyPhoto}>
-                <Image src={image} alt="" fill sizes="(max-width: 900px) 50vw, 24vw" />
-              </div>
-              <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-                {title === "Ceinture" && (
-                  <small>
-                    Pour un passager majeur, l’éventuelle amende pour non-port de la ceinture est à
-                    la charge du passager.
-                  </small>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className={styles.driverServices} aria-label="Services proposés par le chauffeur">
-        <div className={styles.driverSectionHeading}>
-          <span>À votre disposition</span>
-          <small>{content.driver.displayName}</small>
-        </div>
-        <div className={styles.driverServiceList}>
-          {content.services.map((service, index) => (
-            <article key={service.id}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <strong>{service.title}</strong>
-                <p>{service.description}</p>
-              </div>
-              <small className={styles.driverServicePrice}>
-                <span>Prix</span>
-                <strong>{formatServicePrice(service.priceCents, service.currency)}</strong>
-              </small>
-            </article>
-          ))}
-          {!content.services.length && (
-            <p className={styles.driverContentEmpty}>Aucun service personnalisé renseigné.</p>
-          )}
-        </div>
-      </section>
+      <div className={styles.servicesColumns}>
+        <section className={styles.driverServices} aria-label="Services proposés par le chauffeur">
+          <div className={styles.driverSectionHeading}>
+            <span>À votre disposition</span>
+            <small>{content.driver.displayName}</small>
+          </div>
+          <div className={styles.driverServiceList}>
+            {content.services.map((service, index) => (
+              <article key={service.id}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <strong>{service.title}</strong>
+                  <p>{service.description}</p>
+                </div>
+                <small className={styles.driverServicePrice}>
+                  <span>Prix</span>
+                  <strong>{formatServicePrice(service.priceCents, service.currency)}</strong>
+                </small>
+              </article>
+            ))}
+            {!content.services.length && (
+              <p className={styles.driverContentEmpty}>Aucun service personnalisé renseigné.</p>
+            )}
+          </div>
+        </section>
+        <section className={styles.safetySection} aria-label="Consignes de sécurité">
+          <div className={styles.driverSectionHeading}>
+            <span>Consignes de sécurité à bord</span>
+          </div>
+          <div className={styles.safetyGrid}>
+            {SAFETY_ITEMS.map(({ title, text, image }) => (
+              <article className={styles.safetyCard} key={title}>
+                <div className={styles.safetyPhoto}>
+                  <Image src={image} alt="" fill sizes="(max-width: 900px) 100vw, 25vw" />
+                </div>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                  {title === "Ceinture" && (
+                    <small>
+                      Pour un passager majeur, l’éventuelle amende pour non-port de la ceinture est
+                      à la charge du passager.
+                    </small>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
@@ -815,7 +797,16 @@ function CoworkingScreen() {
           ))}
         </ul>
         <a className={styles.coworkingLink} href="https://www.welcome-coworking.com">
-          <strong>Découvrir Welcome! Coworking Strasbourg</strong>
+          <span className={styles.coworkingLinkIcon}>
+            <Building2 aria-hidden="true" />
+          </span>
+          <div>
+            <strong>Visiter Welcome! Coworking</strong>
+            <small>Bureaux & espaces de travail à Strasbourg</small>
+          </div>
+          <span className={styles.coworkingLinkArrow}>
+            <ArrowRight aria-hidden="true" />
+          </span>
         </a>
       </div>
     </div>
@@ -913,7 +904,6 @@ export function VtcShell() {
     };
   }, [clearInactivityTimer, enterSleep, isSleeping]);
 
-  const title = VTC_MENU.find((item) => item.id === activeSection)?.title ?? "";
   const tourismImage =
     DEPARTMENT_CARD_IMAGES[location.departmentCode] ??
     (location.source === "device"
@@ -927,10 +917,10 @@ export function VtcShell() {
         <VtcHome time={time} onOpen={setActiveSection} tourismImage={tourismImage} />
       ) : (
         <section className={styles.detailScreen}>
-          <SectionHeader title={title} onHome={goHome} />
+          <SectionHeader />
           <div className={styles.detailViewport}>
             {activeSection === "journey" && <JourneyScreen />}
-            {activeSection === "live" && <LiveScreen location={location} isLocating={isLocating} />}
+            {activeSection === "live" && <LiveScreen location={location} />}
             {activeSection === "entertainment" && <EntertainmentScreen />}
             {activeSection === "services" && <ServicesScreen content={driverContent} />}
             {activeSection === "region" && (

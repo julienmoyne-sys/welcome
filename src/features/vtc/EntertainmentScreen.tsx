@@ -281,7 +281,6 @@ export function EntertainmentScreen() {
     <div className={`${styles.detailBody} ${styles.entertainmentBody}`}>
       <div className={styles.introBlock}>
         <div className={styles.entertainmentIntroCopy}>
-          <p className={styles.eyebrow}>Pendant le trajet</p>
           <h2>Une pause rien qu’à vous</h2>
           <p>Musique, vidéos ou mini-jeux : choisissez votre moment de détente à bord.</p>
         </div>
