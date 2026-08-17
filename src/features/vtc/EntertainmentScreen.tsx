@@ -290,7 +290,7 @@ export function EntertainmentScreen() {
           <div className={styles.entertainmentHeading}>
             <Gamepad2 aria-hidden="true" />
             <div>
-              <strong>Jeux sans publicité</strong>
+              <strong>Jeux</strong>
               <small>Gratuits, privés et disponibles à bord</small>
             </div>
           </div>
