@@ -12,6 +12,34 @@ type YouTubeSearchResponse = {
   error?: { message?: string };
 };
 
+const LOCAL_FALLBACK_VIDEOS = [
+  {
+    id: "jfKfPfyJRdk",
+    title: "Lofi hip hop radio — musique pour se détendre",
+    channel: "Lofi Girl",
+  },
+  {
+    id: "21X5lGlDOfg",
+    title: "La Terre vue depuis la Station spatiale internationale",
+    channel: "NASA",
+  },
+  {
+    id: "YE7VzlLtp-4",
+    title: "Big Buck Bunny — court métrage d’animation",
+    channel: "Blender Foundation",
+  },
+];
+
+function localVideos(query: string) {
+  if (!query) return LOCAL_FALLBACK_VIDEOS;
+
+  const normalizedQuery = query.toLocaleLowerCase("fr");
+  const matches = LOCAL_FALLBACK_VIDEOS.filter(({ title, channel }) =>
+    `${title} ${channel}`.toLocaleLowerCase("fr").includes(normalizedQuery),
+  );
+  return matches.length ? matches : LOCAL_FALLBACK_VIDEOS;
+}
+
 function decodeEntities(value: string) {
   return value
     .replaceAll("&amp;", "&")
@@ -22,12 +50,13 @@ function decodeEntities(value: string) {
 }
 
 export async function GET(request: NextRequest) {
+  const requestedQuery = request.nextUrl.searchParams.get("q")?.trim().slice(0, 80) ?? "";
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({ error: "La clé YouTube n'est pas configurée." }, { status: 503 });
+    return NextResponse.json({ videos: localVideos(requestedQuery), source: "local-fallback" });
   }
 
-  const query = request.nextUrl.searchParams.get("q")?.trim().slice(0, 80) || DEFAULT_QUERY;
+  const query = requestedQuery || DEFAULT_QUERY;
   const params = new URLSearchParams({
     part: "snippet",
     type: "video",

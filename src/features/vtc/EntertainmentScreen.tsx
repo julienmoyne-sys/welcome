@@ -1,6 +1,6 @@
 "use client";
 
-import { Gamepad2, Play, RotateCcw, Search } from "lucide-react";
+import { Gamepad2, Music2, PartyPopper, Play, RotateCcw, Search, Sparkles } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 
 import styles from "./vtc.module.css";
@@ -280,9 +280,22 @@ export function EntertainmentScreen() {
   return (
     <div className={`${styles.detailBody} ${styles.entertainmentBody}`}>
       <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Pendant le trajet</p>
-        <h2>Divertissements</h2>
-        <p>Regardez YouTube ou profitez d’un jeu directement à bord.</p>
+        <div className={styles.entertainmentIntroCopy}>
+          <p className={styles.eyebrow}>Pendant le trajet</p>
+          <h2>Une pause rien qu’à vous</h2>
+          <p>Musique, vidéos ou mini-jeux : choisissez votre moment de détente à bord.</p>
+        </div>
+        <div className={styles.entertainmentMood} aria-hidden="true">
+          <span>
+            <Music2 />
+          </span>
+          <span>
+            <Sparkles />
+          </span>
+          <span>
+            <PartyPopper />
+          </span>
+        </div>
       </div>
       <div className={styles.entertainmentLayout}>
         <YouTubePanel />

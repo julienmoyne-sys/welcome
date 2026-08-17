@@ -42,7 +42,7 @@ export const VTC_MENU: VtcMenuItem[] = [
   {
     id: "entertainment",
     title: "Divertissements",
-    description: "Musique, lecture et jeux à bord.",
+    description: "Musique, vidéos et jeux à bord",
     icon: Headphones,
     accent: "03",
   },

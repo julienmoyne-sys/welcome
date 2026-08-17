@@ -18,7 +18,6 @@ import {
   MapPin,
   Moon,
   Newspaper,
-  QrCode,
   RefreshCw,
   Route as RouteIcon,
   Sun,
@@ -57,6 +56,8 @@ import { DEMO_DRIVER_CONTENT, type DriverContent } from "@/lib/driver-content";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
 const SLEEP_STATE_KEY = "welcome-vtc-sleeping";
+const LANGUAGE_STORAGE_KEY = "welcome-vtc-language";
+type VtcLanguage = "FR" | "DE" | "EN" | "ES";
 const VTC_CARD_IMAGES = {
   journey: journeyCardImage,
   live: liveCardImage,
@@ -813,13 +814,9 @@ function CoworkingScreen() {
             <li key={feature}>{feature}</li>
           ))}
         </ul>
-        <div className={styles.qrPlaceholder} aria-label="Emplacement réservé au futur QR code">
-          <QrCode aria-hidden="true" />
-          <div>
-            <strong>Découvrir Welcome!</strong>
-            <small>QR code bientôt disponible</small>
-          </div>
-        </div>
+        <a className={styles.coworkingLink} href="https://www.welcome-coworking.com">
+          <strong>Découvrir Welcome! Coworking Strasbourg</strong>
+        </a>
       </div>
     </div>
   );
@@ -829,6 +826,7 @@ export function VtcShell() {
   const [activeSection, setActiveSection] = useState<VtcSectionId | null>(null);
   const [time, setTime] = useState("--:--");
   const [isSleeping, setIsSleeping] = useState(false);
+  const [language, setLanguage] = useState<VtcLanguage>("FR");
   const { location, isLocating } = useVtcLocation();
   const [driverContent, setDriverContent] = useState<DriverContent>(DEMO_DRIVER_CONTENT);
   const inactivityTimer = useRef<number | null>(null);
@@ -855,6 +853,12 @@ export function VtcShell() {
     window.sessionStorage.removeItem(SLEEP_STATE_KEY);
     setActiveSection(null);
     setIsSleeping(false);
+  }, []);
+
+  useEffect(() => {
+    const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    if (!savedLanguage || !["FR", "DE", "EN", "ES"].includes(savedLanguage)) return;
+    window.queueMicrotask(() => setLanguage(savedLanguage as VtcLanguage));
   }, []);
 
   useEffect(() => {
@@ -951,6 +955,23 @@ export function VtcShell() {
       )}
       {!isSleeping && (
         <div className={styles.utilityControls}>
+          <label className={styles.languageSelect}>
+            <span className={styles.srOnly}>Langue</span>
+            <select
+              value={language}
+              aria-label="Choisir la langue"
+              onChange={(event) => {
+                const nextLanguage = event.target.value as VtcLanguage;
+                setLanguage(nextLanguage);
+                window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage);
+              }}
+            >
+              <option value="FR">FR</option>
+              <option value="DE">DE</option>
+              <option value="EN">EN</option>
+              <option value="ES">ES</option>
+            </select>
+          </label>
           <button className={styles.sleepButton} type="button" onClick={enterSleep}>
             <Moon aria-hidden="true" />
             <span>Veille</span>
