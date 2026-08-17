@@ -592,6 +592,16 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.45rem, 0.8vw, 0.7rem);
 }
+.weatherValue {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.weatherValue svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--vtc-gold);
+}
 .cockpitFacts article {
   display: grid;
   min-width: 0;

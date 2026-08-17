@@ -54,7 +54,10 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
     let resizeObserver: ResizeObserver | null = null;
     let currentPosition: [number, number] | null = null;
     let lastCityLookup = 0;
+    let lastCityLookupPosition: [number, number] | null = null;
+    let cityLookupSequence = 0;
     let currentCity: string | null = null;
+    let currentAltitude: number | null = null;
 
     const changeStatus = (nextStatus: LocationStatus) => {
       setStatus(nextStatus);
@@ -121,6 +124,7 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
           const { latitude, longitude, accuracy, altitude, speed } = position.coords;
           const latLng: [number, number] = [latitude, longitude];
           currentPosition = latLng;
+          if (altitude != null) currentAltitude = altitude;
 
           if (!positionMarker) {
             positionMarker = L.marker(latLng, { icon: positionIcon, zIndexOffset: 1000 })
@@ -152,7 +156,7 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
             latitude,
             longitude,
             accuracy,
-            altitude,
+            altitude: currentAltitude,
             speed,
             city,
           });
@@ -162,17 +166,26 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
           onPositionRef.current(snapshot(currentCity));
 
           const now = Date.now();
-          if (now - lastCityLookup > 5 * 60_000) {
+          const movedSinceLookup = lastCityLookupPosition
+            ? map.distance(lastCityLookupPosition, latLng)
+            : Number.POSITIVE_INFINITY;
+          if (movedSinceLookup >= 500 || now - lastCityLookup > 30_000) {
             lastCityLookup = now;
+            lastCityLookupPosition = latLng;
+            const lookupSequence = ++cityLookupSequence;
             void fetch(`/api/vtc/commune?lat=${latitude.toFixed(5)}&lon=${longitude.toFixed(5)}`)
               .then((response) =>
                 response.ok
-                  ? (response.json() as Promise<{ city?: string | null }>)
+                  ? (response.json() as Promise<{
+                      city?: string | null;
+                      altitude?: number | null;
+                    }>)
                   : Promise.reject(),
               )
               .then((data) => {
-                if (disposed) return;
+                if (disposed || lookupSequence !== cityLookupSequence) return;
                 currentCity = data.city ?? null;
+                if (altitude == null && data.altitude != null) currentAltitude = data.altitude;
                 onPositionRef.current(snapshot(currentCity));
               })
               .catch(() => undefined);
@@ -188,7 +201,7 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
           updatePosition,
           (error) =>
             changeStatus(error.code === error.PERMISSION_DENIED ? "denied" : "unavailable"),
-          { enableHighAccuracy: false, maximumAge: 5 * 60_000, timeout: 20_000 },
+          { enableHighAccuracy: true, maximumAge: 30_000, timeout: 20_000 },
         );
 
         const refreshSize = () => map?.invalidateSize(false);

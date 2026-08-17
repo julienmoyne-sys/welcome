@@ -3,6 +3,12 @@
 import {
   ArrowLeft,
   ArrowRight,
+  Cloud,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
+  CloudSun,
   Clock3,
   Flag,
   Gauge,
@@ -12,6 +18,7 @@ import {
   QrCode,
   RefreshCw,
   Route as RouteIcon,
+  Sun,
   Thermometer,
   Wind,
 } from "lucide-react";
@@ -58,6 +65,33 @@ const VTC_CARD_IMAGES = {
   region: regionCardImage,
   coworking: coworkingCardImage,
 } as const;
+
+type CockpitWeather = {
+  temperature: number;
+  weatherCode: number;
+  pressure: number;
+  europeanAqi: number;
+};
+
+function weatherIcon(weatherCode: number) {
+  if (weatherCode === 0) return Sun;
+  if (weatherCode <= 2) return CloudSun;
+  if (weatherCode === 3) return Cloud;
+  if (weatherCode <= 48) return CloudFog;
+  if (weatherCode <= 67 || (weatherCode >= 80 && weatherCode <= 82)) return CloudRain;
+  if (weatherCode <= 77 || (weatherCode >= 85 && weatherCode <= 86)) return CloudSnow;
+  if (weatherCode >= 95) return CloudLightning;
+  return Cloud;
+}
+
+function airQualityLabel(europeanAqi: number) {
+  if (europeanAqi <= 20) return "Bonne";
+  if (europeanAqi <= 40) return "Assez bonne";
+  if (europeanAqi <= 60) return "Moyenne";
+  if (europeanAqi <= 80) return "Médiocre";
+  if (europeanAqi <= 100) return "Mauvaise";
+  return "Très mauvaise";
+}
 
 function VtcLogo({ subdued = false }: { subdued?: boolean }) {
   return (
@@ -148,6 +182,8 @@ function JourneyScreen() {
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
   const [route, setRoute] = useState<NavigationRoute | null>(null);
   const [arrivalTime, setArrivalTime] = useState<string | null>(null);
+  const [weather, setWeather] = useState<CockpitWeather | null>(null);
+  const [weatherLoadedContext, setWeatherLoadedContext] = useState<string | null>(null);
   const [navigationStatus, setNavigationStatus] = useState<"idle" | "loading" | "error">("idle");
   const [navigationError, setNavigationError] = useState("");
   const [cityPhotoFailedFor, setCityPhotoFailedFor] = useState<string | null>(null);
@@ -187,6 +223,37 @@ function JourneyScreen() {
       : `${(route.distanceMeters / 1000).toFixed(1).replace(".", ",")} km`
     : "—";
   const estimatedArrival = arrivalTime ?? "—";
+  const weatherLatitude = route?.destination.latitude ?? gps?.latitude;
+  const weatherLongitude = route?.destination.longitude ?? gps?.longitude;
+  const weatherContext =
+    weatherLatitude === undefined || weatherLongitude === undefined
+      ? null
+      : `${route ? "destination" : "current"}:${weatherLatitude.toFixed(3)}:${weatherLongitude.toFixed(3)}`;
+  const visibleWeather = weatherLoadedContext === weatherContext ? weather : null;
+  const WeatherIcon = visibleWeather ? weatherIcon(visibleWeather.weatherCode) : Thermometer;
+  const destinationSuffix = route ? " (à destination)" : "";
+
+  useEffect(() => {
+    if (!weatherContext || weatherLatitude === undefined || weatherLongitude === undefined) return;
+    const controller = new AbortController();
+    const params = new URLSearchParams({
+      lat: String(weatherLatitude),
+      lon: String(weatherLongitude),
+    });
+    void fetch(`/api/vtc/weather?${params}`, { signal: controller.signal })
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data: CockpitWeather) => {
+        setWeather(data);
+        setWeatherLoadedContext(weatherContext);
+      })
+      .catch((error: unknown) => {
+        if ((error as Error)?.name !== "AbortError") {
+          setWeather(null);
+          setWeatherLoadedContext(weatherContext);
+        }
+      });
+    return () => controller.abort();
+  }, [weatherContext, weatherLatitude, weatherLongitude]);
 
   useEffect(() => {
     if (!nearbyLatitude || !nearbyLongitude) return;
@@ -199,11 +266,16 @@ function JourneyScreen() {
             latitude: Number(nearbyLatitude),
             longitude: Number(nearbyLongitude),
             route: route.geometry,
+            city: gps?.city,
           }),
           signal: controller.signal,
         })
       : fetch(
-          `/api/vtc/nearby?${new URLSearchParams({ lat: nearbyLatitude, lon: nearbyLongitude })}`,
+          `/api/vtc/nearby?${new URLSearchParams({
+            lat: nearbyLatitude,
+            lon: nearbyLongitude,
+            ...(gps?.city ? { city: gps.city } : {}),
+          })}`,
           { signal: controller.signal },
         );
     void request
@@ -219,7 +291,7 @@ function JourneyScreen() {
         }
       });
     return () => controller.abort();
-  }, [nearbyContext, nearbyLatitude, nearbyLongitude, route]);
+  }, [gps?.city, nearbyContext, nearbyLatitude, nearbyLongitude, route]);
 
   return (
     <div className={`${styles.detailBody} ${styles.cockpitBody}`}>
@@ -318,14 +390,30 @@ function JourneyScreen() {
 
         <div className={styles.cockpitDials}>
           {[
-            { label: "Température", value: "18 °C", icon: Thermometer },
-            { label: "Pression", value: "1 016 hPa", icon: Gauge },
-            { label: "Qualité de l’air", value: "Bonne", icon: Wind },
-          ].map(({ label, value, icon: Icon }) => (
+            {
+              label: `Température${destinationSuffix}`,
+              value: visibleWeather ? `${Math.round(visibleWeather.temperature)} °C` : "—",
+              icon: Thermometer,
+              weather: true,
+            },
+            {
+              label: `Pression${destinationSuffix}`,
+              value: visibleWeather ? `${Math.round(visibleWeather.pressure)} hPa` : "—",
+              icon: Gauge,
+            },
+            {
+              label: `Qualité de l’air${destinationSuffix}`,
+              value: visibleWeather ? airQualityLabel(visibleWeather.europeanAqi) : "—",
+              icon: Wind,
+            },
+          ].map(({ label, value, icon: Icon, weather: isWeather }) => (
             <article className={styles.cockpitDial} key={label}>
               <Icon aria-hidden="true" />
               <span>{label}</span>
-              <strong>{value}</strong>
+              <strong className={isWeather ? styles.weatherValue : undefined}>
+                {value}
+                {isWeather && visibleWeather && <WeatherIcon aria-hidden="true" />}
+              </strong>
             </article>
           ))}
         </div>
@@ -349,9 +437,7 @@ function JourneyScreen() {
 
       {gps && (
         <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
-          <span className={styles.timelineLabel}>
-            {route ? "Sur votre trajet · rayon de 30 km" : "À proximité"}
-          </span>
+          {!route && <span className={styles.timelineLabel}>À proximité</span>}
           <div className={styles.timelineTrack}>
             {nearbyLoadedContext !== nearbyContext ? (
               <span className={styles.poiEmpty}>Recherche des lieux d’intérêt…</span>

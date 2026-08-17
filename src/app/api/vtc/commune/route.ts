@@ -7,6 +7,7 @@ type Commune = {
   departement?: { code?: string; nom?: string };
   region?: { code?: string; nom?: string };
 };
+type ElevationResponse = { elevation?: number };
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -30,14 +31,25 @@ export async function GET(request: Request) {
     fields: "nom,departement,region",
     format: "json",
   });
-  const response = await fetch(`https://geo.api.gouv.fr/communes?${params}`, {
-    next: { revalidate: 300 },
+  const elevationParams = new URLSearchParams({
+    latitude: String(latitude),
+    longitude: String(longitude),
+    current: "temperature_2m",
   });
+  const [response, elevationResponse] = await Promise.all([
+    fetch(`https://geo.api.gouv.fr/communes?${params}`, { next: { revalidate: 300 } }),
+    fetch(`https://api.open-meteo.com/v1/forecast?${elevationParams}`, {
+      next: { revalidate: 3600 },
+    }),
+  ]);
   if (!response.ok) {
     return NextResponse.json({ city: null }, { status: 200 });
   }
 
   const communes = (await response.json()) as Commune[];
+  const elevation = elevationResponse.ok
+    ? ((await elevationResponse.json()) as ElevationResponse).elevation
+    : undefined;
   return NextResponse.json(
     {
       city: communes[0]?.nom ?? null,
@@ -45,6 +57,7 @@ export async function GET(request: Request) {
       departmentCode: communes[0]?.departement?.code ?? null,
       region: communes[0]?.region?.nom ?? null,
       regionCode: communes[0]?.region?.code ?? null,
+      altitude: Number.isFinite(elevation) ? elevation : null,
     },
     { headers: { "Cache-Control": "public, max-age=300, s-maxage=300" } },
   );
