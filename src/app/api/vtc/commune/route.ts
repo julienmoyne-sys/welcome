@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-type Commune = { nom?: string };
+type Commune = {
+  nom?: string;
+  departement?: { code?: string; nom?: string };
+  region?: { code?: string; nom?: string };
+};
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -23,7 +27,7 @@ export async function GET(request: Request) {
   const params = new URLSearchParams({
     lat: latitude.toFixed(5),
     lon: longitude.toFixed(5),
-    fields: "nom",
+    fields: "nom,departement,region",
     format: "json",
   });
   const response = await fetch(`https://geo.api.gouv.fr/communes?${params}`, {
@@ -35,7 +39,13 @@ export async function GET(request: Request) {
 
   const communes = (await response.json()) as Commune[];
   return NextResponse.json(
-    { city: communes[0]?.nom ?? null },
+    {
+      city: communes[0]?.nom ?? null,
+      department: communes[0]?.departement?.nom ?? null,
+      departmentCode: communes[0]?.departement?.code ?? null,
+      region: communes[0]?.region?.nom ?? null,
+      regionCode: communes[0]?.region?.code ?? null,
+    },
     { headers: { "Cache-Control": "public, max-age=300, s-maxage=300" } },
   );
 }

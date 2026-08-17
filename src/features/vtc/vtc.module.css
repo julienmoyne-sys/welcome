@@ -1190,6 +1190,346 @@
   background: transparent;
   opacity: 0.18;
 }
+.regionLayout {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  grid-template-columns: clamp(13rem, 21vw, 18rem) minmax(0, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.4rem);
+  padding-block: 0.9rem;
+}
+.regionNav {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.8rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+.regionLocation {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+  padding: 0.7rem;
+  border-bottom: 1px solid var(--vtc-line);
+}
+.regionLocation > svg {
+  width: 1.25rem;
+  color: var(--vtc-gold);
+}
+.regionLocation div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+.regionLocation small {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.66rem;
+}
+.regionLocation strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.regionNav button {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.62);
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+  cursor: pointer;
+}
+.regionNav button svg {
+  width: 1.15rem;
+  flex: 0 0 auto;
+}
+.regionNav button[data-active="true"] {
+  border-color: rgba(212, 191, 99, 0.35);
+  background: rgba(212, 191, 99, 0.1);
+  color: #fff;
+}
+.regionNav button[data-active="true"] svg {
+  color: var(--vtc-gold);
+}
+.regionContent {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.regionHero {
+  position: relative;
+  height: 100%;
+  min-height: 24rem;
+  overflow: hidden;
+  border-radius: 1.4rem;
+}
+.regionHero > img,
+.regionCard > img {
+  object-fit: cover;
+}
+.regionHeroShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 7, 7, 0.92),
+    rgba(6, 7, 7, 0.45) 55%,
+    rgba(6, 7, 7, 0.12)
+  );
+}
+.regionHeroCopy {
+  position: absolute;
+  inset: auto auto clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  width: min(72%, 40rem);
+}
+.regionHeroCopy > p,
+.regionPanelHeading p {
+  margin: 0 0 0.35rem;
+  color: var(--vtc-gold);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.regionHeroCopy h2,
+.regionPanelHeading h2 {
+  margin: 0;
+  font-family: var(--font-manrope-sans), sans-serif;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 500;
+}
+.regionHeroCopy > span {
+  display: block;
+  max-width: 35rem;
+  margin-top: 0.7rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.45;
+}
+.regionHeroCopy ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.regionHeroCopy li {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(8, 9, 9, 0.42);
+  font-size: 0.72rem;
+  backdrop-filter: blur(8px);
+}
+.regionSource {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.6rem;
+  text-decoration: none;
+}
+.regionCards {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.regionCard {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--vtc-line);
+  border-radius: 1.05rem;
+}
+.regionCardShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(5, 6, 6, 0.96), rgba(5, 6, 6, 0.05) 75%);
+}
+.regionCard > div {
+  position: absolute;
+  inset: auto 0.9rem 0.8rem;
+}
+.regionCard small {
+  color: var(--vtc-gold);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+.regionCard strong {
+  display: block;
+  margin-top: 0.18rem;
+  font-size: clamp(0.9rem, 1.35vw, 1.15rem);
+}
+.regionCard p {
+  display: -webkit-box;
+  margin: 0.28rem 0 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.69rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.regionCard div > span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.62rem;
+}
+.regionCard div > span svg {
+  width: 0.75rem;
+}
+.eventsPanel {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+}
+.regionPanelHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+.regionPanelHeading h2 {
+  font-size: clamp(1.5rem, 2.7vw, 2.5rem);
+}
+.regionPanelHeading > span {
+  padding-bottom: 0.25rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.72rem;
+}
+.eventGrid,
+.eventSkeletons {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.eventGrid article {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 1rem;
+  background: var(--vtc-surface);
+}
+.eventGrid small {
+  color: var(--vtc-gold);
+  font-size: 0.64rem;
+}
+.eventGrid strong {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+}
+.eventGrid p {
+  display: -webkit-box;
+  margin: 0.45rem 0 auto;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.eventGrid span {
+  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.65rem;
+}
+.eventSkeletons span {
+  border-radius: 1rem;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.04)
+  );
+  background-size: 200% 100%;
+  animation: event-loading 1.4s infinite;
+}
+@keyframes event-loading {
+  to {
+    background-position: -200% 0;
+  }
+}
+.dataCredit {
+  align-self: flex-end;
+  margin-top: 0.45rem;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 0.58rem;
+}
+.regionEmpty {
+  display: grid;
+  height: 100%;
+  min-height: 22rem;
+  place-content: center;
+  padding: 2rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 1.2rem;
+  background: var(--vtc-surface);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+.regionEmpty h2 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font-size: 2.5rem;
+}
+.practicalPanel {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.practicalGrid {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+.practicalGrid article {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2vw, 2rem);
+  border: 1px solid var(--vtc-line);
+  border-radius: 1.1rem;
+  background: var(--vtc-surface);
+}
+.practicalGrid svg {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: auto;
+  color: var(--vtc-gold);
+  stroke-width: 1.4;
+}
+.practicalGrid small {
+  color: rgba(255, 255, 255, 0.42);
+}
+.practicalGrid strong {
+  margin-top: 0.4rem;
+  overflow-wrap: anywhere;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+}
 @media (max-width: 1080px), (max-height: 700px) {
   .homeScreen,
   .detailScreen {
@@ -1259,6 +1599,15 @@
   }
 }
 @media (max-width: 900px) {
+  .regionLayout {
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+  }
+  .regionCards,
+  .eventGrid,
+  .eventSkeletons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
   .cockpitBody {
     grid-template-areas:
       "heading"

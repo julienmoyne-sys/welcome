@@ -8,24 +8,20 @@ import {
   DoorOpen,
   Gamepad2,
   Headphones,
-  Landmark,
   MapPinned,
   Music2,
   Newspaper,
   Radio,
   Route,
   ShieldCheck,
-  ShoppingBag,
   Snowflake,
   Sparkles,
-  Theater,
-  Utensils,
   WalletCards,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type VtcSectionId =
-  "journey" | "live" | "entertainment" | "alsace" | "services" | "coworking";
+  "journey" | "live" | "entertainment" | "region" | "services" | "coworking";
 
 export type VtcMenuItem = {
   id: VtcSectionId;
@@ -38,8 +34,8 @@ export type VtcMenuItem = {
 export const VTC_MENU: VtcMenuItem[] = [
   {
     id: "journey",
-    title: "Trajet",
-    description: "Les informations utiles de votre parcours.",
+    title: "COCKPIT",
+    description: "Informations utiles",
     icon: Route,
     accent: "01",
   },
@@ -58,9 +54,9 @@ export const VTC_MENU: VtcMenuItem[] = [
     accent: "03",
   },
   {
-    id: "alsace",
-    title: "Alsace",
-    description: "Nos suggestions pour découvrir la région.",
+    id: "region",
+    title: "TOURISME",
+    description: "Nos suggestions locales",
     icon: MapPinned,
     accent: "04",
   },
@@ -73,8 +69,8 @@ export const VTC_MENU: VtcMenuItem[] = [
   },
   {
     id: "coworking",
-    title: "Coworking",
-    description: "Un lieu de travail premium à Strasbourg.",
+    title: "BUSINESS",
+    description: "Espaces de travail",
     icon: BriefcaseBusiness,
     accent: "06",
   },
@@ -121,14 +117,6 @@ export const ONBOARD_SERVICES = [
   { title: "Température à bord", icon: CarFront, visible: true },
   { title: "Musique", icon: Music2, visible: true },
   { title: "Informations pratiques", icon: Sparkles, visible: true },
-] as const;
-
-export const STRASBOURG_CATEGORIES = [
-  { title: "À découvrir", icon: Landmark },
-  { title: "Restaurants", icon: Utensils },
-  { title: "Culture", icon: Theater },
-  { title: "Shopping", icon: ShoppingBag },
-  { title: "Sorties", icon: Sparkles },
 ] as const;
 
 export const COWORKING_FEATURES = [

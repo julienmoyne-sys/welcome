@@ -19,11 +19,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import coworkingImage from "@/assets/hero-welcome-real.png";
 import coworkingCardImage from "@/assets/vtc-card-coworking.png";
 import entertainmentCardImage from "@/assets/vtc-card-entertainment.png";
-import journeyCardImage from "@/assets/vtc-card-journey.png";
-import liveCardImage from "@/assets/vtc-card-live.png";
+import journeyCardImage from "@/assets/vtc-card-cockpit.png";
+import liveCardImage from "@/assets/vtc-card-news-weather.png";
 import servicesCardImage from "@/assets/vtc-card-services.png";
-import strasbourgCardImage from "@/assets/vtc-card-strasbourg.png";
+import regionCardImage from "@/assets/vtc-card-strasbourg.png";
 import welcomeLogo from "@/assets/welcome-vtc-logo.png";
+import { DEPARTMENT_CARD_IMAGES } from "@/data/regions/department-images";
 
 import {
   VtcLiveMap,
@@ -32,12 +33,14 @@ import {
   type NavigationRoute,
 } from "./VtcLiveMap";
 
+import { RegionScreen } from "./RegionScreen";
+import { useVtcLocation } from "./useVtcLocation";
+
 import {
   COWORKING_FEATURES,
   ENTERTAINMENT_ITEMS,
   LIVE_ITEMS,
   ONBOARD_SERVICES,
-  STRASBOURG_CATEGORIES,
   VTC_MENU,
   type VtcSectionId,
 } from "./content";
@@ -50,7 +53,7 @@ const VTC_CARD_IMAGES = {
   live: liveCardImage,
   entertainment: entertainmentCardImage,
   services: servicesCardImage,
-  alsace: strasbourgCardImage,
+  region: regionCardImage,
   coworking: coworkingCardImage,
 } as const;
 
@@ -80,7 +83,15 @@ function SectionHeader({ title, onHome }: { title: string; onHome: () => void })
   );
 }
 
-function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) => void }) {
+function VtcHome({
+  time,
+  onOpen,
+  tourismImage,
+}: {
+  time: string;
+  onOpen: (id: VtcSectionId) => void;
+  tourismImage: (typeof VTC_CARD_IMAGES)[VtcSectionId] | string;
+}) {
   return (
     <section className={styles.homeScreen} aria-labelledby="vtc-welcome-title">
       <header className={styles.homeHeader}>
@@ -103,7 +114,7 @@ function VtcHome({ time, onOpen }: { time: string; onOpen: (id: VtcSectionId) =>
               onClick={() => onOpen(item.id)}
             >
               <Image
-                src={VTC_CARD_IMAGES[item.id]}
+                src={item.id === "region" ? tourismImage : VTC_CARD_IMAGES[item.id]}
                 alt=""
                 fill
                 sizes="(max-width: 900px) 50vw, 33vw"
@@ -394,27 +405,6 @@ function ServicesScreen() {
   );
 }
 
-function StrasbourgScreen() {
-  return (
-    <div className={styles.detailBody}>
-      <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Escapade régionale</p>
-        <h2>Découvrir l’Alsace</h2>
-        <p>Une sélection régionale pourra prochainement enrichir chacune de ces catégories.</p>
-      </div>
-      <div className={styles.categoryGrid}>
-        {STRASBOURG_CATEGORIES.map(({ title, icon: Icon }) => (
-          <article className={styles.categoryCard} key={title}>
-            <Icon aria-hidden="true" />
-            <strong>{title}</strong>
-            <small>Sélection à venir</small>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function CoworkingScreen() {
   return (
     <div className={`${styles.detailBody} ${styles.coworkingBody}`}>
@@ -454,6 +444,7 @@ export function VtcShell() {
   const [activeSection, setActiveSection] = useState<VtcSectionId | null>(null);
   const [time, setTime] = useState("--:--");
   const [isSleeping, setIsSleeping] = useState(false);
+  const { location, isLocating } = useVtcLocation();
   const inactivityTimer = useRef<number | null>(null);
   const sleepStartedAt = useRef(0);
   const wakePointerStarted = useRef(false);
@@ -521,12 +512,17 @@ export function VtcShell() {
   }, [clearInactivityTimer, enterSleep, isSleeping]);
 
   const title = VTC_MENU.find((item) => item.id === activeSection)?.title ?? "";
+  const tourismImage =
+    DEPARTMENT_CARD_IMAGES[location.departmentCode] ??
+    (location.source === "device"
+      ? `/api/vtc/city-image?city=${encodeURIComponent(location.city)}`
+      : regionCardImage);
 
   return (
     <main className={styles.shell}>
       <div className={styles.ambientLight} aria-hidden="true" />
       {activeSection === null ? (
-        <VtcHome time={time} onOpen={setActiveSection} />
+        <VtcHome time={time} onOpen={setActiveSection} tourismImage={tourismImage} />
       ) : (
         <section className={styles.detailScreen}>
           <SectionHeader title={title} onHome={goHome} />
@@ -535,7 +531,9 @@ export function VtcShell() {
             {activeSection === "live" && <LiveScreen />}
             {activeSection === "entertainment" && <EntertainmentScreen />}
             {activeSection === "services" && <ServicesScreen />}
-            {activeSection === "alsace" && <StrasbourgScreen />}
+            {activeSection === "region" && (
+              <RegionScreen location={location} isLocating={isLocating} />
+            )}
             {activeSection === "coworking" && <CoworkingScreen />}
           </div>
           <button
