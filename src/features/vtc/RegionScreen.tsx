@@ -274,7 +274,9 @@ function EventsPanel({
         <div className={styles.eventGrid}>
           {filteredEvents.map((event) => (
             <article key={event.id}>
-              <small>{event.category}</small>
+              {event.category.trim().toLocaleLowerCase("fr") !== "sortie" && (
+                <small>{event.category}</small>
+              )}
               <strong title={event.title}>{event.title}</strong>
               <p title={event.description ?? undefined}>
                 {event.description ?? "Une sortie sélectionnée près de votre trajet."}
