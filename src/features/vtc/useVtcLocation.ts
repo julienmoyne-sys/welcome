@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import {
   DEFAULT_VTC_LOCATION,
+  isWithinFrenchDepartments,
   reverseGeocodeVtcLocation,
   type VtcLocation,
 } from "@/lib/vtc-location";
@@ -19,13 +20,18 @@ export function useVtcLocation() {
     }
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
+        if (!isWithinFrenchDepartments(coords.latitude, coords.longitude)) {
+          setLocation(DEFAULT_VTC_LOCATION);
+          setIsLocating(false);
+          return;
+        }
         void reverseGeocodeVtcLocation(coords.latitude, coords.longitude)
           .then(setLocation)
           .catch(() => undefined)
           .finally(() => setIsLocating(false));
       },
       () => setIsLocating(false),
-      { enableHighAccuracy: false, timeout: 8_000, maximumAge: 5 * 60_000 },
+      { enableHighAccuracy: true, timeout: 8_000, maximumAge: 30_000 },
     );
   }, []);
 

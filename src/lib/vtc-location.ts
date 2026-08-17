@@ -25,6 +25,29 @@ export const DEFAULT_VTC_LOCATION: VtcLocation = {
   source: "default",
 };
 
+const FRENCH_DEPARTMENT_BOUNDS = [
+  { minLat: 41, maxLat: 51.6, minLon: -5.6, maxLon: 10 }, // France métropolitaine
+  { minLat: 15.8, maxLat: 16.6, minLon: -61.9, maxLon: -60.9 }, // Guadeloupe
+  { minLat: 14.3, maxLat: 14.95, minLon: -61.3, maxLon: -60.7 }, // Martinique
+  { minLat: 2, maxLat: 6, minLon: -55, maxLon: -51 }, // Guyane
+  { minLat: -21.5, maxLat: -20.8, minLon: 55.1, maxLon: 55.9 }, // La Réunion
+  { minLat: -13.1, maxLat: -12.5, minLon: 44.9, maxLon: 45.4 }, // Mayotte
+] as const;
+
+export function isWithinFrenchDepartments(lat: number, lon: number) {
+  return (
+    Number.isFinite(lat) &&
+    Number.isFinite(lon) &&
+    FRENCH_DEPARTMENT_BOUNDS.some(
+      (bounds) =>
+        lat >= bounds.minLat &&
+        lat <= bounds.maxLat &&
+        lon >= bounds.minLon &&
+        lon <= bounds.maxLon,
+    )
+  );
+}
+
 const CULTURAL_ZONE_ALIASES: Record<string, string> = {
   strasbourg: "alsace",
   colmar: "alsace",
@@ -70,9 +93,11 @@ export function resolveTourismRegion(location: Partial<VtcLocation>): {
 }
 
 export async function reverseGeocodeVtcLocation(lat: number, lon: number): Promise<VtcLocation> {
+  if (!isWithinFrenchDepartments(lat, lon)) return DEFAULT_VTC_LOCATION;
   const response = await fetch(`/api/vtc/commune?lat=${lat}&lon=${lon}`);
   if (!response.ok) throw new Error("location-unavailable");
   const data = (await response.json()) as Partial<VtcLocation>;
+  if (!data.departmentCode) return DEFAULT_VTC_LOCATION;
   return {
     ...DEFAULT_VTC_LOCATION,
     ...data,

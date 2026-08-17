@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { DEFAULT_VTC_LOCATION, isWithinFrenchDepartments } from "@/lib/vtc-location";
+
 import styles from "./vtc.module.css";
 
 export type GpsSnapshot = {
@@ -28,7 +30,7 @@ type VtcLiveMapProps = {
   onStatusChange: (status: LocationStatus) => void;
 };
 
-const FALLBACK_POSITION: [number, number] = [48.5734, 7.7521];
+const FALLBACK_POSITION: [number, number] = [DEFAULT_VTC_LOCATION.lat, DEFAULT_VTC_LOCATION.lon];
 
 export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,6 +60,7 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
     let cityLookupSequence = 0;
     let currentCity: string | null = null;
     let currentAltitude: number | null = null;
+    let rejectedDevicePosition: [number, number] | null = null;
 
     const changeStatus = (nextStatus: LocationStatus) => {
       setStatus(nextStatus);
@@ -121,8 +124,24 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
 
         const updatePosition = (position: GeolocationPosition) => {
           if (disposed || !map) return;
-          const { latitude, longitude, accuracy, altitude, speed } = position.coords;
+          const {
+            latitude: deviceLatitude,
+            longitude: deviceLongitude,
+            accuracy,
+            altitude: deviceAltitude,
+            speed,
+          } = position.coords;
+          const deviceLatLng: [number, number] = [deviceLatitude, deviceLongitude];
+          const usesDefault =
+            !isWithinFrenchDepartments(deviceLatitude, deviceLongitude) ||
+            Boolean(
+              rejectedDevicePosition && map.distance(rejectedDevicePosition, deviceLatLng) < 10_000,
+            );
+          const latitude = usesDefault ? DEFAULT_VTC_LOCATION.lat : deviceLatitude;
+          const longitude = usesDefault ? DEFAULT_VTC_LOCATION.lon : deviceLongitude;
+          const altitude = usesDefault ? null : deviceAltitude;
           const latLng: [number, number] = [latitude, longitude];
+          if (usesDefault) currentCity = DEFAULT_VTC_LOCATION.city;
           currentPosition = latLng;
           if (altitude != null) currentAltitude = altitude;
 
@@ -178,12 +197,31 @@ export function VtcLiveMap({ route, onPosition, onStatusChange }: VtcLiveMapProp
                 response.ok
                   ? (response.json() as Promise<{
                       city?: string | null;
+                      departmentCode?: string | null;
                       altitude?: number | null;
                     }>)
                   : Promise.reject(),
               )
               .then((data) => {
                 if (disposed || lookupSequence !== cityLookupSequence) return;
+                if (!usesDefault && !data.departmentCode) {
+                  rejectedDevicePosition = deviceLatLng;
+                  currentCity = DEFAULT_VTC_LOCATION.city;
+                  currentAltitude = null;
+                  positionMarker?.setLatLng(FALLBACK_POSITION);
+                  accuracyCircle?.setLatLng(FALLBACK_POSITION).setRadius(0);
+                  map?.setView(FALLBACK_POSITION, 15, { animate: false });
+                  updateRoute(L, FALLBACK_POSITION);
+                  onPositionRef.current({
+                    latitude: DEFAULT_VTC_LOCATION.lat,
+                    longitude: DEFAULT_VTC_LOCATION.lon,
+                    accuracy: 0,
+                    altitude: null,
+                    speed,
+                    city: DEFAULT_VTC_LOCATION.city,
+                  });
+                  return;
+                }
                 currentCity = data.city ?? null;
                 if (altitude == null && data.altitude != null) currentAltitude = data.altitude;
                 onPositionRef.current(snapshot(currentCity));

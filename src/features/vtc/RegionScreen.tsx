@@ -275,8 +275,10 @@ function EventsPanel({
           {filteredEvents.map((event) => (
             <article key={event.id}>
               <small>{event.category}</small>
-              <strong>{event.title}</strong>
-              <p>{event.description ?? "Une sortie sélectionnée près de votre trajet."}</p>
+              <strong title={event.title}>{event.title}</strong>
+              <p title={event.description ?? undefined}>
+                {event.description ?? "Une sortie sélectionnée près de votre trajet."}
+              </p>
               <span>
                 {friendlyDate(event.startDate)}
                 {event.startTime ? ` · ${event.startTime}` : ""}
