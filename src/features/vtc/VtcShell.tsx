@@ -4,12 +4,14 @@ import {
   ArrowLeft,
   ArrowRight,
   Clock3,
+  Flag,
   Gauge,
   Home,
   MapPin,
   Moon,
   QrCode,
   RefreshCw,
+  Route as RouteIcon,
   Thermometer,
   Wind,
 } from "lucide-react";
@@ -145,12 +147,14 @@ function JourneyScreen() {
   const [gps, setGps] = useState<GpsSnapshot | null>(null);
   const [locationStatus, setLocationStatus] = useState<LocationStatus>("loading");
   const [route, setRoute] = useState<NavigationRoute | null>(null);
+  const [arrivalTime, setArrivalTime] = useState<string | null>(null);
   const [navigationStatus, setNavigationStatus] = useState<"idle" | "loading" | "error">("idle");
   const [navigationError, setNavigationError] = useState("");
   const [cityPhotoFailedFor, setCityPhotoFailedFor] = useState<string | null>(null);
   const [nearbyPoints, setNearbyPoints] = useState<
     Array<{ id: string; name: string; category: string; distanceMeters: number }>
   >([]);
+  const [nearbyLoadedContext, setNearbyLoadedContext] = useState<string | null>(null);
   const updateGps = useCallback((snapshot: GpsSnapshot) => setGps(snapshot), []);
   const updateLocationStatus = useCallback(
     (status: LocationStatus) => setLocationStatus(status),
@@ -164,6 +168,12 @@ function JourneyScreen() {
         : "Localisation en attente";
   const nearbyLatitude = gps?.latitude.toFixed(3);
   const nearbyLongitude = gps?.longitude.toFixed(3);
+  const nearbyContext = route
+    ? `route:${route.destination.latitude.toFixed(3)}:${route.destination.longitude.toFixed(3)}`
+    : nearbyLatitude && nearbyLongitude
+      ? `local:${nearbyLatitude}:${nearbyLongitude}`
+      : null;
+  const visibleNearbyPoints = nearbyLoadedContext === nearbyContext ? nearbyPoints : [];
   const remainingTime = route
     ? route.durationSeconds < 3600
       ? `${Math.max(1, Math.round(route.durationSeconds / 60))} min`
@@ -171,6 +181,12 @@ function JourneyScreen() {
           (route.durationSeconds % 3600) / 60,
         )} min`
     : "—";
+  const remainingDistance = route
+    ? route.distanceMeters < 1000
+      ? `${Math.round(route.distanceMeters)} m`
+      : `${(route.distanceMeters / 1000).toFixed(1).replace(".", ",")} km`
+    : "—";
+  const estimatedArrival = arrivalTime ?? "—";
 
   useEffect(() => {
     if (!nearbyLatitude || !nearbyLongitude) return;
@@ -192,10 +208,18 @@ function JourneyScreen() {
         );
     void request
       .then((response) => (response.ok ? response.json() : Promise.reject()))
-      .then((data: { points?: typeof nearbyPoints }) => setNearbyPoints(data.points ?? []))
-      .catch(() => undefined);
+      .then((data: { points?: typeof nearbyPoints }) => {
+        setNearbyPoints(data.points ?? []);
+        setNearbyLoadedContext(nearbyContext);
+      })
+      .catch((error: unknown) => {
+        if ((error as Error)?.name !== "AbortError") {
+          setNearbyPoints([]);
+          setNearbyLoadedContext(nearbyContext);
+        }
+      });
     return () => controller.abort();
-  }, [nearbyLatitude, nearbyLongitude, route]);
+  }, [nearbyContext, nearbyLatitude, nearbyLongitude, route]);
 
   return (
     <div className={`${styles.detailBody} ${styles.cockpitBody}`}>
@@ -225,10 +249,16 @@ function JourneyScreen() {
                 const data = (await response.json()) as NavigationRoute & { error?: string };
                 if (!response.ok) throw new Error(data.error ?? "Impossible de calculer le trajet");
                 setRoute(data);
+                setArrivalTime(
+                  new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit" }).format(
+                    new Date(Date.now() + data.durationSeconds * 1000),
+                  ),
+                );
                 setDestinationInput(data.destination.label);
                 setNavigationStatus("idle");
               } catch (error) {
                 setRoute(null);
+                setArrivalTime(null);
                 setNavigationStatus("error");
                 setNavigationError(
                   error instanceof Error ? error.message : "Impossible de calculer le trajet",
@@ -302,42 +332,48 @@ function JourneyScreen() {
       </div>
 
       <div className={styles.cockpitFacts}>
-        {[{ label: "Temps restant", value: remainingTime, icon: Clock3 }].map(
-          ({ label, value, icon: Icon }) => (
-            <article key={label}>
-              <Icon aria-hidden="true" />
-              <span>{label}</span>
-              <strong>{value}</strong>
-            </article>
-          ),
-        )}
+        {[
+          { label: "Temps restant", value: remainingTime, icon: Clock3 },
+          { label: "Distance restante", value: remainingDistance, icon: RouteIcon },
+          { label: "Arrivée estimée", value: estimatedArrival, icon: Flag },
+        ].map(({ label, value, icon: Icon }) => (
+          <article key={label}>
+            <Icon aria-hidden="true" />
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </article>
+        ))}
       </div>
 
       <VtcLiveMap route={route} onPosition={updateGps} onStatusChange={updateLocationStatus} />
 
-      <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
-        <span className={styles.timelineLabel}>Sur votre route</span>
-        <div className={styles.timelineTrack}>
-          {nearbyPoints.length === 0 ? (
-            <span className={styles.poiEmpty}>
-              {gps ? "Recherche à proximité…" : locationPlaceholder}
-            </span>
-          ) : (
-            nearbyPoints.map((point) => (
-              <div className={styles.timelineStop} key={point.id}>
-                <span className={styles.timelineDot} />
-                <strong title={point.name}>{point.name}</strong>
-                <small>
-                  {point.category} ·{" "}
-                  {point.distanceMeters < 1000
-                    ? `${point.distanceMeters} m`
-                    : `${(point.distanceMeters / 1000).toFixed(1).replace(".", ",")} km`}
-                </small>
-              </div>
-            ))
-          )}
-        </div>
-      </section>
+      {gps && (
+        <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
+          <span className={styles.timelineLabel}>
+            {route ? "Sur votre trajet · rayon de 30 km" : "À proximité"}
+          </span>
+          <div className={styles.timelineTrack}>
+            {nearbyLoadedContext !== nearbyContext ? (
+              <span className={styles.poiEmpty}>Recherche des lieux d’intérêt…</span>
+            ) : visibleNearbyPoints.length === 0 ? (
+              <span className={styles.poiEmpty}>Aucun lieu d’intérêt trouvé.</span>
+            ) : (
+              visibleNearbyPoints.map((point) => (
+                <div className={styles.timelineStop} key={point.id}>
+                  <span className={styles.timelineDot} />
+                  <strong title={point.name}>{point.name}</strong>
+                  <small>
+                    {point.category} ·{" "}
+                    {point.distanceMeters < 1000
+                      ? `${point.distanceMeters} m`
+                      : `${(point.distanceMeters / 1000).toFixed(1).replace(".", ",")} km`}
+                  </small>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

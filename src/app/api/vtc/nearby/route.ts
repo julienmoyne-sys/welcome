@@ -55,7 +55,20 @@ function fixedPoints(latitude: number, longitude: number) {
     name: point.name,
     category: point.category,
     distanceMeters: Math.round(distanceInMeters(latitude, longitude, point.lat, point.lon)),
-  })).sort((a, b) => a.distanceMeters - b.distanceMeters);
+  }))
+    .filter((point) => point.distanceMeters <= 25_000)
+    .sort((a, b) => a.distanceMeters - b.distanceMeters);
+}
+
+function importance(tags: Record<string, string>) {
+  return (
+    (tags.wikipedia ? 8 : 0) +
+    (tags.wikidata ? 6 : 0) +
+    (tags.heritage || tags["heritage:operator"] ? 5 : 0) +
+    (["attraction", "museum", "gallery", "zoo", "theme_park"].includes(tags.tourism) ? 4 : 0) +
+    (tags.historic ? 3 : 0) +
+    (tags.website ? 1 : 0)
+  );
 }
 
 function nearestRouteIndex(route: Coordinate[], latitude: number, longitude: number) {
@@ -95,20 +108,25 @@ function routeDistance(
 
 async function findPoints(latitude: number, longitude: number, route?: Coordinate[]) {
   const sampledRoute = route?.filter(
-    (_, index) => index % Math.max(1, Math.ceil(route.length / 24)) === 0,
+    (_, index) => index % Math.max(1, Math.ceil(route.length / 12)) === 0,
   );
   if (route?.length && sampledRoute && sampledRoute.at(-1) !== route.at(-1))
     sampledRoute.push(route.at(-1)!);
   const filter = sampledRoute?.length
-    ? `(around:1800,${sampledRoute.flat().join(",")})`
+    ? `(around:30000,${sampledRoute.flat().join(",")})`
     : `(around:12000,${latitude},${longitude})`;
-  const query = `[out:json][timeout:15];(
-    nwr${filter}[name][tourism];
-    nwr${filter}[name][historic];
-    nwr${filter}[name][leisure];
-    nwr${filter}[name][office];
-    nwr${filter}[name][amenity~"^(arts_centre|casino|cinema|conference_centre|coworking_space|theatre)$"];
-  );out center tags;`;
+  const query = route?.length
+    ? `[out:json][timeout:30];(
+        nwr${filter}[name][tourism~"^(attraction|museum|gallery|viewpoint|zoo|theme_park)$"];
+        nwr${filter}[name][historic~"^(castle|monument|ruins|archaeological_site|fort|manor)$"];
+        nwr${filter}[name][heritage];
+      );out center tags;`
+    : `[out:json][timeout:15];(
+        nwr${filter}[name][tourism];
+        nwr${filter}[name][historic];
+        nwr${filter}[name][leisure];
+        nwr${filter}[name][amenity~"^(arts_centre|casino|cinema|theatre)$"];
+      );out center tags;`;
 
   try {
     const response = await fetch("https://overpass-api.de/api/interpreter", {
@@ -122,35 +140,41 @@ async function findPoints(latitude: number, longitude: number, route?: Coordinat
 
     const data = (await response.json()) as OverpassResponse;
     const seen = new Set<string>();
-    const points = (data.elements ?? [])
-      .flatMap((element) => {
-        const name = element.tags?.name?.trim();
-        const lat = element.lat ?? element.center?.lat;
-        const lon = element.lon ?? element.center?.lon;
-        if (!name || lat == null || lon == null || seen.has(name.toLocaleLowerCase("fr")))
-          return [];
-        const alongRoute = route?.length
-          ? routeDistance(route, latitude, longitude, lat, lon)
-          : undefined;
-        if (route?.length && !alongRoute) return [];
-        if (alongRoute && alongRoute.detour > 1_800) return [];
-        seen.add(name.toLocaleLowerCase("fr"));
-        return [
-          {
-            id: `${element.id}-${name}`,
-            name,
-            category: category(element.tags ?? {}),
-            distanceMeters: Math.round(
-              alongRoute?.distance ?? distanceInMeters(latitude, longitude, lat, lon),
-            ),
-          },
-        ];
-      })
+    const candidates = (data.elements ?? []).flatMap((element) => {
+      const name = element.tags?.name?.trim();
+      const lat = element.lat ?? element.center?.lat;
+      const lon = element.lon ?? element.center?.lon;
+      if (!name || lat == null || lon == null || seen.has(name.toLocaleLowerCase("fr"))) return [];
+      const alongRoute = route?.length
+        ? routeDistance(route, latitude, longitude, lat, lon)
+        : undefined;
+      if (route?.length && !alongRoute) return [];
+      if (alongRoute && alongRoute.detour > 30_000) return [];
+      seen.add(name.toLocaleLowerCase("fr"));
+      return [
+        {
+          id: `${element.id}-${name}`,
+          name,
+          category: category(element.tags ?? {}),
+          importance: importance(element.tags ?? {}),
+          distanceMeters: Math.round(
+            alongRoute?.distance ?? distanceInMeters(latitude, longitude, lat, lon),
+          ),
+        },
+      ];
+    });
+    const points = candidates
+      .sort((a, b) =>
+        route?.length
+          ? b.importance - a.importance || a.distanceMeters - b.distanceMeters
+          : a.distanceMeters - b.distanceMeters,
+      )
+      .slice(0, route?.length ? 8 : 4)
       .sort((a, b) => a.distanceMeters - b.distanceMeters)
-      .slice(0, 4);
-    return points.length > 0 ? points : fixedPoints(latitude, longitude);
+      .map(({ importance: _importance, ...point }) => point);
+    return points.length > 0 ? points : route?.length ? [] : fixedPoints(latitude, longitude);
   } catch {
-    return fixedPoints(latitude, longitude);
+    return route?.length ? [] : fixedPoints(latitude, longitude);
   }
 }
 
@@ -182,16 +206,17 @@ export async function POST(request: Request) {
   };
   const latitude = Number(body.latitude);
   const longitude = Number(body.longitude);
-  const route = Array.isArray(body.route)
-    ? body.route
-        .filter(
-          (point): point is Coordinate =>
-            Array.isArray(point) &&
-            point.length === 2 &&
-            validPosition(Number(point[0]), Number(point[1])),
-        )
-        .slice(0, 500)
+  const validRoute = Array.isArray(body.route)
+    ? body.route.filter(
+        (point): point is Coordinate =>
+          Array.isArray(point) &&
+          point.length === 2 &&
+          validPosition(Number(point[0]), Number(point[1])),
+      )
     : [];
+  const sampleStep = Math.max(1, Math.ceil(validRoute.length / 500));
+  const route = validRoute.filter((_, index) => index % sampleStep === 0);
+  if (validRoute.length && route.at(-1) !== validRoute.at(-1)) route.push(validRoute.at(-1)!);
   if (!validPosition(latitude, longitude) || route.length < 2)
     return NextResponse.json({ error: "Trajet invalide" }, { status: 400 });
   return NextResponse.json({ points: await findPoints(latitude, longitude, route) });
