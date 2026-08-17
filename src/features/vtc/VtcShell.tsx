@@ -50,14 +50,9 @@ import {
 import { RegionScreen } from "./RegionScreen";
 import { useVtcLocation } from "./useVtcLocation";
 
-import {
-  COWORKING_FEATURES,
-  ENTERTAINMENT_ITEMS,
-  SAFETY_ITEMS,
-  VTC_MENU,
-  type VtcSectionId,
-} from "./content";
+import { COWORKING_FEATURES, SAFETY_ITEMS, VTC_MENU, type VtcSectionId } from "./content";
 import styles from "./vtc.module.css";
+import { EntertainmentScreen } from "./EntertainmentScreen";
 import { DEMO_DRIVER_CONTENT, type DriverContent } from "@/lib/driver-content";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
@@ -734,27 +729,6 @@ function LiveScreen({
   );
 }
 
-function EntertainmentScreen() {
-  return (
-    <div className={styles.detailBody}>
-      <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Pendant le trajet</p>
-        <h2>Divertissements</h2>
-        <p>Profitez d’une sélection pensée pour rendre votre voyage encore plus agréable.</p>
-      </div>
-      <div className={styles.serviceGrid}>
-        {ENTERTAINMENT_ITEMS.map(({ title, icon: Icon }) => (
-          <article className={styles.serviceCard} key={title}>
-            <Icon aria-hidden="true" />
-            <strong>{title}</strong>
-            <small>Sélection à venir</small>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function ServicesScreen({ content }: { content: DriverContent }) {
   return (
     <div className={styles.detailBody}>
@@ -769,9 +743,11 @@ function ServicesScreen({ content }: { content: DriverContent }) {
           <small>Consignes de sécurité VTC</small>
         </div>
         <div className={styles.safetyGrid}>
-          {SAFETY_ITEMS.map(({ title, text, icon: Icon }) => (
+          {SAFETY_ITEMS.map(({ title, text, image }) => (
             <article className={styles.safetyCard} key={title}>
-              <Icon aria-hidden="true" />
+              <div className={styles.safetyPhoto}>
+                <Image src={image} alt="" fill sizes="(max-width: 900px) 50vw, 24vw" />
+              </div>
               <div>
                 <h3>{title}</h3>
                 <p>{text}</p>

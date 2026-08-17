@@ -1,22 +1,15 @@
 import {
   Armchair,
   BatteryCharging,
-  Baby,
   BriefcaseBusiness,
   Building2,
   CarFront,
-  DoorOpen,
-  Gamepad2,
   Headphones,
   MapPinned,
-  Music2,
-  Newspaper,
   Radio,
   Route,
-  ShieldCheck,
   Snowflake,
   Sparkles,
-  WalletCards,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -82,32 +75,31 @@ export const LIVE_ITEMS = [
   { title: "Heure d’arrivée", icon: MapPinned },
 ] as const;
 
-export const ENTERTAINMENT_ITEMS = [
-  { title: "Musique", icon: Music2 },
-  { title: "Presse", icon: Newspaper },
-  { title: "Jeux", icon: Gamepad2 },
-] as const;
+import safetyBelongingsImage from "@/assets/vtc-safety-belongings.png";
+import safetyChildrenImage from "@/assets/vtc-safety-children.png";
+import safetyDoorsImage from "@/assets/vtc-safety-doors.png";
+import safetySeatbeltImage from "@/assets/vtc-safety-seatbelt.png";
 
 export const SAFETY_ITEMS = [
   {
     title: "Ceinture",
     text: "Attachez votre ceinture dès votre installation et conservez-la pendant tout le trajet.",
-    icon: ShieldCheck,
+    image: safetySeatbeltImage,
   },
   {
     title: "Portes",
     text: "Attendez l’arrêt complet et l’accord du chauffeur avant d’ouvrir une porte, côté trottoir si possible.",
-    icon: DoorOpen,
+    image: safetyDoorsImage,
   },
   {
     title: "Enfants",
     text: "Signalez avant le départ tout besoin de siège enfant afin qu’un dispositif adapté puisse être prévu.",
-    icon: Baby,
+    image: safetyChildrenImage,
   },
   {
     title: "Effets personnels",
     text: "Gardez les bagages hors des zones de passage et vérifiez vos effets personnels avant de descendre.",
-    icon: WalletCards,
+    image: safetyBelongingsImage,
   },
 ] as const;
 
