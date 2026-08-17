@@ -25,6 +25,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getDepartmentTourismContent } from "@/data/departments";
 import type { RegionalCard } from "@/data/regions";
 import type { VtcLocation } from "@/lib/vtc-location";
+import type { DriverFavorite } from "@/lib/driver-content";
 
 import styles from "./vtc.module.css";
 
@@ -317,9 +318,13 @@ function EventsPanel({
 export function RegionScreen({
   location,
   isLocating,
+  driverFavorites,
+  driverName,
 }: {
   location: VtcLocation;
   isLocating: boolean;
+  driverFavorites: DriverFavorite[];
+  driverName: string;
 }) {
   const [activeTab, setActiveTab] = useState<RegionTab>("welcome");
   const content = getDepartmentTourismContent(location.departmentCode);
@@ -392,14 +397,41 @@ export function RegionScreen({
           ) : (
             <div className={styles.regionEmpty}>{genericMessage}</div>
           ))}
-        {activeTab === "favorites" &&
-          (content?.driverFavorites.length ? (
-            <RegionalCards items={content.driverFavorites} fallback={content.heroImage} />
-          ) : (
-            <div className={styles.regionEmpty}>
-              Les coups de cœur du chauffeur seront bientôt disponibles.
+        {activeTab === "favorites" && (
+          <div className={styles.driverFavoritesPanel}>
+            <div className={styles.driverSectionHeading}>
+              <span>Les adresses personnelles du chauffeur</span>
+              <small>{driverName}</small>
             </div>
-          ))}
+            <div className={styles.driverFavoritesGrid}>
+              {driverFavorites.map((favorite, index) => (
+                <article key={favorite.id}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <strong>{favorite.title}</strong>
+                    <p>{favorite.description}</p>
+                    {favorite.address && (
+                      <a
+                        className={styles.driverFavoriteAddress}
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(favorite.address)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Afficher ${favorite.address} dans Google Maps`}
+                      >
+                        <MapPin aria-hidden="true" /> {favorite.address}
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
+              {!driverFavorites.length && (
+                <div className={styles.regionEmpty}>
+                  Les coups de cœur du chauffeur seront bientôt disponibles.
+                </div>
+              )}
+            </div>
+          </div>
+        )}
         {activeTab === "activities" &&
           (content ? (
             <RegionalCards items={content.activities} fallback={content.heroImage} />

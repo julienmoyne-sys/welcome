@@ -10,15 +10,20 @@ import {
   CloudSnow,
   CloudSun,
   Clock3,
+  Droplets,
+  Eye,
   Flag,
   Gauge,
   Home,
   MapPin,
   Moon,
+  Newspaper,
   QrCode,
   RefreshCw,
   Route as RouteIcon,
   Sun,
+  Sunrise,
+  Sunset,
   Thermometer,
   Wind,
 } from "lucide-react";
@@ -48,12 +53,12 @@ import { useVtcLocation } from "./useVtcLocation";
 import {
   COWORKING_FEATURES,
   ENTERTAINMENT_ITEMS,
-  LIVE_ITEMS,
-  ONBOARD_SERVICES,
+  SAFETY_ITEMS,
   VTC_MENU,
   type VtcSectionId,
 } from "./content";
 import styles from "./vtc.module.css";
+import { DEMO_DRIVER_CONTENT, type DriverContent } from "@/lib/driver-content";
 
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
 const SLEEP_STATE_KEY = "welcome-vtc-sleeping";
@@ -73,6 +78,44 @@ type CockpitWeather = {
   europeanAqi: number;
 };
 
+type LiveDashboardData = {
+  updatedAt: string;
+  weather: {
+    temperature_2m: number;
+    apparent_temperature: number;
+    relative_humidity_2m: number;
+    precipitation: number;
+    weather_code: number;
+    cloud_cover: number;
+    surface_pressure: number;
+    wind_speed_10m: number;
+    wind_gusts_10m: number;
+    wind_direction_10m: number;
+    visibility: number;
+    european_aqi: number | null;
+    uv_index: number | null;
+    sunrise: string | null;
+    sunset: string | null;
+  } | null;
+  featuredImage: {
+    url: string;
+    width: number;
+    height: number;
+    title: string;
+    author: string;
+    license: string;
+    licenseUrl: string | null;
+    sourceUrl: string;
+  } | null;
+  headlines: Array<{
+    title: string;
+    link: string;
+    publishedAt: string;
+    source: string;
+    tone: "news" | "light";
+  }>;
+};
+
 function weatherIcon(weatherCode: number) {
   if (weatherCode === 0) return Sun;
   if (weatherCode <= 2) return CloudSun;
@@ -84,6 +127,17 @@ function weatherIcon(weatherCode: number) {
   return Cloud;
 }
 
+function WeatherGlyph({ code }: { code: number }) {
+  if (code === 0) return <Sun aria-hidden="true" />;
+  if (code <= 2) return <CloudSun aria-hidden="true" />;
+  if (code === 3) return <Cloud aria-hidden="true" />;
+  if (code <= 48) return <CloudFog aria-hidden="true" />;
+  if (code <= 67 || (code >= 80 && code <= 82)) return <CloudRain aria-hidden="true" />;
+  if (code <= 77 || (code >= 85 && code <= 86)) return <CloudSnow aria-hidden="true" />;
+  if (code >= 95) return <CloudLightning aria-hidden="true" />;
+  return <Cloud aria-hidden="true" />;
+}
+
 function airQualityLabel(europeanAqi: number) {
   if (europeanAqi <= 20) return "Bonne";
   if (europeanAqi <= 40) return "Assez bonne";
@@ -91,6 +145,32 @@ function airQualityLabel(europeanAqi: number) {
   if (europeanAqi <= 80) return "Médiocre";
   if (europeanAqi <= 100) return "Mauvaise";
   return "Très mauvaise";
+}
+
+function weatherLabel(code: number) {
+  if (code === 0) return "Ciel dégagé";
+  if (code <= 2) return "Partiellement nuageux";
+  if (code === 3) return "Couvert";
+  if (code <= 48) return "Brouillard";
+  if (code <= 67 || (code >= 80 && code <= 82)) return "Pluie";
+  if (code <= 77 || (code >= 85 && code <= 86)) return "Neige";
+  return "Orages";
+}
+
+function shortTime(value: string | null) {
+  if (!value) return "—";
+  return new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit" }).format(
+    new Date(value),
+  );
+}
+
+function formatServicePrice(priceCents: number | null, currency: string) {
+  if (priceCents === null) return "Offert";
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: priceCents % 100 === 0 ? 0 : 2,
+  }).format(priceCents / 100);
 }
 
 function VtcLogo({ subdued = false }: { subdued?: boolean }) {
@@ -298,7 +378,7 @@ function JourneyScreen() {
       <div className={styles.cockpitHeading}>
         <div className={styles.introBlock}>
           <p className={styles.eyebrow}>Navigation</p>
-          <h2>COCKPIT</h2>
+          <h2>Cockpit</h2>
         </div>
         <div className={styles.destinationEntry}>
           <span className={styles.destinationHint} data-hidden={Boolean(route)} aria-hidden="true">
@@ -464,22 +544,191 @@ function JourneyScreen() {
   );
 }
 
-function LiveScreen() {
+function LiveScreen({
+  location,
+  isLocating,
+}: {
+  location: ReturnType<typeof useVtcLocation>["location"];
+  isLocating: boolean;
+}) {
+  const [data, setData] = useState<LiveDashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ lat: String(location.lat), lon: String(location.lon) });
+    fetch(`/api/vtc/live?${params}`, { signal: controller.signal })
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((payload: LiveDashboardData) => setData(payload))
+      .catch((error: unknown) => {
+        if ((error as Error)?.name !== "AbortError") setData(null);
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
+  }, [location.lat, location.lon, refreshKey]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setRefreshKey((value) => value + 1), 5 * 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const current = data?.weather;
+  const news = data?.headlines.filter((item) => item.tone === "news") ?? [];
+  const light = data?.headlines.filter((item) => item.tone === "light") ?? [];
+  const headlines = Array.from({ length: Math.max(news.length, light.length) }).flatMap(
+    (_, index) =>
+      [news[index], light[index]].filter((item): item is LiveDashboardData["headlines"][number] =>
+        Boolean(item),
+      ),
+  );
+
   return (
-    <div className={styles.detailBody}>
-      <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>En direct</p>
-        <h2>Votre trajet en temps réel</h2>
-        <p>Les informations de circulation seront actualisées tout au long de votre trajet.</p>
-      </div>
-      <div className={styles.serviceGrid}>
-        {LIVE_ITEMS.map(({ title, icon: Icon }) => (
-          <article className={styles.serviceCard} key={title}>
-            <Icon aria-hidden="true" />
-            <strong>{title}</strong>
-            <small>Mise à jour en direct</small>
-          </article>
-        ))}
+    <div className={`${styles.detailBody} ${styles.liveDashboard}`}>
+      <header className={styles.liveDashboardHeader}>
+        <div>
+          <p className={styles.eyebrow}>En direct</p>
+          <h2>Météo & actualités</h2>
+          <span>
+            <MapPin aria-hidden="true" />
+            {isLocating ? "Localisation…" : location.city}
+          </span>
+        </div>
+        <button type="button" onClick={() => setRefreshKey((value) => value + 1)}>
+          <RefreshCw aria-hidden="true" /> Actualiser
+        </button>
+      </header>
+
+      <div className={styles.liveDashboardGrid}>
+        <div className={styles.liveSideColumn}>
+          <section className={styles.weatherDashboard} aria-label="Météo actuelle">
+            {loading && !current ? (
+              <div className={styles.liveLoading}>Actualisation de la météo…</div>
+            ) : current ? (
+              <>
+                <div className={styles.weatherMain}>
+                  <WeatherGlyph code={current.weather_code} />
+                  <div>
+                    <strong>{Math.round(current.temperature_2m)}°</strong>
+                    <span>{weatherLabel(current.weather_code)}</span>
+                    <small>Ressenti {Math.round(current.apparent_temperature)} °C</small>
+                  </div>
+                </div>
+                <div className={styles.weatherMetrics}>
+                  {[
+                    {
+                      icon: Droplets,
+                      label: "Humidité",
+                      value: `${current.relative_humidity_2m} %`,
+                    },
+                    {
+                      icon: Wind,
+                      label: "Vent",
+                      value: `${Math.round(current.wind_speed_10m)} km/h`,
+                    },
+                    {
+                      icon: Gauge,
+                      label: "Pression",
+                      value: `${Math.round(current.surface_pressure)} hPa`,
+                    },
+                    {
+                      icon: CloudRain,
+                      label: "Précipitations",
+                      value: `${current.precipitation} mm`,
+                    },
+                    {
+                      icon: Eye,
+                      label: "Visibilité",
+                      value: `${Math.round(current.visibility / 1000)} km`,
+                    },
+                    {
+                      icon: Sun,
+                      label: "Indice UV",
+                      value: current.uv_index == null ? "—" : current.uv_index.toFixed(1),
+                    },
+                  ].map(({ icon: Icon, label, value }) => (
+                    <article key={label}>
+                      <Icon aria-hidden="true" />
+                      <span>{label}</span>
+                      <strong>{value}</strong>
+                    </article>
+                  ))}
+                </div>
+                <div className={styles.weatherFooter}>
+                  <span>
+                    <Sunrise aria-hidden="true" /> Lever {shortTime(current.sunrise)}
+                  </span>
+                  <span>
+                    <Sunset aria-hidden="true" /> Coucher {shortTime(current.sunset)}
+                  </span>
+                  <span>
+                    Air {current.european_aqi == null ? "—" : airQualityLabel(current.european_aqi)}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div className={styles.liveLoading}>Météo temporairement indisponible.</div>
+            )}
+          </section>
+
+          {data?.featuredImage ? (
+            <article className={styles.pictureOfDay}>
+              <Image
+                src={data.featuredImage.url}
+                alt={data.featuredImage.title}
+                fill
+                sizes="(max-width: 900px) 100vw, 42vw"
+              />
+              <div className={styles.pictureOfDayShade} />
+              <div className={styles.pictureOfDayCopy}>
+                <span>Image du jour</span>
+                <strong>{data.featuredImage.title}</strong>
+                <small>
+                  {data.featuredImage.author} · {data.featuredImage.license}
+                </small>
+                <a href={data.featuredImage.sourceUrl} target="_blank" rel="noreferrer">
+                  Voir sur Wikimedia Commons
+                </a>
+              </div>
+            </article>
+          ) : null}
+        </div>
+
+        <section className={styles.newsDashboard} aria-label="Fil d’actualité">
+          <div className={styles.newsHeading}>
+            <div>
+              <Newspaper aria-hidden="true" />
+              <span>Le fil du moment</span>
+            </div>
+            <small>France 24 + une pause insolite</small>
+          </div>
+          <div className={styles.newsFeed}>
+            {headlines.length ? (
+              headlines.map((item) => (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={`${item.source}-${item.title}`}
+                  data-tone={item.tone}
+                >
+                  <span>{item.source}</span>
+                  <strong>{item.title}</strong>
+                  <small>
+                    {item.publishedAt
+                      ? new Intl.DateTimeFormat("fr-FR", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }).format(new Date(item.publishedAt))
+                      : "En direct"}
+                  </small>
+                </a>
+              ))
+            ) : (
+              <div className={styles.liveLoading}>Actualités temporairement indisponibles.</div>
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -506,23 +755,61 @@ function EntertainmentScreen() {
   );
 }
 
-function ServicesScreen() {
+function ServicesScreen({ content }: { content: DriverContent }) {
   return (
     <div className={styles.detailBody}>
       <div className={styles.introBlock}>
-        <p className={styles.eyebrow}>Votre confort</p>
+        <p className={styles.eyebrow}>Sécurité et confort</p>
         <h2>Services à bord</h2>
-        <p>La disponibilité de chaque service est à confirmer auprès de votre chauffeur.</p>
+        <p>Les services ci-dessous sont renseignés directement par votre chauffeur.</p>
       </div>
-      <div className={styles.serviceGrid}>
-        {ONBOARD_SERVICES.filter((service) => service.visible).map(({ title, icon: Icon }) => (
-          <article className={styles.serviceCard} key={title}>
-            <Icon aria-hidden="true" />
-            <strong>{title}</strong>
-            <small>Disponibilité à confirmer</small>
-          </article>
-        ))}
-      </div>
+      <section className={styles.safetySection} aria-label="Consignes de sécurité">
+        <div className={styles.driverSectionHeading}>
+          <span>Les bons réflexes à bord</span>
+          <small>Consignes de sécurité VTC</small>
+        </div>
+        <div className={styles.safetyGrid}>
+          {SAFETY_ITEMS.map(({ title, text, icon: Icon }) => (
+            <article className={styles.safetyCard} key={title}>
+              <Icon aria-hidden="true" />
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                {title === "Ceinture" && (
+                  <small>
+                    Pour un passager majeur, l’éventuelle amende pour non-port de la ceinture est à
+                    la charge du passager.
+                  </small>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className={styles.driverServices} aria-label="Services proposés par le chauffeur">
+        <div className={styles.driverSectionHeading}>
+          <span>À votre disposition</span>
+          <small>{content.driver.displayName}</small>
+        </div>
+        <div className={styles.driverServiceList}>
+          {content.services.map((service, index) => (
+            <article key={service.id}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <strong>{service.title}</strong>
+                <p>{service.description}</p>
+              </div>
+              <small className={styles.driverServicePrice}>
+                <span>Prix</span>
+                <strong>{formatServicePrice(service.priceCents, service.currency)}</strong>
+              </small>
+            </article>
+          ))}
+          {!content.services.length && (
+            <p className={styles.driverContentEmpty}>Aucun service personnalisé renseigné.</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
@@ -567,6 +854,7 @@ export function VtcShell() {
   const [time, setTime] = useState("--:--");
   const [isSleeping, setIsSleeping] = useState(false);
   const { location, isLocating } = useVtcLocation();
+  const [driverContent, setDriverContent] = useState<DriverContent>(DEMO_DRIVER_CONTENT);
   const inactivityTimer = useRef<number | null>(null);
   const sleepStartedAt = useRef(0);
   const wakePointerStarted = useRef(false);
@@ -591,6 +879,18 @@ export function VtcShell() {
     window.sessionStorage.removeItem(SLEEP_STATE_KEY);
     setActiveSection(null);
     setIsSleeping(false);
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const driver = process.env.NEXT_PUBLIC_VTC_DRIVER_SLUG ?? "demo";
+    fetch(`/api/vtc/driver-content?driver=${encodeURIComponent(driver)}`, {
+      signal: controller.signal,
+    })
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((content: DriverContent) => setDriverContent(content))
+      .catch(() => undefined);
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
@@ -650,11 +950,16 @@ export function VtcShell() {
           <SectionHeader title={title} onHome={goHome} />
           <div className={styles.detailViewport}>
             {activeSection === "journey" && <JourneyScreen />}
-            {activeSection === "live" && <LiveScreen />}
+            {activeSection === "live" && <LiveScreen location={location} isLocating={isLocating} />}
             {activeSection === "entertainment" && <EntertainmentScreen />}
-            {activeSection === "services" && <ServicesScreen />}
+            {activeSection === "services" && <ServicesScreen content={driverContent} />}
             {activeSection === "region" && (
-              <RegionScreen location={location} isLocating={isLocating} />
+              <RegionScreen
+                location={location}
+                isLocating={isLocating}
+                driverFavorites={driverContent.favorites}
+                driverName={driverContent.driver.displayName}
+              />
             )}
             {activeSection === "coworking" && <CoworkingScreen />}
           </div>

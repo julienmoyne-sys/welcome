@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
+import { ExternalLinkGuard } from "@/features/vtc/ExternalLinkGuard";
+
 import "../globals.css";
 import "./vtc.css";
 
@@ -35,7 +37,10 @@ export const viewport: Viewport = {
 export default function VtcLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body>
+        <ExternalLinkGuard />
+        {children}
+      </body>
     </html>
   );
 }

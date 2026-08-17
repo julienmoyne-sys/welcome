@@ -34,7 +34,7 @@ export type VtcMenuItem = {
 export const VTC_MENU: VtcMenuItem[] = [
   {
     id: "journey",
-    title: "COCKPIT",
+    title: "Cockpit",
     description: "Informations utiles",
     icon: Route,
     accent: "01",
@@ -63,7 +63,7 @@ export const VTC_MENU: VtcMenuItem[] = [
   {
     id: "services",
     title: "Services à bord",
-    description: "Votre confort pendant le trajet.",
+    description: "Sécurité et confort",
     icon: Armchair,
     accent: "05",
   },
@@ -91,32 +91,24 @@ export const ENTERTAINMENT_ITEMS = [
 export const SAFETY_ITEMS = [
   {
     title: "Ceinture",
-    text: "Pour votre sécurité, gardez votre ceinture attachée pendant le trajet.",
+    text: "Attachez votre ceinture dès votre installation et conservez-la pendant tout le trajet.",
     icon: ShieldCheck,
   },
   {
     title: "Portes",
-    text: "Attendez l’arrêt complet du véhicule avant d’ouvrir une porte.",
+    text: "Attendez l’arrêt complet et l’accord du chauffeur avant d’ouvrir une porte, côté trottoir si possible.",
     icon: DoorOpen,
   },
   {
     title: "Enfants",
-    text: "Les enfants doivent utiliser un dispositif de retenue adapté lorsque la réglementation l’exige.",
+    text: "Signalez avant le départ tout besoin de siège enfant afin qu’un dispositif adapté puisse être prévu.",
     icon: Baby,
   },
   {
     title: "Effets personnels",
-    text: "Avant de quitter le véhicule, pensez à vérifier que vous n’avez rien oublié.",
+    text: "Gardez les bagages hors des zones de passage et vérifiez vos effets personnels avant de descendre.",
     icon: WalletCards,
   },
-] as const;
-
-export const ONBOARD_SERVICES = [
-  { title: "Recharge téléphone", icon: BatteryCharging, visible: true },
-  { title: "Climatisation", icon: Snowflake, visible: true },
-  { title: "Température à bord", icon: CarFront, visible: true },
-  { title: "Musique", icon: Music2, visible: true },
-  { title: "Informations pratiques", icon: Sparkles, visible: true },
 ] as const;
 
 export const COWORKING_FEATURES = [
