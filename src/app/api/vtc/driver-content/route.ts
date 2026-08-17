@@ -3,7 +3,20 @@ import { NextResponse } from "next/server";
 
 import { DEMO_DRIVER_CONTENT, type DriverContent } from "@/lib/driver-content";
 
-type DriverRow = { id: string; display_name: string };
+type DriverRow = {
+  id: string;
+  driver_number: string;
+  display_name: string;
+  first_name: string | null;
+  bio: string | null;
+  other_activities: string[];
+  languages: string[];
+  interests: string[];
+  phone: string | null;
+  email: string | null;
+  website: string | null;
+  vcard: string | null;
+};
 type ContentRow = {
   id: string;
   kind: "service" | "favorite";
@@ -18,7 +31,11 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
-  const requestedSlug = new URL(request.url).searchParams.get("driver")?.trim();
+  const searchParams = new URL(request.url).searchParams;
+  const requestedNumber = Number(searchParams.get("id"));
+  const driverNumber =
+    Number.isSafeInteger(requestedNumber) && requestedNumber > 0 ? requestedNumber : null;
+  const requestedSlug = searchParams.get("driver")?.trim();
   const slug = requestedSlug || process.env.VTC_DRIVER_SLUG || "demo";
   const databaseUrl = process.env.DATABASE_URL;
 
@@ -26,12 +43,21 @@ export async function GET(request: Request) {
 
   try {
     const sql = neon(databaseUrl);
-    const drivers = (await sql`
-      SELECT id, display_name
-      FROM vtc_drivers
-      WHERE slug = ${slug} AND is_active = true
-      LIMIT 1
-    `) as DriverRow[];
+    const drivers = driverNumber
+      ? ((await sql`
+          SELECT id, driver_number, display_name, first_name, bio, other_activities,
+                 languages, interests, phone, email, website, vcard
+          FROM vtc_drivers
+          WHERE driver_number = ${driverNumber} AND is_active = true
+          LIMIT 1
+        `) as DriverRow[])
+      : ((await sql`
+          SELECT id, driver_number, display_name, first_name, bio, other_activities,
+                 languages, interests, phone, email, website, vcard
+          FROM vtc_drivers
+          WHERE slug = ${slug} AND is_active = true
+          LIMIT 1
+        `) as DriverRow[]);
     const driver = drivers[0];
     if (!driver) return NextResponse.json(DEMO_DRIVER_CONTENT);
 
@@ -43,7 +69,19 @@ export async function GET(request: Request) {
     `) as ContentRow[];
 
     const content: DriverContent = {
-      driver: { id: driver.id, displayName: driver.display_name },
+      driver: {
+        id: Number(driver.driver_number),
+        displayName: driver.display_name,
+        firstName: driver.first_name || driver.display_name,
+        bio: driver.bio || "Votre chauffeur vous souhaite la bienvenue à bord.",
+        otherActivities: driver.other_activities ?? [],
+        languages: driver.languages ?? [],
+        interests: driver.interests ?? [],
+        phone: driver.phone,
+        email: driver.email,
+        website: driver.website,
+        vcard: driver.vcard || DEMO_DRIVER_CONTENT.driver.vcard,
+      },
       services: items
         .filter((item) => item.kind === "service")
         .map(({ id, title, description, price_cents, currency }) => ({

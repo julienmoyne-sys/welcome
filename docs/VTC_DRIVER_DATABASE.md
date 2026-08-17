@@ -1,6 +1,6 @@
 # Configuration serveur des contenus chauffeur
 
-Les services à bord et les coups de cœur sont lus dans PostgreSQL via Neon. Tant que la base
+Le profil du chauffeur, sa vCard, les services à bord et les coups de cœur sont lus dans PostgreSQL via Neon. Tant que la base
 n’est pas configurée, l’API renvoie automatiquement les contenus de démonstration définis dans
 `src/lib/driver-content.ts`.
 
@@ -22,26 +22,39 @@ Ouvrir l’éditeur SQL de Neon et exécuter intégralement `database/vtc-driver
 script crée les tables, les index, le chauffeur `demo` et un premier service d’exemple. Il est
 réexécutable sans dupliquer les exemples, dont le coup de cœur « La Corde à Linge ».
 
-## 3. Choisir le chauffeur affiché
+## 3. Choisir le chauffeur affiché sur une tablette
 
 Ajouter dans Vercel, pour chaque déploiement concerné :
 
 ```text
-VTC_DRIVER_SLUG=demo
-NEXT_PUBLIC_VTC_DRIVER_SLUG=demo
+NEXT_PUBLIC_VTC_DRIVER_ID=1
 ```
 
-Créer un slug différent pour chaque chauffeur ou tablette. Les deux valeurs doivent correspondre.
-Après toute modification des variables Vercel, redéployer l’application.
+`driver_number` est un numéro unique auto-incrémenté par PostgreSQL. Il identifie la fiche à lire
+sur la tablette via `/api/vtc/driver-content?id=1`. Le slug reste accepté comme solution de repli
+avec `NEXT_PUBLIC_VTC_DRIVER_SLUG=demo`. Après toute modification des variables Vercel,
+redéployer l’application.
 
 ## 4. Ajouter les contenus d’un chauffeur
 
 Créer d’abord le chauffeur :
 
 ```sql
-INSERT INTO vtc_drivers (slug, display_name)
-VALUES ('jean-dupont', 'Jean, votre chauffeur');
+INSERT INTO vtc_drivers
+  (slug, display_name, first_name, bio, other_activities, languages, interests, phone, email, website)
+VALUES
+  ('jean-dupont', 'Jean Dupont', 'Jean',
+   'Chauffeur professionnel attentif à votre confort.',
+   ARRAY['Entrepreneur'], ARRAY['Français', 'Anglais'],
+   ARRAY['Voyages', 'Gastronomie'], '+33 6 00 00 00 00',
+   'jean@example.com', 'https://example.com')
+RETURNING driver_number;
 ```
+
+La colonne `vcard` contient la fiche contact complète au format vCard 3.0. La tablette transforme
+directement ce texte en QR code : le passager peut ainsi scanner puis enregistrer le contact sur
+son téléphone. Le UUID `id` reste la clé technique utilisée pour les relations internes ;
+`driver_number` est l’identifiant numérique stable destiné aux tablettes.
 
 Ajouter ensuite un service :
 

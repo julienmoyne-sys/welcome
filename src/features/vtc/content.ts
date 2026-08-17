@@ -1,7 +1,6 @@
 import {
   Armchair,
   BatteryCharging,
-  BriefcaseBusiness,
   Building2,
   CarFront,
   Headphones,
@@ -10,6 +9,7 @@ import {
   Route,
   Snowflake,
   Sparkles,
+  UserRound,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -62,9 +62,9 @@ export const VTC_MENU: VtcMenuItem[] = [
   },
   {
     id: "coworking",
-    title: "BUSINESS",
-    description: "Espaces de travail",
-    icon: BriefcaseBusiness,
+    title: "VOTRE CHAUFFEUR",
+    description: "Gardons contact",
+    icon: UserRound,
     accent: "06",
   },
 ];
@@ -101,15 +101,6 @@ export const SAFETY_ITEMS = [
     text: "Gardez les bagages hors des zones de passage et vérifiez vos effets personnels avant de descendre.",
     image: safetyBelongingsImage,
   },
-] as const;
-
-export const COWORKING_FEATURES = [
-  "Espaces de travail premium",
-  "Bureaux privatifs",
-  "Coworking",
-  "Salle de réunion",
-  "Environnement professionnel",
-  "Strasbourg",
 ] as const;
 
 export const JOURNEY_FIELDS = [

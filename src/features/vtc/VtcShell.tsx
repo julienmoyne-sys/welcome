@@ -2,7 +2,7 @@
 
 import {
   ArrowRight,
-  Building2,
+  BriefcaseBusiness,
   Cloud,
   CloudFog,
   CloudLightning,
@@ -10,11 +10,13 @@ import {
   CloudSnow,
   CloudSun,
   Clock3,
+  ContactRound,
   Droplets,
   Eye,
   Flag,
   Gauge,
   Home,
+  Languages,
   MapPin,
   Moon,
   Newspaper,
@@ -27,10 +29,10 @@ import {
   Wind,
 } from "lucide-react";
 import Image from "next/image";
+import { QRCodeSVG } from "qrcode.react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import coworkingImage from "@/assets/hero-welcome-real.png";
-import coworkingCardImage from "@/assets/vtc-card-coworking.png";
+import driverCardImage from "@/assets/vtc-card-driver.png";
 import entertainmentCardImage from "@/assets/vtc-card-entertainment.png";
 import journeyCardImage from "@/assets/vtc-card-cockpit.png";
 import liveCardImage from "@/assets/vtc-card-news-weather.png";
@@ -49,7 +51,7 @@ import {
 import { RegionScreen } from "./RegionScreen";
 import { useVtcLocation } from "./useVtcLocation";
 
-import { COWORKING_FEATURES, SAFETY_ITEMS, VTC_MENU, type VtcSectionId } from "./content";
+import { SAFETY_ITEMS, VTC_MENU, type VtcSectionId } from "./content";
 import styles from "./vtc.module.css";
 import { EntertainmentScreen } from "./EntertainmentScreen";
 import { DEMO_DRIVER_CONTENT, type DriverContent } from "@/lib/driver-content";
@@ -64,7 +66,7 @@ const VTC_CARD_IMAGES = {
   entertainment: entertainmentCardImage,
   services: servicesCardImage,
   region: regionCardImage,
-  coworking: coworkingCardImage,
+  coworking: driverCardImage,
 } as const;
 
 type CockpitWeather = {
@@ -112,18 +114,8 @@ type LiveDashboardData = {
   }>;
 };
 
-function weatherIcon(weatherCode: number) {
-  if (weatherCode === 0) return Sun;
-  if (weatherCode <= 2) return CloudSun;
-  if (weatherCode === 3) return Cloud;
-  if (weatherCode <= 48) return CloudFog;
-  if (weatherCode <= 67 || (weatherCode >= 80 && weatherCode <= 82)) return CloudRain;
-  if (weatherCode <= 77 || (weatherCode >= 85 && weatherCode <= 86)) return CloudSnow;
-  if (weatherCode >= 95) return CloudLightning;
-  return Cloud;
-}
-
-function WeatherGlyph({ code }: { code: number }) {
+function WeatherGlyph({ code }: { code: number | null }) {
+  if (code === null) return <Thermometer aria-hidden="true" />;
   if (code === 0) return <Sun aria-hidden="true" />;
   if (code <= 2) return <CloudSun aria-hidden="true" />;
   if (code === 3) return <Cloud aria-hidden="true" />;
@@ -298,8 +290,8 @@ function JourneyScreen() {
       ? null
       : `${route ? "destination" : "current"}:${weatherLatitude.toFixed(3)}:${weatherLongitude.toFixed(3)}`;
   const visibleWeather = weatherLoadedContext === weatherContext ? weather : null;
-  const WeatherIcon = visibleWeather ? weatherIcon(visibleWeather.weatherCode) : Thermometer;
   const destinationSuffix = route ? " (à destination)" : "";
+  const temperatureLabel = route ? "Température à destination" : "Température actuelle";
 
   useEffect(() => {
     if (!weatherContext || weatherLatitude === undefined || weatherLongitude === undefined) return;
@@ -451,18 +443,21 @@ function JourneyScreen() {
                   ? `${gps.latitude.toFixed(4)}, ${gps.longitude.toFixed(4)}`
                   : locationPlaceholder)}
             </strong>
-            <small>Altitude {gps?.altitude == null ? "—" : `${Math.round(gps.altitude)} m`}</small>
+            <div className={styles.cityConditions}>
+              <span>Altitude {gps?.altitude == null ? "—" : `${Math.round(gps.altitude)} m`}</span>
+              <span>
+                <WeatherGlyph code={visibleWeather?.weatherCode ?? null} />
+                <span>{temperatureLabel}</span>
+                <strong>
+                  {visibleWeather ? `${Math.round(visibleWeather.temperature)} °C` : "—"}
+                </strong>
+              </span>
+            </div>
           </div>
         </section>
 
         <div className={styles.cockpitDials}>
           {[
-            {
-              label: `Température${destinationSuffix}`,
-              value: visibleWeather ? `${Math.round(visibleWeather.temperature)} °C` : "—",
-              icon: Thermometer,
-              weather: true,
-            },
             {
               label: `Pression${destinationSuffix}`,
               value: visibleWeather ? `${Math.round(visibleWeather.pressure)} hPa` : "—",
@@ -473,14 +468,11 @@ function JourneyScreen() {
               value: visibleWeather ? airQualityLabel(visibleWeather.europeanAqi) : "—",
               icon: Wind,
             },
-          ].map(({ label, value, icon: Icon, weather: isWeather }) => (
+          ].map(({ label, value, icon: Icon }) => (
             <article className={styles.cockpitDial} key={label}>
               <Icon aria-hidden="true" />
               <span>{label}</span>
-              <strong className={isWeather ? styles.weatherValue : undefined}>
-                {value}
-                {isWeather && visibleWeather && <WeatherIcon aria-hidden="true" />}
-              </strong>
+              <strong>{value}</strong>
             </article>
           ))}
         </div>
@@ -504,7 +496,7 @@ function JourneyScreen() {
 
       {gps && (
         <section className={styles.routeTimeline} aria-label="Points d’intérêt à proximité">
-          {!route && <span className={styles.timelineLabel}>À proximité</span>}
+          <span className={styles.timelineLabel}>SITES À PROXIMITÉ</span>
           <div className={styles.timelineTrack}>
             {nearbyLoadedContext !== nearbyContext ? (
               <span className={styles.poiEmpty}>Recherche des lieux d’intérêt…</span>
@@ -773,42 +765,64 @@ function ServicesScreen({ content }: { content: DriverContent }) {
   );
 }
 
-function CoworkingScreen() {
+function DriverScreen({ content }: { content: DriverContent }) {
+  const { driver } = content;
+
   return (
-    <div className={`${styles.detailBody} ${styles.coworkingBody}`}>
-      <div className={styles.coworkingVisual}>
-        <Image
-          src={coworkingImage}
-          alt="Espace Welcome! Coworking à Strasbourg"
-          fill
-          sizes="55vw"
-        />
-        <div className={styles.visualShade} />
-        <div className={styles.visualCopy}>
-          <p className={styles.eyebrow}>Welcome! Coworking</p>
-          <h2>Le prolongement de votre chez vous.</h2>
-          <p>Un environnement professionnel chaleureux, pensé pour travailler autrement.</p>
+    <div className={`${styles.detailBody} ${styles.driverProfileBody}`}>
+      <section className={styles.driverProfileHero} aria-labelledby="driver-profile-name">
+        <div className={styles.driverAvatar} aria-hidden="true">
+          {driver.firstName.slice(0, 1).toUpperCase()}
         </div>
-      </div>
-      <div className={styles.coworkingAside}>
-        <ul>
-          {COWORKING_FEATURES.map((feature) => (
-            <li key={feature}>{feature}</li>
-          ))}
-        </ul>
-        <a className={styles.coworkingLink} href="https://www.welcome-coworking.com">
-          <span className={styles.coworkingLinkIcon}>
-            <Building2 aria-hidden="true" />
-          </span>
-          <div>
-            <strong>Visiter Welcome! Coworking</strong>
-            <small>Bureaux & espaces de travail à Strasbourg</small>
+        <p className={styles.eyebrow}>Votre chauffeur</p>
+        <h2 id="driver-profile-name">{driver.firstName}</h2>
+        <span className={styles.driverReference}>
+          Chauffeur n° {String(driver.id).padStart(4, "0")}
+        </span>
+        <p className={styles.driverBio}>{driver.bio}</p>
+        <div className={styles.driverVcardQr}>
+          <div className={styles.driverQrCode} aria-label={`QR code vCard de ${driver.firstName}`}>
+            <QRCodeSVG
+              value={driver.vcard}
+              size={132}
+              level="M"
+              bgColor="#ffffff"
+              fgColor="#101412"
+              marginSize={1}
+            />
           </div>
-          <span className={styles.coworkingLinkArrow}>
-            <ArrowRight aria-hidden="true" />
+          <span>
+            <strong>Scannez pour garder le contact</strong>
+            <small>La fiche de votre chauffeur s’ajoutera à votre téléphone</small>
           </span>
-        </a>
-      </div>
+        </div>
+      </section>
+
+      <section className={styles.driverProfileDetails} aria-label="Présentation du chauffeur">
+        {[
+          {
+            title: "Autres activités",
+            values: driver.otherActivities,
+            icon: BriefcaseBusiness,
+          },
+          { title: "Langues parlées", values: driver.languages, icon: Languages },
+          { title: "Centres d’intérêt", values: driver.interests, icon: ContactRound },
+        ].map(({ title, values, icon: Icon }) => (
+          <article className={styles.driverDetailCard} key={title}>
+            <div className={styles.driverDetailHeading}>
+              <Icon aria-hidden="true" />
+              <h3>{title}</h3>
+            </div>
+            <div className={styles.driverTags}>
+              {values.length ? (
+                values.map((value) => <span key={value}>{value}</span>)
+              ) : (
+                <span>Non renseigné</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </section>
     </div>
   );
 }
@@ -854,8 +868,12 @@ export function VtcShell() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const driver = process.env.NEXT_PUBLIC_VTC_DRIVER_SLUG ?? "demo";
-    fetch(`/api/vtc/driver-content?driver=${encodeURIComponent(driver)}`, {
+    const driverId = process.env.NEXT_PUBLIC_VTC_DRIVER_ID;
+    const driverSlug = process.env.NEXT_PUBLIC_VTC_DRIVER_SLUG ?? "demo";
+    const query = driverId
+      ? `id=${encodeURIComponent(driverId)}`
+      : `driver=${encodeURIComponent(driverSlug)}`;
+    fetch(`/api/vtc/driver-content?${query}`, {
       signal: controller.signal,
     })
       .then((response) => (response.ok ? response.json() : Promise.reject()))
@@ -931,7 +949,7 @@ export function VtcShell() {
                 driverName={driverContent.driver.displayName}
               />
             )}
-            {activeSection === "coworking" && <CoworkingScreen />}
+            {activeSection === "coworking" && <DriverScreen content={driverContent} />}
           </div>
           <button
             className={styles.floatingHome}

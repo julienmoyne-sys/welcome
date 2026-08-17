@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
@@ -94,6 +95,7 @@ export default async function LocaleLayout({
         </NextIntlClientProvider>
         <JsonLd data={organizationJsonLd()} />
       </body>
+      <GoogleAnalytics gaId="G-P877RD6HJH" />
     </html>
   );
 }

@@ -19,19 +19,10 @@ type WikipediaGeoResult = {
   dist: number;
 };
 type WikipediaGeoResponse = { query?: { geosearch?: WikipediaGeoResult[] } };
-type NominatimResult = {
-  place_id: number;
-  display_name: string;
-  name?: string;
-  lat: string;
-  lon: string;
-};
-type PointOfInterest = {
-  id: string;
-  name: string;
-  category: string;
-  distanceMeters: number;
-};
+
+const TOURISM_TOP_LIMIT = 10;
+const DISPLAYED_TOURISM_LIMIT = 8;
+const REGIONAL_SEARCH_RADIUS_METERS = 50_000;
 
 const FIXED_POINTS = [
   {
@@ -65,121 +56,6 @@ const normalizeName = (value: string) =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLocaleLowerCase("fr");
 
-const PROFESSIONAL_STADIUM_MARKERS = [
-  "abbe-deschamps",
-  "allianz riviera",
-  "armand-cesari",
-  "auguste-bonal",
-  "auguste-delaune",
-  "bauer",
-  "beaujoire",
-  "bollaert-delelis",
-  "charlety",
-  "francis-le ble",
-  "francis-le-basser",
-  "francois-coty",
-  "geoffroy-guichard",
-  "groupama stadium",
-  "la licorne",
-  "la meinau",
-  "le moustoir",
-  "louis-ii",
-  "marcel-picot",
-  "marie-marvingt",
-  "matmut atlantique",
-  "mauroy",
-  "mosson",
-  "nouste camp",
-  "oceane",
-  "parc des princes",
-  "parc des sports d'annecy",
-  "paul-lignon",
-  "pierre-mauroy",
-  "raymond-kopa",
-  "roazhon park",
-  "roudourou",
-  "saint-symphorien",
-  "stade des alpes",
-  "stadium de toulouse",
-  "tribut",
-  "velodrome",
-];
-
-const MAJOR_STATION_CITIES = [
-  "aix-en-provence",
-  "amiens",
-  "angers",
-  "annecy",
-  "avignon",
-  "besancon",
-  "bordeaux",
-  "brest",
-  "caen",
-  "chambery",
-  "clermont-ferrand",
-  "dijon",
-  "grenoble",
-  "le havre",
-  "le mans",
-  "lille",
-  "limoges",
-  "lyon",
-  "marseille",
-  "metz",
-  "montpellier",
-  "mulhouse",
-  "nancy",
-  "nantes",
-  "nice",
-  "nimes",
-  "orleans",
-  "paris",
-  "pau",
-  "perpignan",
-  "poitiers",
-  "reims",
-  "rennes",
-  "rouen",
-  "saint-etienne",
-  "strasbourg",
-  "toulon",
-  "toulouse",
-  "tours",
-];
-
-function isProfessionalStadium(name: string) {
-  const normalized = normalizeName(name);
-  return PROFESSIONAL_STADIUM_MARKERS.some((marker) => normalized.includes(marker));
-}
-
-function isMajorStation(name: string) {
-  const normalized = normalizeName(name);
-  const mainTerminalMarkers = [
-    "-ville",
-    "austerlitz",
-    "flandres",
-    "gare de l'est",
-    "gare de lyon",
-    "gare du nord",
-    "matabiau",
-    "montparnasse",
-    "part-dieu",
-    "perrache",
-    "saint-charles",
-    "saint-jean",
-    "saint-lazare",
-  ];
-  return (
-    !/(ancienne|marchandises|triage|desaffectee|fermee)/.test(normalized) &&
-    MAJOR_STATION_CITIES.some(
-      (city) =>
-        normalized === `gare de ${city}` ||
-        (normalized.includes(city) &&
-          mainTerminalMarkers.some((marker) => normalized.includes(marker))),
-    )
-  );
-}
-
 function distanceInMeters(lat1: number, lon1: number, lat2: number, lon2: number) {
   const dLat = radians(lat2 - lat1);
   const dLon = radians(lon2 - lon1);
@@ -204,20 +80,21 @@ function fixedPoints(latitude: number, longitude: number) {
     category: point.category,
     distanceMeters: Math.round(distanceInMeters(latitude, longitude, point.lat, point.lon)),
   }))
+    .filter((point) => point.category === "Site touristique")
     .filter((point) => point.distanceMeters <= 25_000)
     .sort((a, b) => a.distanceMeters - b.distanceMeters);
 }
 
 function importance(tags: Record<string, string>) {
   return (
-    (tags.shop === "tobacco" ? 16 : 0) +
-    (tags.aeroway === "aerodrome" ? 15 : 0) +
-    (tags.railway === "station" ? 14 : 0) +
-    (tags.leisure === "stadium" && tags.sport === "soccer" ? 13 : 0) +
     (tags.wikipedia ? 8 : 0) +
     (tags.wikidata ? 6 : 0) +
     (tags.heritage || tags["heritage:operator"] ? 5 : 0) +
-    (["attraction", "museum", "gallery", "zoo", "theme_park"].includes(tags.tourism) ? 4 : 0) +
+    (["attraction", "museum", "gallery", "viewpoint", "zoo", "theme_park", "aquarium"].includes(
+      tags.tourism,
+    )
+      ? 4
+      : 0) +
     (tags.historic ? 3 : 0) +
     (tags.website ? 1 : 0)
   );
@@ -225,7 +102,6 @@ function importance(tags: Record<string, string>) {
 
 function wikipediaImportance(title: string) {
   const normalized = title.toLocaleLowerCase("fr");
-  const usefulPlaces = ["aéroport", "aérodrome", "gare de ", "stade", "football"];
   const landmarks = [
     "cathédrale",
     "château",
@@ -242,43 +118,30 @@ function wikipediaImportance(title: string) {
     "opéra",
     "tour ",
     "place ",
+    "mémorial",
+    "hôtel de ville",
+    "église",
+    "synagogue",
+    "temple",
+    "quartier historique",
   ];
-  return (
-    usefulPlaces.reduce((score, keyword) => score + (normalized.includes(keyword) ? 8 : 0), 1) +
-    landmarks.reduce((score, keyword) => score + (normalized.includes(keyword) ? 5 : 0), 0)
-  );
+  return landmarks.reduce((score, keyword) => score + (normalized.includes(keyword) ? 5 : 0), 0);
 }
 
-function wikipediaCategory(title: string) {
-  const normalized = title.toLocaleLowerCase("fr");
-  if (normalized.includes("aéroport") || normalized.includes("aérodrome")) return "Aéroport";
-  if (normalized.includes("gare de ") || normalized.startsWith("gare ")) return "Gare";
-  if (normalized.includes("stade") || normalized.includes("football")) return "Stade de football";
+function wikipediaCategory() {
   return "Site touristique";
 }
 
 function isRelevantWikipediaPlace(title: string) {
   const normalized = normalizeName(title);
-  const placeCategory = wikipediaCategory(title);
-  if (placeCategory === "Stade de football") return isProfessionalStadium(title);
-  if (placeCategory === "Aéroport")
-    return normalized.includes("aeroport") && !normalized.includes("aerodrome");
-  if (placeCategory === "Gare") return isMajorStation(title);
-  return true;
+  if (/(gare|aeroport|aerodrome|stade|football|centre commercial|hopital)/.test(normalized))
+    return false;
+  return wikipediaImportance(title) >= 5;
 }
 
 function isRelevantOsmPlace(name: string, tags: Record<string, string>) {
-  const placeCategory = category(tags);
-  if (placeCategory === "Bureau de tabac") return true;
-  if (placeCategory === "Stade de football") {
-    const capacity = Number(tags.capacity?.replace(/\D/g, ""));
-    return isProfessionalStadium(name) || (Number.isFinite(capacity) && capacity >= 8_000);
-  }
-  if (placeCategory === "Aéroport") {
-    return Boolean(tags.iata) || ["international", "regional"].includes(tags["aerodrome:type"]);
-  }
-  if (placeCategory === "Gare") return isMajorStation(name);
-  return true;
+  void name;
+  return importance(tags) >= 4;
 }
 
 function isUsefulWikipediaPlace(title: string) {
@@ -324,58 +187,10 @@ function routeDistance(
 
 function selectPoints<
   T extends { id: string; category: string; importance: number; distanceMeters: number },
->(candidates: T[], route: Coordinate[] | undefined, limit: number) {
-  const ranked = [...candidates].sort(
-    (a, b) => b.importance - a.importance || a.distanceMeters - b.distanceMeters,
-  );
-  if (!route?.length) {
-    const selected: T[] = [];
-    const categoryCounts = new Map<string, number>();
-    ranked.forEach((point) => {
-      const count = categoryCounts.get(point.category) ?? 0;
-      if (selected.length < limit && count < 2) {
-        selected.push(point);
-        categoryCounts.set(point.category, count + 1);
-      }
-    });
-    return selected.slice(0, limit).sort((a, b) => a.distanceMeters - b.distanceMeters);
-  }
-
-  const routeLength = route
-    .slice(1)
-    .reduce(
-      (total, [lat, lon], index) =>
-        total + distanceInMeters(route[index][0], route[index][1], lat, lon),
-      0,
-    );
-  const segmentLength = Math.max(1, routeLength / limit);
-  const bestBySegment = new Map<number, T>();
-  ranked.forEach((point) => {
-    const segment = Math.min(limit - 1, Math.floor(point.distanceMeters / segmentLength));
-    if (!bestBySegment.has(segment)) bestBySegment.set(segment, point);
-  });
-
-  const selected: T[] = [];
-  const categoryCounts = new Map<string, number>();
-  [...bestBySegment.values()]
-    .sort((a, b) => a.distanceMeters - b.distanceMeters)
-    .forEach((point) => {
-      const count = categoryCounts.get(point.category) ?? 0;
-      if (count < 3) {
-        selected.push(point);
-        categoryCounts.set(point.category, count + 1);
-      }
-    });
-  const selectedIds = new Set(selected.map((point) => point.id));
-  ranked.forEach((point) => {
-    const count = categoryCounts.get(point.category) ?? 0;
-    if (selected.length < limit && !selectedIds.has(point.id) && count < 3) {
-      selected.push(point);
-      selectedIds.add(point.id);
-      categoryCounts.set(point.category, count + 1);
-    }
-  });
-  return selected.slice(0, limit).sort((a, b) => a.distanceMeters - b.distanceMeters);
+>(candidates: T[], _route: Coordinate[] | undefined, limit: number) {
+  return [...candidates]
+    .sort((a, b) => b.importance - a.importance || a.distanceMeters - b.distanceMeters)
+    .slice(0, limit);
 }
 
 async function findWikipediaPoints(latitude: number, longitude: number, route?: Coordinate[]) {
@@ -432,7 +247,7 @@ async function findWikipediaPoints(latitude: number, longitude: number, route?: 
             {
               id: `wikipedia-${place.pageid}`,
               name: place.title,
-              category: wikipediaCategory(place.title),
+              category: wikipediaCategory(),
               importance: wikipediaImportance(place.title),
               distanceMeters: Math.round(
                 alongRoute?.distance ?? distanceInMeters(latitude, longitude, place.lat, place.lon),
@@ -443,74 +258,13 @@ async function findWikipediaPoints(latitude: number, longitude: number, route?: 
       : [],
   );
 
-  return selectPoints(candidates, route, 8).map(({ importance: _importance, ...point }) => point);
-}
-
-async function includeNearbyTobacco(
-  points: PointOfInterest[],
-  latitude: number,
-  longitude: number,
-  city: string | undefined,
-  route?: Coordinate[],
-) {
-  if (
-    !city ||
-    points.some((point) => point.category === "Bureau de tabac" && point.distanceMeters <= 5_000)
-  )
-    return points.slice(0, 8);
-
-  const latitudeDelta = 5 / 111;
-  const longitudeDelta = 5 / Math.max(20, 111 * Math.cos(radians(latitude)));
-  const params = new URLSearchParams({
-    format: "jsonv2",
-    q: `Tabac ${city}`,
-    viewbox: `${longitude - longitudeDelta},${latitude + latitudeDelta},${longitude + longitudeDelta},${latitude - latitudeDelta}`,
-    bounded: "1",
-    limit: "5",
-  });
-  const response = await fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
-    headers: { "User-Agent": "Welcome-VTC/1.0 (contact@welcome-coworking.com)" },
-    signal: AbortSignal.timeout(5_000),
-    next: { revalidate: 900 },
-  });
-  if (!response.ok) return points.slice(0, 8);
-  const results = (await response.json()) as NominatimResult[];
-  const tobacco = results.flatMap((result) => {
-    const lat = Number(result.lat);
-    const lon = Number(result.lon);
-    const directDistance = distanceInMeters(latitude, longitude, lat, lon);
-    const alongRoute = route?.length
-      ? routeDistance(route, latitude, longitude, lat, lon)
-      : undefined;
-    if (
-      !Number.isFinite(lat) ||
-      !Number.isFinite(lon) ||
-      directDistance > 5_000 ||
-      (route?.length && (!alongRoute || alongRoute.detour > 5_000))
-    )
-      return [];
-    return [
-      {
-        id: `nominatim-tobacco-${result.place_id}`,
-        name: result.name?.trim() || result.display_name.split(",")[0],
-        category: "Bureau de tabac",
-        distanceMeters: Math.round(directDistance),
-      },
-    ];
-  })[0];
-  if (!tobacco) return points.slice(0, 8);
-
-  return [...points.filter((point) => point.category !== "Bureau de tabac").slice(0, 7), tobacco]
+  return selectPoints(candidates, route, TOURISM_TOP_LIMIT)
     .sort((a, b) => a.distanceMeters - b.distanceMeters)
-    .slice(0, 8);
+    .slice(0, DISPLAYED_TOURISM_LIMIT)
+    .map(({ importance: _importance, ...point }) => point);
 }
 
-async function findPoints(
-  latitude: number,
-  longitude: number,
-  route?: Coordinate[],
-  city?: string,
-) {
+async function findPoints(latitude: number, longitude: number, route?: Coordinate[]) {
   const sampledRoute = route?.filter(
     (_, index) => index % Math.max(1, Math.ceil(route.length / 12)) === 0,
   );
@@ -518,23 +272,15 @@ async function findPoints(
     sampledRoute.push(route.at(-1)!);
   const filter = sampledRoute?.length
     ? `(around:30000,${sampledRoute.flat().join(",")})`
-    : `(around:12000,${latitude},${longitude})`;
+    : `(around:${REGIONAL_SEARCH_RADIUS_METERS},${latitude},${longitude})`;
   const query = route?.length
     ? `[out:json][timeout:30];(
-        nwr${filter}[name][shop=tobacco];
-        nwr${filter}[name][leisure=stadium][sport=soccer];
-        nwr${filter}[name][railway=station];
-        nwr${filter}[name][aeroway=aerodrome];
-        nwr${filter}[name][tourism~"^(attraction|museum|viewpoint|zoo|theme_park)$"];
+        nwr${filter}[name][tourism~"^(attraction|museum|gallery|viewpoint|zoo|theme_park|aquarium)$"];
         nwr${filter}[name][historic~"^(castle|monument|archaeological_site|fort)$"];
         nwr${filter}[name][heritage];
       );out center tags;`
-    : `[out:json][timeout:15];(
-        nwr${filter}[name][shop=tobacco];
-        nwr${filter}[name][leisure=stadium][sport=soccer];
-        nwr${filter}[name][railway=station];
-        nwr${filter}[name][aeroway=aerodrome];
-        nwr${filter}[name][tourism~"^(attraction|museum|viewpoint|zoo|theme_park)$"];
+    : `[out:json][timeout:25];(
+        nwr${filter}[name][tourism~"^(attraction|museum|gallery|viewpoint|zoo|theme_park|aquarium)$"];
         nwr${filter}[name][historic~"^(castle|monument|archaeological_site|fort)$"];
         nwr${filter}[name][heritage];
       );out center tags;`;
@@ -544,7 +290,7 @@ async function findPoints(
       method: "POST",
       body: new URLSearchParams({ data: query }),
       headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-      signal: AbortSignal.timeout(6_000),
+      signal: AbortSignal.timeout(10_000),
       cache: "no-store",
     });
     if (!response.ok) throw new Error(`Overpass ${response.status}`);
@@ -581,25 +327,22 @@ async function findPoints(
         },
       ];
     });
-    const points = selectPoints(candidates, route, 8).map(
-      ({ importance: _importance, ...point }) => point,
-    );
-    if (points.length > 0)
-      return includeNearbyTobacco(points, latitude, longitude, city, route).catch(() => points);
+    // Le classement constitue la liste dynamique des dix incontournables du
+    // secteur : notoriété documentée d'abord, puis proximité avec le visiteur.
+    const points = selectPoints(candidates, route, TOURISM_TOP_LIMIT)
+      .sort((a, b) => a.distanceMeters - b.distanceMeters)
+      .slice(0, DISPLAYED_TOURISM_LIMIT)
+      .map(({ importance: _importance, ...point }) => point);
+    if (points.length > 0) return points;
   } catch {
     // Le service Overpass public peut être saturé : la recherche nationale
     // Wikipédia ci-dessous garantit un second fournisseur sans clé API.
   }
 
   const wikipediaPoints = await findWikipediaPoints(latitude, longitude, route).catch(() => []);
-  if (wikipediaPoints.length > 0)
-    return includeNearbyTobacco(wikipediaPoints, latitude, longitude, city, route).catch(
-      () => wikipediaPoints,
-    );
+  if (wikipediaPoints.length > 0) return wikipediaPoints;
   const fallbackPoints = route?.length ? [] : fixedPoints(latitude, longitude);
-  return includeNearbyTobacco(fallbackPoints, latitude, longitude, city, route).catch(
-    () => fallbackPoints,
-  );
+  return fallbackPoints;
 }
 
 function validPosition(latitude: number, longitude: number) {
@@ -617,10 +360,9 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const latitude = Number(url.searchParams.get("lat"));
   const longitude = Number(url.searchParams.get("lon"));
-  const city = url.searchParams.get("city")?.trim() || undefined;
   if (!validPosition(latitude, longitude))
     return NextResponse.json({ error: "Coordonnées invalides" }, { status: 400 });
-  return NextResponse.json({ points: await findPoints(latitude, longitude, undefined, city) });
+  return NextResponse.json({ points: await findPoints(latitude, longitude) });
 }
 
 export async function POST(request: Request) {
@@ -628,7 +370,6 @@ export async function POST(request: Request) {
     latitude?: number;
     longitude?: number;
     route?: Coordinate[];
-    city?: string;
   };
   const latitude = Number(body.latitude);
   const longitude = Number(body.longitude);
@@ -646,6 +387,6 @@ export async function POST(request: Request) {
   if (!validPosition(latitude, longitude) || route.length < 2)
     return NextResponse.json({ error: "Trajet invalide" }, { status: 400 });
   return NextResponse.json({
-    points: await findPoints(latitude, longitude, route, body.city?.trim() || undefined),
+    points: await findPoints(latitude, longitude, route),
   });
 }

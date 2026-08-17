@@ -450,7 +450,7 @@
 .cockpitGrid {
   display: grid;
   grid-area: overview;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 2fr) minmax(9rem, 1fr);
   gap: clamp(0.8rem, 1.4vw, 1.2rem);
 }
 .altitudePanel,
@@ -499,9 +499,35 @@
   letter-spacing: -0.05em;
   line-height: 1;
 }
-.cityCurrentContent small {
-  margin-top: 0.65rem;
+.cityConditions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  margin-top: 0.75rem;
+}
+.cityConditions > span {
   color: rgba(255, 255, 255, 0.62);
+  font-size: 0.7rem;
+}
+.cityConditions > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+.cityConditions svg {
+  width: 0.95rem;
+  color: var(--vtc-gold);
+}
+.cityConditions strong {
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
 }
 .locationLine {
   display: flex;
@@ -553,7 +579,7 @@
 }
 .cockpitDials {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: clamp(0.65rem, 1vw, 0.9rem);
 }
 .cockpitDial {
@@ -591,16 +617,6 @@
   grid-area: facts;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.45rem, 0.8vw, 0.7rem);
-}
-.weatherValue {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.weatherValue svg {
-  width: 0.9rem;
-  height: 0.9rem;
-  color: var(--vtc-gold);
 }
 .cockpitFacts article {
   display: grid;
@@ -867,24 +883,27 @@
   }
 }
 .routeTimeline {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: clamp(1rem, 2vw, 2rem);
+  display: block;
   padding: 0.85rem clamp(1rem, 1.8vw, 1.5rem);
   border-radius: 1rem;
   grid-area: timeline;
+  min-height: 7.5rem;
 }
 .timelineLabel {
+  display: block;
+  margin-bottom: 1rem;
   color: rgba(255, 255, 255, 0.45);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
+  text-align: center;
   text-transform: uppercase;
 }
 .timelineTrack {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem 0;
 }
 .poiEmpty {
   grid-column: 1 / -1;
@@ -1820,118 +1839,141 @@
   color: rgba(255, 255, 255, 0.4);
   font-size: 0.72rem;
 }
-.coworkingBody {
+.driverProfileBody {
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(16rem, 0.75fr);
+  grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
   align-items: stretch;
   padding-block-start: 0.9rem;
 }
-.coworkingVisual {
+.driverProfileHero {
   position: relative;
-  min-width: 0;
-  min-height: 28rem;
+  display: flex;
+  min-height: 27rem;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
   overflow: hidden;
   border-radius: clamp(1.2rem, 2vw, 2rem);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(212, 191, 99, 0.22), transparent 42%),
+    linear-gradient(145deg, #1d2723, #0c100f 72%);
 }
-.coworkingVisual img {
-  object-fit: cover;
-}
-.visualShade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(5, 6, 6, 0.88), rgba(5, 6, 6, 0.12));
-}
-.visualCopy {
-  position: absolute;
-  inset: auto auto clamp(1.5rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem);
-  width: min(78%, 44rem);
-}
-.coworkingAside {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-.coworkingAside ul {
+.driverAvatar {
   display: grid;
-  gap: 0.65rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.coworkingAside li {
-  padding-bottom: 0.65rem;
-  border-bottom: 1px solid var(--vtc-line);
-  color: rgba(255, 255, 255, 0.68);
-}
-.coworkingLink {
-  display: inline-flex;
-  width: 100%;
-  min-height: 6.25rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.85rem;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 1.2rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
-  color: #fff;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease;
-}
-.coworkingLink:hover,
-.coworkingLink:focus-visible {
-  border-color: rgba(212, 191, 99, 0.48);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(212, 191, 99, 0.07));
-  transform: translateY(-2px);
-}
-.coworkingLink > div {
-  display: grid;
-  min-width: 0;
-  gap: 0.35rem;
-}
-.coworkingLink small {
-  color: rgba(255, 255, 255, 0.48);
-  font-size: 0.62rem;
-  line-height: 1.35;
-}
-.coworkingLink strong {
-  color: #fff;
-  font-size: 0.82rem;
-  line-height: 1.25;
-}
-.coworkingLinkIcon,
-.coworkingLinkArrow {
-  display: grid;
-  flex: 0 0 auto;
+  width: 5.2rem;
+  height: 5.2rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid rgba(212, 191, 99, 0.52);
+  border-radius: 50%;
+  background: rgba(212, 191, 99, 0.12);
+  color: var(--vtc-gold);
+  font-family: var(--font-serif), serif;
+  font-size: 2.4rem;
   place-items: center;
 }
-.coworkingLinkIcon {
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 0.8rem;
-  background: rgba(212, 191, 99, 0.13);
+.driverProfileHero h2 {
+  margin: 0.2rem 0 0;
+  color: #fff;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(2.3rem, 4vw, 3.7rem);
+  font-weight: 400;
+}
+.driverReference {
+  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.driverBio {
+  max-width: 34rem;
+  margin: 1.25rem 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(0.8rem, 1.2vw, 0.98rem);
+  line-height: 1.65;
+}
+.driverVcardQr {
+  display: inline-flex;
+  width: min(100%, 27rem);
+  margin-top: auto;
+  align-items: center;
+  gap: 1.15rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(212, 191, 99, 0.38);
+  border-radius: 1rem;
+  background: rgba(212, 191, 99, 0.1);
+  color: #fff;
+}
+.driverQrCode {
+  display: grid;
+  flex: 0 0 auto;
+  padding: 0.35rem;
+  border-radius: 0.65rem;
+  background: #fff;
+  place-items: center;
+}
+.driverQrCode svg {
+  display: block;
+  width: clamp(6.4rem, 9vw, 8.25rem);
+  height: auto;
+}
+.driverVcardQr > span {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 0.45rem;
+}
+.driverVcardQr strong {
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+.driverVcardQr small {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+.driverProfileDetails {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.driverDetailCard {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  border: 1px solid var(--vtc-line);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+.driverDetailHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.driverDetailHeading svg {
+  width: 1.2rem;
   color: var(--vtc-gold);
 }
-.coworkingLinkIcon svg {
-  width: 1.25rem;
+.driverDetailHeading h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(0.82rem, 1.3vw, 1rem);
+  font-weight: 600;
 }
-.coworkingLinkArrow {
-  width: 2rem;
-  height: 2rem;
+.driverTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.driverTags span {
+  padding: 0.45rem 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
   color: rgba(255, 255, 255, 0.72);
-}
-.coworkingLinkArrow svg {
-  width: 0.95rem;
+  font-size: 0.7rem;
 }
 .externalModalBackdrop {
   position: fixed;
@@ -2654,7 +2696,7 @@
   .entertainmentBody {
     padding-block-start: 0.9rem;
   }
-  .coworkingBody {
+  .driverProfileBody {
     padding-block-start: 0.9rem;
   }
   .altitudePanel {
@@ -2681,7 +2723,7 @@
   .safetyCard p {
     font-size: 0.8rem;
   }
-  .coworkingVisual {
+  .driverProfileHero {
     min-height: 20rem;
   }
 }
@@ -2773,7 +2815,7 @@
   .infoGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .coworkingBody {
+  .driverProfileBody {
     grid-template-columns: minmax(0, 1.25fr) minmax(14rem, 0.75fr);
   }
 }
@@ -2798,10 +2840,10 @@
   .menuCard:last-child {
     grid-column: 1 / -1;
   }
-  .coworkingBody {
+  .driverProfileBody {
     grid-template-columns: 1fr;
   }
-  .coworkingVisual {
+  .driverProfileHero {
     min-height: 24rem;
   }
 }

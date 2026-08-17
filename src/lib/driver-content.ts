@@ -14,14 +14,39 @@ export type DriverFavorite = {
 };
 
 export type DriverContent = {
-  driver: { id: string; displayName: string };
+  driver: {
+    id: number;
+    displayName: string;
+    firstName: string;
+    bio: string;
+    otherActivities: string[];
+    languages: string[];
+    interests: string[];
+    phone: string | null;
+    email: string | null;
+    website: string | null;
+    vcard: string;
+  };
   services: DriverService[];
   favorites: DriverFavorite[];
   source: "database" | "demo";
 };
 
 export const DEMO_DRIVER_CONTENT: DriverContent = {
-  driver: { id: "demo-driver", displayName: "Votre chauffeur Welcome" },
+  driver: {
+    id: 1,
+    displayName: "Votre chauffeur Welcome",
+    firstName: "Alexandre",
+    bio: "Chauffeur professionnel attentif, je veille à rendre chaque trajet agréable et serein.",
+    otherActivities: ["Entrepreneur", "Ambassadeur local"],
+    languages: ["Français", "Anglais", "Allemand"],
+    interests: ["Voyages", "Gastronomie", "Patrimoine régional"],
+    phone: "+33 6 22 80 55 36",
+    email: "contact@welcome-coworking.com",
+    website: "https://www.welcome-coworking.com",
+    vcard:
+      "BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Votre chauffeur Welcome\r\nN:;Alexandre;;;\r\nTEL;TYPE=CELL:+33 6 22 80 55 36\r\nEMAIL;TYPE=INTERNET:contact@welcome-coworking.com\r\nURL:https://www.welcome-coworking.com\r\nNOTE:Chauffeur professionnel attentif, je veille à rendre chaque trajet agréable et serein.\r\nEND:VCARD",
+  },
   services: [
     {
       id: "demo-service-water",
