@@ -2,6 +2,8 @@
 
 import {
   BadgeEuro,
+  BriefcaseBusiness,
+  Building2,
   CalendarDays,
   CarFront,
   Cigarette,
@@ -15,6 +17,7 @@ import {
   PhoneCall,
   PlugZap,
   Ruler,
+  Star,
   Trophy,
   Utensils,
   Wifi,
@@ -29,7 +32,8 @@ import type { DriverFavorite } from "@/lib/driver-content";
 
 import styles from "./vtc.module.css";
 
-type RegionTab = "welcome" | "visit" | "food" | "activities" | "agenda" | "favorites" | "practical";
+type RegionTab =
+  "welcome" | "visit" | "food" | "activities" | "agenda" | "business" | "favorites" | "practical";
 type EventCard = {
   id: string;
   title: string;
@@ -49,6 +53,15 @@ type EventsResponse = {
   categories?: string[];
   status?: "ready" | "not-configured" | "upstream-error" | "invalid-request";
   scope?: "department" | "region";
+};
+type CoworkingSpace = {
+  id: string;
+  name: string;
+  address: string | null;
+  distanceKm: number;
+  website: string | null;
+  featured: boolean;
+  rating: number | null;
 };
 
 const EXCHANGE_CURRENCIES = ["USD", "GBP", "CHF", "JPY", "CAD", "AUD", "CNY", "KRW"] as const;
@@ -110,9 +123,80 @@ const TABS = [
   { id: "food", label: "Gastronomie", icon: Utensils },
   { id: "activities", label: "Activités", icon: Trophy },
   { id: "agenda", label: "Agenda", icon: CalendarDays },
+  { id: "business", label: "Business", icon: BriefcaseBusiness },
   { id: "favorites", label: "Coups de cœur du chauffeur", icon: Heart },
   { id: "practical", label: "Pratique", icon: Info },
 ] as const;
+
+function BusinessPanel({ city, lat, lon }: { city: string; lat: number; lon: number }) {
+  const [spaces, setSpaces] = useState<CoworkingSpace[]>([]);
+  const [nearestCity, setNearestCity] = useState(city);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ city, lat: String(lat), lon: String(lon) });
+    fetch(`/api/vtc/coworking?${params}`, { signal: controller.signal })
+      .then((response) => response.json())
+      .then((data: { city?: string; spaces?: CoworkingSpace[] }) => {
+        setNearestCity(data.city || city);
+        setSpaces(data.spaces ?? []);
+      })
+      .catch((error: unknown) => {
+        if ((error as Error).name !== "AbortError") setSpaces([]);
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
+  }, [city, lat, lon]);
+
+  return (
+    <div className={styles.businessPanel}>
+      <div className={styles.regionPanelHeading}>
+        <div>
+          <p>Travailler autrement</p>
+          <h2>Espaces de coworking</h2>
+        </div>
+        <span>Sélection autour de la grande ville la plus proche : {nearestCity}</span>
+      </div>
+      {loading ? (
+        <div className={styles.eventSkeletons}>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <span key={index} />
+          ))}
+        </div>
+      ) : spaces.length ? (
+        <div className={styles.coworkingGrid}>
+          {spaces.map((space) => (
+            <article key={space.id} data-featured={space.featured}>
+              <Building2 aria-hidden="true" />
+              {space.featured && <small>Adresse partenaire à Strasbourg</small>}
+              <strong>{space.name}</strong>
+              {space.address && <p>{space.address}</p>}
+              <span>
+                <MapPin aria-hidden="true" /> {space.distanceKm} km
+              </span>
+              {space.rating !== null && (
+                <span className={styles.coworkingRating}>
+                  <Star aria-hidden="true" /> {space.rating.toLocaleString("fr-FR")}/5
+                </span>
+              )}
+              {space.featured && space.website && (
+                <a href={space.website} data-modal="true" aria-label={`Découvrir ${space.name}`}>
+                  Découvrir l’espace
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.regionEmpty}>
+          Aucun espace de coworking référencé autour de {nearestCity}.
+        </div>
+      )}
+      <small className={styles.dataCredit}>Données géographiques : OpenStreetMap</small>
+    </div>
+  );
+}
 
 function RegionalCards({ items, fallback }: { items: RegionalCard[]; fallback: StaticImageData }) {
   return (
@@ -447,6 +531,9 @@ export function RegionScreen({
             lat={location.lat}
             lon={location.lon}
           />
+        )}
+        {activeTab === "business" && (
+          <BusinessPanel city={location.city} lat={location.lat} lon={location.lon} />
         )}
         {activeTab === "practical" && (
           <div className={styles.practicalPanel}>

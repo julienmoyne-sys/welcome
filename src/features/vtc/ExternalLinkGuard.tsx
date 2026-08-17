@@ -28,7 +28,9 @@ export function ExternalLinkGuard() {
       if (!link) return;
 
       const url = new URL(link.href, window.location.href);
-      if (url.origin === window.location.origin || !/^https?:$/.test(url.protocol)) return;
+      const forceModal = link.dataset.modal === "true";
+      if ((!forceModal && url.origin === window.location.origin) || !/^https?:$/.test(url.protocol))
+        return;
 
       event.preventDefault();
       setPage({ url: embeddableUrl(url), title: link.textContent?.trim() || url.hostname });

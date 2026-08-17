@@ -2406,6 +2406,97 @@
   min-height: 0;
   flex-direction: column;
 }
+.businessPanel {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+}
+.coworkingGrid {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: minmax(11.5rem, 1fr);
+  gap: 0.75rem;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+  scrollbar-color: rgba(198, 164, 102, 0.65) rgba(255, 255, 255, 0.04);
+  scrollbar-width: thin;
+}
+.coworkingGrid article {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 1rem;
+  background: var(--vtc-surface);
+}
+.coworkingGrid article[data-featured="true"] {
+  border-color: rgba(212, 191, 99, 0.62);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(212, 191, 99, 0.2), transparent 48%),
+    linear-gradient(145deg, rgba(32, 42, 37, 0.98), rgba(13, 17, 15, 0.98));
+  box-shadow: inset 0 0 0 1px rgba(212, 191, 99, 0.08);
+}
+.coworkingGrid > article > svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  margin-bottom: auto;
+  color: var(--vtc-gold);
+  stroke-width: 1.4;
+}
+.coworkingGrid small {
+  margin-top: 0.65rem;
+  color: var(--vtc-gold);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.coworkingGrid strong {
+  margin-top: 0.35rem;
+  font-size: clamp(0.9rem, 1.3vw, 1.08rem);
+}
+.coworkingGrid p {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+.coworkingGrid article > span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.55rem;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.65rem;
+}
+.coworkingGrid article > span svg {
+  width: 0.75rem;
+}
+.coworkingGrid article > .coworkingRating {
+  color: var(--vtc-gold);
+  font-weight: 700;
+}
+.coworkingRating svg {
+  fill: currentColor;
+}
+.coworkingGrid a {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: var(--vtc-gold);
+  color: #111512;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.coworkingGrid a:hover,
+.coworkingGrid a:focus-visible {
+  filter: brightness(1.08);
+}
 .regionPanelHeading {
   display: flex;
   align-items: flex-end;
@@ -2759,7 +2850,8 @@
   .eventGrid {
     grid-template-rows: none;
   }
-  .practicalGrid {
+  .practicalGrid,
+  .coworkingGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .cockpitBody {
