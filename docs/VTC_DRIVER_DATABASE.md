@@ -20,7 +20,7 @@ vercel env pull .env.local --yes
 
 Ouvrir l’éditeur SQL de Neon et exécuter intégralement `database/vtc-driver-content.sql`. Le
 script crée les tables, les index, le chauffeur `demo` et un premier service d’exemple. Il est
-réexécutable sans dupliquer cet exemple.
+réexécutable sans dupliquer les exemples, dont le coup de cœur « La Corde à Linge ».
 
 ## 3. Choisir le chauffeur affiché
 

@@ -408,6 +408,7 @@ export function RegionScreen({
                 <article key={favorite.id}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <div>
+                    <small className={styles.driverFavoriteLabel}>Adresse recommandée</small>
                     <strong>{favorite.title}</strong>
                     <p>{favorite.description}</p>
                     {favorite.address && (

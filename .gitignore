@@ -37,3 +37,6 @@ next-env.d.ts
 .env.developement
 src/lib/contact.server.ts
 .env.development
+.env.local
+
+.env.local
