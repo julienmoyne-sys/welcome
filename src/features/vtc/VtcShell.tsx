@@ -95,24 +95,75 @@ type LiveDashboardData = {
     sunrise: string | null;
     sunset: string | null;
   } | null;
-  featuredImage: {
-    url: string;
-    width: number;
-    height: number;
-    title: string;
-    author: string;
-    license: string;
-    licenseUrl: string | null;
-    sourceUrl: string;
-  } | null;
+  sportsLeagues: Array<{
+    id: string;
+    name: string;
+    standings: Array<{
+      position: number;
+      team: string;
+      played: number;
+      goalDifference: number;
+      points: number;
+    }>;
+    results: SportsMatch[];
+    upcoming: SportsMatch[];
+  }>;
   headlines: Array<{
     title: string;
     link: string;
     publishedAt: string;
     source: string;
-    tone: "news" | "light";
+    tone: "news" | "sport" | "light";
   }>;
 };
+
+type SportsMatch = {
+  home: string;
+  away: string;
+  homeScore: string | null;
+  awayScore: string | null;
+  playedAt: string | null;
+  link: string;
+};
+
+type SportsView = "results" | "standings" | "upcoming";
+
+const LIGUE_1_CLUB_LOCATIONS: Record<string, [number, number]> = {
+  angers: [47.4736, -0.5542],
+  auxerre: [47.7982, 3.5738],
+  brest: [48.3904, -4.4861],
+  le_havre: [49.4944, 0.1079],
+  lens: [50.433, 2.8279],
+  lille: [50.6292, 3.0573],
+  lorient: [47.7483, -3.3702],
+  lyon: [45.764, 4.8357],
+  marseille: [43.2965, 5.3698],
+  metz: [49.1193, 6.1757],
+  monaco: [43.7384, 7.4246],
+  nantes: [47.2184, -1.5536],
+  nice: [43.7102, 7.262],
+  paris: [48.8566, 2.3522],
+  rennes: [48.1173, -1.6778],
+  strasbourg: [48.5734, 7.7521],
+  toulouse: [43.6047, 1.4442],
+};
+
+function normalizeClubName(name: string) {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function clubLocation(name: string) {
+  const normalized = normalizeClubName(name);
+  return Object.entries(LIGUE_1_CLUB_LOCATIONS).find(([key]) => normalized.includes(key))?.[1];
+}
+
+function distanceSquared(lat: number, lon: number, target: [number, number]) {
+  const lonScale = Math.cos((lat * Math.PI) / 180);
+  return (lat - target[0]) ** 2 + ((lon - target[1]) * lonScale) ** 2;
+}
 
 function WeatherGlyph({ code }: { code: number | null }) {
   if (code === null) return <Thermometer aria-hidden="true" />;
@@ -526,6 +577,8 @@ function LiveScreen({ location }: { location: ReturnType<typeof useVtcLocation>[
   const [data, setData] = useState<LiveDashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [sportsLeague, setSportsLeague] = useState("ligue-1");
+  const [sportsView, setSportsView] = useState<SportsView>("standings");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -546,160 +599,241 @@ function LiveScreen({ location }: { location: ReturnType<typeof useVtcLocation>[
   }, []);
 
   const current = data?.weather;
+  const selectedLeague =
+    data?.sportsLeagues.find((league) => league.id === sportsLeague) ?? data?.sportsLeagues[0];
+  const nearestLigue1Club =
+    selectedLeague?.id === "ligue-1"
+      ? selectedLeague.standings.reduce<{ team: string; distance: number } | null>(
+          (nearest, row) => {
+            const club = clubLocation(row.team);
+            if (!club) return nearest;
+            const distance = distanceSquared(location.lat, location.lon, club);
+            return !nearest || distance < nearest.distance ? { team: row.team, distance } : nearest;
+          },
+          null,
+        )?.team
+      : null;
   const news = data?.headlines.filter((item) => item.tone === "news") ?? [];
+  const sportNews = data?.headlines.filter((item) => item.tone === "sport") ?? [];
   const light = data?.headlines.filter((item) => item.tone === "light") ?? [];
-  const headlines = Array.from({ length: Math.max(news.length, light.length) }).flatMap(
-    (_, index) =>
-      [news[index], light[index]].filter((item): item is LiveDashboardData["headlines"][number] =>
-        Boolean(item),
-      ),
+  const headlines = Array.from({
+    length: Math.max(news.length, sportNews.length, light.length),
+  }).flatMap((_, index) =>
+    [news[index], sportNews[index], light[index]].filter(
+      (item): item is LiveDashboardData["headlines"][number] => Boolean(item),
+    ),
   );
 
   return (
     <div className={`${styles.detailBody} ${styles.liveDashboard}`}>
-      <header className={styles.liveDashboardHeader}>
-        <h2>Météo</h2>
-        <div>
-          <h2>Actualités</h2>
-          <button type="button" onClick={() => setRefreshKey((value) => value + 1)}>
-            <RefreshCw aria-hidden="true" /> Actualiser
-          </button>
-        </div>
-      </header>
+      <section className={styles.weatherDashboard} aria-label="Météo actuelle">
+        {loading && !current ? (
+          <div className={styles.liveLoading}>Actualisation de la météo…</div>
+        ) : current ? (
+          <>
+            <div className={styles.weatherMain}>
+              <WeatherGlyph code={current.weather_code} />
+              <div>
+                <strong>{Math.round(current.temperature_2m)}°</strong>
+                <span>{weatherLabel(current.weather_code)}</span>
+                <small>Ressenti {Math.round(current.apparent_temperature)} °C</small>
+              </div>
+              <strong className={styles.weatherLocation}>{location.city}</strong>
+            </div>
+            <div className={styles.weatherMetrics}>
+              {[
+                { icon: Droplets, label: "Humidité", value: `${current.relative_humidity_2m} %` },
+                { icon: Wind, label: "Vent", value: `${Math.round(current.wind_speed_10m)} km/h` },
+                {
+                  icon: Gauge,
+                  label: "Pression",
+                  value: `${Math.round(current.surface_pressure)} hPa`,
+                },
+                { icon: CloudRain, label: "Précipitations", value: `${current.precipitation} mm` },
+                {
+                  icon: Eye,
+                  label: "Visibilité",
+                  value: `${Math.round(current.visibility / 1000)} km`,
+                },
+                {
+                  icon: Sun,
+                  label: "Indice UV",
+                  value: current.uv_index == null ? "—" : current.uv_index.toFixed(1),
+                },
+              ].map(({ icon: Icon, label, value }) => (
+                <article key={label}>
+                  <Icon aria-hidden="true" />
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </article>
+              ))}
+            </div>
+            <div className={styles.weatherFooter}>
+              <span>
+                <Sunrise aria-hidden="true" /> Lever {shortTime(current.sunrise)}
+              </span>
+              <span>
+                <Sunset aria-hidden="true" /> Coucher {shortTime(current.sunset)}
+              </span>
+              <span>
+                Air {current.european_aqi == null ? "—" : airQualityLabel(current.european_aqi)}
+              </span>
+            </div>
+          </>
+        ) : (
+          <div className={styles.liveLoading}>Météo temporairement indisponible.</div>
+        )}
+      </section>
 
       <div className={styles.liveDashboardGrid}>
         <div className={styles.liveSideColumn}>
-          <section className={styles.weatherDashboard} aria-label="Météo actuelle">
-            {loading && !current ? (
-              <div className={styles.liveLoading}>Actualisation de la météo…</div>
-            ) : current ? (
-              <>
-                <div className={styles.weatherMain}>
-                  <WeatherGlyph code={current.weather_code} />
-                  <div>
-                    <strong>{Math.round(current.temperature_2m)}°</strong>
-                    <span>{weatherLabel(current.weather_code)}</span>
-                    <small>Ressenti {Math.round(current.apparent_temperature)} °C</small>
-                  </div>
-                  <strong className={styles.weatherLocation}>{location.city}</strong>
-                </div>
-                <div className={styles.weatherMetrics}>
-                  {[
-                    {
-                      icon: Droplets,
-                      label: "Humidité",
-                      value: `${current.relative_humidity_2m} %`,
-                    },
-                    {
-                      icon: Wind,
-                      label: "Vent",
-                      value: `${Math.round(current.wind_speed_10m)} km/h`,
-                    },
-                    {
-                      icon: Gauge,
-                      label: "Pression",
-                      value: `${Math.round(current.surface_pressure)} hPa`,
-                    },
-                    {
-                      icon: CloudRain,
-                      label: "Précipitations",
-                      value: `${current.precipitation} mm`,
-                    },
-                    {
-                      icon: Eye,
-                      label: "Visibilité",
-                      value: `${Math.round(current.visibility / 1000)} km`,
-                    },
-                    {
-                      icon: Sun,
-                      label: "Indice UV",
-                      value: current.uv_index == null ? "—" : current.uv_index.toFixed(1),
-                    },
-                  ].map(({ icon: Icon, label, value }) => (
-                    <article key={label}>
-                      <Icon aria-hidden="true" />
-                      <span>{label}</span>
-                      <strong>{value}</strong>
-                    </article>
-                  ))}
-                </div>
-                <div className={styles.weatherFooter}>
-                  <span>
-                    <Sunrise aria-hidden="true" /> Lever {shortTime(current.sunrise)}
-                  </span>
-                  <span>
-                    <Sunset aria-hidden="true" /> Coucher {shortTime(current.sunset)}
-                  </span>
-                  <span>
-                    Air {current.european_aqi == null ? "—" : airQualityLabel(current.european_aqi)}
-                  </span>
-                </div>
-              </>
-            ) : (
-              <div className={styles.liveLoading}>Météo temporairement indisponible.</div>
-            )}
-          </section>
-
-          {data?.featuredImage ? (
-            <article className={styles.pictureOfDay}>
-              <Image
-                src={data.featuredImage.url}
-                alt={data.featuredImage.title}
-                fill
-                sizes="(max-width: 900px) 100vw, 42vw"
-              />
-              <div className={styles.pictureOfDayShade} />
-              <div className={styles.pictureOfDayCopy}>
-                <span>Image du jour</span>
-                <strong>{data.featuredImage.title}</strong>
-                <small>
-                  {data.featuredImage.author} · {data.featuredImage.license}
-                </small>
-                <a href={data.featuredImage.sourceUrl} target="_blank" rel="noreferrer">
-                  Voir sur Wikimedia Commons
-                </a>
+          <div className={styles.sportsBlock}>
+            <h2>Football</h2>
+            <section className={styles.sportsDashboard} aria-label="Football européen">
+              <div className={styles.sportsLeagueTabs} role="tablist" aria-label="Championnat">
+                {data?.sportsLeagues.map((league) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedLeague?.id === league.id}
+                    onClick={() => setSportsLeague(league.id)}
+                    key={league.id}
+                  >
+                    {league.name}
+                  </button>
+                ))}
               </div>
-            </article>
-          ) : null}
+              <div className={styles.sportsViewTabs} role="tablist" aria-label="Données sportives">
+                {(
+                  [
+                    ["results", "Résultats"],
+                    ["standings", "Classement"],
+                    ["upcoming", "À venir"],
+                  ] as const
+                ).map(([view, label]) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={sportsView === view}
+                    onClick={() => setSportsView(view)}
+                    key={view}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <div className={styles.sportsContent}>
+                {sportsView === "standings" && selectedLeague?.standings.length ? (
+                  <div
+                    className={styles.sportsStandings}
+                    role="table"
+                    aria-label={`Classement ${selectedLeague.name}`}
+                  >
+                    <div role="row" className={styles.sportsTableHead}>
+                      <span>#</span>
+                      <span>Équipe</span>
+                      <span>J</span>
+                      <span>Diff.</span>
+                      <span>Pts</span>
+                    </div>
+                    {selectedLeague.standings.map((row) => (
+                      <div
+                        role="row"
+                        key={row.team}
+                        data-nearest={row.team === nearestLigue1Club || undefined}
+                      >
+                        <span>{row.position}</span>
+                        <strong>{row.team}</strong>
+                        <span>{row.played}</span>
+                        <span>
+                          {row.goalDifference > 0 ? `+${row.goalDifference}` : row.goalDifference}
+                        </span>
+                        <strong>{row.points}</strong>
+                      </div>
+                    ))}
+                  </div>
+                ) : sportsView !== "standings" && selectedLeague?.[sportsView].length ? (
+                  selectedLeague[sportsView].map((match) => (
+                    <a
+                      href={match.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      key={`${match.home}-${match.away}-${match.playedAt}`}
+                    >
+                      <small>
+                        {match.playedAt
+                          ? new Intl.DateTimeFormat("fr-FR", {
+                              day: "2-digit",
+                              month: "short",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            }).format(new Date(match.playedAt))
+                          : "Date à confirmer"}
+                      </small>
+                      <span>{match.home}</span>
+                      <strong>{match.homeScore ?? "—"}</strong>
+                      <span>{match.away}</span>
+                      <strong>{match.awayScore ?? "—"}</strong>
+                    </a>
+                  ))
+                ) : (
+                  <div className={styles.sportsEmpty}>
+                    Aucune donnée disponible dans cette période.
+                  </div>
+                )}
+              </div>
+              <a
+                className={styles.sportsCredit}
+                href="https://sportscore.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Données fournies par SportScore
+              </a>
+            </section>
+          </div>
         </div>
 
-        <section className={styles.newsDashboard} aria-label="Fil d’actualité">
-          <div className={styles.newsHeading}>
-            <div className={styles.newsHeadingTitle}>
-              <div>
-                <Newspaper aria-hidden="true" />
-                <span>Le fil du moment</span>
+        <div className={styles.newsBlock}>
+          <h2>Actualités</h2>
+          <section className={styles.newsDashboard} aria-label="Fil d’actualité">
+            <div className={styles.newsHeading}>
+              <div className={styles.newsHeadingTitle}>
+                <div>
+                  <Newspaper aria-hidden="true" />
+                  <span>Le fil du moment</span>
+                </div>
               </div>
+              <small>France 24 + sport + insolite</small>
             </div>
-            <small>France 24 + une pause insolite</small>
-          </div>
-          <div className={styles.newsFeed}>
-            {headlines.length ? (
-              headlines.map((item) => (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  key={`${item.source}-${item.title}`}
-                  data-tone={item.tone}
-                >
-                  <span>{item.source}</span>
-                  <strong>{item.title}</strong>
-                  <small>
-                    {item.publishedAt
-                      ? new Intl.DateTimeFormat("fr-FR", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        }).format(new Date(item.publishedAt))
-                      : "En direct"}
-                  </small>
-                </a>
-              ))
-            ) : (
-              <div className={styles.liveLoading}>Actualités temporairement indisponibles.</div>
-            )}
-          </div>
-        </section>
+            <div className={styles.newsFeed}>
+              {headlines.length ? (
+                headlines.map((item) => (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={`${item.source}-${item.title}`}
+                    data-tone={item.tone}
+                  >
+                    <span>{item.source}</span>
+                    <strong>{item.title}</strong>
+                    <small>
+                      {item.publishedAt
+                        ? new Intl.DateTimeFormat("fr-FR", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }).format(new Date(item.publishedAt))
+                        : "En direct"}
+                    </small>
+                  </a>
+                ))
+              ) : (
+                <div className={styles.liveLoading}>Actualités temporairement indisponibles.</div>
+              )}
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );
