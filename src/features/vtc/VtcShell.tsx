@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { QRCodeSVG } from "qrcode.react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 
 import driverCardImage from "@/assets/vtc-card-driver.png";
 import entertainmentCardImage from "@/assets/vtc-card-entertainment.png";
@@ -59,6 +59,7 @@ import { DEMO_DRIVER_CONTENT, type DriverContent } from "@/lib/driver-content";
 export const INACTIVITY_TIMEOUT_MS = process.env.NODE_ENV === "test" ? 250 : 2 * 60 * 1_000;
 const SLEEP_STATE_KEY = "welcome-vtc-sleeping";
 const LANGUAGE_STORAGE_KEY = "welcome-vtc-language";
+const BRIGHTNESS_STORAGE_KEY = "welcome-vtc-brightness";
 type VtcLanguage = "FR" | "DE" | "EN" | "ES";
 const VTC_CARD_IMAGES = {
   journey: journeyCardImage,
@@ -966,6 +967,7 @@ export function VtcShell() {
   const [time, setTime] = useState("--:--");
   const [isSleeping, setIsSleeping] = useState(false);
   const [language, setLanguage] = useState<VtcLanguage>("FR");
+  const [brightness, setBrightness] = useState(100);
   const { location, isLocating } = useVtcLocation();
   const [driverContent, setDriverContent] = useState<DriverContent>(DEMO_DRIVER_CONTENT);
   const inactivityTimer = useRef<number | null>(null);
@@ -999,6 +1001,20 @@ export function VtcShell() {
     if (!savedLanguage || !["FR", "DE", "EN", "ES"].includes(savedLanguage)) return;
     window.queueMicrotask(() => setLanguage(savedLanguage as VtcLanguage));
   }, []);
+
+  useEffect(() => {
+    const savedBrightness = Number(window.localStorage.getItem(BRIGHTNESS_STORAGE_KEY));
+    if (!Number.isFinite(savedBrightness) || savedBrightness < 40 || savedBrightness > 120) return;
+    window.queueMicrotask(() => setBrightness(savedBrightness));
+  }, []);
+
+  const changeBrightness = (delta: number) => {
+    setBrightness((current) => {
+      const next = Math.min(120, Math.max(40, current + delta));
+      window.localStorage.setItem(BRIGHTNESS_STORAGE_KEY, String(next));
+      return next;
+    });
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -1063,7 +1079,10 @@ export function VtcShell() {
       : regionCardImage);
 
   return (
-    <main className={styles.shell}>
+    <main
+      className={styles.shell}
+      style={{ "--vtc-brightness": brightness / 100 } as CSSProperties}
+    >
       <div className={styles.ambientLight} aria-hidden="true" />
       {activeSection === null ? (
         <VtcHome time={time} onOpen={setActiveSection} tourismImage={tourismImage} />
@@ -1097,6 +1116,25 @@ export function VtcShell() {
       )}
       {!isSleeping && (
         <div className={styles.utilityControls}>
+          <div className={styles.brightnessControls} aria-label="Luminosité de l’interface">
+            <button
+              type="button"
+              onClick={() => changeBrightness(-20)}
+              aria-label="Diminuer la luminosité"
+              disabled={brightness === 40}
+            >
+              −
+            </button>
+            <span aria-live="polite">{brightness} %</span>
+            <button
+              type="button"
+              onClick={() => changeBrightness(20)}
+              aria-label="Augmenter la luminosité"
+              disabled={brightness === 120}
+            >
+              +
+            </button>
+          </div>
           <label className={styles.languageSelect}>
             <span className={styles.srOnly}>Langue</span>
             <select

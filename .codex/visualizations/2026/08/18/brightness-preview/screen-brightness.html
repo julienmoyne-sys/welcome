@@ -1,0 +1,48 @@
+<div id="vtc-brightness-preview">
+  <style>
+    #vtc-brightness-preview { width: 100%; font-family: Inter, system-ui, sans-serif; }
+    #vtc-brightness-preview .vtc-screen { position: relative; overflow: hidden; min-height: 380px; padding: 26px; border-radius: 22px; background: #090a0a; color: #f7f6f2; transition: filter 180ms ease; }
+    #vtc-brightness-preview .vtc-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 85% 10%, rgba(212,191,99,.16), transparent 34%), radial-gradient(circle at 5% 100%, rgba(111,132,113,.12), transparent 32%); }
+    #vtc-brightness-preview .vtc-top { position: relative; display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.11); }
+    #vtc-brightness-preview .vtc-brand { color: #d4bf63; font-weight: 500; letter-spacing: .14em; }
+    #vtc-brightness-preview .vtc-controls { display: flex; align-items: center; gap: 6px; padding: 5px; border: 1px solid rgba(255,255,255,.11); border-radius: 999px; background: rgba(255,255,255,.055); }
+    #vtc-brightness-preview .vtc-controls .btn { min-width: 38px; }
+    #vtc-brightness-preview .vtc-value { min-width: 54px; color: rgba(255,255,255,.65); text-align: center; font-size: 12px; }
+    #vtc-brightness-preview .vtc-content { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; padding-top: 22px; }
+    #vtc-brightness-preview .vtc-panel { min-height: 250px; padding: 20px; border: 1px solid rgba(255,255,255,.11); border-radius: 18px; background: rgba(255,255,255,.055); }
+    #vtc-brightness-preview .vtc-panel h2 { margin: 0 0 18px; font-weight: 400; }
+    #vtc-brightness-preview .vtc-news { display: grid; gap: 12px; }
+    #vtc-brightness-preview .vtc-line { height: 10px; border-radius: 999px; background: rgba(255,255,255,.13); }
+    #vtc-brightness-preview .vtc-line:nth-child(2) { width: 82%; }
+    #vtc-brightness-preview .vtc-line:nth-child(3) { width: 67%; }
+    #vtc-brightness-preview .vtc-weather { display: grid; place-items: center; color: #d4bf63; }
+    #vtc-brightness-preview .vtc-temp { font-size: 62px; font-weight: 400; }
+    @media (max-width: 560px) { #vtc-brightness-preview .vtc-content { grid-template-columns: 1fr; } #vtc-brightness-preview .vtc-screen { padding: 16px; } }
+  </style>
+  <div class="vtc-screen" aria-label="Aperçu du réglage visuel de luminosité">
+    <div class="vtc-glow"></div>
+    <div class="vtc-top">
+      <span class="vtc-brand">WELCOME VTC</span>
+      <div class="vtc-controls" aria-label="Luminosité de l'interface">
+        <button class="btn btn-ghost" type="button" data-action="down" aria-label="Diminuer la luminosité">−</button>
+        <span class="vtc-value" aria-live="polite">100 %</span>
+        <button class="btn btn-ghost" type="button" data-action="up" aria-label="Augmenter la luminosité">+</button>
+      </div>
+    </div>
+    <div class="vtc-content">
+      <section class="vtc-panel"><h2>Actualités</h2><div class="vtc-news"><div class="vtc-line"></div><div class="vtc-line"></div><div class="vtc-line"></div></div></section>
+      <section class="vtc-panel vtc-weather"><div><div class="vtc-temp">18°</div><div>Strasbourg</div></div></section>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const root = document.getElementById('vtc-brightness-preview');
+      const screen = root.querySelector('.vtc-screen');
+      const value = root.querySelector('.vtc-value');
+      let brightness = 100;
+      const render = () => { screen.style.filter = `brightness(${brightness}%)`; value.textContent = `${brightness} %`; };
+      root.querySelector('[data-action="down"]').addEventListener('click', () => { brightness = Math.max(40, brightness - 20); render(); });
+      root.querySelector('[data-action="up"]').addEventListener('click', () => { brightness = Math.min(120, brightness + 20); render(); });
+    })();
+  </script>
+</div>

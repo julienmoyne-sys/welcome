@@ -31,6 +31,8 @@
   max-width: 100%;
   min-width: 0;
   height: 100dvh;
+  filter: brightness(var(--vtc-brightness, 1));
+  transition: filter 180ms ease;
   padding: max(clamp(1.5rem, 3.2vh, 3.5rem), env(safe-area-inset-top))
     max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-right))
     max(clamp(1.5rem, 3vh, 3rem), env(safe-area-inset-bottom))
@@ -2152,6 +2154,49 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+}
+.brightnessControls {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 999px;
+  background: rgba(8, 9, 9, 0.72);
+  backdrop-filter: blur(10px);
+}
+.brightnessControls button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+  font: inherit;
+  font-size: 1.15rem;
+  cursor: pointer;
+  place-items: center;
+}
+.brightnessControls button:hover,
+.brightnessControls button:focus-visible {
+  background: rgba(255, 255, 255, 0.09);
+}
+.brightnessControls button:focus-visible {
+  outline: 3px solid var(--vtc-gold);
+  outline-offset: 2px;
+}
+.brightnessControls button:disabled {
+  cursor: default;
+  opacity: 0.25;
+}
+.brightnessControls span {
+  min-width: 3.1rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.68rem;
+  text-align: center;
 }
 .srOnly {
   position: absolute;
