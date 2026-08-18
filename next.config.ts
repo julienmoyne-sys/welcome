@@ -48,13 +48,6 @@ const nextConfig: NextConfig = {
      * alors que le gain de poids est net.
      */
     qualities: [60, 75],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
-        pathname: "/wikipedia/commons/**",
-      },
-    ],
   },
 
   async redirects() {

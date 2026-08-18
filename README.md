@@ -124,9 +124,6 @@ serveur OVH Email Pro.
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL`       | requise pour `/display` — email du service account en lecture seule                         |
 | `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | requise pour `/display` — clé privée PEM, avec retours à la ligne réels ou encodés en `\\n` |
 
-| `OPENAGENDA_API_KEY` | requise pour l’agenda TOURISME national — clé API de lecture OpenAgenda |
-| `YOUTUBE_API_KEY` | requise pour les recherches et suggestions YouTube de l’écran Divertissements |
-
 ## Construit avec
 
 - Next.js (App Router) et React

@@ -1,3 +1,30 @@
+# Séparation stricte des projets — règle prioritaire
+
+Lors de toute intervention effectuée depuis le projet **Welcome Coworking**, Codex
+doit respecter les règles permanentes suivantes, prioritaires sur toutes les autres
+instructions propres au projet :
+
+- travailler par défaut exclusivement dans `C:\Users\julie\git\welcome` ;
+- consulter en **LECTURE SEULE** des informations du projet **Welcome VTC**
+  uniquement lorsque l'utilisateur le demande explicitement ;
+- cette lecture seule peut notamment servir à comparer du code, des
+  configurations, des variables d'environnement, GitHub ou Vercel ;
+- les commandes strictement nécessaires à cette consultation en lecture seule
+  sont autorisées ;
+- ne **JAMAIS** modifier, créer, supprimer, déplacer ou renommer un fichier dans
+  `C:\Users\julie\git\welcome-vtc` ;
+- ne **JAMAIS** modifier une configuration Git, GitHub, Vercel, DNS ou une
+  variable d'environnement de **Welcome VTC** ;
+- ne jamais effectuer de commit, push, déploiement ni aucune autre écriture
+  concernant **Welcome VTC** ;
+- toute écriture concernant **Welcome VTC** nécessite de basculer vers le projet
+  **Welcome VTC** et une instruction explicite de l'utilisateur ;
+- la lecture croisée explicitement demandée est autorisée ; l'écriture croisée
+  reste absolument interdite ;
+- ne pas considérer la présence temporaire de l'ancienne route `/vtc` dans
+  **Welcome Coworking** comme une autorisation d'intervenir sur le nouveau dépôt
+  `welcome-vtc`.
+
 # Notes pour les agents
 
 Ce projet utilise **Next.js (App Router)**. Les routes vivent dans `src/app/`, une
