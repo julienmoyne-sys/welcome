@@ -66,7 +66,7 @@
   margin-bottom: clamp(0.65rem, 1.2vh, 1rem);
   overflow: hidden;
   border-radius: 0.35rem;
-  background: #000;
+  background: transparent;
 }
 .logo {
   position: absolute;
@@ -2108,10 +2108,18 @@
 }
 .homeButton {
   position: fixed;
-  z-index: 4;
+  z-index: 10;
   top: max(0.75rem, env(safe-area-inset-top));
   left: max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-left));
+  box-sizing: border-box;
+  width: 7rem;
+  height: 44px;
+  padding: 0;
+  pointer-events: auto;
   touch-action: manipulation;
+}
+.homeButton > * {
+  pointer-events: none;
 }
 .utilityControls {
   position: fixed;

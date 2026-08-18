@@ -38,7 +38,7 @@ import journeyCardImage from "@/assets/vtc-card-cockpit.png";
 import liveCardImage from "@/assets/vtc-card-news-weather.png";
 import servicesCardImage from "@/assets/vtc-card-services.png";
 import regionCardImage from "@/assets/vtc-card-strasbourg.png";
-import welcomeLogo from "@/assets/welcome-vtc-logo.png";
+import welcomeLogo from "@/assets/welcome-vtc-logo-transparent-fixed.png";
 import { DEPARTMENT_CARD_IMAGES } from "@/data/regions/department-images";
 
 import {
@@ -1004,13 +1004,13 @@ export function VtcShell() {
 
   useEffect(() => {
     const savedBrightness = Number(window.localStorage.getItem(BRIGHTNESS_STORAGE_KEY));
-    if (!Number.isFinite(savedBrightness) || savedBrightness < 40 || savedBrightness > 150) return;
+    if (!Number.isFinite(savedBrightness) || savedBrightness < 40 || savedBrightness > 160) return;
     window.queueMicrotask(() => setBrightness(savedBrightness));
   }, []);
 
   const changeBrightness = (delta: number) => {
     setBrightness((current) => {
-      const next = Math.min(150, Math.max(40, current + delta));
+      const next = Math.min(160, Math.max(40, current + delta));
       window.localStorage.setItem(BRIGHTNESS_STORAGE_KEY, String(next));
       return next;
     });
@@ -1132,7 +1132,7 @@ export function VtcShell() {
               type="button"
               onClick={() => changeBrightness(20)}
               aria-label="Augmenter la luminosité"
-              disabled={brightness === 150}
+              disabled={brightness >= 160}
             >
               +
             </button>
