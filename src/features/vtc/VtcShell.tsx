@@ -1004,13 +1004,13 @@ export function VtcShell() {
 
   useEffect(() => {
     const savedBrightness = Number(window.localStorage.getItem(BRIGHTNESS_STORAGE_KEY));
-    if (!Number.isFinite(savedBrightness) || savedBrightness < 40 || savedBrightness > 120) return;
+    if (!Number.isFinite(savedBrightness) || savedBrightness < 40 || savedBrightness > 150) return;
     window.queueMicrotask(() => setBrightness(savedBrightness));
   }, []);
 
   const changeBrightness = (delta: number) => {
     setBrightness((current) => {
-      const next = Math.min(120, Math.max(40, current + delta));
+      const next = Math.min(150, Math.max(40, current + delta));
       window.localStorage.setItem(BRIGHTNESS_STORAGE_KEY, String(next));
       return next;
     });
@@ -1104,15 +1104,17 @@ export function VtcShell() {
             )}
             {activeSection === "coworking" && <DriverScreen content={driverContent} />}
           </div>
-          <button
-            className={styles.floatingHome}
-            type="button"
-            onClick={goHome}
-            aria-label="Accueil"
-          >
-            <Home aria-hidden="true" />
-          </button>
         </section>
+      )}
+      {!isSleeping && activeSection !== null && (
+        <button
+          className={`${styles.sleepButton} ${styles.homeButton}`}
+          type="button"
+          onClick={goHome}
+        >
+          <Home aria-hidden="true" />
+          <span>Home</span>
+        </button>
       )}
       {!isSleeping && (
         <div className={styles.utilityControls}>
@@ -1130,7 +1132,7 @@ export function VtcShell() {
               type="button"
               onClick={() => changeBrightness(20)}
               aria-label="Augmenter la luminosité"
-              disabled={brightness === 120}
+              disabled={brightness === 150}
             >
               +
             </button>

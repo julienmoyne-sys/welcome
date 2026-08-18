@@ -181,7 +181,7 @@
   z-index: 1;
 }
 .menuCard:focus-visible,
-.floatingHome:focus-visible,
+.homeButton:focus-visible,
 .sleepButton:focus-visible,
 .sleepOverlay:focus-visible {
   outline: 3px solid var(--vtc-gold);
@@ -254,19 +254,6 @@
   justify-self: center;
   width: clamp(8rem, 11vw, 10rem);
   margin-bottom: 0;
-}
-.floatingHome {
-  display: inline-flex;
-  min-width: 44px;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--vtc-line);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-}
-.floatingHome svg {
-  width: 1.2rem;
 }
 .detailViewport {
   min-width: 0;
@@ -2119,32 +2106,12 @@
   border: 0;
   background: #fff;
 }
-.floatingHome {
+.homeButton {
   position: fixed;
   z-index: 4;
   top: max(0.75rem, env(safe-area-inset-top));
   left: max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-left));
-  width: 4.5rem;
-  height: 4.5rem;
-  min-width: 4.5rem;
-  min-height: 4.5rem;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  transform: translate(-0.75rem, -0.75rem);
   touch-action: manipulation;
-}
-.floatingHome::before {
-  position: absolute;
-  inset: 0.75rem;
-  border: 1px solid var(--vtc-line);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  content: "";
-}
-.floatingHome svg {
-  position: relative;
-  z-index: 1;
 }
 .utilityControls {
   position: fixed;
@@ -2873,7 +2840,7 @@
   .utilityControls {
     right: max(1.2rem, env(safe-area-inset-right));
   }
-  .floatingHome {
+  .homeButton {
     left: max(1.2rem, env(safe-area-inset-left));
   }
   .homeScreen {
