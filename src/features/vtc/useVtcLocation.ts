@@ -14,25 +14,46 @@ export function useVtcLocation() {
   const [isLocating, setIsLocating] = useState(true);
 
   useEffect(() => {
+    let active = true;
     if (!("geolocation" in navigator)) {
       window.queueMicrotask(() => setIsLocating(false));
       return;
     }
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        if (!isWithinFrenchDepartments(coords.latitude, coords.longitude)) {
-          setLocation(DEFAULT_VTC_LOCATION);
-          setIsLocating(false);
-          return;
-        }
-        void reverseGeocodeVtcLocation(coords.latitude, coords.longitude)
-          .then(setLocation)
-          .catch(() => undefined)
-          .finally(() => setIsLocating(false));
-      },
-      () => setIsLocating(false),
-      { enableHighAccuracy: true, timeout: 8_000, maximumAge: 30_000 },
-    );
+
+    const finish = () => {
+      if (active) setIsLocating(false);
+    };
+    const usePosition = ({ coords }: GeolocationPosition) => {
+      if (!active) return;
+      if (!isWithinFrenchDepartments(coords.latitude, coords.longitude)) {
+        setLocation(DEFAULT_VTC_LOCATION);
+        finish();
+        return;
+      }
+      void reverseGeocodeVtcLocation(coords.latitude, coords.longitude)
+        .then((nextLocation) => {
+          if (active) setLocation(nextLocation);
+        })
+        .catch(() => undefined)
+        .finally(finish);
+    };
+    const tryWifiLocation = () => {
+      navigator.geolocation.getCurrentPosition(usePosition, finish, {
+        enableHighAccuracy: false,
+        timeout: 20_000,
+        maximumAge: 10 * 60_000,
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(usePosition, tryWifiLocation, {
+      enableHighAccuracy: true,
+      timeout: 8_000,
+      maximumAge: 30_000,
+    });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   return { location, isLocating };

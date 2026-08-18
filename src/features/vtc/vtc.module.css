@@ -2122,9 +2122,27 @@
   z-index: 4;
   top: max(0.75rem, env(safe-area-inset-top));
   left: max(clamp(1.5rem, 4vw, 4.5rem), env(safe-area-inset-left));
-  width: 3rem;
-  height: 3rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  min-width: 4.5rem;
+  min-height: 4.5rem;
+  border: 0;
   border-radius: 50%;
+  background: transparent;
+  transform: translate(-0.75rem, -0.75rem);
+  touch-action: manipulation;
+}
+.floatingHome::before {
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px solid var(--vtc-line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  content: "";
+}
+.floatingHome svg {
+  position: relative;
+  z-index: 1;
 }
 .utilityControls {
   position: fixed;
