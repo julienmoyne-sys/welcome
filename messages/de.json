@@ -841,10 +841,12 @@
 
   "cookieBanner": {
     "title": "Cookies und Einstellungen",
-    "text": "Diese Website verwendet ausschließlich Cookies und lokalen Speicher, die für den Betrieb unbedingt erforderlich sind (Themenwahl, Anzeige der Google-Bewertungen). Es werden keine Werbetracker gesetzt.",
+    "text": "Diese Website verwendet technisch notwendige Cookies und Speicher ohne Einwilligung. Mit Ihrer Zustimmung misst Google Analytics die Reichweite, um die Website zu verbessern. Es ist kein Werbezweck von Google aktiviert.",
     "more": "Mehr erfahren",
     "manage": "Cookies verwalten",
     "accept": "Verstanden",
+    "acceptAnalytics": "Akzeptieren",
+    "refuseAnalytics": "Ablehnen",
     "close": "Cookie-Hinweis schließen"
   },
 

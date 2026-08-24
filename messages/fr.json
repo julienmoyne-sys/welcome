@@ -845,10 +845,12 @@
 
   "cookieBanner": {
     "title": "Cookies et préférences",
-    "text": "Ce site utilise uniquement des cookies et un stockage local strictement nécessaires à son fonctionnement (préférence de thème, affichage des avis Google). Aucun traceur publicitaire n'est déposé.",
+    "text": "Ce site utilise des cookies et stockages strictement nécessaires, sans consentement. Avec votre accord, Google Analytics mesure l’audience afin d’améliorer le site. Aucune finalité publicitaire Google n’est activée.",
     "more": "En savoir plus",
     "manage": "Gérer mes cookies",
     "accept": "J'ai compris",
+    "acceptAnalytics": "Accepter",
+    "refuseAnalytics": "Refuser",
     "close": "Fermer le bandeau cookies"
   },
 

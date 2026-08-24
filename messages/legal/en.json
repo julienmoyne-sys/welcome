@@ -60,8 +60,8 @@
       {
         "title": "Cookies and analytics",
         "paragraphs": [
-          "The site uses only the cookies and local storage strictly necessary for it to work, in particular remembering your display preference (light or dark mode). These do not require prior consent.",
-          "As there are no advertising trackers or third-party analytics, no profiling is carried out."
+          "The site uses cookies and local storage strictly necessary for it to work, in particular to remember your display preference (light or dark mode) and your audience measurement choice. These do not require prior consent.",
+          "With your consent, Google Analytics is used to measure the audience and help improve the site. No Google advertising purpose is enabled and no advertising profiling is carried out."
         ]
       },
       {
@@ -228,7 +228,7 @@
       {
         "title": "Cookies and trackers",
         "paragraphs": [
-          "The site uses only cookies and local storage strictly necessary for it to work, in particular to remember your display preference (light or dark mode). No advertising or third-party analytics cookies are set. For more details, see our cookie policy."
+          "The site uses cookies and local storage strictly necessary for it to work. With your consent, Google Analytics is used to measure the audience and help improve the site. No Google advertising purpose is enabled. For details and to manage your choice, see our cookie policy."
         ]
       },
       {
@@ -260,10 +260,16 @@
         "purpose": "Remembers your display choice (light or dark mode) so that your experience stays consistent from one visit to the next."
       },
       {
-        "name": "welcome-cookie-notice",
+        "name": "welcome-cookie-consent",
         "type": "Preference",
-        "duration": "1 year",
-        "purpose": "Records your acknowledgement of the cookies strictly necessary for the site to work."
+        "duration": "Until changed or deleted by the user",
+        "purpose": "Stores the Google Analytics choice: “accepted” for acceptance or “refused” for refusal."
+      },
+      {
+        "name": "_ga, _ga_*",
+        "type": "Audience measurement",
+        "duration": "According to the Google Analytics configuration",
+        "purpose": "Allow Google Analytics 4 (G-P877RD6HJH) to measure the audience after consent."
       }
     ],
     "sections": [
@@ -277,14 +283,15 @@
       {
         "title": "Strictly necessary cookies",
         "paragraphs": [
-          "Welcome Coworking uses only cookies strictly necessary for the site to work properly. These cookies do not require prior consent, in line with CNIL guidance and the GDPR.",
-          "They are used to remember your essential preferences, in particular your theme choice (light or dark), and to keep your browsing stable."
+          "Welcome Coworking uses cookies and local storage strictly necessary for the site to work properly. They do not require prior consent.",
+          "They are used in particular to remember your theme choice (light or dark) and your Google Analytics choice."
         ]
       },
       {
         "title": "Analytics cookies",
         "paragraphs": [
-          "The site currently sets no analytics, advertising or social network cookies. No advertising profiling is carried out and no browsing data is shared with third parties for targeting purposes."
+          "With your consent, the site uses Google Analytics 4 (measurement ID G-P877RD6HJH) to measure its audience and help improve it. Without consent, Analytics storage remains denied.",
+          "Google advertising purposes remain disabled, including after acceptance. The site currently grants no consent for advertising storage, advertising user data or advertising personalisation."
         ]
       },
       {
@@ -296,14 +303,14 @@
       {
         "title": "Managing cookies",
         "paragraphs": [
-          "You can configure your browser at any time to refuse or delete cookies. Disabling strictly necessary cookies may however affect how the site works, in particular remembering your display preference.",
+          "You can accept or refuse Google Analytics from the banner. Closing the banner is treated as a refusal. Your choice is stored in your browser and can be removed by deleting the site's data.",
           "To find out more about managing cookies in your browser, see the dedicated help pages for Google Chrome, Mozilla Firefox, Safari or Microsoft Edge."
         ]
       },
       {
         "title": "Retention period",
         "paragraphs": [
-          "Cookies set by Welcome Coworking are kept for a maximum of one year. After that, they are automatically deleted or renewed on your next visit, depending on your choice."
+          "The consent preference remains stored in your browser until you change it or delete the site's data. The lifetime of Google Analytics cookies depends on the service configuration."
         ]
       },
       {
@@ -326,8 +333,8 @@
       {
         "title": "Your preferences on Welcome Coworking",
         "paragraphs": [
-          "Welcome Coworking sets only cookies strictly necessary for the site to work. No advertising, analytics or social network cookies are used.",
-          "The cookies currently set are used to remember your display preference (light or dark mode) and to record your acknowledgement of these necessary cookies."
+          "Welcome Coworking uses strictly necessary cookies and storage without consent. Google Analytics is used to measure the audience and help improve the site only if you accept it.",
+          "Your choice is stored in “welcome-cookie-consent” with the value “accepted” or “refused”. No Google advertising purpose is enabled."
         ]
       },
       {
@@ -339,8 +346,8 @@
       {
         "title": "Consequences of refusing cookies",
         "paragraphs": [
-          "Refusing strictly necessary cookies may affect how some features of the site work. For example, your theme preference (light or dark) may not be kept from one page or one visit to the next.",
-          "Refusing third-party cookies (Google Maps, WhatsApp, social networks) may limit the display of, or interaction with, those services embedded in the site."
+          "If you refuse Google Analytics or close the banner, Analytics storage remains disabled. This refusal does not prevent the site's essential features from working.",
+          "Deleting strictly necessary storage may, however, erase your theme preference or your audience measurement choice."
         ]
       },
       {

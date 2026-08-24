@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
@@ -84,6 +85,29 @@ export default async function LocaleLayout({
   // thème sur <html> avant l'hydratation, donc le serveur ne peut pas la connaître.
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <Script id="google-consent-default" strategy="beforeInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("consent", "default", {
+  analytics_storage: "denied",
+  ad_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied"
+});
+try {
+  var savedConsent = localStorage.getItem("welcome-cookie-consent");
+  if (savedConsent === "accepted" || savedConsent === "refused") {
+    gtag("consent", "update", {
+      analytics_storage: savedConsent === "accepted" ? "granted" : "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied"
+    });
+  }
+} catch (_) {}`}
+        </Script>
+      </head>
       <body>
         <NextIntlClientProvider>
           <ThemeProvider>

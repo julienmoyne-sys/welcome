@@ -57,8 +57,8 @@
       {
         "title": "Cookies und Reichweitenmessung",
         "paragraphs": [
-          "Die Website verwendet ausschließlich Cookies und lokalen Speicher, die für ihren Betrieb unbedingt erforderlich sind, insbesondere zur Speicherung Ihrer Anzeigepräferenz (heller oder dunkler Modus). Diese erfordern keine vorherige Einwilligung.",
-          "Da keine Werbetracker oder Analysedienste Dritter eingesetzt werden, findet kein Profiling statt."
+          "Die Website verwendet Cookies und lokalen Speicher, die für ihren Betrieb unbedingt erforderlich sind, insbesondere zur Speicherung Ihrer Anzeigepräferenz (heller oder dunkler Modus) und Ihrer Entscheidung zur Reichweitenmessung. Diese erfordern keine vorherige Einwilligung.",
+          "Mit Ihrer Einwilligung wird Google Analytics zur Reichweitenmessung und zur Verbesserung der Website eingesetzt. Es ist kein Werbezweck von Google aktiviert und es findet keine Werbeprofilbildung statt."
         ]
       },
       {
@@ -225,7 +225,7 @@
       {
         "title": "Cookies und Tracker",
         "paragraphs": [
-          "Die Website verwendet ausschließlich Cookies und lokalen Speicher, die für ihren Betrieb unbedingt erforderlich sind, insbesondere zur Speicherung Ihrer Anzeigepräferenz (heller oder dunkler Modus). Es werden keine Werbe- oder Analyse-Cookies Dritter gesetzt. Weitere Einzelheiten finden Sie in unserer Cookie-Richtlinie."
+          "Die Website verwendet Cookies und lokalen Speicher, die für ihren Betrieb unbedingt erforderlich sind. Mit Ihrer Einwilligung wird Google Analytics zur Reichweitenmessung und zur Verbesserung der Website eingesetzt. Es ist kein Werbezweck von Google aktiviert. Einzelheiten und die Verwaltung Ihrer Entscheidung finden Sie in unserer Cookie-Richtlinie."
         ]
       },
       {
@@ -257,10 +257,16 @@
         "purpose": "Speichert Ihre Anzeigewahl (heller oder dunkler Modus), damit Ihr Erlebnis von Besuch zu Besuch einheitlich bleibt."
       },
       {
-        "name": "welcome-cookie-notice",
+        "name": "welcome-cookie-consent",
         "type": "Präferenz",
-        "duration": "1 Jahr",
-        "purpose": "Hält Ihre Kenntnisnahme der für den Betrieb der Website unbedingt erforderlichen Cookies fest."
+        "duration": "Bis zur Änderung oder Löschung durch den Nutzer",
+        "purpose": "Speichert die Entscheidung zu Google Analytics: „accepted“ für Zustimmung oder „refused“ für Ablehnung."
+      },
+      {
+        "name": "_ga, _ga_*",
+        "type": "Reichweitenmessung",
+        "duration": "Gemäß der Konfiguration von Google Analytics",
+        "purpose": "Ermöglichen Google Analytics 4 (G-P877RD6HJH) die Reichweitenmessung nach Einwilligung."
       }
     ],
     "sections": [
@@ -274,14 +280,15 @@
       {
         "title": "Unbedingt erforderliche Cookies",
         "paragraphs": [
-          "Welcome Coworking verwendet ausschließlich Cookies, die für den ordnungsgemäßen Betrieb der Website unbedingt erforderlich sind. Diese Cookies erfordern gemäß den Vorgaben der CNIL und der DSGVO keine vorherige Einwilligung.",
-          "Sie dienen dazu, Ihre wesentlichen Einstellungen zu speichern, insbesondere Ihre Themenwahl (hell oder dunkel), und eine stabile Navigation zu gewährleisten."
+          "Welcome Coworking verwendet Cookies und lokalen Speicher, die für den ordnungsgemäßen Betrieb der Website unbedingt erforderlich sind. Sie erfordern keine vorherige Einwilligung.",
+          "Sie dienen insbesondere dazu, Ihre Themenwahl (hell oder dunkel) und Ihre Entscheidung zu Google Analytics zu speichern."
         ]
       },
       {
         "title": "Cookies zur Reichweitenmessung",
         "paragraphs": [
-          "Die Website setzt derzeit keine Cookies zur Reichweitenmessung, für Werbung oder für soziale Netzwerke. Es findet keine Werbeprofilbildung statt, und es werden keine Navigationsdaten zu Targeting-Zwecken an Dritte weitergegeben."
+          "Mit Ihrer Einwilligung verwendet die Website Google Analytics 4 (Mess-ID G-P877RD6HJH), um ihre Reichweite zu messen und sie zu verbessern. Ohne Einwilligung bleibt der Analytics-Speicher abgelehnt.",
+          "Die Werbezwecke von Google bleiben auch nach einer Zustimmung deaktiviert. Die Website erteilt derzeit keine Einwilligung für Werbespeicher, werbebezogene Nutzerdaten oder personalisierte Werbung."
         ]
       },
       {
@@ -293,14 +300,14 @@
       {
         "title": "Verwaltung der Cookies",
         "paragraphs": [
-          "Sie können Ihren Browser jederzeit so einstellen, dass Cookies abgelehnt oder gelöscht werden. Das Deaktivieren der unbedingt erforderlichen Cookies kann jedoch die Funktionsweise der Website beeinträchtigen, insbesondere die Speicherung Ihrer Anzeigepräferenz.",
+          "Sie können Google Analytics über den Hinweis akzeptieren oder ablehnen. Das Schließen des Hinweises gilt als Ablehnung. Ihre Entscheidung wird im Browser gespeichert und kann durch Löschen der Websitedaten entfernt werden.",
           "Weitere Informationen zur Verwaltung von Cookies in Ihrem Browser finden Sie auf den entsprechenden Hilfeseiten von Google Chrome, Mozilla Firefox, Safari oder Microsoft Edge."
         ]
       },
       {
         "title": "Speicherdauer",
         "paragraphs": [
-          "Die von Welcome Coworking gesetzten Cookies werden höchstens ein Jahr gespeichert. Danach werden sie automatisch gelöscht oder bei Ihrem nächsten Besuch entsprechend Ihrer Wahl erneuert."
+          "Die Einwilligungsentscheidung bleibt in Ihrem Browser gespeichert, bis Sie sie ändern oder die Websitedaten löschen. Die Laufzeit der Google-Analytics-Cookies hängt von der Konfiguration des Dienstes ab."
         ]
       },
       {
@@ -323,8 +330,8 @@
       {
         "title": "Ihre Einstellungen bei Welcome Coworking",
         "paragraphs": [
-          "Welcome Coworking setzt ausschließlich Cookies, die für den Betrieb der Website unbedingt erforderlich sind. Es werden keine Werbe-, Analyse- oder Social-Media-Cookies verwendet.",
-          "Die derzeit gesetzten Cookies dienen dazu, Ihre Anzeigepräferenz (heller oder dunkler Modus) zu speichern und Ihre Kenntnisnahme dieser erforderlichen Cookies festzuhalten."
+          "Welcome Coworking verwendet technisch notwendige Cookies und Speicher ohne Einwilligung. Google Analytics wird nur mit Ihrer Zustimmung zur Reichweitenmessung und zur Verbesserung der Website eingesetzt.",
+          "Ihre Entscheidung wird in „welcome-cookie-consent“ mit dem Wert „accepted“ oder „refused“ gespeichert. Es ist kein Werbezweck von Google aktiviert."
         ]
       },
       {
@@ -336,8 +343,8 @@
       {
         "title": "Folgen der Ablehnung von Cookies",
         "paragraphs": [
-          "Die Ablehnung der unbedingt erforderlichen Cookies kann die Funktionsweise einzelner Bereiche der Website beeinträchtigen. So wird Ihre Themenwahl (hell oder dunkel) möglicherweise nicht von Seite zu Seite oder von Besuch zu Besuch beibehalten.",
-          "Die Ablehnung von Cookies Dritter (Google Maps, WhatsApp, soziale Netzwerke) kann die Anzeige dieser eingebetteten Dienste oder die Interaktion mit ihnen einschränken."
+          "Wenn Sie Google Analytics ablehnen oder den Hinweis schließen, bleibt der Analytics-Speicher deaktiviert. Diese Ablehnung beeinträchtigt die wesentlichen Funktionen der Website nicht.",
+          "Das Löschen technisch notwendiger Speicher kann jedoch Ihre Themenwahl oder Ihre Entscheidung zur Reichweitenmessung entfernen."
         ]
       },
       {

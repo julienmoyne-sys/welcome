@@ -2,34 +2,77 @@
 
 import { Cookie, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { Link } from "@/i18n/navigation";
 
-const STORAGE_KEY = "welcome-cookie-notice";
+const STORAGE_KEY = "welcome-cookie-consent";
+
+type ConsentChoice = "accepted" | "refused";
+
+function updateGoogleConsent(choice: ConsentChoice) {
+  const win = window as typeof window & {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  };
+
+  win.dataLayer = win.dataLayer || [];
+
+  if (!win.gtag) {
+    win.gtag = (...args: unknown[]) => {
+      win.dataLayer?.push(args);
+    };
+  }
+
+  win.gtag("consent", "update", {
+    analytics_storage: choice === "accepted" ? "granted" : "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+}
 
 export function CookieBanner() {
   const t = useTranslations("cookieBanner");
-  const [visible, setVisible] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+  const needsConsent = useSyncExternalStore(
+    () => () => undefined,
+    () => {
+      try {
+        const consent = localStorage.getItem(STORAGE_KEY);
+        return consent !== "accepted" && consent !== "refused";
+      } catch {
+        return true;
+      }
+    },
+    () => false,
+  );
 
   useEffect(() => {
     try {
-      if (!localStorage.getItem(STORAGE_KEY)) setVisible(true);
-    } catch {
-      /* stockage indisponible */
-    }
+      const consent = localStorage.getItem(STORAGE_KEY);
+
+      if (consent === "accepted" || consent === "refused") {
+        updateGoogleConsent(consent);
+      }
+    } catch {}
   }, []);
 
-  const dismiss = () => {
+  const saveConsent = (choice: ConsentChoice) => {
     try {
-      localStorage.setItem(STORAGE_KEY, "acknowledged");
+      localStorage.setItem(STORAGE_KEY, choice);
     } catch {
       /* stockage indisponible */
     }
-    setVisible(false);
+
+    updateGoogleConsent(choice);
+    setDismissed(true);
   };
 
-  if (!visible) return null;
+  const accept = () => saveConsent("accepted");
+  const refuse = () => saveConsent("refused");
+
+  if (!needsConsent || dismissed) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[70] px-4 pb-4 sm:px-6 sm:pb-6">
@@ -40,6 +83,7 @@ export function CookieBanner() {
 
         <div className="flex-1">
           <p className="font-manrope text-[15px] font-semibold text-welcome-black">{t("title")}</p>
+
           <p className="mt-1 font-inter text-[13.5px] leading-[1.6] text-welcome-body">
             {t("text")}{" "}
             <Link
@@ -61,14 +105,23 @@ export function CookieBanner() {
         <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
-            onClick={dismiss}
-            className="inline-flex h-[46px] items-center justify-center rounded-[12px] bg-welcome-gold px-6 font-manrope text-[14.5px] font-semibold text-[#0b0b0b] transition-transform duration-200 hover:-translate-y-[1px]"
+            onClick={refuse}
+            className="inline-flex h-[46px] items-center justify-center rounded-[12px] border border-welcome-black/10 px-5 font-manrope text-[14.5px] font-semibold text-welcome-black transition-colors hover:bg-welcome-cream"
           >
-            {t("accept")}
+            {t("refuseAnalytics")}
           </button>
+
           <button
             type="button"
-            onClick={dismiss}
+            onClick={accept}
+            className="inline-flex h-[46px] items-center justify-center rounded-[12px] bg-welcome-gold px-6 font-manrope text-[14.5px] font-semibold text-[#0b0b0b] transition-transform duration-200 hover:-translate-y-[1px]"
+          >
+            {t("acceptAnalytics")}
+          </button>
+
+          <button
+            type="button"
+            onClick={refuse}
             aria-label={t("close")}
             className="inline-flex h-[46px] w-[46px] items-center justify-center rounded-[12px] border border-welcome-black/10 text-welcome-body transition-colors hover:bg-welcome-cream"
           >

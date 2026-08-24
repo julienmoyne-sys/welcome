@@ -820,10 +820,12 @@
 
   "cookieBanner": {
     "title": "Cookies and preferences",
-    "text": "This site only uses cookies and local storage strictly necessary for it to work (theme preference, display of Google reviews). No advertising trackers are set.",
+    "text": "This site uses strictly necessary cookies and storage without consent. With your agreement, Google Analytics measures the audience to help improve the site. No Google advertising purpose is enabled.",
     "more": "Find out more",
     "manage": "Manage my cookies",
     "accept": "Got it",
+    "acceptAnalytics": "Accept",
+    "refuseAnalytics": "Refuse",
     "close": "Close the cookie banner"
   },
 

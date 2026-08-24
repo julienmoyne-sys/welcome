@@ -57,8 +57,8 @@
       {
         "title": "Cookies et mesure d'audience",
         "paragraphs": [
-          "Le site utilise uniquement les cookies et le stockage local strictement nécessaires à son fonctionnement, notamment la mémorisation de votre préférence d'affichage (mode clair ou sombre). Ces éléments ne nécessitent pas de consentement préalable.",
-          "En l'absence de traceurs publicitaires ou de mesure d'audience tierce, aucun profilage n'est réalisé."
+          "Le site utilise des cookies et du stockage local strictement nécessaires à son fonctionnement, notamment pour mémoriser votre préférence d'affichage (mode clair ou sombre) et votre choix relatif à la mesure d'audience. Ces éléments ne nécessitent pas de consentement préalable.",
+          "Avec votre consentement, Google Analytics est utilisé pour mesurer l'audience et contribuer à l'amélioration du site. Aucune finalité publicitaire Google n'est activée et aucun profilage publicitaire n'est réalisé."
         ]
       },
       {
@@ -225,7 +225,7 @@
       {
         "title": "Cookies et traceurs",
         "paragraphs": [
-          "Le site utilise uniquement des cookies et du stockage local strictement nécessaires à son fonctionnement, notamment pour mémoriser votre préférence d'affichage (mode clair ou sombre). Aucun cookie publicitaire ou de mesure d'audience tiers n'est déposé. Pour plus de détails, consultez notre politique de cookies."
+          "Le site utilise des cookies et du stockage local strictement nécessaires à son fonctionnement. Avec votre consentement, Google Analytics est utilisé pour mesurer l'audience et contribuer à l'amélioration du site. Aucune finalité publicitaire Google n'est activée. Pour plus de détails et pour gérer votre choix, consultez notre politique de cookies."
         ]
       },
       {
@@ -257,10 +257,16 @@
         "purpose": "Mémorise votre choix d'affichage (mode clair ou sombre) pour conserver une expérience cohérente d'une visite à l'autre."
       },
       {
-        "name": "welcome-cookie-notice",
+        "name": "welcome-cookie-consent",
         "type": "Préférence",
-        "duration": "1 an",
-        "purpose": "Enregistre votre accord sur le dépôt des cookies strictement nécessaires au fonctionnement du site."
+        "duration": "Jusqu'à modification ou suppression par l'utilisateur",
+        "purpose": "Mémorise le choix relatif à Google Analytics : « accepted » pour l'acceptation ou « refused » pour le refus."
+      },
+      {
+        "name": "_ga, _ga_*",
+        "type": "Mesure d'audience",
+        "duration": "Selon la configuration de Google Analytics",
+        "purpose": "Permettent à Google Analytics 4 (G-P877RD6HJH) de mesurer l'audience après consentement."
       }
     ],
     "sections": [
@@ -274,14 +280,15 @@
       {
         "title": "Cookies strictement nécessaires",
         "paragraphs": [
-          "Welcome Coworking utilise uniquement des cookies strictement nécessaires au bon fonctionnement du site. Ces cookies ne nécessitent pas de consentement préalable, conformément aux règles de la CNIL et au RGPD.",
-          "Ils servent à mémoriser vos préférences essentielles, notamment votre choix de thème (clair ou sombre), et à garantir la stabilité de votre navigation."
+          "Welcome Coworking utilise des cookies et du stockage local strictement nécessaires au bon fonctionnement du site. Ils ne nécessitent pas de consentement préalable.",
+          "Ils servent notamment à mémoriser votre choix de thème (clair ou sombre) et votre choix relatif à Google Analytics."
         ]
       },
       {
         "title": "Cookies de mesure d'audience",
         "paragraphs": [
-          "Le site ne dépose actuellement aucun cookie de mesure d'audience, de publicité ou de réseaux sociaux. Aucun profilage publicitaire n'est réalisé et aucune donnée de navigation n'est partagée avec des tiers à des fins de ciblage."
+          "Avec votre consentement, le site utilise Google Analytics 4 (identifiant G-P877RD6HJH) pour mesurer l'audience et contribuer à son amélioration. Sans consentement, le stockage Analytics reste refusé.",
+          "Les finalités publicitaires Google restent désactivées, y compris après une acceptation. Le site n'accorde actuellement aucun consentement au stockage publicitaire, aux données utilisateur publicitaires ni à la personnalisation publicitaire."
         ]
       },
       {
@@ -293,14 +300,14 @@
       {
         "title": "Gestion des cookies",
         "paragraphs": [
-          "Vous pouvez à tout moment configurer votre navigateur pour refuser ou supprimer les cookies. La désactivation des cookies strictement nécessaires peut toutefois affecter le fonctionnement du site, notamment la mémorisation de votre préférence d'affichage.",
+          "Vous pouvez accepter ou refuser Google Analytics depuis le bandeau. Le bouton de fermeture équivaut à un refus. Votre choix est mémorisé dans votre navigateur et peut être supprimé avec les données du site.",
           "Pour en savoir plus sur la gestion des cookies selon votre navigateur, vous pouvez consulter les pages d'aide dédiées de Google Chrome, Mozilla Firefox, Safari ou Microsoft Edge."
         ]
       },
       {
         "title": "Durée de conservation",
         "paragraphs": [
-          "Les cookies déposés par Welcome Coworking sont conservés pour une durée maximale d'un an. Passé ce délai, ils sont automatiquement supprimés ou renouvelés lors de votre prochaine visite, selon votre choix."
+          "La préférence de consentement reste enregistrée dans votre navigateur jusqu'à ce que vous la modifiiez ou supprimiez les données du site. La durée des cookies Google Analytics dépend de la configuration du service."
         ]
       },
       {
@@ -323,8 +330,8 @@
       {
         "title": "Vos préférences sur Welcome Coworking",
         "paragraphs": [
-          "Welcome Coworking dépose uniquement des cookies strictement nécessaires au fonctionnement du site. Aucun cookie publicitaire, de mesure d'audience ou de réseau social n'est utilisé.",
-          "Les cookies actuellement déposés servent à mémoriser votre préférence d'affichage (mode clair ou sombre) et à enregistrer votre accord sur l'utilisation de ces cookies nécessaires."
+          "Welcome Coworking utilise des cookies et stockages strictement nécessaires sans consentement. Google Analytics est utilisé pour mesurer l'audience et contribuer à l'amélioration du site uniquement si vous l'acceptez.",
+          "Votre choix est enregistré dans « welcome-cookie-consent » avec la valeur « accepted » ou « refused ». Aucune finalité publicitaire Google n'est activée."
         ]
       },
       {
@@ -336,8 +343,8 @@
       {
         "title": "Conséquences du refus des cookies",
         "paragraphs": [
-          "Le refus des cookies strictement nécessaires peut affecter le fonctionnement de certaines fonctionnalités du site. Par exemple, votre préférence de thème (clair ou sombre) pourrait ne pas être conservée d'une page à l'autre ou d'une visite à l'autre.",
-          "Le refus des cookies tiers (Google Maps, WhatsApp, réseaux sociaux) peut limiter l'affichage ou l'interaction avec ces services intégrés au site."
+          "Si vous refusez Google Analytics ou fermez le bandeau, le stockage Analytics reste désactivé. Ce refus n'empêche pas l'utilisation des fonctionnalités essentielles du site.",
+          "La suppression des stockages strictement nécessaires peut toutefois effacer votre préférence de thème ou votre choix relatif à la mesure d'audience."
         ]
       },
       {
