@@ -8,12 +8,6 @@ import { useReveal } from "../hooks/useReveal";
 import { submitContact } from "../lib/contact.actions";
 import contactPhoto from "../assets/contact-photo-real.png";
 
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-  }
-}
-
 export function ContactSection({ showHeader = true }: { showHeader?: boolean }) {
   const t = useTranslations("contact");
   const locale = useLocale();
@@ -65,12 +59,17 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
       setStatus("success");
 
       // Conversion GA4 : uniquement après l'envoi réel du formulaire
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "generate_lead",
-        event_category: "contact",
-        event_label: "contact_form",
-      });
+      const dataLayer = (
+  window as unknown as {
+    dataLayer?: Array<Record<string, unknown>>;
+  }
+).dataLayer;
+
+dataLayer?.push({
+  event: "generate_lead",
+  event_category: "contact",
+  event_label: "contact_form",
+});
 
       setForm({
         name: "",
