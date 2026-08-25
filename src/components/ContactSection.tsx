@@ -25,7 +25,8 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] =
+    useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const update = (key: keyof typeof form, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -56,6 +57,23 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
       }
 
       setStatus("success");
+
+      // Conversion GA4 : uniquement après l'envoi réel du formulaire
+const gtag = (
+  window as unknown as {
+    gtag?: (
+      command: "event",
+      eventName: string,
+      params?: Record<string, unknown>
+    ) => void;
+  }
+).gtag;
+
+gtag?.("event", "generate_lead", {
+  event_category: "contact",
+  event_label: "contact_form",
+});
+
       setForm({
         name: "",
         company: "",
@@ -72,7 +90,10 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
   };
 
   return (
-    <section ref={ref} className="bg-welcome-cream py-[100px] lg:py-[140px]">
+    <section
+      ref={ref}
+      className="bg-welcome-cream py-[100px] lg:py-[140px]"
+    >
       <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
         {showHeader && (
           <div
@@ -83,9 +104,12 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
             <p className="font-inter text-[15px] font-medium uppercase tracking-[0.12em] text-welcome-sage">
               {t("eyebrow")}
             </p>
+
             <h2 className="mt-4 font-manrope text-4xl font-semibold leading-[1.12] tracking-tight text-welcome-black md:text-5xl">
-              {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
+              {t("titleLead")}{" "}
+              <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
             </h2>
+
             <p className="mt-5 font-inter text-lg leading-relaxed text-welcome-body/80">
               {t("lead")}
             </p>
@@ -94,7 +118,9 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
 
         {/* two columns */}
         <div
-          className={`${showHeader ? "mt-16 lg:mt-20" : ""} grid items-stretch gap-12 lg:grid-cols-[45%_55%] lg:gap-20`}
+          className={`${
+            showHeader ? "mt-16 lg:mt-20" : ""
+          } grid items-stretch gap-12 lg:grid-cols-[45%_55%] lg:gap-20`}
         >
           {/* left column */}
           <div
@@ -106,8 +132,6 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
               <Image
                 src={contactPhoto}
                 alt={t("photoAlt")}
-                // Colonne de 45 % dans un conteneur plafonné à 1280 px avec padding :
-                // ≥ 1280 → 45 % de 1200 = 540 px ; sinon la largeur réelle du créneau.
                 sizes="(min-width: 1280px) 540px, (min-width: 1024px) 45vw, calc(100vw - 48px)"
                 className="welcome-photo aspect-square w-full object-cover"
               />
@@ -118,9 +142,11 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
               <h3 className="font-manrope text-lg font-semibold text-welcome-black">
                 {t("whatsapp.title")}
               </h3>
+
               <p className="mt-2 font-inter text-[15px] leading-relaxed text-welcome-body/70">
                 {t("whatsapp.text")}
               </p>
+
               <a
                 href="https://wa.me/33622805536"
                 target="_blank"
@@ -145,6 +171,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
               <h3 className="font-manrope text-lg font-semibold text-welcome-black">
                 {t("info.title")}
               </h3>
+
               <div className="mt-5 space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-welcome-cream">
@@ -164,6 +191,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     </a>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-welcome-cream">
                     <Phone size={18} className="text-welcome-black" />
@@ -182,6 +210,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     </a>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-welcome-cream">
                     <Mail size={18} className="text-welcome-black" />
@@ -198,6 +227,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     </a>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-welcome-cream">
                     <Clock size={18} className="text-welcome-black" />
@@ -208,7 +238,9 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     </p>
                     <p className="font-inter text-sm text-welcome-body/70">
                       {t.rich("info.hours", {
-                        strong: (chunks) => <strong className="font-bold">{chunks}</strong>,
+                        strong: (chunks) => (
+                          <strong className="font-bold">{chunks}</strong>
+                        ),
                       })}
                     </p>
                   </div>
@@ -230,6 +262,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
               <h3 className="font-manrope text-2xl font-semibold text-welcome-black">
                 {t("form.title")}
               </h3>
+
               <p className="mt-2 font-inter text-[15px] leading-relaxed text-welcome-body/70">
                 {t("form.lead")}
               </p>
@@ -252,16 +285,21 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                       placeholder={t("form.namePlaceholder")}
                     />
                     {errors.name && (
-                      <p className="mt-1.5 font-inter text-xs text-red-600">{errors.name}</p>
+                      <p className="mt-1.5 font-inter text-xs text-red-600">
+                        {errors.name}
+                      </p>
                     )}
                   </div>
+
                   <div>
                     <label
                       htmlFor="company"
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
                       {t("form.company")}{" "}
-                      <span className="font-normal text-welcome-body/50">{t("form.optional")}</span>
+                      <span className="font-normal text-welcome-body/50">
+                        {t("form.optional")}
+                      </span>
                     </label>
                     <input
                       id="company"
@@ -291,16 +329,21 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                       placeholder={t("form.emailPlaceholder")}
                     />
                     {errors.email && (
-                      <p className="mt-1.5 font-inter text-xs text-red-600">{errors.email}</p>
+                      <p className="mt-1.5 font-inter text-xs text-red-600">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
+
                   <div>
                     <label
                       htmlFor="phone"
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
                       {t("form.phone")}{" "}
-                      <span className="font-normal text-welcome-body/50">{t("form.optional")}</span>
+                      <span className="font-normal text-welcome-body/50">
+                        {t("form.optional")}
+                      </span>
                     </label>
                     <input
                       id="phone"
@@ -317,9 +360,11 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                   <label className="mb-2.5 block font-manrope text-sm font-semibold text-welcome-black">
                     {t("form.needLabel")}
                   </label>
+
                   <div className="flex flex-wrap gap-2.5">
                     {needs.map((need) => {
                       const selected = form.need === need;
+
                       return (
                         <button
                           key={need}
@@ -331,14 +376,19 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                               : "border-welcome-black/10 bg-welcome-cream/40 text-welcome-body/80 hover:border-welcome-black/20"
                           }`}
                         >
-                          {selected && <Check size={14} className="text-welcome-gold" />}
+                          {selected && (
+                            <Check size={14} className="text-welcome-gold" />
+                          )}
                           {need}
                         </button>
                       );
                     })}
                   </div>
+
                   {errors.need && (
-                    <p className="mt-1.5 font-inter text-xs text-red-600">{errors.need}</p>
+                    <p className="mt-1.5 font-inter text-xs text-red-600">
+                      {errors.need}
+                    </p>
                   )}
                 </div>
 
@@ -349,6 +399,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                   >
                     {t("form.message")}
                   </label>
+
                   <textarea
                     id="message"
                     rows={4}
@@ -357,15 +408,15 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     className="w-full resize-none rounded-[12px] border border-welcome-black/10 bg-welcome-cream/50 px-4 py-3 font-inter text-[15px] text-welcome-black outline-none transition-all placeholder:text-welcome-body/40 focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
                     placeholder={t("form.messagePlaceholder")}
                   />
+
                   {errors.message && (
-                    <p className="mt-1.5 font-inter text-xs text-red-600">{errors.message}</p>
+                    <p className="mt-1.5 font-inter text-xs text-red-600">
+                      {errors.message}
+                    </p>
                   )}
                 </div>
 
                 <div className="flex items-start gap-3">
-                  {/* Case à cocher personnalisée : le texte de consentement étant un
-                      frère et non un `<label>`, il faut le désigner explicitement,
-                      sinon la case est annoncée sans libellé. */}
                   <button
                     type="button"
                     onClick={() => update("rgpd", !form.rgpd)}
@@ -380,8 +431,11 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     aria-describedby={errors.rgpd ? "rgpd-error" : undefined}
                     aria-invalid={errors.rgpd ? true : undefined}
                   >
-                    {form.rgpd && <Check size={12} className="text-welcome-black" />}
+                    {form.rgpd && (
+                      <Check size={12} className="text-welcome-black" />
+                    )}
                   </button>
+
                   <p
                     id="rgpd-label"
                     className="font-inter text-xs leading-relaxed text-welcome-body/60"
@@ -389,8 +443,12 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     {t("form.rgpd")}
                   </p>
                 </div>
+
                 {errors.rgpd && (
-                  <p id="rgpd-error" className="font-inter text-xs text-red-600">
+                  <p
+                    id="rgpd-error"
+                    className="font-inter text-xs text-red-600"
+                  >
                     {errors.rgpd}
                   </p>
                 )}
@@ -400,7 +458,9 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                   disabled={status === "submitting"}
                   className="inline-flex h-[54px] w-full items-center justify-center rounded-[14px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg disabled:opacity-70 sm:w-auto"
                 >
-                  {status === "submitting" ? t("form.submitting") : t("form.submit")}
+                  {status === "submitting"
+                    ? t("form.submitting")
+                    : t("form.submit")}
                 </button>
 
                 {status === "success" && (
@@ -408,6 +468,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
                     {t("form.success")}
                   </p>
                 )}
+
                 {status === "error" && Object.keys(errors).length === 0 && (
                   <p className="rounded-[12px] bg-red-50 px-4 py-3 font-inter text-sm text-red-700">
                     {t("form.error")}
