@@ -22,7 +22,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Suspense, useEffect, useRef } from "react";
 
 import avantagesCseLogo from "@/assets/avantages-cse-monochrome.png";
 import chatGptBusiness from "@/assets/chatgpt-business-welcome-strasbourg.png";
@@ -70,6 +72,25 @@ const PLAN_STYLES = [
   "bg-welcome-gold/[0.075]",
   "bg-welcome-gold/[0.14]",
 ] as const;
+
+const PLAN_IDS = ["flex", "work-bar", "open-space", "private-office"] as const;
+const HIGHLIGHT_IDS = ["nomad", "open-space", "private-office"] as const;
+
+function ComparisonHighlightSync() {
+  const markerRef = useRef<HTMLSpanElement | null>(null);
+  const searchParams = useSearchParams();
+  const plan = searchParams.get("plan") ?? "";
+
+  useEffect(() => {
+    const comparison = markerRef.current?.closest<HTMLElement>(".comparison-print-root");
+    comparison?.setAttribute(
+      "data-highlighted-plan",
+      HIGHLIGHT_IDS.includes(plan as (typeof HIGHLIGHT_IDS)[number]) ? plan : "",
+    );
+  }, [plan]);
+
+  return <span ref={markerRef} className="hidden" aria-hidden="true" />;
+}
 
 function StatusMark({ cell, labels }: { cell: Cell; labels: Record<string, string> }) {
   if (cell.type === "included" || cell.type === "conditional") {
@@ -229,7 +250,10 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
   );
 
   return (
-    <div className="comparison-print-root">
+    <div className="comparison-print-root relative">
+      <Suspense fallback={null}>
+        <ComparisonHighlightSync />
+      </Suspense>
       <div className="comparison-print-action mb-5 flex justify-end">
         <button
           type="button"
@@ -245,6 +269,8 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
           {plans.map((plan, index) => (
             <article
               key={plan.name}
+              data-plan-id={PLAN_IDS[index]}
+              data-plan-edge="top"
               className={`rounded-[18px] border border-welcome-black/[0.08] p-4 text-center ${PLAN_STYLES[index]}`}
             >
               <span
@@ -335,6 +361,12 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                       {row.cells.map((cell, planIndex) => (
                         <div
                           key={`${row.label}-mobile-${planIndex}`}
+                          data-plan-id={PLAN_IDS[planIndex]}
+                          data-plan-edge={
+                            groupIndex === groups.length - 1 && index === group.rows.length - 1
+                              ? "bottom"
+                              : undefined
+                          }
                           className={`flex min-h-[82px] flex-col items-center justify-center gap-2 border-welcome-black/[0.07] px-2 py-3 text-center odd:border-r [&:nth-child(n+3)]:border-t ${PLAN_STYLES[planIndex]}`}
                         >
                           <span className="font-inter text-[9px] font-bold uppercase tracking-[0.07em] text-welcome-body/55">
@@ -403,6 +435,8 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                 {plans.map((plan, index) => (
                   <div
                     key={plan.name}
+                    data-plan-id={PLAN_IDS[index]}
+                    data-plan-edge="top"
                     className={`relative flex min-h-[210px] flex-col items-center border-l border-welcome-black/[0.08] px-4 py-6 text-center transition-colors duration-300 lg:px-5 lg:py-7 ${PLAN_STYLES[index]}`}
                   >
                     <span
@@ -495,6 +529,13 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                         {row.cells.map((cell, index) => (
                           <div
                             key={`${row.label}-${index}`}
+                            data-plan-id={PLAN_IDS[index]}
+                            data-plan-edge={
+                              groupIndex === groups.length - 1 &&
+                              row === group.rows[group.rows.length - 1]
+                                ? "bottom"
+                                : undefined
+                            }
                             className={`flex items-center justify-center border-l border-welcome-black/[0.07] px-2.5 py-4 text-center transition-colors duration-200 group-hover:bg-welcome-black/[0.018] ${PLAN_STYLES[index]}`}
                           >
                             <StatusMark cell={cell} labels={labels} />

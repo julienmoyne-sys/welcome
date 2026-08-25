@@ -402,6 +402,52 @@ html {
   background-color: var(--comparison-cse-hover-bg) !important;
 }
 
+/* La formule visée par un bouton « Comparer » est repérée par l'ancre d'URL. */
+.comparison-print-root[data-highlighted-plan="nomad"] [data-plan-id="flex"],
+.comparison-print-root[data-highlighted-plan="nomad"] [data-plan-id="work-bar"],
+.comparison-print-root[data-highlighted-plan="open-space"] [data-plan-id="open-space"],
+.comparison-print-root[data-highlighted-plan="private-office"] [data-plan-id="private-office"] {
+  position: relative;
+  z-index: 1;
+}
+
+.comparison-print-root[data-highlighted-plan="open-space"] [data-plan-id="open-space"]::after,
+.comparison-print-root[data-highlighted-plan="private-office"]
+  [data-plan-id="private-office"]::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  border-right: 3px solid var(--welcome-gold);
+  border-left: 3px solid var(--welcome-gold);
+  filter: drop-shadow(0 0 5px rgb(198 178 74 / 0.8));
+}
+
+.comparison-print-root[data-highlighted-plan="nomad"] [data-plan-id="flex"]::after,
+.comparison-print-root[data-highlighted-plan="nomad"] [data-plan-id="work-bar"]::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  filter: drop-shadow(0 0 5px rgb(198 178 74 / 0.8));
+}
+
+.comparison-print-root[data-highlighted-plan="nomad"] [data-plan-id="flex"]::after {
+  border-left: 3px solid var(--welcome-gold);
+}
+
+.comparison-print-root[data-highlighted-plan="nomad"] [data-plan-id="work-bar"]::after {
+  border-right: 3px solid var(--welcome-gold);
+}
+
+.comparison-print-root [data-plan-edge="top"]::after {
+  border-top: 3px solid var(--welcome-gold);
+}
+
+.comparison-print-root [data-plan-edge="bottom"]::after {
+  border-bottom: 3px solid var(--welcome-gold);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .welcome-marquee-track {
     animation: none;

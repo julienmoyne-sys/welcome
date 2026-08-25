@@ -8,9 +8,19 @@ import { Link } from "@/i18n/navigation";
  * `cta` distingue le libellé « Comparer » de « En savoir plus ».
  */
 const PLANS = [
-  { key: "nomad", icon: Briefcase, cta: "compare", href: "/comparatif-solutions" },
-  { key: "openSpace", icon: Armchair, cta: "compare", href: "/comparatif-solutions" },
-  { key: "privateOffice", icon: DoorOpen, cta: "compare", href: "/comparatif-solutions" },
+  { key: "nomad", icon: Briefcase, cta: "compare", href: "/comparatif-solutions?plan=nomad" },
+  {
+    key: "openSpace",
+    icon: Armchair,
+    cta: "compare",
+    href: "/comparatif-solutions?plan=open-space",
+  },
+  {
+    key: "privateOffice",
+    icon: DoorOpen,
+    cta: "compare",
+    href: "/comparatif-solutions?plan=private-office",
+  },
   {
     key: "meetingRoom",
     icon: Presentation,

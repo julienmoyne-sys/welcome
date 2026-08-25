@@ -43,7 +43,7 @@
     },
     "comparison": {
       "title": "Comparatif des formules de coworking — Welcome Strasbourg",
-      "description": "Comparez les quatre formules Welcome Coworking à Strasbourg : Flex, Work Bar, Open Space et Bureau privatif.",
+      "description": "Comparez les quatre formules Welcome Coworking à Strasbourg : Flex, Flex+, Open Space et Bureau privatif.",
       "ogTitle": "Comparez les solutions Welcome Coworking",
       "ogDescription": "Comparez prix, accès, espaces et services des quatre formules Welcome Coworking à Strasbourg."
     },
@@ -313,7 +313,7 @@
     "swipe": "Faites défiler pour comparer les offres",
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
-      { "kicker": "Résident", "name": "Work Bar", "price": "90 €" },
+      { "kicker": "Nomade", "name": "Flex+", "price": "90 €" },
       { "kicker": "Résident", "name": "Open Space", "price": "190 à 300 €" },
       { "kicker": "Résident", "name": "Bureau privatif", "price": "425 à 700 €" }
     ],
@@ -342,8 +342,8 @@
           {
             "label": "Accès au site 24/24",
             "cells": [
-              { "type": "text", "label": "lun. à ven. 9 h – 18 h" },
-              { "type": "text", "label": "lun. à ven. 9 h – 18 h" },
+              { "type": "text", "label": "lun. à ven. 8h-18h" },
+              { "type": "text", "label": "lun. à ven. 8h-18h" },
               { "type": "included" },
               { "type": "included" }
             ]
@@ -456,9 +456,9 @@
           {
             "label": "Climatisation",
             "cells": [
-              { "type": "text", "label": "Mutuelle" },
-              { "type": "text", "label": "Mutuelle" },
-              { "type": "text", "label": "Mutuelle" },
+              { "type": "text", "label": "Mutualisée" },
+              { "type": "text", "label": "Mutualisée" },
+              { "type": "text", "label": "Mutualisée" },
               { "type": "text", "label": "Individuelle" }
             ]
           },
@@ -664,7 +664,7 @@
       "nomad": {
         "name": "Nomade",
         "availability": "8 postes restants",
-        "features": ["Flex ou Résident", "Tout espace réservable", "45 ou 90 € HT /mois"]
+        "features": ["Flex ou Flex+", "Tout espace réservable", "45 ou 90 € HT /mois"]
       },
       "openSpace": {
         "name": "Open Space",
@@ -726,7 +726,7 @@
 
   "access": {
     "eyebrow": "Accès",
-    "titleLead": "Tout est à quelques",
+    "titleLead": "Tout à quelques",
     "titleHighlight": "minutes.",
     "lead": "Que vous veniez en tram, à vélo ou en voiture, Welcome est idéalement situé pour simplifier chacune de vos journées.",
     "cards": [

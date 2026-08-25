@@ -1,6 +1,6 @@
 "use client";
 
-import { TrainFront, Bike, Car, Trophy } from "lucide-react";
+import { Bike, Car, TrainFront, Trophy } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -86,14 +86,7 @@ function MapIllustration({ visible }: { visible: boolean }) {
           }}
         >
           <circle cx="300" cy="230" r="66" fill="#0b0b0b" />
-          <circle
-            cx="300"
-            cy="230"
-            r="48"
-            fill="#0b0b0b"
-            stroke="var(--welcome-gold)"
-            strokeWidth="1.75"
-          />
+          <circle cx="300" cy="230" r="48" fill="#0b0b0b" />
           <image
             x="252"
             y="182"
