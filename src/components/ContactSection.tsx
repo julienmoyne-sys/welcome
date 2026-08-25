@@ -59,14 +59,17 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
       setStatus("success");
 
       // Conversion GA4 : uniquement après l'envoi réel du formulaire
-      const dataLayer = (
+const gtag = (
   window as unknown as {
-    dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (
+      command: "event",
+      eventName: string,
+      params?: Record<string, unknown>
+    ) => void;
   }
-).dataLayer;
+).gtag;
 
-dataLayer?.push({
-  event: "generate_lead",
+gtag?.("event", "generate_lead", {
   event_category: "contact",
   event_label: "contact_form",
 });
