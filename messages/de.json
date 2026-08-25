@@ -24,8 +24,8 @@
       "ogDescription": "Ein heller, ruhiger und einladender Open Space für flexibles Arbeiten in Straßburg."
     },
     "privateOffices": {
-      "title": "Private Büros in Straßburg — Welcome Coworking",
-      "description": "Entdecken Sie komfortable Privatbüros für konzentriertes Arbeiten in Straßburg.",
+      "title": "Privatbüro mieten in Straßburg | Welcome Coworking",
+      "description": "Mieten Sie ein ausgestattetes Privatbüro in Straßburg mit 24/7-Zugang, Glasfaser-WLAN, Gemeinschaftsbereichen und Tram Couffignal in der Nähe.",
       "ogTitle": "Private Büros — Welcome Coworking Straßburg",
       "ogDescription": "Helle, bezugsfertige private Büros in einem einladenden Coworking-Space."
     },
@@ -43,7 +43,7 @@
     },
     "comparison": {
       "title": "Coworking-Angebote im Vergleich — Welcome Straßburg",
-      "description": "Vergleichen Sie vier Angebote von Welcome Coworking in Straßburg: Flex, Work Bar, Open Space und privates Büro.",
+      "description": "Vergleichen Sie vier Angebote von Welcome Coworking in Straßburg: Flex, Flex+, Open Space und privates Büro.",
       "ogTitle": "Welcome Coworking Angebote vergleichen",
       "ogDescription": "Vergleichen Sie Preise, Zugang, Arbeitsbereiche und Services der vier Welcome Coworking Angebote in Straßburg."
     },
@@ -241,7 +241,34 @@
       }
     ],
     "ctaTitle": "Ihr nächstes Büro könnte hier sein.",
-    "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor."
+    "ctaText": "Besichtigen Sie die Räume und stellen Sie sich Ihr Team bei Welcome vor.",
+    "seoContent": {
+      "title": "Ausgestattete Privatbüros in Straßburg mieten",
+      "paragraphs": [
+        "Welcome Coworking bietet geschlossene, vollständig ausgestattete Privatbüros in Straßburg: ruhig genug für konzentriertes Arbeiten und zugleich eingebunden in einen Coworking-Space. Jedes Büro verfügt über Mobiliar, einen ergonomischen Stuhl, Stauraum, professionelles Glasfaser-WLAN und eigenständigen Zugang rund um die Uhr.",
+        "Die Angebote kosten 425 bis 700 € netto pro Monat und haben keine Mindestlaufzeit. In der 204 avenue de Colmar, direkt an der Tramhaltestelle Couffignal, stehen Ihnen außerdem die Gemeinschaftsbereiche, Küche und Lounge sowie der Besprechungsraum zur Verfügung."
+      ],
+      "links": [
+        "Besprechungsraum entdecken",
+        "Küche und Lounge ansehen",
+        "Arbeitsangebote vergleichen"
+      ],
+      "faqTitle": "Häufige Fragen zu privaten Büros",
+      "faq": [
+        {
+          "question": "Sind die privaten Büros geschlossen und ausgestattet?",
+          "answer": "Ja. Die geschlossenen Büros bieten Mobiliar, ergonomischen Stuhl, Stauraum, individuelle Klimatisierung und Beleuchtung sowie eine professionelle Glasfaserverbindung."
+        },
+        {
+          "question": "Ist der Zugang zum eigenen Büro jederzeit möglich?",
+          "answer": "Ja. Mitglieder haben rund um die Uhr eigenständigen Zugang. Welcome Coworking liegt in der 204 avenue de Colmar in Straßburg, nahe der von den Linien A und E bedienten Haltestelle Couffignal."
+        },
+        {
+          "question": "Was kostet ein privates Büro und wie lange ist die Laufzeit?",
+          "answer": "Private Büros kosten 425 bis 700 € netto pro Monat und werden ohne Mindestlaufzeit angeboten. Kontaktieren Sie Welcome, um das passende Angebot für Ihr Team zu finden."
+        }
+      ]
+    }
   },
   "meetingRoomPage": {
     "back": "Zurück zu den Räumen",
@@ -309,7 +336,7 @@
     "swipe": "Wischen Sie, um die Angebote zu vergleichen",
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
-      { "kicker": "Resident", "name": "Work Bar", "price": "90 €" },
+      { "kicker": "Nomade", "name": "Flex+", "price": "90 €" },
       { "kicker": "Resident", "name": "Open Space", "price": "190 bis 300 €" },
       { "kicker": "Resident", "name": "Privates Büro", "price": "425 bis 700 €" }
     ],
@@ -338,8 +365,8 @@
           {
             "label": "Zugang rund um die Uhr",
             "cells": [
-              { "type": "text", "label": "Mo.–Fr., 9–18 Uhr" },
-              { "type": "text", "label": "Mo.–Fr., 9–18 Uhr" },
+              { "type": "text", "label": "Mo.–Fr., 8–18 Uhr" },
+              { "type": "text", "label": "Mo.–Fr., 8–18 Uhr" },
               { "type": "included" },
               { "type": "included" }
             ]
@@ -660,7 +687,7 @@
       "nomad": {
         "name": "Nomade",
         "availability": "8 Plätze frei",
-        "features": ["Flex oder Resident", "Alle Räume buchbar", "45 oder 90 € netto / Monat"]
+        "features": ["Flex oder Flex+", "Alle Räume buchbar", "45 oder 90 € netto / Monat"]
       },
       "openSpace": {
         "name": "Open Space",

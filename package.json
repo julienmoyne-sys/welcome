@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "check:translations": "node scripts/check-translations.mjs",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "npm run check:translations && tsc --noEmit",
     "format": "prettier --write ."
   },
   "dependencies": {

@@ -35,6 +35,12 @@ const FEATURE_ICONS = {
   kitchenLounge: [Coffee, Sofa, UtensilsCrossed, MessageCircle],
 } as const;
 
+const PRIVATE_OFFICE_LINKS = [
+  "/salle-de-reunion",
+  "/cuisine-detente",
+  "/comparatif-solutions",
+] as const;
+
 export async function SpacePresentationPage({
   locale,
   path,
@@ -55,6 +61,16 @@ export async function SpacePresentationPage({
   const t = await getTranslations(namespace);
   const features = t.raw("features") as { title: string; text: string }[];
   const icons = FEATURE_ICONS[kind];
+  const seoContent =
+    kind === "privateOffices"
+      ? (t.raw("seoContent") as {
+          title: string;
+          paragraphs: string[];
+          links: string[];
+          faqTitle: string;
+          faq: { question: string; answer: string }[];
+        })
+      : null;
 
   return (
     <div className="min-h-screen bg-welcome-cream">
@@ -146,6 +162,63 @@ export async function SpacePresentationPage({
                 })}
               </div>
             </div>
+
+            {seoContent && (
+              <div className="mt-20 border-t border-welcome-black/[0.08] pt-16 sm:mt-24 sm:pt-20">
+                <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+                  <h2 className="font-manrope text-[32px] font-bold leading-tight tracking-tight text-welcome-black sm:text-[40px]">
+                    {seoContent.title}
+                  </h2>
+                  <div>
+                    <div className="space-y-4">
+                      {seoContent.paragraphs.map((paragraph) => (
+                        <p
+                          key={paragraph}
+                          className="font-inter text-[16px] leading-[1.75] text-welcome-body"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                    <nav
+                      className="mt-7 flex flex-wrap gap-x-6 gap-y-3"
+                      aria-label={seoContent.title}
+                    >
+                      {PRIVATE_OFFICE_LINKS.map((href, index) => (
+                        <Link
+                          key={href}
+                          href={href}
+                          className="font-inter text-[15px] font-medium text-welcome-gold underline-offset-4 hover:underline"
+                        >
+                          {seoContent.links[index]}
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+
+                <div className="mt-16 sm:mt-20">
+                  <h2 className="font-manrope text-[30px] font-bold leading-tight tracking-tight text-welcome-black sm:text-[36px]">
+                    {seoContent.faqTitle}
+                  </h2>
+                  <div className="mt-8 grid gap-5 lg:grid-cols-3">
+                    {seoContent.faq.map((item) => (
+                      <article
+                        key={item.question}
+                        className="rounded-[20px] border border-welcome-black/[0.07] bg-welcome-cream p-6 sm:p-7"
+                      >
+                        <h3 className="font-manrope text-[18px] font-semibold leading-snug text-welcome-black">
+                          {item.question}
+                        </h3>
+                        <p className="mt-3 font-inter text-[15px] leading-[1.65] text-welcome-body/80">
+                          {item.answer}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

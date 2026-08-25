@@ -24,8 +24,8 @@
       "ogDescription": "A bright, quiet and welcoming open space where you can work at your own pace in Strasbourg."
     },
     "privateOffices": {
-      "title": "Private offices in Strasbourg — Welcome Coworking",
-      "description": "Discover comfortable, fully equipped private offices where your team can work with confidence in Strasbourg.",
+      "title": "Private Office Rental Strasbourg | Welcome Coworking",
+      "description": "Rent a fully equipped private office in Strasbourg with 24/7 access, fibre Wi-Fi, shared spaces and the Couffignal tram stop nearby.",
       "ogTitle": "Private offices — Welcome Coworking Strasbourg",
       "ogDescription": "Bright, ready-to-use private offices in a warm coworking space."
     },
@@ -43,7 +43,7 @@
     },
     "comparison": {
       "title": "Coworking plan comparison — Welcome Strasbourg",
-      "description": "Compare four Welcome Coworking plans in Strasbourg: Flex, Work Bar, Open Space and Private Office.",
+      "description": "Compare four Welcome Coworking plans in Strasbourg: Flex, Flex+, Open Space and Private Office.",
       "ogTitle": "Compare Welcome Coworking plans",
       "ogDescription": "Compare pricing, access, workspaces and services across four Welcome Coworking plans in Strasbourg."
     },
@@ -238,7 +238,34 @@
       }
     ],
     "ctaTitle": "Your next office could be here.",
-    "ctaText": "Come and picture your team at Welcome."
+    "ctaText": "Come and picture your team at Welcome.",
+    "seoContent": {
+      "title": "Fully equipped private office rental in Strasbourg",
+      "paragraphs": [
+        "Welcome Coworking offers fully equipped, enclosed private offices in Strasbourg, designed for quiet, focused work with the benefits of a shared workspace. Each office includes furniture, an ergonomic chair, storage, professional fibre Wi-Fi and independent 24/7 access.",
+        "Plans range from €425 to €700 excluding VAT per month, with no minimum commitment. At 204 avenue de Colmar, close to the Couffignal tram stop, members also enjoy shared spaces, the kitchen and lounge, and access to the meeting room."
+      ],
+      "links": [
+        "Explore the meeting room",
+        "See the kitchen and lounge",
+        "Compare workspace options"
+      ],
+      "faqTitle": "Private office FAQs",
+      "faq": [
+        {
+          "question": "Are the private offices enclosed and equipped?",
+          "answer": "Yes. Each enclosed office comes with furniture, an ergonomic chair, storage, individual air conditioning and lighting, plus a professional fibre connection."
+        },
+        {
+          "question": "Can members access their office at any time?",
+          "answer": "Yes. Members have independent 24/7 access. Welcome Coworking is at 204 avenue de Colmar in Strasbourg, near the Couffignal stop served by tram lines A and E."
+        },
+        {
+          "question": "How much does a private office cost and what is the commitment?",
+          "answer": "Private offices range from €425 to €700 excluding VAT per month, with no minimum commitment. Contact Welcome to find the right plan for your team."
+        }
+      ]
+    }
   },
   "meetingRoomPage": {
     "back": "Back to the spaces",
@@ -297,7 +324,7 @@
     "swipe": "Swipe to compare plans",
     "plans": [
       { "kicker": "Nomad", "name": "Flex", "price": "€45" },
-      { "kicker": "Resident", "name": "Work Bar", "price": "€90" },
+      { "kicker": "Nomad", "name": "Flex+", "price": "€90" },
       { "kicker": "Resident", "name": "Open Space", "price": "€190 to €300" },
       { "kicker": "Resident", "name": "Private Office", "price": "€425 to €700" }
     ],
@@ -326,8 +353,8 @@
           {
             "label": "24/7 site access",
             "cells": [
-              { "type": "text", "label": "Mon–Fri, 9 am–6 pm" },
-              { "type": "text", "label": "Mon–Fri, 9 am–6 pm" },
+              { "type": "text", "label": "Mon–Fri, 8 am–6 pm" },
+              { "type": "text", "label": "Mon–Fri, 8 am–6 pm" },
               { "type": "included" },
               { "type": "included" }
             ]
@@ -648,7 +675,7 @@
       "nomad": {
         "name": "Nomad",
         "availability": "8 spaces remaining",
-        "features": ["Flex or Resident", "All spaces bookable", "€45 or €90 excl. VAT / month"]
+        "features": ["Flex or Flex+", "All spaces bookable", "€45 or €90 excl. VAT / month"]
       },
       "openSpace": {
         "name": "Open space",

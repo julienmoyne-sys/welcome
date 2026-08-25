@@ -24,8 +24,8 @@
       "ogDescription": "Un open space lumineux, calme et chaleureux pour travailler à votre rythme à Strasbourg."
     },
     "privateOffices": {
-      "title": "Bureaux privatifs à Strasbourg — Welcome Coworking",
-      "description": "Découvrez des bureaux privatifs confortables et équipés pour travailler sereinement à Strasbourg.",
+      "title": "Bureau privatif Strasbourg | Location de bureaux équipés",
+      "description": "Louez un bureau privatif fermé et équipé à Strasbourg chez Welcome Coworking : accès 24/7, fibre, espaces communs et tram Couffignal.",
       "ogTitle": "Les bureaux privatifs — Welcome Coworking Strasbourg",
       "ogDescription": "Des bureaux fermés, lumineux et prêts à travailler dans un coworking chaleureux."
     },
@@ -248,7 +248,34 @@
       }
     ],
     "ctaTitle": "Votre prochain bureau est peut-être ici.",
-    "ctaText": "Venez découvrir les volumes et imaginer votre équipe chez Welcome."
+    "ctaText": "Venez découvrir les volumes et imaginer votre équipe chez Welcome.",
+    "seoContent": {
+      "title": "Location de bureaux privatifs équipés à Strasbourg",
+      "paragraphs": [
+        "Welcome Coworking propose des bureaux privatifs fermés et équipés à Strasbourg, conçus pour travailler au calme tout en profitant de l'énergie d'un espace de coworking. Chaque bureau dispose de mobilier, d'un fauteuil ergonomique, de rangements, de la fibre professionnelle et d'un accès autonome 24/7.",
+        "Les formules, de 425 € à 700 € HT par mois, sont proposées sans minimum d'engagement. Au 204 avenue de Colmar, à proximité immédiate du tram Couffignal, vous bénéficiez aussi des espaces communs, de la cuisine et de l'espace détente, ainsi que de la salle de réunion."
+      ],
+      "links": [
+        "Découvrir la salle de réunion",
+        "Voir la cuisine et l'espace détente",
+        "Comparer les solutions de travail"
+      ],
+      "faqTitle": "Questions fréquentes sur les bureaux privatifs",
+      "faq": [
+        {
+          "question": "Les bureaux privatifs sont-ils fermés et équipés ?",
+          "answer": "Oui. Ce sont des espaces clos avec mobilier, fauteuil ergonomique, rangements, climatisation et éclairage individuels, ainsi qu'une connexion fibre professionnelle."
+        },
+        {
+          "question": "Peut-on accéder à son bureau à toute heure ?",
+          "answer": "Oui. Les membres disposent d'un accès autonome 24/7. Welcome Coworking se trouve au 204 avenue de Colmar à Strasbourg, près de l'arrêt Couffignal desservi par les trams A et E."
+        },
+        {
+          "question": "Quel est le tarif et l'engagement d'un bureau privatif ?",
+          "answer": "Les bureaux privatifs sont proposés de 425 € à 700 € HT par mois, sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
+        }
+      ]
+    }
   },
   "meetingRoomPage": {
     "back": "Revenir aux espaces",
