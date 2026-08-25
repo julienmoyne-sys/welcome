@@ -120,6 +120,9 @@ try {
         <JsonLd data={organizationJsonLd()} />
       </body>
       <GoogleAnalytics gaId="G-P877RD6HJH" />
+      <Script id="google-ads-config" strategy="afterInteractive">
+        {`gtag("config", "AW-991226504");`}
+      </Script>
     </html>
   );
 }
