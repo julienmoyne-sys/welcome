@@ -30,10 +30,10 @@
       "ogDescription": "Des bureaux fermés, lumineux et prêts à travailler dans un coworking chaleureux."
     },
     "meetingRoom": {
-      "title": "Salle de réunion à Strasbourg — Welcome Coworking",
-      "description": "Réservez à Strasbourg une salle de réunion calme et équipée pour vos réunions d'équipe, présentations clients et visioconférences.",
-      "ogTitle": "La salle de réunion — Welcome Coworking Strasbourg",
-      "ogDescription": "Une salle équipée jusqu'à 12 personnes, avec écran et visioconférence."
+      "title": "Location salle de réunion Strasbourg | Welcome Coworking",
+      "description": "Louez une salle de réunion équipée à Strasbourg Meinau jusqu’à 9 personnes : écran, paperboard, fibre et climatisation. Dès 60 € HT.",
+      "ogTitle": "Location de salle de réunion à Strasbourg",
+      "ogDescription": "Une salle équipée jusqu’à 9 personnes à Strasbourg Meinau, dès 60 € HT la demi-journée."
     },
     "kitchenLounge": {
       "title": "Cuisine et espace détente — Welcome Coworking Strasbourg",
@@ -278,32 +278,138 @@
     }
   },
   "meetingRoomPage": {
-    "back": "Revenir aux espaces",
-    "backSolutions": "Revenir aux solutions",
     "eyebrow": "La salle de réunion",
-    "titleLead": "Un cadre qui fait",
-    "titleHighlight": "avancer les idées.",
-    "lead": "Réunissez vos équipes et recevez vos clients dans une salle confortable, équipée et pensée pour des échanges efficaces.",
-    "visit": "Organiser une visite",
+    "title": "Location de salle de réunion à Strasbourg",
+    "tagline": "Un cadre qui fait avancer les idées",
+    "lead": "Réunissez vos équipes et recevez vos clients dans une salle confortable, calme et entièrement équipée à Strasbourg Meinau. Welcome Coworking accueille jusqu’à 9 personnes pour vos réunions, présentations, formations, entretiens et visioconférences.",
+    "availability": "Vérifier la disponibilité",
     "imageAlt": "Salle de réunion Welcome avec grande table en bois, chaises noires et écran",
-    "detailsEyebrow": "Vos rendez-vous",
-    "detailsTitle": "Tout est prêt pour vous réunir.",
-    "detailsText": "Réunion d'équipe, présentation client ou visioconférence : installez-vous dans un environnement professionnel et calme, au sein d'une verrière climatisée.",
-    "features": [
-      {
-        "title": "Jusqu'à 9 personnes",
-        "text": "Une capacité adaptée aux réunions et formations à taille humaine ainsi qu'aux entretiens individuels."
-      },
-      {
-        "title": "Écran mural & Paperboard",
-        "text": "Présentez vos contenus dans de bonnes conditions."
-      },
-      { "title": "Services", "text": "Cuisine, boissons chaudes et froides, relieuse..." },
-      {
-        "title": "Internet",
-        "text": "Connexion fibre professionnelle et sécurisée en WIFI ou RJ45."
-      }
-    ],
+    "pricing": {
+      "title": "Des tarifs simples pour réserver la salle",
+      "cards": [
+        {
+          "title": "Réservation extérieure",
+          "price": "60 € HT la demi-journée · 100 € HT la journée",
+          "details": [
+            "Jusqu’à 9 personnes",
+            "Équipements et connexion fibre inclus",
+            "Réservation à la demi-journée ou à la journée"
+          ],
+          "button": "Demander une réservation",
+          "href": "/contact"
+        },
+        {
+          "title": "Membres Welcome Flex",
+          "price": "45 € HT/mois + 10 € HT/heure",
+          "details": [
+            "Tarif horaire réservé aux membres Flex",
+            "Sans engagement",
+            "Équipements et connexion fibre inclus"
+          ],
+          "button": "Découvrir l’offre Flex",
+          "href": "/comparatif-solutions"
+        }
+      ]
+    },
+    "uses": {
+      "title": "Une salle adaptée à vos rendez-vous professionnels",
+      "intro": "Un espace confidentiel et polyvalent pour travailler efficacement, recevoir vos interlocuteurs et partager vos idées.",
+      "items": [
+        {
+          "title": "Réunion d’équipe",
+          "text": "Rassemblez jusqu’à 9 collaborateurs autour d’une même table."
+        },
+        {
+          "title": "Présentation client",
+          "text": "Présentez vos contenus sur l’écran mural dans un cadre professionnel."
+        },
+        {
+          "title": "Entretien individuel",
+          "text": "Échangez au calme dans un espace confortable et confidentiel."
+        },
+        {
+          "title": "Formation en petit groupe",
+          "text": "Animez une formation ou un atelier à taille humaine avec écran et paperboard."
+        },
+        {
+          "title": "Visioconférence",
+          "text": "Connectez votre matériel en HDMI ou Chromecast et profitez de la fibre."
+        },
+        {
+          "title": "Séance de travail",
+          "text": "Avancez sur un projet ou organisez un atelier dans un environnement dédié."
+        }
+      ]
+    },
+    "equipment": {
+      "title": "Une salle de réunion équipée et prête à l’emploi",
+      "intro": "La salle et les espaces partagés réunissent les services utiles à une journée de travail fluide.",
+      "items": [
+        {
+          "title": "Jusqu’à 9 personnes",
+          "text": "Une capacité adaptée aux réunions, entretiens et formations en petit groupe."
+        },
+        {
+          "title": "Écran et présentation",
+          "text": "Écran mural, connexion HDMI, Chromecast et paperboard."
+        },
+        {
+          "title": "Fibre professionnelle",
+          "text": "Connexion rapide et sécurisée en Wi-Fi ou par câble RJ45."
+        },
+        {
+          "title": "Confort",
+          "text": "Salle calme et climatisée pour travailler dans de bonnes conditions."
+        },
+        {
+          "title": "Cuisine et boissons",
+          "text": "Accès à la cuisine ainsi qu’aux boissons chaudes et froides."
+        },
+        {
+          "title": "Services de bureau",
+          "text": "Imprimante, scanner et relieuse sont disponibles sur place."
+        }
+      ]
+    },
+    "location": {
+      "title": "Une salle facilement accessible à Strasbourg Meinau",
+      "address": "Welcome Coworking\n204 avenue de Colmar\n67100 Strasbourg",
+      "text": "À proximité de la Meinau et du centre de Strasbourg, la salle est desservie par les trams A et E à l’arrêt Lycée Couffignal et par la gare TER Krimmeri-Meinau. L’accès est pratique depuis la M35 et le stationnement est gratuit autour du bâtiment.",
+      "button": "Voir l’itinéraire"
+    },
+    "trust": {
+      "title": "Un lieu choisi par les professionnels",
+      "text": "Welcome Coworking accueille des professionnels depuis 2017. Plus de 100 entreprises ont déjà travaillé, échangé et développé leurs projets dans nos espaces."
+    },
+    "faq": {
+      "title": "Questions fréquentes sur la salle de réunion",
+      "items": [
+        {
+          "question": "Combien coûte la location de la salle de réunion ?",
+          "answer": "Pour une demande extérieure, la salle coûte 60 € HT la demi-journée ou 100 € HT la journée. Les membres Welcome Flex bénéficient d’un tarif de 10 € HT par heure, en complément de leur abonnement à 45 € HT par mois."
+        },
+        {
+          "question": "Combien de personnes la salle peut-elle accueillir ?",
+          "answer": "La salle de réunion Welcome Coworking peut accueillir jusqu’à 9 personnes."
+        },
+        {
+          "question": "La salle peut-elle être réservée à l’heure ?",
+          "answer": "La réservation à 10 € HT par heure est réservée aux membres de l’offre Welcome Flex. Les entreprises extérieures peuvent réserver une demi-journée ou une journée."
+        },
+        {
+          "question": "La salle convient-elle à une formation ?",
+          "answer": "Oui, elle convient aux formations, ateliers et réunions en petit groupe jusqu’à 9 personnes."
+        },
+        {
+          "question": "Quels équipements sont disponibles ?",
+          "answer": "La salle dispose notamment d’un écran mural, d’une connexion HDMI et Chromecast, d’un paperboard, de la fibre professionnelle en Wi-Fi ou RJ45 et de la climatisation."
+        },
+        {
+          "question": "Où se trouve la salle ?",
+          "answer": "Welcome Coworking se trouve au 204 avenue de Colmar à Strasbourg, dans le secteur Meinau, à proximité du tram Lycée Couffignal et de la gare Krimmeri-Meinau."
+        }
+      ]
+    },
     "ctaTitle": "Une réunion à organiser à Strasbourg ?",
     "ctaText": "Discutons de votre projet ensemble."
   },

@@ -30,10 +30,10 @@
       "ogDescription": "Helle, bezugsfertige private Büros in einem einladenden Coworking-Space."
     },
     "meetingRoom": {
-      "title": "Besprechungsraum in Straßburg — Welcome Coworking",
-      "description": "Buchen Sie in Straßburg einen ruhigen, voll ausgestatteten Besprechungsraum für Teammeetings, Kundenpräsentationen und Videokonferenzen.",
-      "ogTitle": "Der Besprechungsraum — Welcome Coworking Straßburg",
-      "ogDescription": "Ein Raum für bis zu 12 Personen mit Bildschirm und Videokonferenz."
+      "title": "Besprechungsraum in Straßburg mieten | Welcome Coworking",
+      "description": "Voll ausgestatteter Besprechungsraum in Straßburg-Meinau für bis zu 9 Personen mit Bildschirm, Flipchart, Glasfaser und Klimaanlage. Ab 60 € zzgl. MwSt.",
+      "ogTitle": "Besprechungsraum in Straßburg mieten",
+      "ogDescription": "Ausgestatteter Besprechungsraum für bis zu 9 Personen in Straßburg-Meinau, ab 60 € zzgl. MwSt. pro Halbtag."
     },
     "kitchenLounge": {
       "title": "Küche und Lounge — Welcome Coworking Straßburg",
@@ -271,32 +271,135 @@
     }
   },
   "meetingRoomPage": {
-    "back": "Zurück zu den Räumen",
-    "backSolutions": "Zurück zu den Angeboten",
     "eyebrow": "Der Besprechungsraum",
-    "titleLead": "Ein Rahmen, der Ideen",
-    "titleHighlight": "voranbringt.",
-    "lead": "Bringen Sie Ihr Team zusammen und empfangen Sie Kunden in einem komfortablen, ausgestatteten Raum.",
-    "visit": "Besichtigung buchen",
+    "title": "Besprechungsraum in Straßburg mieten",
+    "tagline": "Ein Rahmen, der Ideen voranbringt",
+    "lead": "Bringen Sie Ihr Team zusammen und empfangen Sie Kunden in einem komfortablen, ruhigen und vollständig ausgestatteten Raum im Straßburger Stadtteil Meinau. Welcome Coworking bietet Platz für bis zu 9 Personen bei Meetings, Präsentationen, Schulungen, Gesprächen und Videokonferenzen.",
+    "availability": "Verfügbarkeit prüfen",
     "imageAlt": "Welcome Besprechungsraum mit großem Holztisch, schwarzen Stühlen und Bildschirm",
-    "detailsEyebrow": "Ihre Termine",
-    "detailsTitle": "Alles ist bereit für Ihr Meeting.",
-    "detailsText": "Teammeeting, Kundenpräsentation oder Videokonferenz: arbeiten Sie in einem ruhigen, professionellen und klimatisierten Raum mit Glaswänden.",
-    "features": [
-      {
-        "title": "Bis zu 9 Personen",
-        "text": "Ideal für Meetings und Schulungen im kleinen Kreis sowie für Einzelgespräche."
-      },
-      {
-        "title": "Wandbildschirm & Flipchart",
-        "text": "Präsentieren Sie Ihre Inhalte komfortabel."
-      },
-      { "title": "Services", "text": "Küche, heiße und kalte Getränke, Bindegerät und mehr." },
-      {
-        "title": "Internet",
-        "text": "Professionelle, sichere Glasfaserverbindung über WLAN oder RJ45."
-      }
-    ],
+    "pricing": {
+      "title": "Klare Preise für Ihre Raumbuchung",
+      "cards": [
+        {
+          "title": "Externe Buchung",
+          "price": "60 € zzgl. MwSt. pro Halbtag · 100 € zzgl. MwSt. pro Tag",
+          "details": [
+            "Bis zu 9 Personen",
+            "Ausstattung und Glasfaser inklusive",
+            "Halb- oder ganztägige Buchung"
+          ],
+          "button": "Buchung anfragen",
+          "href": "/contact"
+        },
+        {
+          "title": "Welcome-Flex-Mitglieder",
+          "price": "45 € zzgl. MwSt./Monat + 10 € zzgl. MwSt./Stunde",
+          "details": [
+            "Stundentarif ausschließlich für Flex-Mitglieder",
+            "Ohne Bindung",
+            "Ausstattung und Glasfaser inklusive"
+          ],
+          "button": "Flex-Angebot entdecken",
+          "href": "/comparatif-solutions"
+        }
+      ]
+    },
+    "uses": {
+      "title": "Ein Raum für Ihre geschäftlichen Termine",
+      "intro": "Ein geschützter, vielseitiger Ort für effizientes Arbeiten, Kundentermine und den Austausch von Ideen.",
+      "items": [
+        {
+          "title": "Teammeeting",
+          "text": "Bringen Sie bis zu 9 Kolleginnen und Kollegen an einem Tisch zusammen."
+        },
+        {
+          "title": "Kundenpräsentation",
+          "text": "Präsentieren Sie Inhalte auf dem Wandbildschirm in professioneller Umgebung."
+        },
+        {
+          "title": "Einzelgespräch",
+          "text": "Führen Sie Gespräche ruhig, komfortabel und vertraulich."
+        },
+        {
+          "title": "Schulung in kleiner Gruppe",
+          "text": "Nutzen Sie Bildschirm und Flipchart für Schulungen oder Workshops."
+        },
+        {
+          "title": "Videokonferenz",
+          "text": "Verbinden Sie Ihre Geräte per HDMI oder Chromecast und nutzen Sie Glasfaser."
+        },
+        {
+          "title": "Arbeitssitzung",
+          "text": "Bringen Sie ein Projekt voran oder veranstalten Sie einen Workshop."
+        }
+      ]
+    },
+    "equipment": {
+      "title": "Vollständig ausgestattet und sofort einsatzbereit",
+      "intro": "Raum und Gemeinschaftsbereiche bieten alles für einen reibungslosen Arbeitstag.",
+      "items": [
+        {
+          "title": "Bis zu 9 Personen",
+          "text": "Geeignet für Meetings, Gespräche und Schulungen in kleiner Runde."
+        },
+        {
+          "title": "Bildschirm und Präsentation",
+          "text": "Wandbildschirm, HDMI, Chromecast und Flipchart."
+        },
+        {
+          "title": "Professionelle Glasfaser",
+          "text": "Schnelle, sichere Verbindung über WLAN oder RJ45-Kabel."
+        },
+        { "title": "Komfort", "text": "Ein ruhiger, klimatisierter Raum für angenehmes Arbeiten." },
+        {
+          "title": "Küche und Getränke",
+          "text": "Zugang zur Küche sowie zu heißen und kalten Getränken."
+        },
+        {
+          "title": "Büroservice",
+          "text": "Drucker, Scanner und Bindegerät stehen vor Ort zur Verfügung."
+        }
+      ]
+    },
+    "location": {
+      "title": "Gut erreichbar in Straßburg-Meinau",
+      "address": "Welcome Coworking\n204 avenue de Colmar\n67100 Strasbourg",
+      "text": "Nahe Meinau und der Straßburger Innenstadt erreichen Sie den Raum mit den Tramlinien A und E an der Haltestelle Lycée Couffignal sowie über den Bahnhof Krimmeri-Meinau. Auch von der M35 ist die Anfahrt bequem; rund um das Gebäude stehen kostenlose Parkplätze zur Verfügung.",
+      "button": "Route anzeigen"
+    },
+    "trust": {
+      "title": "Ein bewährter Ort für Berufstätige",
+      "text": "Welcome Coworking empfängt seit 2017 Berufstätige. Mehr als 100 Unternehmen haben bereits in unseren Räumen gearbeitet, sich ausgetauscht und Projekte entwickelt."
+    },
+    "faq": {
+      "title": "Häufige Fragen zum Besprechungsraum",
+      "items": [
+        {
+          "question": "Was kostet der Besprechungsraum?",
+          "answer": "Externe Buchungen kosten 60 € zzgl. MwSt. pro Halbtag oder 100 € zzgl. MwSt. pro Tag. Welcome-Flex-Mitglieder zahlen zusätzlich zu ihrem Monatsbeitrag von 45 € zzgl. MwSt. einen Stundentarif von 10 € zzgl. MwSt."
+        },
+        {
+          "question": "Wie viele Personen finden im Raum Platz?",
+          "answer": "Der Besprechungsraum von Welcome Coworking bietet Platz für bis zu 9 Personen."
+        },
+        {
+          "question": "Kann der Raum stundenweise gebucht werden?",
+          "answer": "Der Stundentarif von 10 € zzgl. MwSt. gilt ausschließlich für Welcome-Flex-Mitglieder. Externe Unternehmen können einen Halbtag oder einen ganzen Tag buchen."
+        },
+        {
+          "question": "Eignet sich der Raum für Schulungen?",
+          "answer": "Ja, er eignet sich für Schulungen, Workshops und Meetings in kleinen Gruppen mit bis zu 9 Personen."
+        },
+        {
+          "question": "Welche Ausstattung ist vorhanden?",
+          "answer": "Der Raum bietet einen Wandbildschirm, HDMI und Chromecast, ein Flipchart, professionelle Glasfaser über WLAN oder RJ45 sowie eine Klimaanlage."
+        },
+        {
+          "question": "Wo befindet sich der Raum?",
+          "answer": "Welcome Coworking befindet sich in der 204 avenue de Colmar im Straßburger Stadtteil Meinau, nahe der Tramhaltestelle Lycée Couffignal und dem Bahnhof Krimmeri-Meinau."
+        }
+      ]
+    },
     "ctaTitle": "Planen Sie ein Meeting in Straßburg?",
     "ctaText": "Lassen Sie uns gemeinsam über Ihr Vorhaben sprechen."
   },

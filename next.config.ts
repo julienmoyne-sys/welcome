@@ -12,6 +12,10 @@ const SECTION_REDIRECTS = ["acces", "espaces", "formules", "references"];
 
 const WORDPRESS_REDIRECTS = [
   {
+    source: "/location-salle-reunion-strasbourg-evenementiel",
+    destination: "/salle-de-reunion",
+  },
+  {
     source: "/coworking-strasbourg-espaces",
     destination: "/comparatif-solutions",
   },

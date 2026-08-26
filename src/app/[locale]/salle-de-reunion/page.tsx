@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-
-import meetingRoomImage from "@/assets/salle-reunion-pro.png";
-import { SpacePresentationPage } from "@/components/SpacePresentationPage";
+import { MeetingRoomPage as MeetingRoomLanding } from "@/components/MeetingRoomPage";
 import { routing } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";
 
@@ -27,16 +24,5 @@ export async function generateMetadata({
 
 export default async function MeetingRoomPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "meetingRoomPage" });
-
-  return (
-    <SpacePresentationPage
-      locale={locale}
-      path={PATH}
-      namespace="meetingRoomPage"
-      image={meetingRoomImage}
-      kind="meetingRoom"
-      solutionsBackLabel={t("backSolutions")}
-    />
-  );
+  return <MeetingRoomLanding locale={locale} />;
 }

@@ -30,10 +30,10 @@
       "ogDescription": "Bright, ready-to-use private offices in a warm coworking space."
     },
     "meetingRoom": {
-      "title": "Meeting room in Strasbourg — Welcome Coworking",
-      "description": "Book a quiet, fully equipped meeting room in Strasbourg for team meetings, client presentations and video calls.",
-      "ogTitle": "The meeting room — Welcome Coworking Strasbourg",
-      "ogDescription": "An equipped room for up to 12 people, with display and video conferencing."
+      "title": "Meeting room hire in Strasbourg | Welcome Coworking",
+      "description": "Hire a fully equipped meeting room in Strasbourg Meinau for up to 9 people, with screen, flip chart, fibre and air conditioning. From €60 excl. VAT.",
+      "ogTitle": "Meeting room hire in Strasbourg",
+      "ogDescription": "An equipped meeting room for up to 9 people in Strasbourg Meinau, from €60 excl. VAT per half-day."
     },
     "kitchenLounge": {
       "title": "Kitchen and lounge — Welcome Coworking Strasbourg",
@@ -268,26 +268,126 @@
     }
   },
   "meetingRoomPage": {
-    "back": "Back to the spaces",
-    "backSolutions": "Back to the solutions",
     "eyebrow": "The meeting room",
-    "titleLead": "A setting that moves",
-    "titleHighlight": "ideas forward.",
-    "lead": "Bring your team together and welcome clients in a comfortable, equipped room designed for productive conversations.",
-    "visit": "Book a visit",
+    "title": "Meeting room hire in Strasbourg",
+    "tagline": "A setting that moves ideas forward",
+    "lead": "Bring your team together and welcome clients in a comfortable, quiet and fully equipped room in Strasbourg’s Meinau district. Welcome Coworking hosts up to 9 people for meetings, presentations, training sessions, interviews and video calls.",
+    "availability": "Check availability",
     "imageAlt": "Welcome meeting room with large wooden table, black chairs and display",
-    "detailsEyebrow": "Your meetings",
-    "detailsTitle": "Everything is ready when you are.",
-    "detailsText": "Team meeting, client presentation or video call: settle into a quiet, professional air-conditioned glass-partitioned room.",
-    "features": [
-      {
-        "title": "Up to 9 people",
-        "text": "Ideal for small-scale meetings and training sessions, as well as one-to-one interviews."
-      },
-      { "title": "Wall-mounted screen & flip chart", "text": "Present your content comfortably." },
-      { "title": "Services", "text": "Kitchen, hot and cold drinks, binding machine and more." },
-      { "title": "Internet", "text": "Professional, secure fibre connection via Wi-Fi or RJ45." }
-    ],
+    "pricing": {
+      "title": "Straightforward meeting room rates",
+      "cards": [
+        {
+          "title": "External booking",
+          "price": "€60 excl. VAT per half-day · €100 excl. VAT per day",
+          "details": [
+            "Up to 9 people",
+            "Equipment and fibre connection included",
+            "Half-day or full-day booking"
+          ],
+          "button": "Request a booking",
+          "href": "/contact"
+        },
+        {
+          "title": "Welcome Flex members",
+          "price": "€45 excl. VAT/month + €10 excl. VAT/hour",
+          "details": [
+            "Hourly rate exclusively for Flex members",
+            "No commitment",
+            "Equipment and fibre connection included"
+          ],
+          "button": "Explore the Flex plan",
+          "href": "/comparatif-solutions"
+        }
+      ]
+    },
+    "uses": {
+      "title": "A room for every professional appointment",
+      "intro": "A private, versatile space where you can work efficiently, welcome guests and share ideas.",
+      "items": [
+        { "title": "Team meeting", "text": "Bring up to 9 colleagues together around one table." },
+        {
+          "title": "Client presentation",
+          "text": "Present your content on the wall-mounted screen in a professional setting."
+        },
+        { "title": "One-to-one interview", "text": "Talk in comfort and privacy in a quiet room." },
+        {
+          "title": "Small-group training",
+          "text": "Run a training session or workshop with a screen and flip chart."
+        },
+        {
+          "title": "Video call",
+          "text": "Connect via HDMI or Chromecast and make the most of fibre broadband."
+        },
+        {
+          "title": "Working session",
+          "text": "Move a project forward or run a workshop in a dedicated environment."
+        }
+      ]
+    },
+    "equipment": {
+      "title": "A fully equipped, ready-to-use meeting room",
+      "intro": "The room and shared areas provide everything you need for a smooth working day.",
+      "items": [
+        {
+          "title": "Up to 9 people",
+          "text": "Ideal for meetings, interviews and training in small groups."
+        },
+        {
+          "title": "Screen and presentations",
+          "text": "Wall-mounted screen, HDMI, Chromecast and flip chart."
+        },
+        {
+          "title": "Professional fibre",
+          "text": "Fast, secure connection over Wi-Fi or RJ45 cable."
+        },
+        { "title": "Comfort", "text": "A quiet, air-conditioned room for comfortable working." },
+        { "title": "Kitchen and drinks", "text": "Access to the kitchen and hot and cold drinks." },
+        {
+          "title": "Office services",
+          "text": "Printer, scanner and binding machine available on site."
+        }
+      ]
+    },
+    "location": {
+      "title": "Easy to reach in Strasbourg Meinau",
+      "address": "Welcome Coworking\n204 avenue de Colmar\n67100 Strasbourg",
+      "text": "Close to the Meinau district and central Strasbourg, the room is served by tram lines A and E at Lycée Couffignal and Krimmeri-Meinau railway station. It is easy to reach from the M35, with free parking around the building.",
+      "button": "Get directions"
+    },
+    "trust": {
+      "title": "A trusted place for professionals",
+      "text": "Welcome Coworking has welcomed professionals since 2017. More than 100 companies have already worked, met and developed their projects in our spaces."
+    },
+    "faq": {
+      "title": "Meeting room FAQs",
+      "items": [
+        {
+          "question": "How much does the meeting room cost?",
+          "answer": "External bookings cost €60 excl. VAT for a half-day or €100 excl. VAT for a full day. Welcome Flex members pay €10 excl. VAT per hour in addition to their €45 excl. VAT monthly membership."
+        },
+        {
+          "question": "How many people can the room accommodate?",
+          "answer": "The Welcome Coworking meeting room accommodates up to 9 people."
+        },
+        {
+          "question": "Can the room be booked by the hour?",
+          "answer": "The €10 excl. VAT hourly rate is exclusively for Welcome Flex members. External companies can book a half-day or full day."
+        },
+        {
+          "question": "Is the room suitable for training?",
+          "answer": "Yes. It suits training sessions, workshops and small-group meetings for up to 9 people."
+        },
+        {
+          "question": "What equipment is available?",
+          "answer": "The room includes a wall-mounted screen, HDMI and Chromecast connections, a flip chart, professional fibre over Wi-Fi or RJ45, and air conditioning."
+        },
+        {
+          "question": "Where is the room?",
+          "answer": "Welcome Coworking is at 204 avenue de Colmar in Strasbourg’s Meinau district, near the Lycée Couffignal tram stop and Krimmeri-Meinau station."
+        }
+      ]
+    },
     "ctaTitle": "Planning a meeting in Strasbourg?",
     "ctaText": "Let's discuss your project together."
   },
