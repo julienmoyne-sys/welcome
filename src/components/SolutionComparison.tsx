@@ -287,7 +287,7 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                 {plan.price}
               </p>
               <p className="mt-1 font-inter text-[10px] leading-snug text-welcome-body/60">
-                {t("priceSuffix")}
+                {t(PLAN_IDS[index] === "private-office" ? "officePriceSuffix" : "priceSuffix")}
               </p>
             </article>
           ))}
@@ -455,7 +455,9 @@ export function SolutionComparison({ contactTitle }: { contactTitle: string }) {
                       {plan.price}
                     </p>
                     <p className="mt-2 font-inter text-[12px] text-welcome-body/60">
-                      {t("priceSuffix")}
+                      {t(
+                        PLAN_IDS[index] === "private-office" ? "officePriceSuffix" : "priceSuffix",
+                      )}
                     </p>
                   </div>
                 ))}

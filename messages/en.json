@@ -243,7 +243,7 @@
       "title": "Fully equipped private office rental in Strasbourg",
       "paragraphs": [
         "Welcome Coworking offers fully equipped, enclosed private offices in Strasbourg, designed for quiet, focused work with the benefits of a shared workspace. Depending on your needs, you can rent a private office configured for one, two or three workstations. Each office includes furniture, ergonomic chairs, storage, professional fibre Wi-Fi and independent 24/7 access.",
-        "Plans range from €425 to €700 excluding VAT per month, with no minimum commitment. At 204 avenue de Colmar, close to the Couffignal tram stop, members also enjoy shared spaces, the kitchen and lounge, and access to the meeting room."
+        "Plans start at €575 excluding VAT per month, with no minimum commitment. At 204 avenue de Colmar, close to the Couffignal tram stop, members also enjoy shared spaces, the kitchen and lounge, and access to the meeting room."
       ],
       "links": [
         "Explore the meeting room",
@@ -262,7 +262,7 @@
         },
         {
           "question": "How much does a private office cost and what is the commitment?",
-          "answer": "Private offices range from €425 to €700 excluding VAT per month, with no minimum commitment. Contact Welcome to find the right plan for your team."
+          "answer": "Private offices start at €575 excluding VAT per month, with no minimum commitment. Contact Welcome to find the right plan for your team."
         }
       ]
     }
@@ -421,12 +421,13 @@
     "cseModalTitle": "Major brand discounts",
     "chatGptModalTitle": "ChatGPT Business at Welcome! Coworking Strasbourg",
     "priceSuffix": "excl. VAT / desk / month",
+    "officePriceSuffix": "excl. VAT / month",
     "swipe": "Swipe to compare plans",
     "plans": [
       { "kicker": "Nomad", "name": "Flex", "price": "€45" },
       { "kicker": "Nomad", "name": "Flex+", "price": "€90" },
       { "kicker": "Resident", "name": "Open Space", "price": "€190 to €300" },
-      { "kicker": "Resident", "name": "Private Office", "price": "€425 to €700" }
+      { "kicker": "Resident", "name": "Private Office", "price": "From €575" }
     ],
     "groups": [
       {
@@ -764,6 +765,21 @@
     "ctaVisit": "Book a visit",
     "ctaFaq": "View the FAQ"
   },
+  "launchOffer": {
+    "eyebrow": "Launch offer",
+    "title": "Your private office. Your price guaranteed.",
+    "summary": "Private office with one workstation and a window",
+    "unit": "excl. VAT / month",
+    "instead": "instead of",
+    "saving": "Save €80 excl. VAT every month",
+    "features": ["With a window", "As-new condition", "Individual air conditioning"],
+    "guarantee": "Fixed price guaranteed for the entire duration of your contract.",
+    "cta": "Call now",
+    "details": "Discover the offer",
+    "availability": "Subject to availability.",
+    "close": "Close offer",
+    "intro": "This offer applies to a private office with one workstation and a window, in as-new condition, with lighting and individual air conditioning, for maximum privacy and confidentiality."
+  },
   "pricing": {
     "eyebrow": "Our solutions",
     "title": "Choose your own pace.",
@@ -798,7 +814,7 @@
           "Dedicated desk",
           "Meeting credit included",
           "ChatGPT Business*",
-          "€425 to €700 excl. VAT / month"
+          "From €575 excl. VAT / month"
         ]
       },
       "meetingRoom": {

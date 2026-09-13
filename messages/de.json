@@ -246,7 +246,7 @@
       "title": "Ausgestattete Privatbüros in Straßburg mieten",
       "paragraphs": [
         "Welcome Coworking bietet geschlossene, vollständig ausgestattete Privatbüros in Straßburg: ruhig genug für konzentriertes Arbeiten und zugleich eingebunden in einen Coworking-Space. Je nach Bedarf können Sie ein Privatbüro mit einem, zwei oder drei Arbeitsplätzen mieten. Jedes Büro verfügt über Mobiliar, ergonomische Stühle, Stauraum, professionelles Glasfaser-WLAN und eigenständigen Zugang rund um die Uhr.",
-        "Die Angebote kosten 425 bis 700 € netto pro Monat und haben keine Mindestlaufzeit. In der 204 avenue de Colmar, direkt an der Tramhaltestelle Couffignal, stehen Ihnen außerdem die Gemeinschaftsbereiche, Küche und Lounge sowie der Besprechungsraum zur Verfügung."
+        "Die Angebote sind ab 575 € netto pro Monat erhältlich und haben keine Mindestlaufzeit. In der 204 avenue de Colmar, direkt an der Tramhaltestelle Couffignal, stehen Ihnen außerdem die Gemeinschaftsbereiche, Küche und Lounge sowie der Besprechungsraum zur Verfügung."
       ],
       "links": [
         "Besprechungsraum entdecken",
@@ -265,7 +265,7 @@
         },
         {
           "question": "Was kostet ein privates Büro und wie lange ist die Laufzeit?",
-          "answer": "Private Büros kosten 425 bis 700 € netto pro Monat und werden ohne Mindestlaufzeit angeboten. Kontaktieren Sie Welcome, um das passende Angebot für Ihr Team zu finden."
+          "answer": "Private Büros sind ab 575 € netto pro Monat erhältlich und werden ohne Mindestlaufzeit angeboten. Kontaktieren Sie Welcome, um das passende Angebot für Ihr Team zu finden."
         }
       ]
     }
@@ -436,12 +436,13 @@
     "cseModalTitle": "Rabatte bei großen Marken",
     "chatGptModalTitle": "ChatGPT Business bei Welcome! Coworking Straßburg",
     "priceSuffix": "netto / Arbeitsplatz / Monat",
+    "officePriceSuffix": "netto / Monat",
     "swipe": "Wischen Sie, um die Angebote zu vergleichen",
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
       { "kicker": "Nomade", "name": "Flex+", "price": "90 €" },
       { "kicker": "Resident", "name": "Open Space", "price": "190 bis 300 €" },
-      { "kicker": "Resident", "name": "Privates Büro", "price": "425 bis 700 €" }
+      { "kicker": "Resident", "name": "Privates Büro", "price": "Ab 575 €" }
     ],
     "groups": [
       {
@@ -779,6 +780,21 @@
     "ctaVisit": "Besichtigung buchen",
     "ctaFaq": "FAQ ansehen"
   },
+  "launchOffer": {
+    "eyebrow": "Eröffnungsangebot",
+    "title": "Ihr privates Büro. Ihr garantierter Preis.",
+    "summary": "Privates Büro mit einem Arbeitsplatz und Fenster",
+    "unit": "netto / Monat",
+    "instead": "statt",
+    "saving": "Jeden Monat 80 € netto sparen",
+    "features": ["Mit Fenster", "Neuwertiger Zustand", "Individuelle Klimaanlage"],
+    "guarantee": "Garantierter Festpreis für die gesamte Vertragslaufzeit.",
+    "cta": "Jetzt anrufen",
+    "details": "Angebot entdecken",
+    "availability": "Nur solange Plätze verfügbar sind.",
+    "close": "Angebot schließen",
+    "intro": "Dieses Angebot gilt für ein neuwertiges privates Büro mit einem Arbeitsplatz, Fenster, Beleuchtung und individueller Klimaanlage für maximale Privatsphäre und Vertraulichkeit."
+  },
   "pricing": {
     "eyebrow": "Unsere Angebote",
     "title": "Wählen Sie Ihren Rhythmus.",
@@ -813,7 +829,7 @@
           "Fester Schreibtisch",
           "Meeting-Guthaben inklusive",
           "ChatGPT Business*",
-          "425 bis 700 € netto / Monat"
+          "Ab 575 € netto / Monat"
         ]
       },
       "meetingRoom": {

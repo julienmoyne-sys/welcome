@@ -253,7 +253,7 @@
       "title": "Location de bureaux privatifs équipés à Strasbourg",
       "paragraphs": [
         "Welcome Coworking propose des bureaux privatifs fermés et équipés à Strasbourg, conçus pour travailler au calme tout en profitant de l'énergie d'un espace de coworking. Selon vos besoins, vous pouvez louer un bureau privatif configuré pour 1, 2 ou 3 postes de travail. Chaque bureau dispose de mobilier, de fauteuils ergonomiques, de rangements, de la fibre professionnelle et d'un accès autonome 24/7.",
-        "Les formules, de 425 € à 700 € HT par mois, sont proposées sans minimum d'engagement. Au 204 avenue de Colmar, à proximité immédiate du tram Couffignal, vous bénéficiez aussi des espaces communs, de la cuisine et de l'espace détente, ainsi que de la salle de réunion."
+        "Les formules, à partir de 575 € HT par mois, sont proposées sans minimum d'engagement. Au 204 avenue de Colmar, à proximité immédiate du tram Couffignal, vous bénéficiez aussi des espaces communs, de la cuisine et de l'espace détente, ainsi que de la salle de réunion."
       ],
       "links": [
         "Découvrir la salle de réunion",
@@ -272,7 +272,7 @@
         },
         {
           "question": "Quel est le tarif et l'engagement d'un bureau privatif ?",
-          "answer": "Les bureaux privatifs sont proposés de 425 € à 700 € HT par mois, sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
+          "answer": "Les bureaux privatifs sont proposés à partir de 575 € HT par mois, sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
         }
       ]
     }
@@ -443,12 +443,13 @@
     "cseModalTitle": "Réductions grandes enseignes",
     "chatGptModalTitle": "ChatGPT Business chez Welcome! Coworking Strasbourg",
     "priceSuffix": "HT / poste / mois",
+    "officePriceSuffix": "HT / mois",
     "swipe": "Faites défiler pour comparer les offres",
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
       { "kicker": "Nomade", "name": "Flex+", "price": "90 €" },
       { "kicker": "Résident", "name": "Open Space", "price": "190 à 300 €" },
-      { "kicker": "Résident", "name": "Bureau privatif", "price": "425 à 700 €" }
+      { "kicker": "Résident", "name": "Bureau privatif", "price": "À partir de 575 €" }
     ],
     "groups": [
       {
@@ -786,6 +787,21 @@
     "ctaVisit": "Organiser une visite",
     "ctaFaq": "Consulter la FAQ"
   },
+  "launchOffer": {
+    "eyebrow": "Offre de lancement",
+    "title": "Votre bureau privatif. Votre prix garanti.",
+    "summary": "Bureau privatif 1 poste avec fenêtre",
+    "unit": "HT / mois",
+    "instead": "au lieu de",
+    "saving": "80 € HT économisés chaque mois",
+    "features": ["Avec fenêtre", "État neuf", "Climatisation individuelle"],
+    "guarantee": "Prix fixe garanti pendant toute la durée du contrat.",
+    "cta": "Appelez vite",
+    "details": "Découvrir l’offre",
+    "availability": "Dans la limite des places disponibles.",
+    "close": "Fermer l’offre",
+    "intro": "Cette offre concerne un bureau privatif 1 poste avec fenêtre, à l’état neuf, avec lumière et climatisation individuelle, pour un maximum d’intimité et de confidentialité."
+  },
   "pricing": {
     "eyebrow": "Nos solutions",
     "title": "Choisissez votre rythme.",
@@ -820,7 +836,7 @@
           "Bureau dédié",
           "Crédit réunion inclus",
           "ChatGPT Business*",
-          "425 € à 700 HT /mois"
+          "À partir de 575 € HT / mois"
         ]
       },
       "meetingRoom": {

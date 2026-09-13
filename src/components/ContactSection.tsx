@@ -25,8 +25,7 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] =
-    useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const update = (key: keyof typeof form, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -59,20 +58,16 @@ export function ContactSection({ showHeader = true }: { showHeader?: boolean }) 
       setStatus("success");
 
       // Conversion GA4 : uniquement après l'envoi réel du formulaire
-const gtag = (
-  window as unknown as {
-    gtag?: (
-      command: "event",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-).gtag;
+      const gtag = (
+        window as unknown as {
+          gtag?: (command: "event", eventName: string, params?: Record<string, unknown>) => void;
+        }
+      ).gtag;
 
-gtag?.("event", "generate_lead", {
-  event_category: "contact",
-  event_label: "contact_form",
-});
+      gtag?.("event", "generate_lead", {
+        event_category: "contact",
+        event_label: "contact_form",
+      });
 
       setForm({
         name: "",
@@ -90,10 +85,7 @@ gtag?.("event", "generate_lead", {
   };
 
   return (
-    <section
-      ref={ref}
-      className="bg-welcome-cream py-[100px] lg:py-[140px]"
-    >
+    <section ref={ref} className="bg-welcome-cream py-[100px] lg:py-[140px]">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
         {showHeader && (
           <div
@@ -106,8 +98,7 @@ gtag?.("event", "generate_lead", {
             </p>
 
             <h2 className="mt-4 font-manrope text-4xl font-semibold leading-[1.12] tracking-tight text-welcome-black md:text-5xl">
-              {t("titleLead")}{" "}
-              <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
+              {t("titleLead")} <span className="text-welcome-gold">{t("titleHighlight")}</span> ?
             </h2>
 
             <p className="mt-5 font-inter text-lg leading-relaxed text-welcome-body/80">
@@ -238,9 +229,7 @@ gtag?.("event", "generate_lead", {
                     </p>
                     <p className="font-inter text-sm text-welcome-body/70">
                       {t.rich("info.hours", {
-                        strong: (chunks) => (
-                          <strong className="font-bold">{chunks}</strong>
-                        ),
+                        strong: (chunks) => <strong className="font-bold">{chunks}</strong>,
                       })}
                     </p>
                   </div>
@@ -285,9 +274,7 @@ gtag?.("event", "generate_lead", {
                       placeholder={t("form.namePlaceholder")}
                     />
                     {errors.name && (
-                      <p className="mt-1.5 font-inter text-xs text-red-600">
-                        {errors.name}
-                      </p>
+                      <p className="mt-1.5 font-inter text-xs text-red-600">{errors.name}</p>
                     )}
                   </div>
 
@@ -297,9 +284,7 @@ gtag?.("event", "generate_lead", {
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
                       {t("form.company")}{" "}
-                      <span className="font-normal text-welcome-body/50">
-                        {t("form.optional")}
-                      </span>
+                      <span className="font-normal text-welcome-body/50">{t("form.optional")}</span>
                     </label>
                     <input
                       id="company"
@@ -329,9 +314,7 @@ gtag?.("event", "generate_lead", {
                       placeholder={t("form.emailPlaceholder")}
                     />
                     {errors.email && (
-                      <p className="mt-1.5 font-inter text-xs text-red-600">
-                        {errors.email}
-                      </p>
+                      <p className="mt-1.5 font-inter text-xs text-red-600">{errors.email}</p>
                     )}
                   </div>
 
@@ -341,9 +324,7 @@ gtag?.("event", "generate_lead", {
                       className="mb-2 block font-manrope text-sm font-semibold text-welcome-black"
                     >
                       {t("form.phone")}{" "}
-                      <span className="font-normal text-welcome-body/50">
-                        {t("form.optional")}
-                      </span>
+                      <span className="font-normal text-welcome-body/50">{t("form.optional")}</span>
                     </label>
                     <input
                       id="phone"
@@ -376,9 +357,7 @@ gtag?.("event", "generate_lead", {
                               : "border-welcome-black/10 bg-welcome-cream/40 text-welcome-body/80 hover:border-welcome-black/20"
                           }`}
                         >
-                          {selected && (
-                            <Check size={14} className="text-welcome-gold" />
-                          )}
+                          {selected && <Check size={14} className="text-welcome-gold" />}
                           {need}
                         </button>
                       );
@@ -386,9 +365,7 @@ gtag?.("event", "generate_lead", {
                   </div>
 
                   {errors.need && (
-                    <p className="mt-1.5 font-inter text-xs text-red-600">
-                      {errors.need}
-                    </p>
+                    <p className="mt-1.5 font-inter text-xs text-red-600">{errors.need}</p>
                   )}
                 </div>
 
@@ -410,9 +387,7 @@ gtag?.("event", "generate_lead", {
                   />
 
                   {errors.message && (
-                    <p className="mt-1.5 font-inter text-xs text-red-600">
-                      {errors.message}
-                    </p>
+                    <p className="mt-1.5 font-inter text-xs text-red-600">{errors.message}</p>
                   )}
                 </div>
 
@@ -431,9 +406,7 @@ gtag?.("event", "generate_lead", {
                     aria-describedby={errors.rgpd ? "rgpd-error" : undefined}
                     aria-invalid={errors.rgpd ? true : undefined}
                   >
-                    {form.rgpd && (
-                      <Check size={12} className="text-welcome-black" />
-                    )}
+                    {form.rgpd && <Check size={12} className="text-welcome-black" />}
                   </button>
 
                   <p
@@ -445,10 +418,7 @@ gtag?.("event", "generate_lead", {
                 </div>
 
                 {errors.rgpd && (
-                  <p
-                    id="rgpd-error"
-                    className="font-inter text-xs text-red-600"
-                  >
+                  <p id="rgpd-error" className="font-inter text-xs text-red-600">
                     {errors.rgpd}
                   </p>
                 )}
@@ -458,9 +428,7 @@ gtag?.("event", "generate_lead", {
                   disabled={status === "submitting"}
                   className="inline-flex h-[54px] w-full items-center justify-center rounded-[14px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg disabled:opacity-70 sm:w-auto"
                 >
-                  {status === "submitting"
-                    ? t("form.submitting")
-                    : t("form.submit")}
+                  {status === "submitting" ? t("form.submitting") : t("form.submit")}
                 </button>
 
                 {status === "success" && (
