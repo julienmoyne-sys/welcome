@@ -107,14 +107,21 @@
     "eyebrow": "Bienvenue chez Welcome.",
     "titleLine1": "Comme à la maison.",
     "titleLine2": "En beaucoup plus inspirant.",
-    "lead": "Découvrez le confort et la chaleur d’un intérieur, associés aux équipements et aux services d’un véritable environnement professionnel premium à <strong>Strasbourg</strong>.",
+    "lead": "Découvrez le confort et la chaleur d’un intérieur, un standing premium à <strong>Strasbourg</strong>. Exclusivement réservé à nos résidents, sans clients à la journée.",
     "ctaVisit": "Organiser une visite",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Découvrir Welcome",
-    "imageAlt": "Espace de coworking Welcome avec bar en bois, verrières noires, plantes et éclairage chaleureux"
+    "carouselLabel": "Photos des espaces Welcome",
+    "previousSlide": "Photo précédente",
+    "nextSlide": "Photo suivante",
+    "imageAlt1": "Espace de coworking Welcome avec grande table en bois, verrières noires, plantes et éclairage chaleureux",
+    "imageAlt2": "Bureau privatif Welcome avec mobilier en bois et vue au coucher du soleil",
+    "imageAlt3": "Open space Welcome avec bureaux en bois, verrières et végétation",
+    "imageAlt4": "Salle de réunion Welcome avec grande table en bois, fauteuils et écran"
   },
 
   "reassurance": {
+    "footnote": "* dans la limite d'un usage ou de consommations raisonnables",
     "items": [
       {
         "icon": "atmosphere",
@@ -127,9 +134,9 @@
         "text": "En tram, à vélo, en voiture ou en train"
       },
       {
-        "icon": "profiles",
-        "title": "Tous profils",
-        "text": "Pour nomades et résidents, sous contrat exclusivement"
+        "icon": "included",
+        "title": "Tout compris*",
+        "text": "ChatGPT Business, impressions, réunion, boissons chaudes, fruits frais, réductions"
       },
       {
         "icon": "workspace",
@@ -597,10 +604,10 @@
             ]
           },
           {
-            "label": "Boissons chaudes journalières",
+            "label": "Café/thé à volonté",
             "cells": [
-              { "type": "text", "label": "1" },
-              { "type": "text", "label": "1" },
+              { "type": "included" },
+              { "type": "included" },
               { "type": "included" },
               { "type": "included" }
             ]

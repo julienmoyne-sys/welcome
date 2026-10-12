@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { AccessSection } from "@/components/AccessSection";
@@ -7,6 +6,7 @@ import { EditorialSection } from "@/components/EditorialSection";
 import { ExploreSection } from "@/components/ExploreSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { HomeContactSection } from "@/components/HomeContactSection";
 import { JsonLd } from "@/components/JsonLd";
 import { PricingSection } from "@/components/PricingSection";
@@ -16,7 +16,6 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/metadata";
 import { GEO_META, localBusinessJsonLd } from "@/lib/seo";
-import heroImage from "@/assets/hero-welcome-real.png";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -47,27 +46,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <Header />
       <main>
-        <section className="relative flex min-h-[720px] w-full items-center">
+        <section className="relative flex min-h-[720px] w-full items-center overflow-hidden xl:min-h-[min(56.25vw,1200px)]">
           {/* Visuel d'en-tête, et LCP de la page : `priority` le fait précharger.
               En `<Image>` plutôt qu'en background CSS, il est optimisé (AVIF/WebP,
               variantes par largeur d'écran) et porte son texte alternatif. */}
-          <Image
-            src={heroImage}
-            alt={t("imageAlt")}
-            fill
-            fetchPriority="high"
-            loading="eager"
-            // `sizes="100vw"` sans déduction : la section est pleine largeur.
-            sizes="100vw"
-            // Photographie recouverte aux deux tiers par le dégradé ci-dessous :
-            // −45 % de poids par rapport au défaut de 75, sans perte perceptible.
-            quality={60}
-            className="welcome-photo object-cover object-center"
+          <HeroCarousel
+            alts={[t("imageAlt1"), t("imageAlt2"), t("imageAlt4")]}
+            previousLabel={t("previousSlide")}
+            nextLabel={t("nextSlide")}
+            slideLabel={t("carouselLabel")}
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-welcome-cream/95 via-welcome-cream/75 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-welcome-cream from-0% via-welcome-cream/95 via-40% to-transparent to-75% dark:hidden" />
+          <div className="pointer-events-none absolute inset-0 z-10 hidden bg-gradient-to-r from-welcome-cream/95 via-welcome-cream/75 to-transparent dark:block" />
 
-          <div className="relative mx-auto w-full max-w-[1400px] px-6 lg:px-10">
+          <div className="pointer-events-none relative z-20 mx-auto w-full max-w-[1400px] px-6 lg:px-10">
             <div className="max-w-2xl">
               <p className="font-manrope text-sm font-semibold uppercase tracking-[0.15em] text-welcome-gold">
                 {t("eyebrow")}
@@ -85,7 +78,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
                   href="/contact"
-                  className="hidden h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg lg:inline-flex"
+                  className="pointer-events-auto hidden h-[52px] items-center justify-center rounded-[12px] bg-welcome-gold px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg lg:inline-flex"
                 >
                   {t("ctaVisit")}
                 </Link>
@@ -93,13 +86,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   href="https://wa.me/33622805536"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-[52px] items-center justify-center rounded-[12px] bg-[#25D366] px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg lg:hidden"
+                  className="pointer-events-auto inline-flex h-[52px] items-center justify-center rounded-[12px] bg-[#25D366] px-8 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg lg:hidden"
                 >
                   {t("ctaWhatsapp")}
                 </a>
                 <Link
                   href="/#espaces"
-                  className="inline-flex h-[52px] items-center justify-center rounded-[12px] border border-welcome-black/20 bg-welcome-white/80 px-8 font-manrope text-[16px] font-semibold text-welcome-black backdrop-blur-sm transition-all duration-200 hover:bg-welcome-white hover:shadow-md"
+                  className="pointer-events-auto inline-flex h-[52px] items-center justify-center rounded-[12px] border border-welcome-black/20 bg-welcome-white/80 px-8 font-manrope text-[16px] font-semibold text-welcome-black backdrop-blur-sm transition-all duration-200 hover:bg-welcome-white hover:shadow-md"
                 >
                   {t("ctaDiscover")}
                 </Link>

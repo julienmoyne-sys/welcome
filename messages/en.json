@@ -107,14 +107,21 @@
     "eyebrow": "Welcome to Welcome.",
     "titleLine1": "Just like home.",
     "titleLine2": "Only far more inspiring.",
-    "lead": "Discover the comfort and warmth of a welcoming interior, combined with the amenities and services of a truly premium professional environment in <strong>Strasbourg</strong>.",
+    "lead": "Discover the comfort and warmth of a welcoming interior, with a premium standard in <strong>Strasbourg</strong>. Exclusively for our residents, with no day passes.",
     "ctaVisit": "Book a visit",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Discover Welcome",
-    "imageAlt": "Welcome coworking space with a wooden bar, black steel glazing, plants and warm lighting"
+    "carouselLabel": "Photos of Welcome workspaces",
+    "previousSlide": "Previous photo",
+    "nextSlide": "Next photo",
+    "imageAlt1": "Welcome coworking space with a large wooden table, black steel glazing, plants and warm lighting",
+    "imageAlt2": "Welcome private office with wooden furniture and a sunset view",
+    "imageAlt3": "Welcome open space with wooden desks, steel glazing and plants",
+    "imageAlt4": "Welcome meeting room with a large wooden table, armchairs and a screen"
   },
 
   "reassurance": {
+    "footnote": "* subject to reasonable use or consumption",
     "items": [
       {
         "icon": "atmosphere",
@@ -123,9 +130,9 @@
       },
       { "icon": "access", "title": "Easy access", "text": "By tram, bike, car or train" },
       {
-        "icon": "profiles",
-        "title": "All profiles",
-        "text": "For nomads and residents, exclusively under contract"
+        "icon": "included",
+        "title": "All included*",
+        "text": "ChatGPT Business, printing, meeting room, hot drinks, fresh fruit, discounts"
       },
       {
         "icon": "workspace",
@@ -575,10 +582,10 @@
             ]
           },
           {
-            "label": "Daily hot drinks",
+            "label": "Unlimited coffee/tea",
             "cells": [
-              { "type": "text", "label": "1" },
-              { "type": "text", "label": "1" },
+              { "type": "included" },
+              { "type": "included" },
               { "type": "included" },
               { "type": "included" }
             ]

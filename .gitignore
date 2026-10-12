@@ -40,3 +40,10 @@ src/lib/contact.server.ts
 .env.local
 
 .env.local
+
+# Local review and generated artifacts
+/output/
+/.codex/visualizations/
+/tmp/
+/({alt
+/i.alt.includes('coworking')

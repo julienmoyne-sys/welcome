@@ -3,17 +3,17 @@ import {
   BriefcaseBusiness,
   CalendarDays,
   CarFront,
+  PackageCheck,
   Route,
   Sparkles,
   TramFront,
-  Users,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const ICONS = {
   atmosphere: Sparkles,
   access: Route,
-  profiles: Users,
+  included: PackageCheck,
   workspace: BriefcaseBusiness,
   tram: TramFront,
   bike: Bike,
@@ -58,6 +58,9 @@ export function ReassuranceSection() {
           })}
         </div>
       </div>
+      <p className="mx-auto mt-3 w-full max-w-[1280px] text-right font-inter text-[12px] text-welcome-black/60">
+        {t("footnote")}
+      </p>
     </section>
   );
 }

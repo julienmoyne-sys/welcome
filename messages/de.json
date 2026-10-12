@@ -107,14 +107,21 @@
     "eyebrow": "Willkommen bei Welcome.",
     "titleLine1": "Wie zu Hause.",
     "titleLine2": "Nur viel inspirierender.",
-    "lead": "Entdecken Sie den Komfort und die Wärme eines wohnlichen Interieurs, verbunden mit der Ausstattung und den Services eines echten professionellen Premium-Arbeitsumfelds in <strong>Straßburg</strong>.",
+    "lead": "Entdecken Sie den Komfort und die Wärme eines wohnlichen Interieurs mit Premium-Ambiente in <strong>Straßburg</strong>. Exklusiv unseren festen Mitgliedern vorbehalten – ohne Tagesgäste.",
     "ctaVisit": "Besichtigung buchen",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Welcome entdecken",
-    "imageAlt": "Coworking-Space Welcome mit Holztheke, schwarzen Sprossenfenstern, Pflanzen und warmer Beleuchtung"
+    "carouselLabel": "Fotos der Welcome-Arbeitsbereiche",
+    "previousSlide": "Vorheriges Foto",
+    "nextSlide": "Nächstes Foto",
+    "imageAlt1": "Welcome-Coworking-Space mit großem Holztisch, schwarzen Sprossenfenstern, Pflanzen und warmer Beleuchtung",
+    "imageAlt2": "Privatbüro bei Welcome mit Holzmöbeln und Blick auf den Sonnenuntergang",
+    "imageAlt3": "Welcome-Open-Space mit Holztischen, Sprossenfenstern und Pflanzen",
+    "imageAlt4": "Welcome-Besprechungsraum mit großem Holztisch, Sesseln und Bildschirm"
   },
 
   "reassurance": {
+    "footnote": "* im Rahmen einer angemessenen Nutzung oder eines angemessenen Verbrauchs",
     "items": [
       { "icon": "atmosphere", "title": "Warme Atmosphäre", "text": "Holz, Pflanzen & Tageslicht" },
       {
@@ -123,9 +130,9 @@
         "text": "Mit Tram, Fahrrad, Auto oder Zug"
       },
       {
-        "icon": "profiles",
-        "title": "Alle Profile",
-        "text": "Für Nomaden und feste Mieter, ausschließlich mit Vertrag"
+        "icon": "included",
+        "title": "Alles inklusive*",
+        "text": "ChatGPT Business, Ausdrucke, Besprechungsraum, Heißgetränke, frisches Obst, Rabatte"
       },
       {
         "icon": "workspace",
@@ -590,10 +597,10 @@
             ]
           },
           {
-            "label": "Tägliche Heißgetränke",
+            "label": "Kaffee/Tee unbegrenzt",
             "cells": [
-              { "type": "text", "label": "1" },
-              { "type": "text", "label": "1" },
+              { "type": "included" },
+              { "type": "included" },
               { "type": "included" },
               { "type": "included" }
             ]

@@ -125,6 +125,7 @@
   --welcome-ink-fg: #ffffff;
   --welcome-line: rgba(11, 11, 11, 0.08);
   --welcome-photo-filter: none;
+  --welcome-hero-photo-filter: brightness(0.7) contrast(1.16) saturate(0.92);
   --comparison-criteria-bg: #f1f3f1;
   --comparison-criteria-header-bg: #edf0ed;
   --comparison-criteria-hover-bg: #e8ece8;
@@ -178,6 +179,7 @@
   --welcome-ink-fg: #121212;
   --welcome-line: rgba(255, 255, 255, 0.12);
   --welcome-photo-filter: brightness(0.8) contrast(1.05);
+  --welcome-hero-photo-filter: brightness(0.8) contrast(1.05);
   --comparison-criteria-bg: #272a27;
   --comparison-criteria-header-bg: #292d29;
   --comparison-criteria-hover-bg: #2e332e;
@@ -208,6 +210,12 @@ html {
 .welcome-photo {
   filter: var(--welcome-photo-filter);
   transition: filter 300ms ease;
+}
+
+/* The hero images are naturally very bright. Keep their depth in light mode
+   instead of letting the cream overlay wash out the furniture and textures. */
+.welcome-hero-photo {
+  filter: var(--welcome-hero-photo-filter);
 }
 
 /* Logo stays perfectly legible in both modes. */
