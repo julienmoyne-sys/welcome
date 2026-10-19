@@ -1,5 +1,11 @@
 {
   "metadata": {
+    "individualOffice": {
+      "title": "Privatbüro für 1 Person in Straßburg | Welcome Coworking",
+      "description": "Sie suchen ein Privatbüro, um allein in Straßburg zu arbeiten? Welcome bietet abgeschlossene, ausgestattete Büros in der 204 avenue de Colmar in Straßburg, mit Zugang rund um die Uhr und ohne Mindestvertragsdauer, inklusive Möbeln, Internet und kostenlosen Parkmöglichkeiten rund um das Gebäude.",
+      "ogTitle": "Privatbüro für 1 Person in Straßburg | Welcome Coworking",
+      "ogDescription": "Sie suchen ein Privatbüro, um allein in Straßburg zu arbeiten? Welcome bietet abgeschlossene, ausgestattete Büros in der 204 avenue de Colmar in Straßburg, mit Zugang rund um die Uhr und ohne Mindestvertragsdauer, inklusive Möbeln, Internet und kostenlosen Parkmöglichkeiten rund um das Gebäude."
+    },
     "site": {
       "title": "Welcome Coworking Straßburg",
       "description": "Welcome Coworking in Straßburg: Open Space, private Büros und Besprechungsraum in einer hellen, einladenden Umgebung.",
@@ -263,6 +269,7 @@
       ],
       "individualOffice": {
         "title": "Einzelbüro in Straßburg",
+        "link": "Privatbüro für 1 Person in Straßburg",
         "paragraphs": [
           "Sie sind selbstständig, beraten Unternehmen oder gründen ein Unternehmen und suchen ein Einzelbüro in Straßburg? Im Stadtteil Meinau bietet Welcome Coworking geschlossene Büros für eine Person, die konzentriertes Arbeiten, Komfort und Vertraulichkeit verbinden. In Ihrem eigenen Raum können Sie Unterlagen bearbeiten, Videokonferenzen führen und mit Kunden sprechen, abseits der Gemeinschaftsbereiche.",
           "Mobiliar, ein ergonomischer Stuhl, Stauraum und professionelles Glasfaserinternet erleichtern Ihren Arbeitsalltag. Tageslicht, eine individuelle Klimaanlage und eigenständiger Zugang rund um die Uhr ermöglichen es Ihnen, in Ihrem eigenen Rhythmus zu arbeiten. Zugleich genießen Sie die Vorteile des Coworkings: Küche, Lounge und Besprechungsraum. In der 204 avenue de Colmar, nahe der Tramhaltestelle Couffignal, verbindet Ihr Büro in Straßburg-Meinau Selbstständigkeit und Geselligkeit, ohne Mindestlaufzeit."
@@ -1031,5 +1038,70 @@
     "backHome": "Zurück zur Startseite",
     "lastUpdated": "Letzte Aktualisierung: August 2026",
     "legalEyebrow": "Rechtliche Hinweise"
+  },
+  "individualOfficePage": {
+    "title": "Privatbüro für 1 Person in Straßburg | Welcome Coworking",
+    "lead": "Sie suchen ein Privatbüro, um allein in Straßburg zu arbeiten? Welcome bietet abgeschlossene, ausgestattete Büros in der 204 avenue de Colmar in Straßburg, mit Zugang rund um die Uhr und ohne Mindestvertragsdauer, inklusive Möbeln, Internet und kostenlosen Parkmöglichkeiten rund um das Gebäude.",
+    "price": "Ab 450 € netto pro Monat",
+    "conditions": "Aktuell ausgewiesener Einstiegspreis für Privatbüros. Kontaktieren Sie Welcome, um das Angebot und die Verfügbarkeit eines Büros für eine Person zu bestätigen.",
+    "includedTitle": "Das ist enthalten",
+    "included": [
+      "Abgeschlossenes, ausgestattetes Büro: Möbel, ergonomischer Stuhl und Stauraum",
+      "Professioneller Glasfaseranschluss mit WLAN",
+      "Eigenständiger Zugang rund um die Uhr, 7 Tage die Woche",
+      "Fenster, individuelle Klimaanlage und Beleuchtung",
+      "Zugang zu Besprechungsraum, Küche und Lounge",
+      "Drucker, Scanner und Bindegerät verfügbar"
+    ],
+    "costTitle": "Was kostet ein Einzelbüro in Straßburg?",
+    "cost": [
+      {
+        "title": "Coworking im Open Space",
+        "text": "Sie nutzen einen Arbeitsplatz in einem mit anderen Personen geteilten Raum. Dieses Angebot umfasst kein abgeschlossenes Einzelbüro."
+      },
+      {
+        "title": "Gelegentliche Anmietung",
+        "text": "Eine stundenweise, halbtägige oder tageweise Buchung deckt einen gelegentlichen Bedarf. Der Preis lässt sich nicht direkt mit einer monatlichen Miete vergleichen."
+      },
+      {
+        "title": "Monatliches Privatbüro",
+        "text": "Sie nutzen ein abgeschlossenes Büro für die tägliche Arbeit allein. Das Welcome-Angebot gehört in diese Kategorie: ab 450 € netto pro Monat, ohne Mindestvertragsdauer. Vergleichen Sie auch die enthaltene Ausstattung, Leistungen und Zugangsbedingungen."
+      }
+    ],
+    "audienceTitle": "Für wen ist das geeignet?",
+    "audience": [
+      "Selbstständige, die einen eigenen Arbeitsbereich suchen",
+      "Berater, die Ruhe für ihre Aufgaben und Videokonferenzen benötigen",
+      "Unternehmensgründer, die ein ausgestattetes Büro suchen",
+      "Beschäftigte im Homeoffice, die nicht mehr von zu Hause arbeiten möchten"
+    ],
+    "locationTitle": "Wo liegt Ihr Büro in Straßburg?",
+    "location": "204 avenue de Colmar, 67100 Straßburg, Stadtteil Meinau. Tram A und E, Haltestelle Couffignal. Anfahrt mit dem Auto über die M35 und kostenlose Parkmöglichkeiten rund um das Gebäude.",
+    "map": "Route anzeigen",
+    "back": "Alle Privatbüros",
+    "contact": "Besichtigung anfragen und Verfügbarkeit prüfen",
+    "faqTitle": "Häufige Fragen",
+    "faq": [
+      {
+        "question": "Wo kann ich ein Privatbüro für 1 Person in Straßburg mieten?",
+        "answer": "Welcome Coworking bietet abgeschlossene Büros für eine Person in der 204 avenue de Colmar, 67100 Straßburg, nahe der Tramhaltestelle Couffignal."
+      },
+      {
+        "question": "Was kostet ein Einzelbüro bei Welcome in Straßburg?",
+        "answer": "Privatbüros werden ab 450 € netto pro Monat angeboten. Kontaktieren Sie Welcome, um das passende Angebot für eine Person und die Verfügbarkeit zu bestätigen."
+      },
+      {
+        "question": "Kann ich ein Einzelbüro ohne Mindestvertragsdauer mieten?",
+        "answer": "Ja, die Privatbüro-Angebote von Welcome haben keine Mindestvertragsdauer."
+      },
+      {
+        "question": "Was ist bei der Miete eines Privatbüros für eine Person enthalten?",
+        "answer": "Das Büro ist abgeschlossen und mit Möbeln, ergonomischem Stuhl, Stauraum, professionellem Glasfaserinternet, individueller Klimaanlage und Beleuchtung ausgestattet. Sie haben außerdem Zugang zu Besprechungsraum, Küche und Lounge sowie eigenständigen Zugang rund um die Uhr, 7 Tage die Woche."
+      },
+      {
+        "question": "Wie erreiche ich das Büro mit der Tram oder dem Auto?",
+        "answer": "Die Adresse lautet 204 avenue de Colmar in Straßburg. Die Tramlinien A und E bedienen die Haltestelle Couffignal. Die Anfahrt ist unter anderem über die M35 möglich; Parkmöglichkeiten rund um das Gebäude sind kostenlos."
+      }
+    ]
   }
 }

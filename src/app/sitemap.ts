@@ -13,6 +13,11 @@ const PAGES = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
   { path: "/comparatif-solutions", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/open-space", changeFrequency: "weekly" as const, priority: 0.8 },
+  {
+    path: "/bureau-privatif-1-personne-strasbourg",
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  },
   { path: "/bureaux-privatifs", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/salle-de-reunion", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/cuisine-detente", changeFrequency: "weekly" as const, priority: 0.7 },

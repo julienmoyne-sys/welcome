@@ -66,7 +66,7 @@ export async function SpacePresentationPage({
       ? (t.raw("seoContent") as {
           title: string;
           paragraphs: string[];
-          individualOffice: { title: string; paragraphs: string[] };
+          individualOffice: { title: string; paragraphs: string[]; link: string };
           links: string[];
           faqTitle: string;
           faq: { question: string; answer: string }[];
@@ -215,6 +215,12 @@ export async function SpacePresentationPage({
                       </p>
                     ))}
                   </div>
+                  <Link
+                    href="/bureau-privatif-1-personne-strasbourg"
+                    className="mt-6 inline-block font-medium text-welcome-gold underline underline-offset-4"
+                  >
+                    {seoContent.individualOffice.link}
+                  </Link>
                 </section>
 
                 <div className="mt-16 sm:mt-20">

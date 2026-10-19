@@ -1,5 +1,11 @@
 {
   "metadata": {
+    "individualOffice": {
+      "title": "Bureau privatif 1 personne à Strasbourg | Welcome Coworking",
+      "description": "Vous cherchez un bureau privatif pour travailler seul à Strasbourg ? Welcome propose des bureaux fermés et équipés au 204 avenue de Colmar à Strasbourg, accessibles 24h/24 et sans durée minimale d’engagement, avec mobilier, internet et stationnement gratuit autour du bâtiment.",
+      "ogTitle": "Bureau privatif 1 personne à Strasbourg | Welcome Coworking",
+      "ogDescription": "Vous cherchez un bureau privatif pour travailler seul à Strasbourg ? Welcome propose des bureaux fermés et équipés au 204 avenue de Colmar à Strasbourg, accessibles 24h/24 et sans durée minimale d’engagement, avec mobilier, internet et stationnement gratuit autour du bâtiment."
+    },
     "site": {
       "title": "Welcome Coworking Strasbourg",
       "description": "Welcome Coworking à Strasbourg : open space, bureaux privatifs et salle de réunion dans un lieu lumineux et chaleureux.",
@@ -270,6 +276,7 @@
       ],
       "individualOffice": {
         "title": "Bureau individuel à Strasbourg",
+        "link": "Bureau privatif 1 personne à Strasbourg",
         "paragraphs": [
           "Vous êtes indépendant, consultant ou entrepreneur et recherchez un bureau individuel à Strasbourg ? À la Meinau, Welcome Coworking propose des bureaux fermés pour une personne, pensés pour conjuguer concentration, confort et confidentialité. Vous disposez de votre propre espace pour travailler sur vos dossiers, organiser vos visioconférences et échanger avec vos clients à l’écart des espaces partagés.",
           "Mobilier, fauteuil ergonomique, rangements et fibre professionnelle facilitent votre quotidien. La lumière naturelle, la climatisation individuelle et l’accès autonome 24/7 vous permettent de travailler à votre rythme. Vous gardez aussi les avantages du coworking : cuisine, espace détente et salle de réunion. Au 204 avenue de Colmar, près du tram Couffignal, votre bureau à Strasbourg Meinau allie autonomie et convivialité, sans minimum d’engagement."
@@ -1038,5 +1045,70 @@
     "backHome": "Retour à l'accueil",
     "lastUpdated": "Dernière mise à jour : août 2026",
     "legalEyebrow": "Informations légales"
+  },
+  "individualOfficePage": {
+    "title": "Bureau privatif 1 personne à Strasbourg | Welcome Coworking",
+    "lead": "Vous cherchez un bureau privatif pour travailler seul à Strasbourg ? Welcome propose des bureaux fermés et équipés au 204 avenue de Colmar à Strasbourg, accessibles 24h/24 et sans durée minimale d’engagement, avec mobilier, internet et stationnement gratuit autour du bâtiment.",
+    "price": "À partir de 450 € HT par mois",
+    "conditions": "Tarif de départ actuellement affiché pour les bureaux privatifs. Contactez Welcome pour confirmer la formule et la disponibilité d’un bureau pour une personne.",
+    "includedTitle": "Ce qui est inclus",
+    "included": [
+      "Bureau fermé et équipé : mobilier, fauteuil ergonomique et rangements",
+      "Connexion fibre professionnelle en Wi-Fi",
+      "Accès autonome 24h/24, 7j/7",
+      "Fenêtre, climatisation et éclairage individuels",
+      "Accès à la salle de réunion, à la cuisine et à l’espace détente",
+      "Imprimante, scanner et relieuse à disposition"
+    ],
+    "costTitle": "Combien ça coûte un bureau individuel à Strasbourg ?",
+    "cost": [
+      {
+        "title": "Coworking en open space",
+        "text": "Vous occupez un poste dans un espace partagé avec d’autres personnes. Cette formule ne vous donne pas un bureau fermé individuel."
+      },
+      {
+        "title": "Location ponctuelle",
+        "text": "Une réservation à l’heure, à la demi-journée ou à la journée répond à un besoin occasionnel. Son prix ne se compare pas directement à une location mensuelle."
+      },
+      {
+        "title": "Bureau privatif mensuel",
+        "text": "Vous disposez d’un bureau fermé pour travailler seul au quotidien. L’offre Welcome appartient à cette catégorie : à partir de 450 € HT par mois, sans durée minimale d’engagement. Comparez aussi les équipements, les services et les conditions d’accès inclus."
+      }
+    ],
+    "audienceTitle": "Pour qui c’est fait",
+    "audience": [
+      "Indépendant qui souhaite un espace dédié à son activité",
+      "Consultant qui a besoin de calme pour ses dossiers et ses visioconférences",
+      "Créateur d’entreprise qui cherche un bureau équipé",
+      "Télétravailleur qui ne veut plus travailler de chez lui"
+    ],
+    "locationTitle": "Où se trouve votre bureau à Strasbourg ?",
+    "location": "204 avenue de Colmar, 67100 Strasbourg, secteur Meinau. Tram A et E, arrêt Couffignal. Accès en voiture depuis la M35 et stationnement gratuit autour du bâtiment.",
+    "map": "Voir l’itinéraire",
+    "back": "Tous les bureaux privatifs",
+    "contact": "Demander une visite et vérifier la disponibilité",
+    "faqTitle": "Questions fréquentes",
+    "faq": [
+      {
+        "question": "Où louer un bureau privatif pour 1 personne à Strasbourg ?",
+        "answer": "Welcome Coworking propose des bureaux fermés pour une personne au 204 avenue de Colmar, 67100 Strasbourg, près du tram Couffignal."
+      },
+      {
+        "question": "Quel est le prix d’un bureau individuel chez Welcome à Strasbourg ?",
+        "answer": "Les bureaux privatifs sont affichés à partir de 450 € HT par mois. Contactez Welcome pour confirmer la formule adaptée à une personne et la disponibilité."
+      },
+      {
+        "question": "Peut-on louer un bureau individuel sans durée minimale d’engagement ?",
+        "answer": "Oui, les formules de bureaux privatifs Welcome sont proposées sans durée minimale d’engagement."
+      },
+      {
+        "question": "Que comprend la location d’un bureau privatif pour une personne ?",
+        "answer": "Le bureau est fermé et équipé : mobilier, fauteuil ergonomique, rangements, fibre professionnelle, climatisation et éclairage individuels. Vous bénéficiez aussi de la salle de réunion, de la cuisine, de l’espace détente et d’un accès autonome 24h/24, 7j/7."
+      },
+      {
+        "question": "Comment accéder au bureau en tram ou en voiture ?",
+        "answer": "L’adresse est le 204 avenue de Colmar à Strasbourg. Les trams A et E desservent l’arrêt Couffignal. L’accès en voiture se fait notamment depuis la M35 ; le stationnement est gratuit autour du bâtiment."
+      }
+    ]
   }
 }
