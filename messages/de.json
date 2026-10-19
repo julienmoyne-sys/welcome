@@ -1041,6 +1041,10 @@
   },
   "individualOfficePage": {
     "visuals": {
+      "loungeAlt": "Welcome-Gemeinschaftsbereich mit gemeinsamem Tisch, Büros hinter Glaswänden und begrünter Decke",
+      "loungeCaption": "Der Gemeinschaftsbereich und die Büros hinter Glaswänden.",
+      "meetingAlt": "Welcome-Besprechungsraum mit Holztisch, Sesseln und großem Bildschirm",
+      "meetingCaption": "Der für Mitglieder zugängliche Besprechungsraum.",
       "title": "Ihr Arbeitsplatz in Bildern",
       "officeAlt": "Stimmungsillustration: ausgestattetes Einzelbüro",
       "cloudAlt": "Stimmungsillustration: Einzelbüro mit Blick auf Wolken",

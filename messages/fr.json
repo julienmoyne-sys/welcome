@@ -1048,6 +1048,10 @@
   },
   "individualOfficePage": {
     "visuals": {
+      "loungeAlt": "Espace commun Welcome avec table partagée, bureaux vitrés et plafond végétalisé",
+      "loungeCaption": "L’espace commun et les bureaux vitrés.",
+      "meetingAlt": "Salle de réunion Welcome avec table en bois, fauteuils et grand écran",
+      "meetingCaption": "La salle de réunion accessible aux membres.",
       "title": "Votre espace de travail en images",
       "officeAlt": "Illustration d’ambiance : bureau individuel équipé",
       "cloudAlt": "Illustration d’ambiance : bureau individuel avec vue sur les nuages",

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import loungeImage from "@/assets/espace-commun-welcome.png";
+import meetingImage from "@/assets/salle-reunion-welcome-carree.jpg";
+
 import officeImage from "@/assets/bureau-individuel-ambiance.png";
 import cloudImage from "@/assets/bureau-individuel-ambiance-nuages.png";
 import spaceImage from "@/assets/bureaux-privatifs-espace-commun.jpg";
@@ -127,6 +130,26 @@ export default async function IndividualOfficePage({
             />
             <figcaption className="mt-3 text-sm">{t("visuals.spaceCaption")}</figcaption>
           </figure>
+          <div className="mt-8 grid items-start gap-6 sm:grid-cols-2">
+            <figure>
+              <Image
+                src={loungeImage}
+                alt={t("visuals.loungeAlt")}
+                sizes="(min-width: 1024px) 460px, (min-width: 640px) 50vw, 100vw"
+                className="aspect-square w-full rounded-2xl object-cover"
+              />
+              <figcaption className="mt-3 text-sm">{t("visuals.loungeCaption")}</figcaption>
+            </figure>
+            <figure>
+              <Image
+                src={meetingImage}
+                alt={t("visuals.meetingAlt")}
+                sizes="(min-width: 1024px) 460px, (min-width: 640px) 50vw, 100vw"
+                className="aspect-square w-full rounded-2xl object-cover"
+              />
+              <figcaption className="mt-3 text-sm">{t("visuals.meetingCaption")}</figcaption>
+            </figure>
+          </div>
         </section>
         <section aria-labelledby="cost-title">
           <h2 id="cost-title" className={heading}>

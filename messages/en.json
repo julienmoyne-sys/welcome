@@ -1017,6 +1017,10 @@
   },
   "individualOfficePage": {
     "visuals": {
+      "loungeAlt": "Welcome shared area with communal table, glass-partitioned offices and greenery on the ceiling",
+      "loungeCaption": "The shared area and glass-partitioned offices.",
+      "meetingAlt": "Welcome meeting room with wooden table, armchairs and large screen",
+      "meetingCaption": "The meeting room available to members.",
       "title": "Your workspace in pictures",
       "officeAlt": "Atmosphere illustration: equipped individual office",
       "cloudAlt": "Atmosphere illustration: individual office with a view of clouds",
