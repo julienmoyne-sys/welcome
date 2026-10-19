@@ -97,6 +97,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   {t("ctaDiscover")}
                 </Link>
               </div>
+              <p className="mt-5 font-manrope text-sm font-semibold text-welcome-black/70">
+                {t("officialSite")}
+              </p>
             </div>
           </div>
         </section>

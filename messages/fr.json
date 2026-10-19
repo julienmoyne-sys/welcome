@@ -107,10 +107,11 @@
     "eyebrow": "Bienvenue chez Welcome.",
     "titleLine1": "Comme à la maison.",
     "titleLine2": "En beaucoup plus inspirant.",
-    "lead": "Découvrez le confort et la chaleur d’un intérieur, un standing premium à <strong>Strasbourg</strong>. Exclusivement réservé à nos résidents, sans clients à la journée.",
+    "lead": "Découvrez le confort et la chaleur d’un intérieur, un standing premium à <strong>Strasbourg Meinau</strong>. Exclusivement réservé à nos résidents, sans clients à la journée.",
     "ctaVisit": "Organiser une visite",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Découvrir Welcome",
+    "officialSite": "Site officiel - Meilleur tarif garanti",
     "carouselLabel": "Photos des espaces Welcome",
     "previousSlide": "Photo précédente",
     "nextSlide": "Photo suivante",
@@ -260,7 +261,7 @@
       "title": "Location de bureaux privatifs équipés à Strasbourg",
       "paragraphs": [
         "Welcome Coworking propose des bureaux privatifs fermés et équipés à Strasbourg, conçus pour travailler au calme tout en profitant de l'énergie d'un espace de coworking. Selon vos besoins, vous pouvez louer un bureau privatif configuré pour 1, 2 ou 3 postes de travail. Chaque bureau dispose de mobilier, de fauteuils ergonomiques, de rangements, de la fibre professionnelle et d'un accès autonome 24/7.",
-        "Les formules, à partir de 575 € HT par mois, sont proposées sans minimum d'engagement. Au 204 avenue de Colmar, à proximité immédiate du tram Couffignal, vous bénéficiez aussi des espaces communs, de la cuisine et de l'espace détente, ainsi que de la salle de réunion."
+        "Les formules, à partir de 450 € HT par mois, sont proposées sans minimum d'engagement. Au 204 avenue de Colmar, à proximité immédiate du tram Couffignal, vous bénéficiez aussi des espaces communs, de la cuisine et de l'espace détente, ainsi que de la salle de réunion."
       ],
       "links": [
         "Découvrir la salle de réunion",
@@ -279,7 +280,7 @@
         },
         {
           "question": "Quel est le tarif et l'engagement d'un bureau privatif ?",
-          "answer": "Les bureaux privatifs sont proposés à partir de 575 € HT par mois, sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
+          "answer": "Les bureaux privatifs sont proposés à partir de 450 € HT par mois, sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
         }
       ]
     }
@@ -455,8 +456,8 @@
     "plans": [
       { "kicker": "Nomade", "name": "Flex", "price": "45 €" },
       { "kicker": "Nomade", "name": "Flex+", "price": "90 €" },
-      { "kicker": "Résident", "name": "Open Space", "price": "190 à 300 €" },
-      { "kicker": "Résident", "name": "Bureau privatif", "price": "À partir de 575 €" }
+      { "kicker": "Résident", "name": "Open Space", "price": "250 €" },
+      { "kicker": "Résident", "name": "Bureau privatif", "price": "À partir de 450 €" }
     ],
     "groups": [
       {
@@ -800,7 +801,7 @@
     "summary": "Bureau privatif 1 poste avec fenêtre",
     "unit": "HT / mois",
     "instead": "au lieu de",
-    "saving": "80 € HT économisés chaque mois",
+    "saving": "125 € HT économisés chaque mois",
     "features": ["Avec fenêtre", "État neuf", "Climatisation individuelle"],
     "guarantee": "Prix fixe garanti pendant toute la durée du contrat.",
     "cta": "Appelez vite",
@@ -831,7 +832,7 @@
           "Bureau dédié",
           "Crédit réunion inclus",
           "ChatGPT Business*",
-          "190 à 300 € HT /mois"
+          "250 € HT /mois"
         ]
       },
       "privateOffice": {
@@ -843,7 +844,7 @@
           "Bureau dédié",
           "Crédit réunion inclus",
           "ChatGPT Business*",
-          "À partir de 575 € HT / mois"
+          "À partir de 450 € HT / mois"
         ]
       },
       "meetingRoom": {

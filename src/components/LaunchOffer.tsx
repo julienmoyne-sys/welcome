@@ -18,7 +18,7 @@ export function LaunchOffer() {
             {t("eyebrow")}
           </span>
           <p>
-            {t("summary")} <strong className="whitespace-nowrap text-base">495 €</strong>{" "}
+            {t("summary")} <strong className="whitespace-nowrap text-base">450 €</strong>{" "}
             <span className="text-xs">{t("unit")}</span>
           </p>
           <Dialog.Trigger className="inline-flex min-h-8 cursor-pointer items-center gap-1 border-b border-[#ecd39c]/60 font-semibold text-[#ecd39c] outline-offset-4 hover:text-white focus-visible:outline-2">
@@ -44,7 +44,7 @@ export function LaunchOffer() {
                 {t("instead")} <del>575 €</del> <span className="text-xs">{t("unit")}</span>
               </p>
               <p className="mt-1 font-manrope text-[68px] font-semibold leading-none tracking-[-0.06em] sm:text-[80px]">
-                495 <span className="text-4xl">€</span>
+                450 <span className="text-4xl">€</span>
               </p>
               <p className="mt-2 font-inter text-sm">{t("unit")}</p>
               <p className="mt-4 inline-block rounded-full bg-[#e7eedf] px-3 py-1.5 font-inter text-xs font-semibold">
