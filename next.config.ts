@@ -56,6 +56,11 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      ...["", "/fr", "/en", "/de"].map((prefix) => ({
+        source: `${prefix}/bureau-privatif-1-personne-strasbourg`,
+        destination: `${prefix}/bureau-privatif-individuel-1-personne-strasbourg`,
+        permanent: true,
+      })),
       ...SECTION_REDIRECTS.map((section) => ({
         source: `/${section}`,
         destination: `/#${section}`,

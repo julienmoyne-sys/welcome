@@ -216,7 +216,7 @@ export async function SpacePresentationPage({
                     ))}
                   </div>
                   <Link
-                    href="/bureau-privatif-1-personne-strasbourg"
+                    href="/bureau-privatif-individuel-1-personne-strasbourg"
                     className="mt-6 inline-block font-medium text-welcome-gold underline underline-offset-4"
                   >
                     {seoContent.individualOffice.link}

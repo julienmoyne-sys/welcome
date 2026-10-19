@@ -14,7 +14,7 @@ const PAGES = [
   { path: "/comparatif-solutions", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/open-space", changeFrequency: "weekly" as const, priority: 0.8 },
   {
-    path: "/bureau-privatif-1-personne-strasbourg",
+    path: "/bureau-privatif-individuel-1-personne-strasbourg",
     changeFrequency: "weekly" as const,
     priority: 0.8,
   },

@@ -9,7 +9,7 @@ import { routing } from "@/i18n/routing";
 import { buildPageMetadata, localePath } from "@/lib/metadata";
 import { breadcrumbJsonLd, faqPageJsonLd, SITE_MAP_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-const PATH = "/bureau-privatif-1-personne-strasbourg";
+const PATH = "/bureau-privatif-individuel-1-personne-strasbourg";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
