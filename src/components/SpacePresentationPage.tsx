@@ -66,6 +66,7 @@ export async function SpacePresentationPage({
       ? (t.raw("seoContent") as {
           title: string;
           paragraphs: string[];
+          individualOffice: { title: string; paragraphs: string[] };
           links: string[];
           faqTitle: string;
           faq: { question: string; answer: string }[];
@@ -196,6 +197,25 @@ export async function SpacePresentationPage({
                     </nav>
                   </div>
                 </div>
+
+                <section className="mt-16 sm:mt-20" aria-labelledby="individual-office-title">
+                  <h2
+                    id="individual-office-title"
+                    className="font-manrope text-[30px] font-bold leading-tight tracking-tight text-welcome-black sm:text-[36px]"
+                  >
+                    {seoContent.individualOffice.title}
+                  </h2>
+                  <div className="mt-6 max-w-4xl space-y-4">
+                    {seoContent.individualOffice.paragraphs.map((paragraph) => (
+                      <p
+                        key={paragraph}
+                        className="font-inter text-[16px] leading-[1.75] text-welcome-body"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </section>
 
                 <div className="mt-16 sm:mt-20">
                   <h2 className="font-manrope text-[30px] font-bold leading-tight tracking-tight text-welcome-black sm:text-[36px]">

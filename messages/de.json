@@ -107,7 +107,7 @@
     "eyebrow": "Willkommen bei Welcome.",
     "titleLine1": "Wie zu Hause.",
     "titleLine2": "Nur viel inspirierender.",
-    "lead": "Entdecken Sie den Komfort und die Wärme eines wohnlichen Interieurs mit Premium-Ambiente in <strong>Straßburg-Meinau</strong>. Exklusiv unseren festen Mitgliedern vorbehalten – ohne Tagesgäste.",
+    "lead": "Erleben Sie den Komfort und die Wärme eines wohnlichen Interieurs in einem hochwertigen, persönlichen und professionellen Umfeld in <strong>Straßburg - Meinau</strong>.",
     "ctaVisit": "Besichtigung buchen",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Welcome entdecken",
@@ -227,7 +227,7 @@
     "eyebrow": "Private Büros",
     "titleLead": "Ihr eigenes Büro,",
     "titleHighlight": "ganz ohne Aufwand.",
-    "lead": "Nutzen Sie einen geschlossenen, ruhigen und komfortablen Raum, um effizient zu arbeiten und Ihre Privatsphäre zu wahren.",
+    "lead": "Genießen Sie in Straßburg-Meinau einen geschlossenen, ruhigen und komfortablen Raum, um effizient zu arbeiten und Ihre Vertraulichkeit zu wahren.",
     "visit": "Besichtigung buchen",
     "imageAlt": "Privates Welcome Büro mit Glastrennwand, Holztisch und warmer Beleuchtung",
     "detailsEyebrow": "Ihr Raum",
@@ -261,6 +261,13 @@
         "Küche und Lounge ansehen",
         "Arbeitsangebote vergleichen"
       ],
+      "individualOffice": {
+        "title": "Einzelbüro in Straßburg",
+        "paragraphs": [
+          "Sie sind selbstständig, beraten Unternehmen oder gründen ein Unternehmen und suchen ein Einzelbüro in Straßburg? Im Stadtteil Meinau bietet Welcome Coworking geschlossene Büros für eine Person, die konzentriertes Arbeiten, Komfort und Vertraulichkeit verbinden. In Ihrem eigenen Raum können Sie Unterlagen bearbeiten, Videokonferenzen führen und mit Kunden sprechen, abseits der Gemeinschaftsbereiche.",
+          "Mobiliar, ein ergonomischer Stuhl, Stauraum und professionelles Glasfaserinternet erleichtern Ihren Arbeitsalltag. Tageslicht, eine individuelle Klimaanlage und eigenständiger Zugang rund um die Uhr ermöglichen es Ihnen, in Ihrem eigenen Rhythmus zu arbeiten. Zugleich genießen Sie die Vorteile des Coworkings: Küche, Lounge und Besprechungsraum. In der 204 avenue de Colmar, nahe der Tramhaltestelle Couffignal, verbindet Ihr Büro in Straßburg-Meinau Selbstständigkeit und Geselligkeit, ohne Mindestlaufzeit."
+        ]
+      },
       "faqTitle": "Häufige Fragen zu privaten Büros",
       "faq": [
         {

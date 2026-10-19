@@ -107,7 +107,7 @@
     "eyebrow": "Welcome to Welcome.",
     "titleLine1": "Just like home.",
     "titleLine2": "Only far more inspiring.",
-    "lead": "Discover the comfort and warmth of a welcoming interior, with a premium standard in <strong>Strasbourg Meinau</strong>. Exclusively for our residents, with no day passes.",
+    "lead": "Enjoy the comfort and warmth of a welcoming interior in a premium, intimate professional setting in <strong>Strasbourg - Meinau</strong>.",
     "ctaVisit": "Book a visit",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Discover Welcome",
@@ -224,7 +224,7 @@
     "eyebrow": "Private offices",
     "titleLead": "An office of your own,",
     "titleHighlight": "without the hassle.",
-    "lead": "Enjoy a quiet, comfortable enclosed space where you can work efficiently and preserve your privacy.",
+    "lead": "In Strasbourg Meinau, enjoy an enclosed, quiet and comfortable space to work efficiently and protect your privacy.",
     "visit": "Book a visit",
     "imageAlt": "Welcome private office with glass partition, wooden desk and warm lighting",
     "detailsEyebrow": "Your space",
@@ -258,6 +258,13 @@
         "See the kitchen and lounge",
         "Compare workspace options"
       ],
+      "individualOffice": {
+        "title": "Individual office in Strasbourg",
+        "paragraphs": [
+          "Are you a freelancer, consultant or entrepreneur looking for an individual office in Strasbourg? In the Meinau district, Welcome Coworking offers enclosed offices for one person, designed to combine focus, comfort and privacy. You have your own space to work on projects, hold video calls and speak with clients away from shared areas.",
+          "Furniture, an ergonomic chair, storage and professional fibre internet make everyday work easier. Natural light, individual air conditioning and independent 24/7 access let you work at your own pace. You also keep the benefits of coworking: a kitchen, lounge and meeting room. At 204 avenue de Colmar, near the Couffignal tram stop, your office in Strasbourg Meinau combines independence and a welcoming atmosphere, with no minimum commitment."
+        ]
+      },
       "faqTitle": "Private office FAQs",
       "faq": [
         {

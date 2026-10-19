@@ -107,7 +107,7 @@
     "eyebrow": "Bienvenue chez Welcome.",
     "titleLine1": "Comme à la maison.",
     "titleLine2": "En beaucoup plus inspirant.",
-    "lead": "Découvrez le confort et la chaleur d’un intérieur, un standing premium à <strong>Strasbourg Meinau</strong>. Exclusivement réservé à nos résidents, sans clients à la journée.",
+    "lead": "Retrouvez le confort et la chaleur d'un intérieur dans un environnement professionnel et intimiste haut de gamme à <strong>Strasbourg - Meinau</strong>.",
     "ctaVisit": "Organiser une visite",
     "ctaWhatsapp": "WhatsApp",
     "ctaDiscover": "Découvrir Welcome",
@@ -234,7 +234,7 @@
     "eyebrow": "Les bureaux privatifs",
     "titleLead": "Un bureau à vous,",
     "titleHighlight": "sans les contraintes.",
-    "lead": "Profitez d'un espace fermé, calme et confortable pour travailler efficacement et préserver votre confidentialité.",
+    "lead": "À Strasbourg Meinau, profitez d'un espace fermé, calme et confortable pour travailler efficacement et préserver votre confidentialité.",
     "visit": "Organiser une visite",
     "imageAlt": "Bureau privatif Welcome avec cloison vitrée, bureau en bois et éclairage chaleureux",
     "detailsEyebrow": "Votre espace",
@@ -268,6 +268,13 @@
         "Voir la cuisine et l'espace détente",
         "Comparer les solutions de travail"
       ],
+      "individualOffice": {
+        "title": "Bureau individuel à Strasbourg",
+        "paragraphs": [
+          "Vous êtes indépendant, consultant ou entrepreneur et recherchez un bureau individuel à Strasbourg ? À la Meinau, Welcome Coworking propose des bureaux fermés pour une personne, pensés pour conjuguer concentration, confort et confidentialité. Vous disposez de votre propre espace pour travailler sur vos dossiers, organiser vos visioconférences et échanger avec vos clients à l’écart des espaces partagés.",
+          "Mobilier, fauteuil ergonomique, rangements et fibre professionnelle facilitent votre quotidien. La lumière naturelle, la climatisation individuelle et l’accès autonome 24/7 vous permettent de travailler à votre rythme. Vous gardez aussi les avantages du coworking : cuisine, espace détente et salle de réunion. Au 204 avenue de Colmar, près du tram Couffignal, votre bureau à Strasbourg Meinau allie autonomie et convivialité, sans minimum d’engagement."
+        ]
+      },
       "faqTitle": "Questions fréquentes sur les bureaux privatifs",
       "faq": [
         {
