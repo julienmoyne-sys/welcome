@@ -1040,6 +1040,14 @@
     "legalEyebrow": "Rechtliche Hinweise"
   },
   "individualOfficePage": {
+    "visuals": {
+      "title": "Ihr Arbeitsplatz in Bildern",
+      "officeAlt": "Stimmungsillustration: ausgestattetes Einzelbüro",
+      "cloudAlt": "Stimmungsillustration: Einzelbüro mit Blick auf Wolken",
+      "spaceAlt": "Gemeinschaftsbereich von Welcome Coworking und abgeschlossene Büros hinter Glaswänden",
+      "illustrationCaption": "Stimmungsillustrationen von Einzelbüros.",
+      "spaceCaption": "Die Räume von Welcome Coworking in der 204 avenue de Colmar in Straßburg."
+    },
     "title": "Privatbüro für 1 Person in Straßburg | Welcome Coworking",
     "lead": "Sie suchen ein Privatbüro, um allein in Straßburg zu arbeiten? Welcome bietet abgeschlossene, ausgestattete Büros in der 204 avenue de Colmar in Straßburg, mit Zugang rund um die Uhr und ohne Mindestvertragsdauer, inklusive Möbeln, Internet und kostenlosen Parkmöglichkeiten rund um das Gebäude.",
     "price": "Ab 450 € netto pro Monat",

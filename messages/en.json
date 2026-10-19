@@ -1016,6 +1016,14 @@
     "legalEyebrow": "Legal information"
   },
   "individualOfficePage": {
+    "visuals": {
+      "title": "Your workspace in pictures",
+      "officeAlt": "Atmosphere illustration: equipped individual office",
+      "cloudAlt": "Atmosphere illustration: individual office with a view of clouds",
+      "spaceAlt": "Welcome Coworking shared area and enclosed offices behind glass partitions",
+      "illustrationCaption": "Atmosphere illustrations of individual offices.",
+      "spaceCaption": "The Welcome Coworking spaces at 204 avenue de Colmar in Strasbourg."
+    },
     "title": "Private office for 1 person in Strasbourg | Welcome Coworking",
     "lead": "Looking for a private office to work alone in Strasbourg? Welcome offers enclosed, equipped offices at 204 avenue de Colmar in Strasbourg, accessible 24/7 with no minimum commitment period, including furniture, internet and free parking around the building.",
     "price": "From €450 excluding VAT per month",

@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+
+import officeImage from "@/assets/bureau-individuel-ambiance.png";
+import cloudImage from "@/assets/bureau-individuel-ambiance-nuages.png";
+import spaceImage from "@/assets/bureaux-privatifs-espace-commun.jpg";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Footer } from "@/components/Footer";
@@ -91,6 +96,37 @@ export default async function IndividualOfficePage({
           >
             {t("contact")}
           </Link>
+        </section>
+        <section aria-labelledby="visuals-title">
+          <h2 id="visuals-title" className={heading}>
+            {t("visuals.title")}
+          </h2>
+          <figure className="mt-8">
+            <div className="grid gap-5 sm:grid-cols-[1.25fr_0.75fr]">
+              <Image
+                src={officeImage}
+                alt={t("visuals.officeAlt")}
+                sizes="(min-width: 640px) 60vw, 100vw"
+                className="h-full w-full rounded-2xl object-cover"
+              />
+              <Image
+                src={cloudImage}
+                alt={t("visuals.cloudAlt")}
+                sizes="(min-width: 640px) 35vw, 100vw"
+                className="h-full max-h-[640px] w-full rounded-2xl object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 text-sm">{t("visuals.illustrationCaption")}</figcaption>
+          </figure>
+          <figure className="mt-8">
+            <Image
+              src={spaceImage}
+              alt={t("visuals.spaceAlt")}
+              sizes="(min-width: 1024px) 944px, 100vw"
+              className="h-auto w-full rounded-2xl"
+            />
+            <figcaption className="mt-3 text-sm">{t("visuals.spaceCaption")}</figcaption>
+          </figure>
         </section>
         <section aria-labelledby="cost-title">
           <h2 id="cost-title" className={heading}>

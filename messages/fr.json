@@ -1047,6 +1047,14 @@
     "legalEyebrow": "Informations légales"
   },
   "individualOfficePage": {
+    "visuals": {
+      "title": "Votre espace de travail en images",
+      "officeAlt": "Illustration d’ambiance : bureau individuel équipé",
+      "cloudAlt": "Illustration d’ambiance : bureau individuel avec vue sur les nuages",
+      "spaceAlt": "Espace commun Welcome Coworking et bureaux fermés derrière les verrières",
+      "illustrationCaption": "Illustrations d’ambiance de bureaux individuels.",
+      "spaceCaption": "Les espaces Welcome Coworking, au 204 avenue de Colmar à Strasbourg."
+    },
     "title": "Bureau privatif 1 personne à Strasbourg | Welcome Coworking",
     "lead": "Vous cherchez un bureau privatif pour travailler seul à Strasbourg ? Welcome propose des bureaux fermés et équipés au 204 avenue de Colmar à Strasbourg, accessibles 24h/24 et sans durée minimale d’engagement, avec mobilier, internet et stationnement gratuit autour du bâtiment.",
     "price": "À partir de 450 € HT par mois",
