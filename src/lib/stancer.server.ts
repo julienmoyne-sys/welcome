@@ -21,7 +21,16 @@ export type GiftCardPaymentMetadata = {
   application: "welcome_gift_card";
   version: 1;
   giftCard: {
-    design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+    design:
+      | "ivory"
+      | "red"
+      | "green"
+      | "birthday"
+      | "thankYou"
+      | "congratulations"
+      | "cloudBirthday"
+      | "cloudThankYou"
+      | "cloudCongratulations";
     occasion?: "christmas" | "birthday" | "congratulations" | "thankYou";
     from: string;
     recipient: string;
@@ -47,7 +56,16 @@ type GiftCardPaymentInput = {
   lastName: string;
   email: string;
   recipient: string;
-  design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+  design:
+    | "ivory"
+    | "red"
+    | "green"
+    | "birthday"
+    | "thankYou"
+    | "congratulations"
+    | "cloudBirthday"
+    | "cloudThankYou"
+    | "cloudCongratulations";
   occasion: "christmas" | "birthday" | "congratulations" | "thankYou";
   from: string;
   message: string;

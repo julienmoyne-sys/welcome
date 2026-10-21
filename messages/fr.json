@@ -993,6 +993,21 @@
           "title": "Félicitations émeraude & or",
           "description": "Prestigieux et lumineux",
           "alt": "Bon cadeau de félicitations Welcome Coworking vert émeraude et or"
+        },
+        "cloudBirthday": {
+          "title": "Anniversaire - bureau dans les nuages",
+          "description": "Chaleureux et inspirant",
+          "alt": "Bon cadeau d’anniversaire Welcome Coworking avec la photo du bureau dans les nuages"
+        },
+        "cloudThankYou": {
+          "title": "Merci - bureau dans les nuages",
+          "description": "Doux et reconnaissant",
+          "alt": "Bon cadeau de remerciement Welcome Coworking avec la photo du bureau dans les nuages"
+        },
+        "cloudCongratulations": {
+          "title": "Félicitations - bureau dans les nuages",
+          "description": "Élégant et inspirant",
+          "alt": "Bon cadeau de félicitations Welcome Coworking avec la photo du bureau dans les nuages"
         }
       }
     },
@@ -1061,6 +1076,8 @@
       "fromRequired": "Indiquez le nom de la personne qui offre le bon.",
       "recipientRequired": "Indiquez le nom de la personne qui recevra le bon.",
       "messageRequired": "Ajoutez un message au bon cadeau.",
+      "nameMaximum": "Limitez ce nom à 40 caractères.",
+      "messageMaximum": "Limitez le message à 140 caractères.",
       "organizationTypeRequired": "Sélectionnez un type d’organisation.",
       "lastNameRequired": "Indiquez votre nom.",
       "firstNameRequired": "Indiquez votre prénom.",

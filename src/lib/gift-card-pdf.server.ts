@@ -6,7 +6,16 @@ import sharp from "sharp";
 export type GiftCardOccasion = "christmas" | "birthday" | "congratulations" | "thankYou";
 
 export type GiftCardDocumentData = {
-  design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+  design:
+    | "ivory"
+    | "red"
+    | "green"
+    | "birthday"
+    | "thankYou"
+    | "congratulations"
+    | "cloudBirthday"
+    | "cloudThankYou"
+    | "cloudCongratulations";
   occasion: GiftCardOccasion;
   amount: number;
   from: string;
@@ -22,7 +31,18 @@ const TEMPLATE_FILENAMES: Record<GiftCardDocumentData["design"], string> = {
   birthday: "gift-card-template-birthday.png",
   thankYou: "gift-card-template-thank-you.png",
   congratulations: "gift-card-template-congratulations.png",
+  cloudBirthday: "gift-card-private-office-clouds.png",
+  cloudThankYou: "gift-card-private-office-clouds.png",
+  cloudCongratulations: "gift-card-private-office-clouds.png",
 };
+
+type CloudDesign = "cloudBirthday" | "cloudThankYou" | "cloudCongratulations";
+
+function isCloudDesign(design: GiftCardDocumentData["design"]): design is CloudDesign {
+  return (
+    design === "cloudBirthday" || design === "cloudThankYou" || design === "cloudCongratulations"
+  );
+}
 
 const COPY = {
   fr: {
@@ -148,6 +168,68 @@ function occasionLabel(data: GiftCardDocumentData, year: number) {
   return data.occasion === "christmas" ? `${label} ${year}` : label;
 }
 
+function buildCloudOverlay(
+  data: GiftCardDocumentData & { design: CloudDesign },
+  values: {
+    occasion: string;
+    amount: string;
+    validity: string;
+    recipient: string;
+    from: string;
+  },
+) {
+  const copy = COPY[data.locale];
+  const palettes = {
+    cloudBirthday: {
+      panel: "#781c2e",
+      text: "#fff9ec",
+      accent: "#f0cf7a",
+      amountBackground: "#fff9ec",
+      amountText: "#781c2e",
+    },
+    cloudThankYou: {
+      panel: "#f5efe4",
+      text: "#173f32",
+      accent: "#b67b29",
+      amountBackground: "#173f32",
+      amountText: "#fff9ec",
+    },
+    cloudCongratulations: {
+      panel: "#063a2a",
+      text: "#fff9ec",
+      accent: "#e3c366",
+      amountBackground: "#e3c366",
+      amountText: "#063a2a",
+    },
+  } as const;
+  const palette = palettes[data.design];
+  const message = wrapText(data.message, 46, 4);
+
+  return `
+    <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="960" height="1024" fill="${palette.panel}"/>
+      <rect x="36" y="36" width="888" height="952" rx="22" fill="none" stroke="${palette.accent}" stroke-width="3" opacity="0.75"/>
+      <line x1="959" y1="0" x2="959" y2="1024" stroke="${palette.accent}" stroke-width="4"/>
+      <g font-family="Arial, sans-serif">
+        <text x="90" y="112" fill="${palette.accent}" font-size="34" font-weight="800">WELCOME!</text>
+        <text x="278" y="112" fill="${palette.accent}" font-size="18" letter-spacing="7">COWORKING</text>
+        <text x="480" y="193" text-anchor="middle" fill="${palette.text}" font-family="Georgia, serif" font-size="35" font-weight="700" letter-spacing="5">CHÈQUE CADEAU</text>
+        <text x="480" y="274" text-anchor="middle" fill="${palette.accent}" font-family="Georgia, serif" font-size="${fontSizeFor(values.occasion, 48, 38, 22)}" font-weight="700" letter-spacing="3">${values.occasion}</text>
+        <rect x="90" y="315" width="780" height="180" rx="20" fill="${palette.amountBackground}" stroke="${palette.accent}" stroke-width="4"/>
+        <text x="480" y="435" text-anchor="middle" fill="${palette.amountText}" font-size="${fontSizeFor(values.amount, 108, 88, 10)}" font-weight="800">${values.amount}</text>
+        <text x="480" y="548" text-anchor="middle" fill="${palette.text}" font-size="23" opacity="0.9">${values.validity}</text>
+        <line x1="90" y1="590" x2="870" y2="590" stroke="${palette.accent}" stroke-width="2" opacity="0.6"/>
+        <g fill="${palette.text}" font-size="27">
+          <text x="100" y="657"><tspan font-weight="700">${copy.recipient} :</tspan> ${values.recipient}</text>
+          <text x="100" y="718"><tspan font-weight="700">${copy.from} :</tspan> ${values.from}</text>
+          <text x="100" y="779" font-weight="700">${copy.message} :</text>
+          <text x="100" y="812" font-size="24" font-style="italic">${textSpans(message, 100, 812, 34)}</text>
+        </g>
+        <text x="100" y="957" fill="${palette.accent}" font-size="20" letter-spacing="2">welcome-coworking.com</text>
+      </g>
+    </svg>`;
+}
+
 function buildOverlay(data: GiftCardDocumentData) {
   const copy = COPY[data.locale];
   const issueDate = getParisCivilDate(new Date());
@@ -164,6 +246,13 @@ function buildOverlay(data: GiftCardDocumentData) {
   );
   const recipient = escapeXml(data.recipient.slice(0, 100));
   const from = escapeXml(data.from.slice(0, 100));
+
+  if (isCloudDesign(data.design)) {
+    return buildCloudOverlay(
+      { ...data, design: data.design },
+      { occasion, amount, validity, recipient, from },
+    );
+  }
 
   if (data.design === "red" || data.design === "birthday") {
     const message = wrapText(data.message, 34, 3);
@@ -267,9 +356,33 @@ export async function generateGiftCardPdf(data: GiftCardDocumentData) {
   const template = await readFile(
     join(process.cwd(), "src", "assets", TEMPLATE_FILENAMES[data.design]),
   );
-  const jpeg = await sharp(template)
-    .composite([{ input: Buffer.from(buildOverlay(data)), top: 0, left: 0 }])
-    .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
-    .toBuffer();
+  let jpeg: Buffer;
+
+  if (isCloudDesign(data.design)) {
+    const photo = await sharp(template).resize({ height: 1024 }).png().toBuffer();
+    const photoMetadata = await sharp(photo).metadata();
+    const photoWidth = photoMetadata.width ?? 576;
+
+    jpeg = await sharp({
+      create: {
+        width: 1536,
+        height: 1024,
+        channels: 3,
+        background: "#000000",
+      },
+    })
+      .composite([
+        { input: photo, top: 0, left: 1536 - photoWidth },
+        { input: Buffer.from(buildOverlay(data)), top: 0, left: 0 },
+      ])
+      .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
+      .toBuffer();
+  } else {
+    jpeg = await sharp(template)
+      .composite([{ input: Buffer.from(buildOverlay(data)), top: 0, left: 0 }])
+      .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
+      .toBuffer();
+  }
+
   return jpegToPdf(jpeg, 1536, 1024);
 }

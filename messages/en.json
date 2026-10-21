@@ -968,6 +968,21 @@
           "title": "Emerald & gold congratulations",
           "description": "Prestigious and bright",
           "alt": "Emerald green and gold Welcome Coworking congratulations gift voucher"
+        },
+        "cloudBirthday": {
+          "title": "Birthday - office above the clouds",
+          "description": "Warm and inspiring",
+          "alt": "Welcome Coworking birthday gift voucher featuring the office above the clouds photo"
+        },
+        "cloudThankYou": {
+          "title": "Thank you - office above the clouds",
+          "description": "Gentle and appreciative",
+          "alt": "Welcome Coworking thank-you gift voucher featuring the office above the clouds photo"
+        },
+        "cloudCongratulations": {
+          "title": "Congratulations - office above the clouds",
+          "description": "Elegant and inspiring",
+          "alt": "Welcome Coworking congratulations gift voucher featuring the office above the clouds photo"
         }
       }
     },
@@ -1036,6 +1051,8 @@
       "fromRequired": "Enter the name of the person giving the voucher.",
       "recipientRequired": "Enter the name of the person receiving the voucher.",
       "messageRequired": "Add a message to the gift voucher.",
+      "nameMaximum": "Limit this name to 40 characters.",
+      "messageMaximum": "Limit the message to 140 characters.",
       "organizationTypeRequired": "Select an organisation type.",
       "lastNameRequired": "Enter your last name.",
       "firstNameRequired": "Enter your first name.",

@@ -24,7 +24,16 @@ export type ContactPayload = {
 };
 
 export type GiftCardPayload = {
-  design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+  design:
+    | "ivory"
+    | "red"
+    | "green"
+    | "birthday"
+    | "thankYou"
+    | "congratulations"
+    | "cloudBirthday"
+    | "cloudThankYou"
+    | "cloudCongratulations";
   occasion: "christmas" | "birthday" | "congratulations" | "thankYou";
   amount: number;
   from: string;
@@ -143,6 +152,9 @@ const GIFT_CARD_DESIGNS: Record<GiftCardPayload["design"], string> = {
   birthday: "Anniversaire bordeaux & or",
   thankYou: "Merci végétal",
   congratulations: "Félicitations émeraude & or",
+  cloudBirthday: "Anniversaire - bureau dans les nuages",
+  cloudThankYou: "Merci - bureau dans les nuages",
+  cloudCongratulations: "Félicitations - bureau dans les nuages",
 };
 
 const ORGANIZATION_TYPES: Record<GiftCardPayload["organizationType"], string> = {

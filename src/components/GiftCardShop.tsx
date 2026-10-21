@@ -9,13 +9,32 @@ import giftCardBirthday from "@/assets/gift-card-template-birthday.png";
 import giftCardCongratulations from "@/assets/gift-card-template-congratulations.png";
 import giftCardGreen from "@/assets/gift-card-template-green.png";
 import giftCardIvory from "@/assets/gift-card-template-ivory.png";
+import giftCardPrivateOfficeClouds from "@/assets/gift-card-private-office-clouds.png";
 import giftCardRed from "@/assets/gift-card-template-red.png";
 import giftCardThankYou from "@/assets/gift-card-template-thank-you.png";
 import { submitGiftCard, validateGiftCard } from "@/lib/gift-card.actions";
 
-type Design = "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+type Design =
+  | "ivory"
+  | "red"
+  | "green"
+  | "birthday"
+  | "thankYou"
+  | "congratulations"
+  | "cloudBirthday"
+  | "cloudThankYou"
+  | "cloudCongratulations";
+type CloudDesign = "cloudBirthday" | "cloudThankYou" | "cloudCongratulations";
 type Occasion = "christmas" | "birthday" | "congratulations" | "thankYou";
 type OrganizationType = "company" | "association" | "individual" | "public";
+
+const GIFT_NAME_MAX_LENGTH = 40;
+const GIFT_MESSAGE_MAX_LENGTH = 140;
+const CLOUD_DESIGNS = new Set<Design>(["cloudBirthday", "cloudThankYou", "cloudCongratulations"]);
+
+function isCloudDesign(design: Design): design is CloudDesign {
+  return CLOUD_DESIGNS.has(design);
+}
 
 const DESIGNS: Array<{ id: Design; image: StaticImageData; occasion: Occasion }> = [
   { id: "ivory", image: giftCardIvory, occasion: "christmas" },
@@ -26,6 +45,13 @@ const DESIGNS: Array<{ id: Design; image: StaticImageData; occasion: Occasion }>
   {
     id: "congratulations",
     image: giftCardCongratulations,
+    occasion: "congratulations",
+  },
+  { id: "cloudBirthday", image: giftCardPrivateOfficeClouds, occasion: "birthday" },
+  { id: "cloudThankYou", image: giftCardPrivateOfficeClouds, occasion: "thankYou" },
+  {
+    id: "cloudCongratulations",
+    image: giftCardPrivateOfficeClouds,
     occasion: "congratulations",
   },
 ];
@@ -183,13 +209,22 @@ export function GiftCardShop() {
                   }`}
                 >
                   <div className="relative aspect-[3/2] overflow-hidden">
-                    <Image
-                      src={image}
-                      alt={t(`designs.items.${id}.alt`)}
-                      fill
-                      sizes="(min-width: 1024px) 31vw, (min-width: 640px) 70vw, calc(100vw - 48px)"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    />
+                    {CLOUD_DESIGNS.has(id) ? (
+                      <CloudDesignThumbnail
+                        design={id}
+                        image={image}
+                        alt={t(`designs.items.${id}.alt`)}
+                        occasion={t(`form.occasionTypes.${occasion}`)}
+                      />
+                    ) : (
+                      <Image
+                        src={image}
+                        alt={t(`designs.items.${id}.alt`)}
+                        fill
+                        sizes="(min-width: 1024px) 31vw, (min-width: 640px) 70vw, calc(100vw - 48px)"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    )}
                     {selected && (
                       <span className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-welcome-gold text-[#0b0b0b] shadow-lg">
                         <Check className="h-5 w-5" aria-hidden="true" />
@@ -305,23 +340,27 @@ export function GiftCardShop() {
                 <input
                   id="gift-from"
                   type="text"
+                  maxLength={GIFT_NAME_MAX_LENGTH}
                   value={form.from}
                   onChange={(event) => update("from", event.target.value)}
                   aria-invalid={Boolean(errors.from)}
                   aria-describedby={errors.from ? "gift-from-error" : undefined}
                   className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
                 />
+                <CharacterCount value={form.from} maximum={GIFT_NAME_MAX_LENGTH} />
               </Field>
               <Field htmlFor="gift-recipient" label={t("form.recipient")} error={errors.recipient}>
                 <input
                   id="gift-recipient"
                   type="text"
+                  maxLength={GIFT_NAME_MAX_LENGTH}
                   value={form.recipient}
                   onChange={(event) => update("recipient", event.target.value)}
                   aria-invalid={Boolean(errors.recipient)}
                   aria-describedby={errors.recipient ? "gift-recipient-error" : undefined}
                   className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
                 />
+                <CharacterCount value={form.recipient} maximum={GIFT_NAME_MAX_LENGTH} />
               </Field>
               <Field
                 htmlFor="gift-message"
@@ -332,12 +371,14 @@ export function GiftCardShop() {
                 <textarea
                   id="gift-message"
                   rows={5}
+                  maxLength={GIFT_MESSAGE_MAX_LENGTH}
                   value={form.message}
                   onChange={(event) => update("message", event.target.value)}
                   aria-invalid={Boolean(errors.message)}
                   aria-describedby={errors.message ? "gift-message-error" : undefined}
                   className="w-full resize-y rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 py-3 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
                 />
+                <CharacterCount value={form.message} maximum={GIFT_MESSAGE_MAX_LENGTH} />
               </Field>
 
               <div className="mt-2 border-t border-welcome-black/10 pt-7 sm:col-span-2">
@@ -670,15 +711,32 @@ function PersonalizedVoucherPreview({
 
   return (
     <div className="relative mt-7 aspect-[3/2] overflow-hidden rounded-[20px] border border-welcome-gold/35 bg-[#062f25] shadow-[0_24px_55px_-35px_rgba(6,47,37,0.75)]">
-      <Image
-        src={image}
-        alt={alt}
-        fill
-        sizes="(min-width: 1024px) 55vw, calc(100vw - 48px)"
-        className="object-cover"
-      />
+      {isCloudDesign(design) ? (
+        <CloudVoucherArtwork
+          design={design}
+          image={image}
+          alt={alt}
+          occasion={occasion}
+          amount={amount}
+          validity={validity}
+          recipient={recipient}
+          from={from}
+          message={message}
+          recipientLabel={recipientLabel}
+          fromLabel={fromLabel}
+          messageLabel={messageLabel}
+        />
+      ) : (
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 55vw, calc(100vw - 48px)"
+          className="object-cover"
+        />
+      )}
 
-      {(design === "ivory" || design === "thankYou") && (
+      {!isCloudDesign(design) && (design === "ivory" || design === "thankYou") && (
         <div className="absolute inset-0 font-inter text-[#171512]">
           <p className="absolute left-[4%] top-[29%] w-[49%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-semibold uppercase tracking-[0.12em] text-[#bd8528]">
             {occasion}
@@ -695,7 +753,7 @@ function PersonalizedVoucherPreview({
         </div>
       )}
 
-      {(design === "red" || design === "birthday") && (
+      {!isCloudDesign(design) && (design === "red" || design === "birthday") && (
         <div className="absolute inset-0 font-serif text-[#94131a]">
           <p className="absolute left-[20%] top-[52%] w-[44%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.08em]">
             {occasion}
@@ -712,7 +770,7 @@ function PersonalizedVoucherPreview({
         </div>
       )}
 
-      {(design === "green" || design === "congratulations") && (
+      {!isCloudDesign(design) && (design === "green" || design === "congratulations") && (
         <div className="absolute inset-0 font-serif">
           <p className="absolute left-[5%] top-[25%] w-[50%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.06em] text-[#fff9e8]">
             {occasion}
@@ -728,6 +786,168 @@ function PersonalizedVoucherPreview({
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+const CLOUD_PALETTES = {
+  cloudBirthday: {
+    panel: "bg-[#781c2e]",
+    text: "text-[#fff9ec]",
+    accent: "text-[#f0cf7a]",
+    border: "border-[#e5bc55]",
+    amount: "bg-[#fff9ec] text-[#781c2e]",
+  },
+  cloudThankYou: {
+    panel: "bg-[#f5efe4]",
+    text: "text-[#173f32]",
+    accent: "text-[#b67b29]",
+    border: "border-[#c79543]",
+    amount: "bg-[#173f32] text-[#fff9ec]",
+  },
+  cloudCongratulations: {
+    panel: "bg-[#063a2a]",
+    text: "text-[#fff9ec]",
+    accent: "text-[#e3c366]",
+    border: "border-[#e3c366]",
+    amount: "bg-[#e3c366] text-[#063a2a]",
+  },
+} as const;
+
+function CloudDesignThumbnail({
+  design,
+  image,
+  alt,
+  occasion,
+}: {
+  design: Design;
+  image: StaticImageData;
+  alt: string;
+  occasion: string;
+}) {
+  if (!isCloudDesign(design)) return null;
+  const palette = CLOUD_PALETTES[design];
+
+  return (
+    <div className={`absolute inset-0 ${palette.panel}`}>
+      <div className="absolute inset-y-0 right-0 w-[37.5%] bg-black">
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 12vw, 28vw"
+          className="object-contain"
+        />
+      </div>
+      <div className={`absolute inset-y-[6%] left-[5%] w-[52.5%] ${palette.text}`}>
+        <p className={`font-manrope text-[clamp(7px,1.2vw,13px)] font-extrabold ${palette.accent}`}>
+          WELCOME! <span className="font-medium tracking-[0.25em]">COWORKING</span>
+        </p>
+        <p className="mt-[8%] font-serif text-[clamp(10px,2.2vw,23px)] font-semibold uppercase tracking-[0.06em]">
+          {occasion}
+        </p>
+        <div
+          className={`mt-[7%] flex h-[29%] items-center justify-center rounded-[10px] border-2 px-[6%] ${palette.border} ${palette.amount}`}
+        >
+          <span className="whitespace-nowrap font-manrope text-[clamp(18px,4.5vw,46px)] font-extrabold leading-none tracking-tight">
+            100 €
+          </span>
+        </div>
+        <div className={`mt-[8%] space-y-[4%] ${palette.accent}`} aria-hidden="true">
+          <span className="block h-[2px] w-[82%] rounded-full bg-current opacity-70" />
+          <span className="block h-[2px] w-[68%] rounded-full bg-current opacity-45" />
+          <span className="block h-[2px] w-[76%] rounded-full bg-current opacity-45" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CloudVoucherArtwork({
+  design,
+  image,
+  alt,
+  occasion,
+  amount,
+  validity,
+  recipient,
+  from,
+  message,
+  recipientLabel,
+  fromLabel,
+  messageLabel,
+}: {
+  design: CloudDesign;
+  image: StaticImageData;
+  alt: string;
+  occasion: string;
+  amount: string;
+  validity: string;
+  recipient: string;
+  from: string;
+  message: string;
+  recipientLabel: string;
+  fromLabel: string;
+  messageLabel: string;
+}) {
+  const palette = CLOUD_PALETTES[design];
+
+  return (
+    <div className={`absolute inset-0 ${palette.panel} ${palette.text}`}>
+      <div className="absolute inset-y-0 right-0 w-[37.5%] bg-black">
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 21vw, 38vw"
+          className="object-contain"
+        />
+      </div>
+      <div
+        className={`pointer-events-none absolute bottom-[3%] left-[2%] right-[39.5%] top-[3%] rounded-[14px] border ${palette.border} opacity-65`}
+        aria-hidden="true"
+      />
+      <div className="absolute left-[5%] top-[5%] w-[52.5%]">
+        <p
+          className={`font-manrope text-[clamp(6px,1.15vw,12px)] font-extrabold ${palette.accent}`}
+        >
+          WELCOME! <span className="font-medium tracking-[0.25em]">COWORKING</span>
+        </p>
+        <p className="mt-[4%] font-serif text-[clamp(7px,1.4vw,15px)] font-semibold uppercase tracking-[0.08em] opacity-85">
+          CHÈQUE CADEAU
+        </p>
+      </div>
+      <p
+        className={`absolute left-[5%] top-[20%] w-[52.5%] truncate text-center font-serif text-[clamp(8px,2.3vw,24px)] font-bold uppercase tracking-[0.07em] ${palette.accent}`}
+      >
+        {occasion}
+      </p>
+      <div
+        className={`absolute left-[5%] top-[29%] flex h-[19%] w-[52.5%] items-center justify-center rounded-[12px] border-2 px-[4%] ${palette.border} ${palette.amount}`}
+      >
+        <span className="whitespace-nowrap font-manrope text-[clamp(15px,4vw,42px)] font-extrabold leading-none tracking-tight">
+          {amount}
+        </span>
+      </div>
+      <p className="absolute left-[6%] top-[51.5%] w-[50.5%] text-center font-inter text-[clamp(5px,1.05vw,11px)] opacity-85">
+        {validity}
+      </p>
+      <div className="absolute left-[7%] top-[59%] w-[48.5%] space-y-[0.25em] font-inter text-[clamp(5px,0.95vw,10px)] leading-[1.2]">
+        <p className="line-clamp-2 break-words">
+          <strong>{recipientLabel}</strong> {recipient}
+        </p>
+        <p className="line-clamp-2 break-words">
+          <strong>{fromLabel}</strong> {from}
+        </p>
+        <p className="line-clamp-4 italic">
+          <strong className="not-italic">{messageLabel}</strong> {message}
+        </p>
+      </div>
+      <p
+        className={`absolute bottom-[5%] left-[7%] font-inter text-[clamp(5px,0.95vw,10px)] ${palette.accent}`}
+      >
+        welcome-coworking.com
+      </p>
     </div>
   );
 }
@@ -784,5 +1004,13 @@ function Field({
         </p>
       )}
     </div>
+  );
+}
+
+function CharacterCount({ value, maximum }: { value: string; maximum: number }) {
+  return (
+    <p className="mt-1.5 text-right font-inter text-xs text-welcome-body/55" aria-live="polite">
+      {value.length}/{maximum}
+    </p>
   );
 }

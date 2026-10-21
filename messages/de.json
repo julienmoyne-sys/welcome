@@ -986,6 +986,21 @@
           "title": "Glückwünsche in Smaragd & Gold",
           "description": "Festlich und strahlend",
           "alt": "Welcome Coworking-Glückwunschgutschein in Smaragdgrün und Gold"
+        },
+        "cloudBirthday": {
+          "title": "Geburtstag - Büro über den Wolken",
+          "description": "Warm und inspirierend",
+          "alt": "Welcome Coworking-Geburtstagsgutschein mit dem Foto des Büros über den Wolken"
+        },
+        "cloudThankYou": {
+          "title": "Dankeschön - Büro über den Wolken",
+          "description": "Herzlich und wertschätzend",
+          "alt": "Welcome Coworking-Dankeschön-Gutschein mit dem Foto des Büros über den Wolken"
+        },
+        "cloudCongratulations": {
+          "title": "Glückwünsche - Büro über den Wolken",
+          "description": "Elegant und inspirierend",
+          "alt": "Welcome Coworking-Glückwunschgutschein mit dem Foto des Büros über den Wolken"
         }
       }
     },
@@ -1054,6 +1069,8 @@
       "fromRequired": "Geben Sie den Namen der schenkenden Person ein.",
       "recipientRequired": "Geben Sie den Namen der beschenkten Person ein.",
       "messageRequired": "Fügen Sie dem Gutschein eine Nachricht hinzu.",
+      "nameMaximum": "Begrenzen Sie diesen Namen auf 40 Zeichen.",
+      "messageMaximum": "Begrenzen Sie die Nachricht auf 140 Zeichen.",
       "organizationTypeRequired": "Wählen Sie eine Organisationsform aus.",
       "lastNameRequired": "Geben Sie Ihren Nachnamen ein.",
       "firstNameRequired": "Geben Sie Ihren Vornamen ein.",

@@ -13,6 +13,9 @@ const DESIGN_OCCASIONS = {
   birthday: "birthday",
   thankYou: "thankYou",
   congratulations: "congratulations",
+  cloudBirthday: "birthday",
+  cloudThankYou: "thankYou",
+  cloudCongratulations: "congratulations",
 } as const;
 
 export type GiftCardResult =
@@ -28,7 +31,17 @@ async function parseGiftCard(input: unknown, locale: string) {
 
   const schema = z
     .object({
-      design: z.enum(["ivory", "red", "green", "birthday", "thankYou", "congratulations"]),
+      design: z.enum([
+        "ivory",
+        "red",
+        "green",
+        "birthday",
+        "thankYou",
+        "congratulations",
+        "cloudBirthday",
+        "cloudThankYou",
+        "cloudCongratulations",
+      ]),
       occasion: z.enum(["christmas", "birthday", "congratulations", "thankYou"], {
         errorMap: () => ({ message: t("occasionRequired") }),
       }),
@@ -37,9 +50,9 @@ async function parseGiftCard(input: unknown, locale: string) {
         .positive(t("amountRequired"))
         .max(10_000, t("amountMaximum"))
         .refine((value) => Number.isInteger(value * 100), t("amountPrecision")),
-      from: z.string().trim().min(1, t("fromRequired")).max(100),
-      recipient: z.string().trim().min(1, t("recipientRequired")).max(100),
-      message: z.string().trim().min(1, t("messageRequired")).max(1_000),
+      from: z.string().trim().min(1, t("fromRequired")).max(40, t("nameMaximum")),
+      recipient: z.string().trim().min(1, t("recipientRequired")).max(40, t("nameMaximum")),
+      message: z.string().trim().min(1, t("messageRequired")).max(140, t("messageMaximum")),
       organizationType: z.enum(["company", "association", "individual", "public"], {
         errorMap: () => ({ message: t("organizationTypeRequired") }),
       }),
