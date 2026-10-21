@@ -24,10 +24,10 @@
       "ogDescription": "Tell us about your office, workstation or meeting room requirements in Strasbourg."
     },
     "shop": {
-      "title": "Christmas gift vouchers | Welcome! Coworking Strasbourg",
+      "title": "Personalised gift vouchers | Welcome! Coworking Strasbourg",
       "description": "Give a personalised Welcome! Coworking voucher, valid for open-space desks, private offices and the meeting room in Strasbourg.",
-      "ogTitle": "Christmas gift vouchers | Welcome! Coworking",
-      "ogDescription": "Choose a design and an amount, then personalise a Welcome! Coworking gift voucher for Christmas 2026."
+      "ogTitle": "Personalised gift vouchers | Welcome! Coworking",
+      "ogDescription": "Choose a design, occasion and amount to create a personalised Welcome! Coworking gift voucher."
     },
     "openSpace": {
       "title": "Open space in Strasbourg — Welcome Coworking",
@@ -927,32 +927,32 @@
   },
   "shop": {
     "hero": {
-      "eyebrow": "Christmas 2026",
+      "eyebrow": "Gift vouchers",
       "title": "Give the gift of time and space",
       "lead": "A useful, elegant and fully personalised gift, valid across all Welcome! Coworking services.",
-      "validity": "Valid from 1 January 2027 to 31 December 2028"
+      "validity": "Valid for 2 years from the date of issue"
     },
     "designs": {
       "eyebrow": "Your gift voucher",
       "title": "Choose your design",
-      "lead": "Select the artwork for your gift. We will personalise the amount and message using the details you provide.",
+      "lead": "Select the artwork for your gift. We will personalise the occasion, amount, dates and message using the details you provide.",
       "selected": "Selected",
       "choose": "Choose",
       "items": {
         "ivory": {
           "title": "Ivory & gold",
           "description": "Bright and contemporary",
-          "alt": "Ivory and gold Welcome Coworking Christmas gift voucher featuring a meeting room"
+          "alt": "Ivory and gold Welcome Coworking gift voucher featuring a meeting room"
         },
         "red": {
-          "title": "Christmas red",
-          "description": "Warm and traditional",
-          "alt": "Red Welcome Coworking Christmas gift voucher with a large ribbon"
+          "title": "Festive red",
+          "description": "Warm and festive",
+          "alt": "Red Welcome Coworking gift voucher with a large ribbon"
         },
         "green": {
           "title": "Green & gold",
           "description": "Elegant and refined",
-          "alt": "Green and gold Welcome Coworking Christmas gift voucher featuring a private office"
+          "alt": "Green and gold Welcome Coworking gift voucher featuring a private office"
         }
       }
     },
@@ -961,6 +961,17 @@
       "title": "Create your gift voucher",
       "lead": "Enter the details to appear on the voucher. Your request will be sent directly to the Welcome! Coworking team.",
       "summaryLabel": "Your selection",
+      "occasion": "Occasion",
+      "customOccasion": "Specify the occasion",
+      "occasionTypes": {
+        "christmas": "Christmas",
+        "birthday": "Birthday",
+        "congratulations": "Congratulations",
+        "thankYou": "Thank you",
+        "retirement": "Retirement",
+        "other": "Other occasion"
+      },
+      "validitySummary": "Valid from {start} to {end}",
       "amount": "Amount in euros including VAT",
       "from": "From:",
       "recipient": "For:",
@@ -1005,6 +1016,8 @@
       "error": "We could not send your request. Please try again or email contact@welcome-coworking.com."
     },
     "validation": {
+      "occasionRequired": "Select an occasion.",
+      "customOccasionRequired": "Enter the occasion to display on the voucher.",
       "amountRequired": "Enter an amount greater than €0.",
       "amountMaximum": "The amount cannot exceed €10,000.",
       "amountPrecision": "Enter an amount with no more than two decimal places.",

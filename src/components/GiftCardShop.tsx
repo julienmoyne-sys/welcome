@@ -5,12 +5,13 @@ import { ArrowRight, Check, CreditCard, Gift, Pencil, Snowflake } from "lucide-r
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
-import giftCardGreen from "@/assets/gift-card-christmas-green.webp";
-import giftCardIvory from "@/assets/gift-card-christmas-ivory.webp";
-import giftCardRed from "@/assets/gift-card-christmas-red.webp";
+import giftCardGreen from "@/assets/gift-card-template-green.png";
+import giftCardIvory from "@/assets/gift-card-template-ivory.png";
+import giftCardRed from "@/assets/gift-card-template-red.png";
 import { submitGiftCard, validateGiftCard } from "@/lib/gift-card.actions";
 
 type Design = "ivory" | "red" | "green";
+type Occasion = "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
 type OrganizationType = "company" | "association" | "individual" | "public";
 
 const DESIGNS: Array<{ id: Design; image: StaticImageData }> = [
@@ -24,6 +25,8 @@ export function GiftCardShop() {
   const locale = useLocale();
   const [form, setForm] = useState({
     design: "ivory" as Design,
+    occasion: "christmas" as Occasion,
+    customOccasion: "",
     amount: "",
     from: "",
     recipient: "",
@@ -237,6 +240,50 @@ export function GiftCardShop() {
             </div>
 
             <div className={step === 1 ? "grid gap-6 sm:grid-cols-2" : "hidden"}>
+              <Field
+                htmlFor="gift-occasion"
+                label={t("form.occasion")}
+                error={errors.occasion}
+                className="sm:col-span-2"
+              >
+                <select
+                  id="gift-occasion"
+                  required
+                  value={form.occasion}
+                  onChange={(event) => update("occasion", event.target.value)}
+                  aria-invalid={Boolean(errors.occasion)}
+                  aria-describedby={errors.occasion ? "gift-occasion-error" : undefined}
+                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                >
+                  <option value="christmas">{t("form.occasionTypes.christmas")}</option>
+                  <option value="birthday">{t("form.occasionTypes.birthday")}</option>
+                  <option value="congratulations">{t("form.occasionTypes.congratulations")}</option>
+                  <option value="thankYou">{t("form.occasionTypes.thankYou")}</option>
+                  <option value="retirement">{t("form.occasionTypes.retirement")}</option>
+                  <option value="other">{t("form.occasionTypes.other")}</option>
+                </select>
+              </Field>
+              {form.occasion === "other" && (
+                <Field
+                  htmlFor="gift-custom-occasion"
+                  label={t("form.customOccasion")}
+                  error={errors.customOccasion}
+                  className="sm:col-span-2"
+                >
+                  <input
+                    id="gift-custom-occasion"
+                    type="text"
+                    maxLength={50}
+                    value={form.customOccasion}
+                    onChange={(event) => update("customOccasion", event.target.value)}
+                    aria-invalid={Boolean(errors.customOccasion)}
+                    aria-describedby={
+                      errors.customOccasion ? "gift-custom-occasion-error" : undefined
+                    }
+                    className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                  />
+                </Field>
+              )}
               <Field
                 htmlFor="gift-amount"
                 label={t("form.amount")}
@@ -481,6 +528,8 @@ function OrderReview({
 }: {
   form: {
     design: Design;
+    occasion: Occasion;
+    customOccasion: string;
     amount: string;
     from: string;
     recipient: string;
@@ -495,14 +544,34 @@ function OrderReview({
   onEdit: () => void;
   t: ReturnType<typeof useTranslations>;
 }) {
+  const locale = useLocale();
   const design = DESIGNS.find((item) => item.id === form.design) ?? DESIGNS[0];
   const amount = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "EUR",
   }).format(Number(form.amount));
+  const issueDate = new Date();
+  const expirationDate = new Date(issueDate);
+  expirationDate.setFullYear(issueDate.getFullYear() + 2);
+  const dateFormatter = new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+  const validity = t("form.validitySummary", {
+    start: dateFormatter.format(issueDate),
+    end: dateFormatter.format(expirationDate),
+  });
+  const occasion =
+    form.occasion === "other" ? form.customOccasion : t(`form.occasionTypes.${form.occasion}`);
+  const voucherOccasion =
+    form.occasion === "christmas"
+      ? `${occasion.toLocaleUpperCase(locale)} ${issueDate.getFullYear()}`
+      : occasion.toLocaleUpperCase(locale);
 
   const orderRows = [
     [t("form.reviewDesign"), t(`designs.items.${form.design}.title`)],
+    [t("form.occasion"), occasion],
     [t("form.amount"), amount],
     [t("form.recipient"), form.recipient],
     [t("form.from"), form.from],
@@ -538,44 +607,20 @@ function OrderReview({
         </button>
       </div>
 
-      <div className="mt-7 overflow-hidden rounded-[20px] border border-welcome-gold/35 bg-[#062f25] shadow-[0_24px_55px_-35px_rgba(6,47,37,0.75)]">
-        <div className="relative aspect-[3/1] overflow-hidden">
-          <Image
-            src={design.image}
-            alt={t(`designs.items.${form.design}.alt`)}
-            fill
-            sizes="(min-width: 1024px) 55vw, calc(100vw - 48px)"
-            className="object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#062f25]/65 via-transparent to-transparent" />
-        </div>
-        <div className="relative border-t border-[#e3c366]/35 px-5 py-6 text-white sm:px-8 sm:py-7">
-          <Snowflake
-            className="pointer-events-none absolute right-6 top-5 h-12 w-12 text-[#e3c366]/20"
-            aria-hidden="true"
-          />
-          <div className="relative grid gap-5 sm:grid-cols-[0.7fr_1.3fr] sm:gap-8">
-            <div>
-              <p className="font-inter text-xs font-semibold uppercase tracking-[0.16em] text-[#e3c366]">
-                {t("form.personalizedVoucher")}
-              </p>
-              <p className="mt-2 font-manrope text-[38px] font-bold tracking-tight text-white">
-                {amount}
-              </p>
-            </div>
-            <div className="space-y-2 font-inter text-sm leading-relaxed text-white/85">
-              <p>
-                <span className="font-semibold text-[#e3c366]">{t("form.recipient")}</span>{" "}
-                {form.recipient}
-              </p>
-              <p>
-                <span className="font-semibold text-[#e3c366]">{t("form.from")}</span> {form.from}
-              </p>
-              <p className="whitespace-pre-wrap italic text-white/75">“{form.message}”</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PersonalizedVoucherPreview
+        design={form.design}
+        image={design.image}
+        alt={t(`designs.items.${form.design}.alt`)}
+        occasion={voucherOccasion}
+        amount={amount}
+        recipient={form.recipient}
+        from={form.from}
+        message={form.message}
+        validity={validity}
+        recipientLabel={t("form.recipient")}
+        fromLabel={t("form.from")}
+        messageLabel={t("form.message")}
+      />
 
       <div className="mt-7 grid gap-5 md:grid-cols-2">
         <ReviewPanel title={t("form.orderSummaryTitle")} rows={orderRows} />
@@ -588,6 +633,111 @@ function OrderReview({
           {t("form.paymentRedirectNotice")}
         </p>
       </div>
+    </div>
+  );
+}
+
+function PersonalizedVoucherPreview({
+  design,
+  image,
+  alt,
+  occasion,
+  amount,
+  recipient,
+  from,
+  message,
+  validity,
+  recipientLabel,
+  fromLabel,
+  messageLabel,
+}: {
+  design: Design;
+  image: StaticImageData;
+  alt: string;
+  occasion: string;
+  amount: string;
+  recipient: string;
+  from: string;
+  message: string;
+  validity: string;
+  recipientLabel: string;
+  fromLabel: string;
+  messageLabel: string;
+}) {
+  const details = (
+    <div className="space-y-[0.25em] leading-tight">
+      <p className="truncate">
+        <strong>{recipientLabel}</strong> {recipient}
+      </p>
+      <p className="truncate">
+        <strong>{fromLabel}</strong> {from}
+      </p>
+      <p className="line-clamp-2 italic">
+        <strong className="not-italic">{messageLabel}</strong> {message}
+      </p>
+    </div>
+  );
+
+  return (
+    <div className="relative mt-7 aspect-[3/2] overflow-hidden rounded-[20px] border border-welcome-gold/35 bg-[#062f25] shadow-[0_24px_55px_-35px_rgba(6,47,37,0.75)]">
+      <Image
+        src={image}
+        alt={alt}
+        fill
+        sizes="(min-width: 1024px) 55vw, calc(100vw - 48px)"
+        className="object-cover"
+      />
+
+      {design === "ivory" && (
+        <div className="absolute inset-0 font-inter text-[#171512]">
+          <p className="absolute left-[4%] top-[29%] w-[49%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-semibold uppercase tracking-[0.12em] text-[#bd8528]">
+            {occasion}
+          </p>
+          <p className="absolute left-[5%] top-[40%] w-[47%] truncate text-center text-[clamp(18px,6vw,58px)] font-extrabold text-[#bd8528]">
+            {amount}
+          </p>
+          <p className="absolute left-[5%] top-[54%] w-[47%] text-center text-[clamp(5px,1.15vw,11px)]">
+            {validity}
+          </p>
+          <div className="absolute left-[7%] top-[75%] w-[41%] text-[clamp(5px,1.3vw,12px)]">
+            {details}
+          </div>
+        </div>
+      )}
+
+      {design === "red" && (
+        <div className="absolute inset-0 font-serif text-[#94131a]">
+          <p className="absolute left-[20%] top-[52%] w-[44%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.08em]">
+            {occasion}
+          </p>
+          <p className="absolute left-[24%] top-[61%] w-[35%] truncate text-center text-[clamp(17px,5vw,50px)] font-bold text-[#fff8e9]">
+            {amount}
+          </p>
+          <p className="absolute left-[23%] top-[76%] w-[38%] text-center text-[clamp(5px,1.1vw,10px)] text-[#2b1b14]">
+            {validity}
+          </p>
+          <div className="absolute left-[71%] top-[53%] w-[24%] text-[clamp(5px,1.25vw,12px)]">
+            {details}
+          </div>
+        </div>
+      )}
+
+      {design === "green" && (
+        <div className="absolute inset-0 font-serif">
+          <p className="absolute left-[5%] top-[25%] w-[50%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.06em] text-[#fff9e8]">
+            {occasion}
+          </p>
+          <p className="absolute left-[9%] top-[38%] w-[39%] truncate text-center text-[clamp(18px,5.8vw,56px)] font-bold text-[#063a2a]">
+            {amount}
+          </p>
+          <p className="absolute left-[8%] top-[55%] w-[41%] text-center text-[clamp(5px,1.1vw,10px)] text-[#fff9e8]">
+            {validity}
+          </p>
+          <div className="absolute left-[8%] top-[78%] w-[43%] text-[clamp(5px,1.25vw,12px)] text-[#171512]">
+            {details}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

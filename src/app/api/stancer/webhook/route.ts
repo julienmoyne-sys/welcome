@@ -26,6 +26,10 @@ const metadataSchema = z.object({
   version: z.literal(1),
   giftCard: z.object({
     design: z.enum(["ivory", "red", "green"]),
+    occasion: z
+      .enum(["christmas", "birthday", "congratulations", "thankYou", "retirement", "other"])
+      .default("christmas"),
+    customOccasion: z.string().max(50).optional(),
     from: z.string().min(1).max(100),
     recipient: z.string().min(1).max(100),
     message: z.string().min(1).max(1_000),

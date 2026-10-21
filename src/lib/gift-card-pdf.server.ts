@@ -1,7 +1,15 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
 import sharp from "sharp";
+
+export type GiftCardOccasion =
+  "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
 
 export type GiftCardDocumentData = {
   design: "ivory" | "red" | "green";
+  occasion: GiftCardOccasion;
+  customOccasion?: string;
   amount: number;
   from: string;
   recipient: string;
@@ -9,45 +17,51 @@ export type GiftCardDocumentData = {
   locale: "fr" | "en" | "de";
 };
 
-const THEMES: Record<
-  GiftCardDocumentData["design"],
-  { background: string; foreground: string; accent: string }
-> = {
-  ivory: { background: "#f8f3e9", foreground: "#171512", accent: "#bd8528" },
-  red: { background: "#7f1118", foreground: "#fff9eb", accent: "#e2bd62" },
-  green: { background: "#063a2a", foreground: "#fffdf4", accent: "#d8b65a" },
+const TEMPLATE_FILENAMES: Record<GiftCardDocumentData["design"], string> = {
+  ivory: "gift-card-template-ivory.png",
+  red: "gift-card-template-red.png",
+  green: "gift-card-template-green.png",
 };
 
 const COPY = {
   fr: {
-    title: "CHÈQUE CADEAU",
-    subtitle: "NOËL 2026",
-    personalized: "Bon cadeau personnalisé",
     recipient: "Pour",
     from: "De la part de",
-    message: "Votre message",
-    validity: "Valable du 01/01/2027 au 31/12/2028",
-    services: "Open space  •  Bureau privatif  •  Salle de réunion",
+    message: "Message",
+    validity: (start: string, end: string) => `Valable du ${start} au ${end}`,
+    occasions: {
+      christmas: "NOËL",
+      birthday: "ANNIVERSAIRE",
+      congratulations: "FÉLICITATIONS",
+      thankYou: "MERCI",
+      retirement: "RETRAITE",
+    },
   },
   en: {
-    title: "GIFT VOUCHER",
-    subtitle: "CHRISTMAS 2026",
-    personalized: "Personalised gift voucher",
     recipient: "For",
     from: "From",
-    message: "Your message",
-    validity: "Valid from 01/01/2027 to 31/12/2028",
-    services: "Open space  •  Private office  •  Meeting room",
+    message: "Message",
+    validity: (start: string, end: string) => `Valid from ${start} to ${end}`,
+    occasions: {
+      christmas: "CHRISTMAS",
+      birthday: "BIRTHDAY",
+      congratulations: "CONGRATULATIONS",
+      thankYou: "THANK YOU",
+      retirement: "RETIREMENT",
+    },
   },
   de: {
-    title: "GESCHENKGUTSCHEIN",
-    subtitle: "WEIHNACHTEN 2026",
-    personalized: "Personalisierter Geschenkgutschein",
     recipient: "Für",
     from: "Von",
-    message: "Ihre Nachricht",
-    validity: "Gültig vom 01.01.2027 bis zum 31.12.2028",
-    services: "Open Space  •  Privatbüro  •  Besprechungsraum",
+    message: "Nachricht",
+    validity: (start: string, end: string) => `Gültig vom ${start} bis ${end}`,
+    occasions: {
+      christmas: "WEIHNACHTEN",
+      birthday: "GEBURTSTAG",
+      congratulations: "HERZLICHEN GLÜCKWUNSCH",
+      thankYou: "DANKE",
+      retirement: "RUHESTAND",
+    },
   },
 } as const;
 
@@ -87,13 +101,126 @@ function wrapText(value: string, maxCharacters: number, maxLines: number) {
   return lines;
 }
 
-function linesToSvg(lines: string[], x: number, startY: number, lineHeight: number) {
+function textSpans(lines: string[], x: number, startY: number, lineHeight: number) {
   return lines
     .map(
       (line, index) =>
         `<tspan x="${x}" y="${startY + index * lineHeight}">${escapeXml(line)}</tspan>`,
     )
     .join("");
+}
+
+function fontSizeFor(value: string, normal: number, compact: number, threshold: number) {
+  return value.length > threshold ? compact : normal;
+}
+
+function getParisCivilDate(date: Date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Paris",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const get = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((part) => part.type === type)?.value);
+  return { year: get("year"), month: get("month"), day: get("day") };
+}
+
+function formatCivilDate(
+  value: { year: number; month: number; day: number },
+  locale: GiftCardDocumentData["locale"],
+) {
+  return new Intl.DateTimeFormat(locale, {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date(Date.UTC(value.year, value.month - 1, value.day, 12)));
+}
+
+function addTwoYears(value: { year: number; month: number; day: number }) {
+  const targetYear = value.year + 2;
+  const lastDay = new Date(Date.UTC(targetYear, value.month, 0)).getUTCDate();
+  return { ...value, year: targetYear, day: Math.min(value.day, lastDay) };
+}
+
+function occasionLabel(data: GiftCardDocumentData, year: number) {
+  const copy = COPY[data.locale];
+  if (data.occasion === "other") {
+    return (data.customOccasion ?? "").trim().toLocaleUpperCase(data.locale);
+  }
+  const label = copy.occasions[data.occasion];
+  return data.occasion === "christmas" ? `${label} ${year}` : label;
+}
+
+function buildOverlay(data: GiftCardDocumentData) {
+  const copy = COPY[data.locale];
+  const issueDate = getParisCivilDate(new Date());
+  const expirationDate = addTwoYears(issueDate);
+  const occasion = escapeXml(occasionLabel(data, issueDate.year).slice(0, 50));
+  const amount = escapeXml(
+    new Intl.NumberFormat(data.locale, { style: "currency", currency: "EUR" }).format(data.amount),
+  );
+  const validity = escapeXml(
+    copy.validity(
+      formatCivilDate(issueDate, data.locale),
+      formatCivilDate(expirationDate, data.locale),
+    ),
+  );
+  const recipient = escapeXml(data.recipient.slice(0, 100));
+  const from = escapeXml(data.from.slice(0, 100));
+
+  if (data.design === "red") {
+    const message = wrapText(data.message, 34, 3);
+    return `
+      <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Georgia, serif">
+          <text x="650" y="573" text-anchor="middle" fill="#9b1119" font-size="${fontSizeFor(occasion, 45, 34, 22)}" font-weight="700" letter-spacing="3">${occasion}</text>
+          <text x="645" y="710" text-anchor="middle" fill="#fff8e9" font-size="${fontSizeFor(amount, 100, 78, 10)}" font-weight="700">${amount}</text>
+        </g>
+        <g fill="#94131a" font-family="Georgia, serif" font-size="24">
+          <text x="1100" y="558"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
+          <text x="1100" y="613"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
+          <text x="1100" y="668" font-weight="700">${copy.message} :</text>
+          <text x="1100" y="711" font-size="22" font-style="italic">${textSpans(message, 1100, 711, 37)}</text>
+        </g>
+        <text x="640" y="798" text-anchor="middle" fill="#2b1b14" font-family="Georgia, serif" font-size="21">${validity}</text>
+      </svg>`;
+  }
+
+  if (data.design === "green") {
+    const message = wrapText(data.message, 52, 2);
+    return `
+      <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Georgia, serif">
+          <text x="430" y="307" text-anchor="middle" fill="#fff9e8" font-size="${fontSizeFor(occasion, 46, 34, 22)}" font-weight="700" letter-spacing="2">${occasion}</text>
+          <text x="420" y="475" text-anchor="middle" fill="#063a2a" font-size="${fontSizeFor(amount, 112, 86, 10)}" font-weight="700">${amount}</text>
+          <text x="430" y="576" text-anchor="middle" fill="#fff9e8" font-size="22">${validity}</text>
+        </g>
+        <g fill="#171512" font-family="Georgia, serif" font-size="23">
+          <text x="125" y="817"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
+          <text x="125" y="862"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
+          <text x="125" y="907" font-weight="700">${copy.message} :</text>
+          <text x="310" y="907" font-size="21" font-style="italic">${textSpans(message, 310, 907, 31)}</text>
+        </g>
+      </svg>`;
+  }
+
+  const message = wrapText(data.message, 38, 2);
+  return `
+    <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Arial, sans-serif">
+        <text x="410" y="337" text-anchor="middle" fill="#bd8528" font-size="${fontSizeFor(occasion, 42, 32, 22)}" font-weight="600" letter-spacing="7">${occasion}</text>
+        <text x="400" y="520" text-anchor="middle" fill="#bd8528" font-size="${fontSizeFor(amount, 124, 92, 10)}" font-weight="800">${amount}</text>
+        <text x="400" y="570" text-anchor="middle" fill="#171512" font-size="22">${validity}</text>
+        <g fill="#171512" font-size="25">
+          <text x="105" y="790"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
+          <text x="105" y="837"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
+          <text x="105" y="884" font-weight="700">${copy.message} :</text>
+          <text x="295" y="884" font-size="22" font-style="italic">${textSpans(message, 295, 884, 32)}</text>
+        </g>
+      </g>
+    </svg>`;
 }
 
 function jpegToPdf(jpeg: Buffer, width: number, height: number) {
@@ -118,9 +245,9 @@ function jpegToPdf(jpeg: Buffer, width: number, height: number) {
   object(2, "<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
   object(
     3,
-    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /XObject << /GiftCard 5 0 R >> >> /Contents 4 0 R >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 561.333] /Resources << /XObject << /GiftCard 5 0 R >> >> /Contents 4 0 R >>",
   );
-  const content = "q\n842 0 0 595 0 0 cm\n/GiftCard Do\nQ";
+  const content = "q\n842 0 0 561.333 0 0 cm\n/GiftCard Do\nQ";
   object(4, `<< /Length ${Buffer.byteLength(content)} >>\nstream\n${content}\nendstream`);
 
   offsets[5] = offset;
@@ -142,53 +269,12 @@ function jpegToPdf(jpeg: Buffer, width: number, height: number) {
 }
 
 export async function generateGiftCardPdf(data: GiftCardDocumentData) {
-  const theme = THEMES[data.design];
-  const copy = COPY[data.locale];
-  const amount = new Intl.NumberFormat(data.locale, {
-    style: "currency",
-    currency: "EUR",
-  }).format(data.amount);
-  const messageLines = wrapText(data.message, 58, 3);
-  const recipient = escapeXml(data.recipient.slice(0, 100));
-  const from = escapeXml(data.from.slice(0, 100));
-
-  const svg = `
-    <svg width="1600" height="1131" viewBox="0 0 1600 1131" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1600" height="1131" fill="${theme.background}"/>
-      <rect x="34" y="34" width="1532" height="1063" rx="20" fill="none" stroke="${theme.accent}" stroke-width="4"/>
-      <circle cx="1390" cy="170" r="210" fill="${theme.accent}" opacity="0.10"/>
-      <circle cx="150" cy="980" r="250" fill="${theme.accent}" opacity="0.08"/>
-      <g fill="${theme.accent}" opacity="0.75" font-family="Arial, sans-serif" font-size="44">
-        <text x="85" y="120">✦</text><text x="1450" y="130">❄</text><text x="1370" y="1040">✦</text>
-      </g>
-
-      <text x="100" y="150" fill="${theme.foreground}" font-family="Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="3">WELCOME<tspan fill="${theme.accent}">!</tspan></text>
-      <text x="103" y="195" fill="${theme.foreground}" opacity="0.82" font-family="Arial, sans-serif" font-size="25" letter-spacing="10">COWORKING</text>
-
-      <text x="800" y="325" text-anchor="middle" fill="${theme.foreground}" font-family="Georgia, serif" font-size="82" font-weight="700" letter-spacing="3">${copy.title}</text>
-      <text x="800" y="390" text-anchor="middle" fill="${theme.accent}" font-family="Arial, sans-serif" font-size="35" font-weight="700" letter-spacing="12">${copy.subtitle}</text>
-
-      <rect x="450" y="455" width="700" height="185" rx="24" fill="${theme.accent}"/>
-      <text x="800" y="535" text-anchor="middle" fill="${theme.background}" font-family="Arial, sans-serif" font-size="27" font-weight="700" letter-spacing="2">${copy.personalized}</text>
-      <text x="800" y="610" text-anchor="middle" fill="${theme.background}" font-family="Arial, sans-serif" font-size="70" font-weight="800">${escapeXml(amount)}</text>
-
-      <g font-family="Arial, sans-serif" fill="${theme.foreground}">
-        <text x="150" y="735" font-size="25" font-weight="700" fill="${theme.accent}">${copy.recipient.toUpperCase()}</text>
-        <text x="150" y="785" font-size="36" font-weight="700">${recipient}</text>
-        <text x="850" y="735" font-size="25" font-weight="700" fill="${theme.accent}">${copy.from.toUpperCase()}</text>
-        <text x="850" y="785" font-size="36" font-weight="700">${from}</text>
-        <text x="150" y="865" font-size="25" font-weight="700" fill="${theme.accent}">${copy.message.toUpperCase()}</text>
-        <text x="150" y="910" font-size="29" font-style="italic">${linesToSvg(messageLines, 150, 910, 38)}</text>
-      </g>
-
-      <line x1="150" y1="1010" x2="1450" y2="1010" stroke="${theme.accent}" stroke-width="2" opacity="0.7"/>
-      <text x="150" y="1055" fill="${theme.foreground}" opacity="0.80" font-family="Arial, sans-serif" font-size="23">${copy.services}</text>
-      <text x="1450" y="1055" text-anchor="end" fill="${theme.foreground}" opacity="0.80" font-family="Arial, sans-serif" font-size="23">${copy.validity}</text>
-    </svg>
-  `;
-
-  const jpeg = await sharp(Buffer.from(svg))
-    .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
+  const template = await readFile(
+    join(process.cwd(), "src", "assets", TEMPLATE_FILENAMES[data.design]),
+  );
+  const jpeg = await sharp(template)
+    .composite([{ input: Buffer.from(buildOverlay(data)), top: 0, left: 0 }])
+    .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
     .toBuffer();
-  return jpegToPdf(jpeg, 1600, 1131);
+  return jpegToPdf(jpeg, 1536, 1024);
 }

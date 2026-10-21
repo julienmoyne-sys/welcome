@@ -24,10 +24,10 @@
       "ogDescription": "Échangeons sur vos besoins en bureau, poste de travail ou salle de réunion à Strasbourg."
     },
     "shop": {
-      "title": "Bons cadeaux de Noël | Welcome! Coworking Strasbourg",
+      "title": "Bons cadeaux personnalisés | Welcome! Coworking Strasbourg",
       "description": "Offrez un bon cadeau Welcome! Coworking personnalisable, valable sur l’open space, les bureaux privatifs et la salle de réunion à Strasbourg.",
-      "ogTitle": "Bons cadeaux de Noël | Welcome! Coworking",
-      "ogDescription": "Choisissez votre modèle, votre montant et personnalisez un bon cadeau Welcome! Coworking pour Noël 2026."
+      "ogTitle": "Bons cadeaux personnalisés | Welcome! Coworking",
+      "ogDescription": "Choisissez votre modèle, votre occasion et votre montant pour créer un bon cadeau Welcome! Coworking personnalisé."
     },
     "openSpace": {
       "title": "Open space à Strasbourg — Welcome Coworking",
@@ -952,32 +952,32 @@
   },
   "shop": {
     "hero": {
-      "eyebrow": "Noël 2026",
+      "eyebrow": "Bons cadeaux",
       "title": "Offrez du temps et de l’espace",
       "lead": "Un cadeau utile, élégant et entièrement personnalisable, à utiliser sur toutes les prestations Welcome! Coworking.",
-      "validity": "Valable du 1er janvier 2027 au 31 décembre 2028"
+      "validity": "Valable 2 ans à compter de sa date d’émission"
     },
     "designs": {
       "eyebrow": "Votre bon cadeau",
       "title": "Choisissez votre modèle",
-      "lead": "Sélectionnez le visuel qui accompagnera votre cadeau. Le montant et le message seront personnalisés selon vos indications.",
+      "lead": "Sélectionnez le visuel qui accompagnera votre cadeau. L’occasion, le montant, les dates et le message seront personnalisés selon vos indications.",
       "selected": "Sélectionné",
       "choose": "Choisir",
       "items": {
         "ivory": {
           "title": "Ivoire & or",
           "description": "Lumineux et contemporain",
-          "alt": "Bon cadeau de Noël Welcome Coworking ivoire et or avec une salle de réunion"
+          "alt": "Bon cadeau Welcome Coworking ivoire et or avec une salle de réunion"
         },
         "red": {
-          "title": "Rouge de Noël",
-          "description": "Chaleureux et traditionnel",
-          "alt": "Bon cadeau de Noël Welcome Coworking rouge avec un grand ruban"
+          "title": "Rouge festif",
+          "description": "Chaleureux et festif",
+          "alt": "Bon cadeau Welcome Coworking rouge avec un grand ruban"
         },
         "green": {
           "title": "Vert & or",
           "description": "Élégant et raffiné",
-          "alt": "Bon cadeau de Noël Welcome Coworking vert et or avec un bureau privatif"
+          "alt": "Bon cadeau Welcome Coworking vert et or avec un bureau privatif"
         }
       }
     },
@@ -986,6 +986,17 @@
       "title": "Créez votre bon cadeau",
       "lead": "Renseignez les informations à inscrire sur le bon. Votre demande sera envoyée directement à l’équipe Welcome! Coworking.",
       "summaryLabel": "Votre sélection",
+      "occasion": "Occasion",
+      "customOccasion": "Précisez l’occasion",
+      "occasionTypes": {
+        "christmas": "Noël",
+        "birthday": "Anniversaire",
+        "congratulations": "Félicitations",
+        "thankYou": "Remerciement",
+        "retirement": "Départ à la retraite",
+        "other": "Autre occasion"
+      },
+      "validitySummary": "Valable du {start} au {end}",
       "amount": "Montant en euros TTC",
       "from": "De la part de :",
       "recipient": "Pour :",
@@ -1030,6 +1041,8 @@
       "error": "L’envoi a échoué. Merci de réessayer ou de nous écrire à contact@welcome-coworking.com."
     },
     "validation": {
+      "occasionRequired": "Sélectionnez une occasion.",
+      "customOccasionRequired": "Précisez l’occasion à afficher sur le bon.",
       "amountRequired": "Indiquez un montant supérieur à 0 €.",
       "amountMaximum": "Le montant ne peut pas dépasser 10 000 €.",
       "amountPrecision": "Indiquez un montant avec deux décimales maximum.",

@@ -25,6 +25,8 @@ export type ContactPayload = {
 
 export type GiftCardPayload = {
   design: "ivory" | "red" | "green";
+  occasion: "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
+  customOccasion?: string;
   amount: number;
   from: string;
   recipient: string;
@@ -148,6 +150,14 @@ const ORGANIZATION_TYPES: Record<GiftCardPayload["organizationType"], string> = 
   public: "Organisation publique",
 };
 
+const GIFT_CARD_OCCASIONS: Record<Exclude<GiftCardPayload["occasion"], "other">, string> = {
+  christmas: "Noël",
+  birthday: "Anniversaire",
+  congratulations: "Félicitations",
+  thankYou: "Remerciement",
+  retirement: "Départ à la retraite",
+};
+
 /** Envoie une demande de bon cadeau vers la boîte de contact de Welcome. */
 export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCardPaymentLink) {
   const formattedAmount = new Intl.NumberFormat("fr-FR", {
@@ -156,9 +166,12 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
   }).format(data.amount);
   const subjectRecipient = data.recipient.replace(/[\r\n]+/g, " ").trim();
   const replyName = `${data.firstName} ${data.lastName}`.replace(/[\r\n"]/g, " ").trim();
+  const occasion =
+    data.occasion === "other" ? data.customOccasion || "Autre" : GIFT_CARD_OCCASIONS[data.occasion];
 
   const rows: Array<[string, string]> = [
     ["Modèle", GIFT_CARD_DESIGNS[data.design]],
+    ["Occasion", occasion],
     ["Montant TTC", formattedAmount],
     ["De la part de", data.from],
     ["Pour", data.recipient],
@@ -173,7 +186,7 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
 
   const html = `
     <div style="font-family:Arial,sans-serif;color:#0b0b0b">
-      <h2 style="color:#0b0b0b">Nouvelle commande de bon cadeau de Noël</h2>
+      <h2 style="color:#0b0b0b">Nouvelle commande de bon cadeau</h2>
       <p style="padding:10px 12px;border-radius:8px;background:#fff3cd;color:#664d03">
         Statut : en attente du paiement Stancer. Vérifier le paiement avant de finaliser le bon et la facture.
       </p>
@@ -199,7 +212,7 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
   `;
 
   const text = [
-    "Nouvelle commande de bon cadeau de Noël",
+    "Nouvelle commande de bon cadeau",
     "Statut : EN ATTENTE DU PAIEMENT STANCER",
     "Vérifier le paiement avant de finaliser le bon et la facture.",
     "",
@@ -219,7 +232,7 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
       from: `"Welcome Coworking" <${SMTP_USER}>`,
       to: TO,
       replyTo: `"${replyName}" <${data.email}>`,
-      subject: `[Paiement en attente] Bon cadeau de Noël — ${formattedAmount} pour ${subjectRecipient}`,
+      subject: `[Paiement en attente] Bon cadeau — ${formattedAmount} pour ${subjectRecipient}`,
       text,
       html,
     });

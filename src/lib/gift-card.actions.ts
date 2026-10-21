@@ -20,6 +20,11 @@ async function parseGiftCard(input: unknown, locale: string) {
   const schema = z
     .object({
       design: z.enum(["ivory", "red", "green"]),
+      occasion: z.enum(
+        ["christmas", "birthday", "congratulations", "thankYou", "retirement", "other"],
+        { errorMap: () => ({ message: t("occasionRequired") }) },
+      ),
+      customOccasion: z.string().trim().max(50).optional(),
       amount: z.coerce
         .number()
         .positive(t("amountRequired"))
@@ -43,6 +48,13 @@ async function parseGiftCard(input: unknown, locale: string) {
         .max(255),
     })
     .superRefine((data, context) => {
+      if (data.occasion === "other" && !data.customOccasion) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["customOccasion"],
+          message: t("customOccasionRequired"),
+        });
+      }
       if (data.email.toLocaleLowerCase() !== data.emailConfirmation.toLocaleLowerCase()) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
