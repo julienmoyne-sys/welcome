@@ -1,23 +1,33 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { ArrowRight, Check, CreditCard, Gift, Pencil, Snowflake } from "lucide-react";
+import { ArrowRight, Check, CreditCard, Gift, Pencil, Sparkles } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
+import giftCardBirthday from "@/assets/gift-card-template-birthday.png";
+import giftCardCongratulations from "@/assets/gift-card-template-congratulations.png";
 import giftCardGreen from "@/assets/gift-card-template-green.png";
 import giftCardIvory from "@/assets/gift-card-template-ivory.png";
 import giftCardRed from "@/assets/gift-card-template-red.png";
+import giftCardThankYou from "@/assets/gift-card-template-thank-you.png";
 import { submitGiftCard, validateGiftCard } from "@/lib/gift-card.actions";
 
-type Design = "ivory" | "red" | "green";
-type Occasion = "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
+type Design = "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+type Occasion = "christmas" | "birthday" | "congratulations" | "thankYou";
 type OrganizationType = "company" | "association" | "individual" | "public";
 
-const DESIGNS: Array<{ id: Design; image: StaticImageData }> = [
-  { id: "ivory", image: giftCardIvory },
-  { id: "red", image: giftCardRed },
-  { id: "green", image: giftCardGreen },
+const DESIGNS: Array<{ id: Design; image: StaticImageData; occasion: Occasion }> = [
+  { id: "ivory", image: giftCardIvory, occasion: "christmas" },
+  { id: "red", image: giftCardRed, occasion: "christmas" },
+  { id: "green", image: giftCardGreen, occasion: "christmas" },
+  { id: "birthday", image: giftCardBirthday, occasion: "birthday" },
+  { id: "thankYou", image: giftCardThankYou, occasion: "thankYou" },
+  {
+    id: "congratulations",
+    image: giftCardCongratulations,
+    occasion: "congratulations",
+  },
 ];
 
 export function GiftCardShop() {
@@ -26,7 +36,6 @@ export function GiftCardShop() {
   const [form, setForm] = useState({
     design: "ivory" as Design,
     occasion: "christmas" as Occasion,
-    customOccasion: "",
     amount: "",
     from: "",
     recipient: "",
@@ -49,6 +58,17 @@ export function GiftCardShop() {
       const next = { ...current };
       delete next[key];
       if (key === "email") delete next.emailConfirmation;
+      return next;
+    });
+  };
+
+  const selectDesign = (design: Design, occasion: Occasion) => {
+    setForm((current) => ({ ...current, design, occasion }));
+    setStatus("idle");
+    setErrors((current) => {
+      const next = { ...current };
+      delete next.design;
+      delete next.occasion;
       return next;
     });
   };
@@ -111,10 +131,10 @@ export function GiftCardShop() {
     <main>
       <section className="relative overflow-hidden bg-[#062f25] px-6 py-20 text-white lg:px-10 lg:py-28">
         <div className="pointer-events-none absolute inset-0 opacity-20" aria-hidden="true">
-          <Snowflake className="absolute left-[8%] top-12 h-16 w-16 text-[#e3c366]" />
-          <Snowflake className="absolute right-[10%] top-20 h-10 w-10 text-[#e3c366]" />
-          <Snowflake className="absolute bottom-10 left-[22%] h-8 w-8 text-white" />
-          <Snowflake className="absolute bottom-12 right-[25%] h-14 w-14 text-white" />
+          <Sparkles className="absolute left-[8%] top-12 h-16 w-16 text-[#e3c366]" />
+          <Sparkles className="absolute right-[10%] top-20 h-10 w-10 text-[#e3c366]" />
+          <Sparkles className="absolute bottom-10 left-[22%] h-8 w-8 text-white" />
+          <Sparkles className="absolute bottom-12 right-[25%] h-14 w-14 text-white" />
         </div>
         <div className="relative mx-auto max-w-[980px] text-center">
           <p className="font-inter text-[14px] font-semibold uppercase tracking-[0.18em] text-[#e3c366]">
@@ -148,14 +168,14 @@ export function GiftCardShop() {
           </div>
 
           <div className="mt-12 grid gap-7 lg:grid-cols-3">
-            {DESIGNS.map(({ id, image }) => {
+            {DESIGNS.map(({ id, image, occasion }) => {
               const selected = form.design === id;
               return (
                 <button
                   key={id}
                   type="button"
                   aria-pressed={selected}
-                  onClick={() => update("design", id)}
+                  onClick={() => selectDesign(id, occasion)}
                   className={`group overflow-hidden rounded-[22px] border-2 bg-welcome-white text-left shadow-[0_18px_45px_-34px_rgba(11,11,11,0.35)] transition-all duration-300 hover:-translate-y-1 ${
                     selected
                       ? "border-welcome-gold shadow-[0_20px_50px_-26px_rgba(198,178,74,0.6)]"
@@ -240,50 +260,22 @@ export function GiftCardShop() {
             </div>
 
             <div className={step === 1 ? "grid gap-6 sm:grid-cols-2" : "hidden"}>
-              <Field
-                htmlFor="gift-occasion"
-                label={t("form.occasion")}
-                error={errors.occasion}
-                className="sm:col-span-2"
-              >
+              <Field htmlFor="gift-occasion" label={t("form.occasion")} className="sm:col-span-2">
                 <select
                   id="gift-occasion"
-                  required
+                  disabled
                   value={form.occasion}
-                  onChange={(event) => update("occasion", event.target.value)}
-                  aria-invalid={Boolean(errors.occasion)}
-                  aria-describedby={errors.occasion ? "gift-occasion-error" : undefined}
-                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                  className="h-14 w-full cursor-not-allowed rounded-[12px] border border-welcome-black/10 bg-welcome-black/[0.06] px-4 font-inter text-base text-welcome-body/65 opacity-100"
                 >
                   <option value="christmas">{t("form.occasionTypes.christmas")}</option>
                   <option value="birthday">{t("form.occasionTypes.birthday")}</option>
                   <option value="congratulations">{t("form.occasionTypes.congratulations")}</option>
                   <option value="thankYou">{t("form.occasionTypes.thankYou")}</option>
-                  <option value="retirement">{t("form.occasionTypes.retirement")}</option>
-                  <option value="other">{t("form.occasionTypes.other")}</option>
                 </select>
+                <p className="mt-2 font-inter text-xs text-welcome-body/60">
+                  {t("form.occasionLocked")}
+                </p>
               </Field>
-              {form.occasion === "other" && (
-                <Field
-                  htmlFor="gift-custom-occasion"
-                  label={t("form.customOccasion")}
-                  error={errors.customOccasion}
-                  className="sm:col-span-2"
-                >
-                  <input
-                    id="gift-custom-occasion"
-                    type="text"
-                    maxLength={50}
-                    value={form.customOccasion}
-                    onChange={(event) => update("customOccasion", event.target.value)}
-                    aria-invalid={Boolean(errors.customOccasion)}
-                    aria-describedby={
-                      errors.customOccasion ? "gift-custom-occasion-error" : undefined
-                    }
-                    className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
-                  />
-                </Field>
-              )}
               <Field
                 htmlFor="gift-amount"
                 label={t("form.amount")}
@@ -529,7 +521,6 @@ function OrderReview({
   form: {
     design: Design;
     occasion: Occasion;
-    customOccasion: string;
     amount: string;
     from: string;
     recipient: string;
@@ -562,8 +553,7 @@ function OrderReview({
     start: dateFormatter.format(issueDate),
     end: dateFormatter.format(expirationDate),
   });
-  const occasion =
-    form.occasion === "other" ? form.customOccasion : t(`form.occasionTypes.${form.occasion}`);
+  const occasion = t(`form.occasionTypes.${form.occasion}`);
   const voucherOccasion =
     form.occasion === "christmas"
       ? `${occasion.toLocaleUpperCase(locale)} ${issueDate.getFullYear()}`
@@ -688,12 +678,12 @@ function PersonalizedVoucherPreview({
         className="object-cover"
       />
 
-      {design === "ivory" && (
+      {(design === "ivory" || design === "thankYou") && (
         <div className="absolute inset-0 font-inter text-[#171512]">
           <p className="absolute left-[4%] top-[29%] w-[49%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-semibold uppercase tracking-[0.12em] text-[#bd8528]">
             {occasion}
           </p>
-          <p className="absolute left-[5%] top-[40%] w-[47%] truncate text-center text-[clamp(18px,6vw,58px)] font-extrabold text-[#bd8528]">
+          <p className="absolute left-[5%] top-[36%] flex h-[18%] w-[47%] items-center justify-center whitespace-nowrap text-center text-[clamp(18px,6vw,58px)] font-extrabold leading-none text-[#bd8528]">
             {amount}
           </p>
           <p className="absolute left-[5%] top-[54%] w-[47%] text-center text-[clamp(5px,1.15vw,11px)]">
@@ -705,12 +695,12 @@ function PersonalizedVoucherPreview({
         </div>
       )}
 
-      {design === "red" && (
+      {(design === "red" || design === "birthday") && (
         <div className="absolute inset-0 font-serif text-[#94131a]">
           <p className="absolute left-[20%] top-[52%] w-[44%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.08em]">
             {occasion}
           </p>
-          <p className="absolute left-[24%] top-[61%] w-[35%] truncate text-center text-[clamp(17px,5vw,50px)] font-bold text-[#fff8e9]">
+          <p className="absolute left-[23.5%] top-[58.5%] flex h-[15%] w-[36%] items-center justify-center whitespace-nowrap text-center text-[clamp(16px,4.3vw,44px)] font-bold leading-none text-[#fff8e9]">
             {amount}
           </p>
           <p className="absolute left-[23%] top-[76%] w-[38%] text-center text-[clamp(5px,1.1vw,10px)] text-[#2b1b14]">
@@ -722,12 +712,12 @@ function PersonalizedVoucherPreview({
         </div>
       )}
 
-      {design === "green" && (
+      {(design === "green" || design === "congratulations") && (
         <div className="absolute inset-0 font-serif">
           <p className="absolute left-[5%] top-[25%] w-[50%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.06em] text-[#fff9e8]">
             {occasion}
           </p>
-          <p className="absolute left-[9%] top-[38%] w-[39%] truncate text-center text-[clamp(18px,5.8vw,56px)] font-bold text-[#063a2a]">
+          <p className="absolute left-[8%] top-[34%] flex h-[18.5%] w-[39.5%] items-center justify-center whitespace-nowrap text-center text-[clamp(16px,4.5vw,46px)] font-bold leading-none text-[#063a2a]">
             {amount}
           </p>
           <p className="absolute left-[8%] top-[55%] w-[41%] text-center text-[clamp(5px,1.1vw,10px)] text-[#fff9e8]">

@@ -953,6 +953,21 @@
           "title": "Green & gold",
           "description": "Elegant and refined",
           "alt": "Green and gold Welcome Coworking gift voucher featuring a private office"
+        },
+        "birthday": {
+          "title": "Burgundy & gold birthday",
+          "description": "Festive and elegant",
+          "alt": "Burgundy, blush and gold Welcome Coworking birthday gift voucher with balloons"
+        },
+        "thankYou": {
+          "title": "Botanical thank you",
+          "description": "Soft and refined",
+          "alt": "Ivory, sage and gold Welcome Coworking thank-you gift voucher with botanical decorations"
+        },
+        "congratulations": {
+          "title": "Emerald & gold congratulations",
+          "description": "Prestigious and bright",
+          "alt": "Emerald green and gold Welcome Coworking congratulations gift voucher"
         }
       }
     },
@@ -962,14 +977,12 @@
       "lead": "Enter the details to appear on the voucher. Your request will be sent directly to the Welcome! Coworking team.",
       "summaryLabel": "Your selection",
       "occasion": "Occasion",
-      "customOccasion": "Specify the occasion",
+      "occasionLocked": "The occasion is set automatically by the selected design.",
       "occasionTypes": {
         "christmas": "Christmas",
         "birthday": "Birthday",
         "congratulations": "Congratulations",
-        "thankYou": "Thank you",
-        "retirement": "Retirement",
-        "other": "Other occasion"
+        "thankYou": "Thank you"
       },
       "validitySummary": "Valid from {start} to {end}",
       "amount": "Amount in euros including VAT",
@@ -1017,7 +1030,6 @@
     },
     "validation": {
       "occasionRequired": "Select an occasion.",
-      "customOccasionRequired": "Enter the occasion to display on the voucher.",
       "amountRequired": "Enter an amount greater than €0.",
       "amountMaximum": "The amount cannot exceed €10,000.",
       "amountPrecision": "Enter an amount with no more than two decimal places.",

@@ -971,6 +971,21 @@
           "title": "Grün & Gold",
           "description": "Elegant und edel",
           "alt": "Grüner und goldener Welcome Coworking-Geschenkgutschein mit privatem Büro"
+        },
+        "birthday": {
+          "title": "Geburtstag in Bordeaux & Gold",
+          "description": "Festlich und elegant",
+          "alt": "Welcome Coworking-Geburtstagsgutschein in Bordeaux, Rosé und Gold mit Luftballons"
+        },
+        "thankYou": {
+          "title": "Botanisches Dankeschön",
+          "description": "Sanft und edel",
+          "alt": "Welcome Coworking-Dankeschön-Gutschein in Elfenbein, Salbeigrün und Gold mit Pflanzenmotiven"
+        },
+        "congratulations": {
+          "title": "Glückwünsche in Smaragd & Gold",
+          "description": "Festlich und strahlend",
+          "alt": "Welcome Coworking-Glückwunschgutschein in Smaragdgrün und Gold"
         }
       }
     },
@@ -980,14 +995,12 @@
       "lead": "Tragen Sie die Angaben ein, die auf dem Gutschein erscheinen sollen. Ihre Anfrage geht direkt an das Team von Welcome! Coworking.",
       "summaryLabel": "Ihre Auswahl",
       "occasion": "Anlass",
-      "customOccasion": "Anlass angeben",
+      "occasionLocked": "Der Anlass wird automatisch durch das gewählte Design festgelegt.",
       "occasionTypes": {
         "christmas": "Weihnachten",
         "birthday": "Geburtstag",
         "congratulations": "Glückwünsche",
-        "thankYou": "Dankeschön",
-        "retirement": "Ruhestand",
-        "other": "Anderer Anlass"
+        "thankYou": "Dankeschön"
       },
       "validitySummary": "Gültig vom {start} bis {end}",
       "amount": "Betrag in Euro inkl. MwSt.",
@@ -1035,7 +1048,6 @@
     },
     "validation": {
       "occasionRequired": "Wählen Sie einen Anlass.",
-      "customOccasionRequired": "Geben Sie den Anlass an, der auf dem Gutschein erscheinen soll.",
       "amountRequired": "Geben Sie einen Betrag über 0 € ein.",
       "amountMaximum": "Der Betrag darf 10.000 € nicht überschreiten.",
       "amountPrecision": "Geben Sie einen Betrag mit höchstens zwei Dezimalstellen ein.",

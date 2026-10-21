@@ -6,6 +6,15 @@ import { z } from "zod";
 import { sendGiftCardEmail } from "./contact.server";
 import { cancelGiftCardPaymentLink, createGiftCardPaymentLink } from "./stancer.server";
 
+const DESIGN_OCCASIONS = {
+  ivory: "christmas",
+  red: "christmas",
+  green: "christmas",
+  birthday: "birthday",
+  thankYou: "thankYou",
+  congratulations: "congratulations",
+} as const;
+
 export type GiftCardResult =
   | { status: "success"; paymentUrl: string }
   | { status: "invalid"; fieldErrors: Record<string, string> }
@@ -19,12 +28,10 @@ async function parseGiftCard(input: unknown, locale: string) {
 
   const schema = z
     .object({
-      design: z.enum(["ivory", "red", "green"]),
-      occasion: z.enum(
-        ["christmas", "birthday", "congratulations", "thankYou", "retirement", "other"],
-        { errorMap: () => ({ message: t("occasionRequired") }) },
-      ),
-      customOccasion: z.string().trim().max(50).optional(),
+      design: z.enum(["ivory", "red", "green", "birthday", "thankYou", "congratulations"]),
+      occasion: z.enum(["christmas", "birthday", "congratulations", "thankYou"], {
+        errorMap: () => ({ message: t("occasionRequired") }),
+      }),
       amount: z.coerce
         .number()
         .positive(t("amountRequired"))
@@ -48,13 +55,6 @@ async function parseGiftCard(input: unknown, locale: string) {
         .max(255),
     })
     .superRefine((data, context) => {
-      if (data.occasion === "other" && !data.customOccasion) {
-        context.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["customOccasion"],
-          message: t("customOccasionRequired"),
-        });
-      }
       if (data.email.toLocaleLowerCase() !== data.emailConfirmation.toLocaleLowerCase()) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
@@ -75,7 +75,11 @@ async function parseGiftCard(input: unknown, locale: string) {
     return { success: false as const, fieldErrors };
   }
 
-  const { emailConfirmation: _emailConfirmation, ...payload } = parsed.data;
+  const { emailConfirmation: _emailConfirmation, occasion: _occasion, ...giftCard } = parsed.data;
+  const payload = {
+    ...giftCard,
+    occasion: DESIGN_OCCASIONS[giftCard.design],
+  };
   return { success: true as const, payload };
 }
 

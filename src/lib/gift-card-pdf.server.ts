@@ -3,13 +3,11 @@ import { join } from "node:path";
 
 import sharp from "sharp";
 
-export type GiftCardOccasion =
-  "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
+export type GiftCardOccasion = "christmas" | "birthday" | "congratulations" | "thankYou";
 
 export type GiftCardDocumentData = {
-  design: "ivory" | "red" | "green";
+  design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
   occasion: GiftCardOccasion;
-  customOccasion?: string;
   amount: number;
   from: string;
   recipient: string;
@@ -21,6 +19,9 @@ const TEMPLATE_FILENAMES: Record<GiftCardDocumentData["design"], string> = {
   ivory: "gift-card-template-ivory.png",
   red: "gift-card-template-red.png",
   green: "gift-card-template-green.png",
+  birthday: "gift-card-template-birthday.png",
+  thankYou: "gift-card-template-thank-you.png",
+  congratulations: "gift-card-template-congratulations.png",
 };
 
 const COPY = {
@@ -34,7 +35,6 @@ const COPY = {
       birthday: "ANNIVERSAIRE",
       congratulations: "FÉLICITATIONS",
       thankYou: "MERCI",
-      retirement: "RETRAITE",
     },
   },
   en: {
@@ -47,7 +47,6 @@ const COPY = {
       birthday: "BIRTHDAY",
       congratulations: "CONGRATULATIONS",
       thankYou: "THANK YOU",
-      retirement: "RETIREMENT",
     },
   },
   de: {
@@ -60,7 +59,6 @@ const COPY = {
       birthday: "GEBURTSTAG",
       congratulations: "HERZLICHEN GLÜCKWUNSCH",
       thankYou: "DANKE",
-      retirement: "RUHESTAND",
     },
   },
 } as const;
@@ -146,9 +144,6 @@ function addTwoYears(value: { year: number; month: number; day: number }) {
 
 function occasionLabel(data: GiftCardDocumentData, year: number) {
   const copy = COPY[data.locale];
-  if (data.occasion === "other") {
-    return (data.customOccasion ?? "").trim().toLocaleUpperCase(data.locale);
-  }
   const label = copy.occasions[data.occasion];
   return data.occasion === "christmas" ? `${label} ${year}` : label;
 }
@@ -170,7 +165,7 @@ function buildOverlay(data: GiftCardDocumentData) {
   const recipient = escapeXml(data.recipient.slice(0, 100));
   const from = escapeXml(data.from.slice(0, 100));
 
-  if (data.design === "red") {
+  if (data.design === "red" || data.design === "birthday") {
     const message = wrapText(data.message, 34, 3);
     return `
       <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
@@ -188,7 +183,7 @@ function buildOverlay(data: GiftCardDocumentData) {
       </svg>`;
   }
 
-  if (data.design === "green") {
+  if (data.design === "green" || data.design === "congratulations") {
     const message = wrapText(data.message, 52, 2);
     return `
       <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">

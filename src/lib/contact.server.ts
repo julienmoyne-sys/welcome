@@ -24,9 +24,8 @@ export type ContactPayload = {
 };
 
 export type GiftCardPayload = {
-  design: "ivory" | "red" | "green";
-  occasion: "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
-  customOccasion?: string;
+  design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+  occasion: "christmas" | "birthday" | "congratulations" | "thankYou";
   amount: number;
   from: string;
   recipient: string;
@@ -141,6 +140,9 @@ const GIFT_CARD_DESIGNS: Record<GiftCardPayload["design"], string> = {
   ivory: "Ivoire & or",
   red: "Rouge de Noël",
   green: "Vert & or",
+  birthday: "Anniversaire bordeaux & or",
+  thankYou: "Merci végétal",
+  congratulations: "Félicitations émeraude & or",
 };
 
 const ORGANIZATION_TYPES: Record<GiftCardPayload["organizationType"], string> = {
@@ -150,12 +152,11 @@ const ORGANIZATION_TYPES: Record<GiftCardPayload["organizationType"], string> = 
   public: "Organisation publique",
 };
 
-const GIFT_CARD_OCCASIONS: Record<Exclude<GiftCardPayload["occasion"], "other">, string> = {
+const GIFT_CARD_OCCASIONS: Record<GiftCardPayload["occasion"], string> = {
   christmas: "Noël",
   birthday: "Anniversaire",
   congratulations: "Félicitations",
   thankYou: "Remerciement",
-  retirement: "Départ à la retraite",
 };
 
 /** Envoie une demande de bon cadeau vers la boîte de contact de Welcome. */
@@ -166,8 +167,7 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
   }).format(data.amount);
   const subjectRecipient = data.recipient.replace(/[\r\n]+/g, " ").trim();
   const replyName = `${data.firstName} ${data.lastName}`.replace(/[\r\n"]/g, " ").trim();
-  const occasion =
-    data.occasion === "other" ? data.customOccasion || "Autre" : GIFT_CARD_OCCASIONS[data.occasion];
+  const occasion = GIFT_CARD_OCCASIONS[data.occasion];
 
   const rows: Array<[string, string]> = [
     ["Modèle", GIFT_CARD_DESIGNS[data.design]],

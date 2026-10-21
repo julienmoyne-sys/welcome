@@ -978,6 +978,21 @@
           "title": "Vert & or",
           "description": "Élégant et raffiné",
           "alt": "Bon cadeau Welcome Coworking vert et or avec un bureau privatif"
+        },
+        "birthday": {
+          "title": "Anniversaire bordeaux & or",
+          "description": "Festif et élégant",
+          "alt": "Bon cadeau d’anniversaire Welcome Coworking bordeaux, rose et or avec des ballons"
+        },
+        "thankYou": {
+          "title": "Merci végétal",
+          "description": "Doux et raffiné",
+          "alt": "Bon cadeau de remerciement Welcome Coworking ivoire, sauge et or avec un décor végétal"
+        },
+        "congratulations": {
+          "title": "Félicitations émeraude & or",
+          "description": "Prestigieux et lumineux",
+          "alt": "Bon cadeau de félicitations Welcome Coworking vert émeraude et or"
         }
       }
     },
@@ -987,14 +1002,12 @@
       "lead": "Renseignez les informations à inscrire sur le bon. Votre demande sera envoyée directement à l’équipe Welcome! Coworking.",
       "summaryLabel": "Votre sélection",
       "occasion": "Occasion",
-      "customOccasion": "Précisez l’occasion",
+      "occasionLocked": "L’occasion est définie automatiquement par le modèle choisi.",
       "occasionTypes": {
         "christmas": "Noël",
         "birthday": "Anniversaire",
         "congratulations": "Félicitations",
-        "thankYou": "Remerciement",
-        "retirement": "Départ à la retraite",
-        "other": "Autre occasion"
+        "thankYou": "Remerciement"
       },
       "validitySummary": "Valable du {start} au {end}",
       "amount": "Montant en euros TTC",
@@ -1042,7 +1055,6 @@
     },
     "validation": {
       "occasionRequired": "Sélectionnez une occasion.",
-      "customOccasionRequired": "Précisez l’occasion à afficher sur le bon.",
       "amountRequired": "Indiquez un montant supérieur à 0 €.",
       "amountMaximum": "Le montant ne peut pas dépasser 10 000 €.",
       "amountPrecision": "Indiquez un montant avec deux décimales maximum.",

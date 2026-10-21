@@ -21,9 +21,8 @@ export type GiftCardPaymentMetadata = {
   application: "welcome_gift_card";
   version: 1;
   giftCard: {
-    design: "ivory" | "red" | "green";
-    occasion?: "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
-    customOccasion?: string;
+    design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+    occasion?: "christmas" | "birthday" | "congratulations" | "thankYou";
     from: string;
     recipient: string;
     message: string;
@@ -48,9 +47,8 @@ type GiftCardPaymentInput = {
   lastName: string;
   email: string;
   recipient: string;
-  design: "ivory" | "red" | "green";
-  occasion: "christmas" | "birthday" | "congratulations" | "thankYou" | "retirement" | "other";
-  customOccasion?: string;
+  design: "ivory" | "red" | "green" | "birthday" | "thankYou" | "congratulations";
+  occasion: "christmas" | "birthday" | "congratulations" | "thankYou";
   from: string;
   message: string;
   locale: "fr" | "en" | "de";
@@ -122,7 +120,6 @@ export async function createGiftCardPaymentLink(
     giftCard: {
       design: input.design,
       occasion: input.occasion,
-      customOccasion: input.customOccasion,
       from: input.from,
       recipient: input.recipient,
       message: input.message,
