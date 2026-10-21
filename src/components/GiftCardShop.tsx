@@ -1,14 +1,14 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { Check, CreditCard, Gift, Send, Snowflake } from "lucide-react";
+import { ArrowRight, Check, CreditCard, Gift, Pencil, Snowflake } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import giftCardGreen from "@/assets/gift-card-christmas-green.webp";
 import giftCardIvory from "@/assets/gift-card-christmas-ivory.webp";
 import giftCardRed from "@/assets/gift-card-christmas-red.webp";
-import { submitGiftCard } from "@/lib/gift-card.actions";
+import { submitGiftCard, validateGiftCard } from "@/lib/gift-card.actions";
 
 type Design = "ivory" | "red" | "green";
 type OrganizationType = "company" | "association" | "individual" | "public";
@@ -36,7 +36,8 @@ export function GiftCardShop() {
     emailConfirmation: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [step, setStep] = useState<1 | 2>(1);
+  const [status, setStatus] = useState<"idle" | "submitting" | "redirecting" | "error">("idle");
 
   const update = (key: keyof typeof form, value: string) => {
     setForm((current) => ({ ...current, [key]: value }));
@@ -49,16 +50,40 @@ export function GiftCardShop() {
     });
   };
 
+  const scrollToOrder = () => {
+    window.requestAnimationFrame(() => {
+      document
+        .getElementById("gift-card-order")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrors({});
     setStatus("submitting");
 
     try {
+      if (step === 1) {
+        const validation = await validateGiftCard(form, locale);
+        if (validation.status === "invalid") {
+          setErrors(validation.fieldErrors);
+          setStatus("error");
+          return;
+        }
+
+        setStep(2);
+        setStatus("idle");
+        scrollToOrder();
+        return;
+      }
+
       const result = await submitGiftCard(form, locale);
       if (result.status === "invalid") {
         setErrors(result.fieldErrors);
+        setStep(1);
         setStatus("error");
+        scrollToOrder();
         return;
       }
       if (result.status === "error") {
@@ -66,23 +91,17 @@ export function GiftCardShop() {
         return;
       }
 
-      setStatus("success");
-      setForm((current) => ({
-        ...current,
-        amount: "",
-        from: "",
-        recipient: "",
-        message: "",
-        organizationType: "",
-        lastName: "",
-        firstName: "",
-        billingAddress: "",
-        email: "",
-        emailConfirmation: "",
-      }));
+      setStatus("redirecting");
+      window.location.assign(result.paymentUrl);
     } catch {
       setStatus("error");
     }
+  };
+
+  const editOrder = () => {
+    setStep(1);
+    setStatus("idle");
+    scrollToOrder();
   };
 
   return (
@@ -198,11 +217,26 @@ export function GiftCardShop() {
           </div>
 
           <form
+            id="gift-card-order"
             onSubmit={handleSubmit}
             className="rounded-[24px] border border-welcome-black/[0.07] bg-welcome-cream p-6 shadow-[0_24px_70px_-48px_rgba(11,11,11,0.45)] sm:p-9"
             noValidate
           >
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="mb-7 flex items-center gap-3" aria-label={t("form.progressLabel")}>
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-welcome-gold font-manrope text-sm font-bold text-[#0b0b0b]">
+                {step}
+              </span>
+              <div>
+                <p className="font-manrope text-sm font-semibold text-welcome-black">
+                  {step === 1 ? t("form.stepOneTitle") : t("form.stepTwoTitle")}
+                </p>
+                <p className="font-inter text-xs text-welcome-body/65">
+                  {t("form.stepCount", { step })}
+                </p>
+              </div>
+            </div>
+
+            <div className={step === 1 ? "grid gap-6 sm:grid-cols-2" : "hidden"}>
               <Field
                 htmlFor="gift-amount"
                 label={t("form.amount")}
@@ -385,39 +419,48 @@ export function GiftCardShop() {
               </Field>
             </div>
 
-            <div
-              role="note"
-              className="mt-7 flex items-start gap-3 rounded-[14px] border border-welcome-gold/35 bg-welcome-gold/10 p-4"
-            >
-              <CreditCard
-                className="mt-0.5 h-5 w-5 shrink-0 text-welcome-gold"
-                aria-hidden="true"
-              />
-              <div>
-                <p className="font-manrope text-sm font-semibold text-welcome-black">
-                  {t("form.nextStepsTitle")}
-                </p>
-                <p className="mt-1 font-inter text-sm leading-relaxed text-welcome-body/75">
-                  {t("form.nextSteps")}
-                </p>
+            {step === 1 ? (
+              <div
+                role="note"
+                className="mt-7 flex items-start gap-3 rounded-[14px] border border-welcome-gold/35 bg-welcome-gold/10 p-4"
+              >
+                <CreditCard
+                  className="mt-0.5 h-5 w-5 shrink-0 text-welcome-gold"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p className="font-manrope text-sm font-semibold text-welcome-black">
+                    {t("form.nextStepsTitle")}
+                  </p>
+                  <p className="mt-1 font-inter text-sm leading-relaxed text-welcome-body/75">
+                    {t("form.nextSteps")}
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : (
+              <OrderReview form={form} onEdit={editOrder} t={t} />
+            )}
 
             <button
               type="submit"
-              disabled={status === "submitting"}
+              disabled={status === "submitting" || status === "redirecting"}
               className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-[13px] bg-welcome-gold px-7 font-manrope text-[16px] font-semibold text-[#0b0b0b] transition-all duration-200 hover:brightness-105 hover:shadow-lg disabled:cursor-wait disabled:opacity-60 sm:w-auto"
             >
-              <Send className="h-4 w-4" aria-hidden="true" />
-              {status === "submitting" ? t("form.sending") : t("form.submit")}
+              {step === 1 ? (
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <CreditCard className="h-4 w-4" aria-hidden="true" />
+              )}
+              {status === "submitting"
+                ? t("form.checking")
+                : status === "redirecting"
+                  ? t("form.redirecting")
+                  : step === 1
+                    ? t("form.nextButton")
+                    : t("form.payButton")}
             </button>
 
             <div aria-live="polite">
-              {status === "success" && (
-                <p className="mt-5 rounded-[12px] bg-emerald-600/10 px-4 py-3 font-inter text-sm text-emerald-700 dark:text-emerald-300">
-                  {t("form.success")}
-                </p>
-              )}
               {status === "error" && Object.keys(errors).length === 0 && (
                 <p className="mt-5 rounded-[12px] bg-red-600/10 px-4 py-3 font-inter text-sm text-red-700 dark:text-red-300">
                   {t("form.error")}
@@ -428,6 +471,145 @@ export function GiftCardShop() {
         </div>
       </section>
     </main>
+  );
+}
+
+function OrderReview({
+  form,
+  onEdit,
+  t,
+}: {
+  form: {
+    design: Design;
+    amount: string;
+    from: string;
+    recipient: string;
+    message: string;
+    organizationType: OrganizationType | "";
+    lastName: string;
+    firstName: string;
+    billingAddress: string;
+    email: string;
+    emailConfirmation: string;
+  };
+  onEdit: () => void;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const design = DESIGNS.find((item) => item.id === form.design) ?? DESIGNS[0];
+  const amount = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "EUR",
+  }).format(Number(form.amount));
+
+  const orderRows = [
+    [t("form.reviewDesign"), t(`designs.items.${form.design}.title`)],
+    [t("form.amount"), amount],
+    [t("form.recipient"), form.recipient],
+    [t("form.from"), form.from],
+  ];
+  const billingRows = [
+    [
+      t("form.organizationType"),
+      form.organizationType ? t(`form.organizationTypes.${form.organizationType}`) : "",
+    ],
+    [t("form.reviewBillingName"), `${form.firstName} ${form.lastName}`],
+    [t("form.billingAddress"), form.billingAddress],
+    [t("form.email"), form.email],
+  ];
+
+  return (
+    <div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="font-manrope text-[26px] font-semibold text-welcome-black">
+            {t("form.reviewTitle")}
+          </h3>
+          <p className="mt-2 max-w-2xl font-inter text-sm leading-relaxed text-welcome-body/70">
+            {t("form.reviewLead")}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onEdit}
+          className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-welcome-black/15 bg-welcome-white px-4 py-2 font-manrope text-sm font-semibold text-welcome-black transition hover:border-welcome-gold"
+        >
+          <Pencil className="h-3.5 w-3.5" aria-hidden="true" />
+          {t("form.editButton")}
+        </button>
+      </div>
+
+      <div className="mt-7 overflow-hidden rounded-[20px] border border-welcome-gold/35 bg-[#062f25] shadow-[0_24px_55px_-35px_rgba(6,47,37,0.75)]">
+        <div className="relative aspect-[3/1] overflow-hidden">
+          <Image
+            src={design.image}
+            alt={t(`designs.items.${form.design}.alt`)}
+            fill
+            sizes="(min-width: 1024px) 55vw, calc(100vw - 48px)"
+            className="object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#062f25]/65 via-transparent to-transparent" />
+        </div>
+        <div className="relative border-t border-[#e3c366]/35 px-5 py-6 text-white sm:px-8 sm:py-7">
+          <Snowflake
+            className="pointer-events-none absolute right-6 top-5 h-12 w-12 text-[#e3c366]/20"
+            aria-hidden="true"
+          />
+          <div className="relative grid gap-5 sm:grid-cols-[0.7fr_1.3fr] sm:gap-8">
+            <div>
+              <p className="font-inter text-xs font-semibold uppercase tracking-[0.16em] text-[#e3c366]">
+                {t("form.personalizedVoucher")}
+              </p>
+              <p className="mt-2 font-manrope text-[38px] font-bold tracking-tight text-white">
+                {amount}
+              </p>
+            </div>
+            <div className="space-y-2 font-inter text-sm leading-relaxed text-white/85">
+              <p>
+                <span className="font-semibold text-[#e3c366]">{t("form.recipient")}</span>{" "}
+                {form.recipient}
+              </p>
+              <p>
+                <span className="font-semibold text-[#e3c366]">{t("form.from")}</span> {form.from}
+              </p>
+              <p className="whitespace-pre-wrap italic text-white/75">“{form.message}”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-7 grid gap-5 md:grid-cols-2">
+        <ReviewPanel title={t("form.orderSummaryTitle")} rows={orderRows} />
+        <ReviewPanel title={t("form.billingSummaryTitle")} rows={billingRows} />
+      </div>
+
+      <div className="mt-6 flex items-start gap-3 rounded-[14px] border border-welcome-gold/35 bg-welcome-gold/10 p-4">
+        <CreditCard className="mt-0.5 h-5 w-5 shrink-0 text-welcome-gold" aria-hidden="true" />
+        <p className="font-inter text-sm leading-relaxed text-welcome-body/75">
+          {t("form.paymentRedirectNotice")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ReviewPanel({ title, rows }: { title: string; rows: string[][] }) {
+  return (
+    <section className="rounded-[16px] border border-welcome-black/10 bg-welcome-white p-5">
+      <h4 className="font-manrope text-sm font-semibold text-welcome-black">{title}</h4>
+      <dl className="mt-4 space-y-3">
+        {rows.map(([label, value]) => (
+          <div
+            key={label}
+            className="border-t border-welcome-black/[0.07] pt-3 first:border-0 first:pt-0"
+          >
+            <dt className="font-inter text-xs text-welcome-body/55">{label}</dt>
+            <dd className="mt-1 whitespace-pre-wrap font-inter text-sm font-medium text-welcome-black">
+              {value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
   );
 }
 

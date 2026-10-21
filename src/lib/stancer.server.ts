@@ -1,6 +1,6 @@
 import "server-only";
 
-import { randomUUID } from "node:crypto";
+import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 
 const STANCER_API_URL = "https://api.stancer.com/v2";
 
@@ -11,6 +11,26 @@ type StancerCustomer = {
 type StancerPaymentIntent = {
   id: string;
   url: string;
+  amount: number;
+  currency: string;
+  status: string;
+  metadata?: GiftCardPaymentMetadata;
+};
+
+export type GiftCardPaymentMetadata = {
+  application: "welcome_gift_card";
+  version: 1;
+  giftCard: {
+    design: "ivory" | "red" | "green";
+    from: string;
+    recipient: string;
+    message: string;
+    email: string;
+    locale: "fr" | "en" | "de";
+  };
+  delivery?: {
+    sentAt: string;
+  };
 };
 
 export type GiftCardPaymentLink = {
@@ -26,6 +46,10 @@ type GiftCardPaymentInput = {
   lastName: string;
   email: string;
   recipient: string;
+  design: "ivory" | "red" | "green";
+  from: string;
+  message: string;
+  locale: "fr" | "en" | "de";
 };
 
 function getApiKey() {
@@ -88,6 +112,18 @@ export async function createGiftCardPaymentLink(
   }
 
   const orderId = randomUUID();
+  const metadata: GiftCardPaymentMetadata = {
+    application: "welcome_gift_card",
+    version: 1,
+    giftCard: {
+      design: input.design,
+      from: input.from,
+      recipient: input.recipient,
+      message: input.message,
+      email: input.email,
+      locale: input.locale,
+    },
+  };
 
   try {
     const description = `Bon cadeau Welcome pour ${input.recipient}`.slice(0, 64);
@@ -103,6 +139,7 @@ export async function createGiftCardPaymentLink(
         methods_allowed: ["card"],
         threeds: "required",
         capture: true,
+        metadata,
       }),
     });
 
@@ -125,6 +162,57 @@ export async function createGiftCardPaymentLink(
     await deleteStancerResource(`/customers/${customer.id}`);
     throw error;
   }
+}
+
+export async function getStancerPaymentIntent(paymentIntentId: string) {
+  if (!/^pi_[a-zA-Z0-9]{24}$/.test(paymentIntentId)) {
+    throw new Error("Invalid Stancer payment intent identifier");
+  }
+  return stancerRequest<StancerPaymentIntent>(`/payment_intents/${paymentIntentId}`, {
+    method: "GET",
+  });
+}
+
+export async function markGiftCardDelivered(
+  paymentIntentId: string,
+  metadata: GiftCardPaymentMetadata,
+) {
+  await stancerRequest<StancerPaymentIntent>(`/payment_intents/${paymentIntentId}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      metadata: {
+        ...metadata,
+        delivery: { sentAt: new Date().toISOString() },
+      },
+    }),
+  });
+}
+
+export function verifyStancerSignature(payload: string, signatureHeader: string | null) {
+  const secret = process.env["STANCER_WEBHOOK_SECRET"];
+  if (!secret) throw new Error("STANCER_WEBHOOK_SECRET is not configured");
+  if (!/^[a-fA-F0-9]+$/.test(secret) || secret.length % 2 !== 0) {
+    throw new Error("STANCER_WEBHOOK_SECRET is invalid");
+  }
+  if (!signatureHeader) return false;
+
+  const parts = new Map(
+    signatureHeader.split(",").flatMap((part) => {
+      const separator = part.indexOf("=");
+      return separator > 0 ? [[part.slice(0, separator), part.slice(separator + 1)]] : [];
+    }),
+  );
+  const timestamp = Number(parts.get("t"));
+  const expected = parts.get("v1");
+  if (!Number.isInteger(timestamp) || !expected || !/^[a-fA-F0-9]{64}$/.test(expected))
+    return false;
+  if (Math.abs(Date.now() / 1000 - timestamp) > 60) return false;
+
+  const computed = createHmac("sha256", Buffer.from(secret, "hex"))
+    .update(`${timestamp}.${payload}`)
+    .digest();
+  const supplied = Buffer.from(expected, "hex");
+  return supplied.length === computed.length && timingSafeEqual(supplied, computed);
 }
 
 export async function cancelGiftCardPaymentLink(payment: GiftCardPaymentLink) {

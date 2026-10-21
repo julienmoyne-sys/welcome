@@ -120,10 +120,18 @@ serveur OVH Email Pro.
 | `SMTP_HOST`                          | optionnelle — défaut `pro1.mail.ovh.net`                                                    |
 | `SMTP_PORT`                          | optionnelle — défaut `587` (STARTTLS) ; `465` bascule en TLS implicite                      |
 | `SMTP_USER`                          | optionnelle — défaut `contact@welcome-coworking.com`                                        |
-| `STANCER_API_KEY`                    | requise pour `/shop` — clé serveur privée `stest_...` en local, `sprod_...` en production |
+| `STANCER_API_KEY`                    | requise pour `/shop` — clé serveur privée `stest_...` en local, `sprod_...` en production   |
+| `STANCER_WEBHOOK_SECRET`             | requise pour `/api/stancer/webhook` — secret retourné par Stancer à la création du webhook  |
 | `GOOGLE_CALENDAR_ID`                 | requise pour `/display` — identifiant de l’agenda privé partagé                             |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL`       | requise pour `/display` — email du service account en lecture seule                         |
 | `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | requise pour `/display` — clé privée PEM, avec retours à la ligne réels ou encodés en `\\n` |
+
+Après le déploiement, enregistrer l’URL HTTPS
+`https://www.welcome-coworking.com/api/stancer/webhook` avec `POST /v2/webhooks/`,
+puis conserver le champ `secret` retourné dans `STANCER_WEBHOOK_SECRET`. Les
+environnements Stancer de test et de production utilisent chacun leur propre
+webhook et leur propre secret. Le webhook vérifie la signature et l’état
+`captured` avant de générer et d’envoyer le bon cadeau PDF au client.
 
 ## Construit avec
 

@@ -7,11 +7,14 @@ import { sendGiftCardEmail } from "./contact.server";
 import { cancelGiftCardPaymentLink, createGiftCardPaymentLink } from "./stancer.server";
 
 export type GiftCardResult =
-  | { status: "success" }
+  | { status: "success"; paymentUrl: string }
   | { status: "invalid"; fieldErrors: Record<string, string> }
   | { status: "error" };
 
-export async function submitGiftCard(input: unknown, locale: string): Promise<GiftCardResult> {
+export type GiftCardValidationResult =
+  { status: "valid" } | { status: "invalid"; fieldErrors: Record<string, string> };
+
+async function parseGiftCard(input: unknown, locale: string) {
   const t = await getTranslations({ locale, namespace: "shop.validation" });
 
   const schema = z
@@ -57,21 +60,38 @@ export async function submitGiftCard(input: unknown, locale: string): Promise<Gi
       const field = issue.path[0];
       if (typeof field === "string" && !fieldErrors[field]) fieldErrors[field] = issue.message;
     }
-    return { status: "invalid", fieldErrors };
+    return { success: false as const, fieldErrors };
   }
 
+  const { emailConfirmation: _emailConfirmation, ...payload } = parsed.data;
+  return { success: true as const, payload };
+}
+
+export async function validateGiftCard(
+  input: unknown,
+  locale: string,
+): Promise<GiftCardValidationResult> {
+  const parsed = await parseGiftCard(input, locale);
+  if (!parsed.success) return { status: "invalid", fieldErrors: parsed.fieldErrors };
+  return { status: "valid" };
+}
+
+export async function submitGiftCard(input: unknown, locale: string): Promise<GiftCardResult> {
+  const parsed = await parseGiftCard(input, locale);
+  if (!parsed.success) return { status: "invalid", fieldErrors: parsed.fieldErrors };
+  const orderLocale = locale === "en" || locale === "de" ? locale : "fr";
+
   try {
-    const { emailConfirmation: _emailConfirmation, ...payload } = parsed.data;
-    const payment = await createGiftCardPaymentLink(payload);
+    const payment = await createGiftCardPaymentLink({ ...parsed.payload, locale: orderLocale });
 
     try {
-      await sendGiftCardEmail(payload, payment);
+      await sendGiftCardEmail(parsed.payload, payment);
     } catch (error) {
       await cancelGiftCardPaymentLink(payment);
       throw error;
     }
 
-    return { status: "success" };
+    return { status: "success", paymentUrl: payment.url };
   } catch (error) {
     console.error(error);
     return { status: "error" };

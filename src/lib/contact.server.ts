@@ -1,6 +1,7 @@
 import nodemailer, { type Transporter } from "nodemailer";
 
 import type { GiftCardPaymentLink } from "./stancer.server";
+import type { GiftCardDocumentData } from "./gift-card-pdf.server";
 
 const TO = "contact@welcome-coworking.com";
 
@@ -172,7 +173,10 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
 
   const html = `
     <div style="font-family:Arial,sans-serif;color:#0b0b0b">
-      <h2 style="color:#0b0b0b">Nouvelle demande de bon cadeau de Noël</h2>
+      <h2 style="color:#0b0b0b">Nouvelle commande de bon cadeau de Noël</h2>
+      <p style="padding:10px 12px;border-radius:8px;background:#fff3cd;color:#664d03">
+        Statut : en attente du paiement Stancer. Vérifier le paiement avant de finaliser le bon et la facture.
+      </p>
       <table cellpadding="6" style="border-collapse:collapse">
         ${rows
           .map(
@@ -195,7 +199,9 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
   `;
 
   const text = [
-    "Nouvelle demande de bon cadeau de Noël",
+    "Nouvelle commande de bon cadeau de Noël",
+    "Statut : EN ATTENTE DU PAIEMENT STANCER",
+    "Vérifier le paiement avant de finaliser le bon et la facture.",
     "",
     ...rows.map(([label, value]) => `${label} : ${value}`),
     "",
@@ -213,7 +219,7 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
       from: `"Welcome Coworking" <${SMTP_USER}>`,
       to: TO,
       replyTo: `"${replyName}" <${data.email}>`,
-      subject: `Bon cadeau de Noël — ${formattedAmount} pour ${subjectRecipient}`,
+      subject: `[Paiement en attente] Bon cadeau de Noël — ${formattedAmount} pour ${subjectRecipient}`,
       text,
       html,
     });
@@ -230,5 +236,81 @@ export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCard
     const message = error instanceof Error ? error.message : String(error);
     console.error(`SMTP gift card send failed via ${SMTP_HOST}:${SMTP_PORT}: ${message}`);
     throw new Error(`Email send failed: ${message}`);
+  }
+}
+
+const DELIVERY_COPY = {
+  fr: {
+    subject: "Votre bon cadeau Welcome! Coworking",
+    title: "Votre bon cadeau est prêt",
+    intro:
+      "Votre paiement a bien été confirmé. Vous trouverez votre bon cadeau personnalisé en pièce jointe au format PDF.",
+    invoice: "Votre facture électronique vous sera envoyée séparément.",
+  },
+  en: {
+    subject: "Your Welcome! Coworking gift voucher",
+    title: "Your gift voucher is ready",
+    intro: "Your payment has been confirmed. Your personalised gift voucher is attached as a PDF.",
+    invoice: "Your electronic invoice will be sent separately.",
+  },
+  de: {
+    subject: "Ihr Welcome! Coworking-Geschenkgutschein",
+    title: "Ihr Geschenkgutschein ist fertig",
+    intro:
+      "Ihre Zahlung wurde bestätigt. Ihren personalisierten Geschenkgutschein finden Sie als PDF im Anhang.",
+    invoice: "Ihre elektronische Rechnung wird Ihnen separat zugesandt.",
+  },
+} as const;
+
+export async function sendGiftCardDeliveryEmail(
+  data: GiftCardDocumentData & { email: string },
+  paymentIntentId: string,
+  pdf: Buffer,
+) {
+  const copy = DELIVERY_COPY[data.locale];
+  const amount = new Intl.NumberFormat(data.locale, {
+    style: "currency",
+    currency: "EUR",
+  }).format(data.amount);
+  const html = `
+    <div style="font-family:Arial,sans-serif;color:#0b0b0b;line-height:1.6">
+      <h2>${escape(copy.title)}</h2>
+      <p>${escape(copy.intro)}</p>
+      <p><strong>${escape(amount)}</strong> — ${escape(data.recipient)}</p>
+      <p>${escape(copy.invoice)}</p>
+      <p style="color:#5a5a5a;font-size:13px">Welcome! Coworking · contact@welcome-coworking.com</p>
+    </div>
+  `;
+  const text = [copy.title, "", copy.intro, `${amount} — ${data.recipient}`, "", copy.invoice].join(
+    "\n",
+  );
+
+  try {
+    const info = await getTransporter().sendMail({
+      from: `"Welcome Coworking" <${SMTP_USER}>`,
+      to: data.email,
+      replyTo: TO,
+      messageId: `<gift-card-${paymentIntentId}@welcome-coworking.com>`,
+      subject: copy.subject,
+      text,
+      html,
+      attachments: [
+        {
+          filename: "bon-cadeau-welcome-coworking.pdf",
+          content: pdf,
+          contentType: "application/pdf",
+        },
+      ],
+    });
+
+    if (info.rejected?.length) {
+      throw new Error(`SMTP rejected recipients: ${info.rejected.join(", ")}`);
+    }
+  } catch (error) {
+    transporter?.close();
+    transporter = null;
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`SMTP gift card delivery failed via ${SMTP_HOST}:${SMTP_PORT}: ${message}`);
+    throw new Error(`Gift card delivery failed: ${message}`);
   }
 }
