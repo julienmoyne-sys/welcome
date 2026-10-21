@@ -990,17 +990,43 @@
       "from": "De la part de :",
       "recipient": "Pour :",
       "message": "Message :",
+      "billingTitle": "Informations de facturation",
+      "billingLead": "Ces informations seront utilisées pour préparer la facture liée au bon cadeau.",
+      "organizationType": "Type d’organisation",
+      "organizationTypes": {
+        "placeholder": "Sélectionnez un type",
+        "company": "Société",
+        "association": "Association",
+        "individual": "Personne physique",
+        "public": "Organisation publique"
+      },
+      "lastName": "Nom",
+      "firstName": "Prénom",
+      "billingAddress": "Adresse de facturation",
+      "email": "Adresse e-mail",
+      "emailConfirmation": "Vérification de l’adresse e-mail",
+      "nextStepsTitle": "Suite de votre demande",
+        "nextSteps": "L’envoi de ce formulaire ne déclenche aucun paiement. Après préparation, l’aperçu du bon personnalisé vous sera envoyé par e-mail avec un lien de paiement sécurisé Stancer. La facture électronique sera envoyée dès validation du paiement.",
       "submit": "Envoyer ma demande",
       "sending": "Envoi en cours…",
-      "success": "Votre demande a bien été envoyée à contact@welcome-coworking.com.",
+      "success": "Votre demande a bien été envoyée. Vous recevrez par e-mail l’aperçu personnalisé et le lien de paiement.",
       "error": "L’envoi a échoué. Merci de réessayer ou de nous écrire à contact@welcome-coworking.com."
     },
     "validation": {
       "amountRequired": "Indiquez un montant supérieur à 0 €.",
-      "amountMaximum": "Le montant ne peut pas dépasser 10 000 €.",
+        "amountMaximum": "Le montant ne peut pas dépasser 10 000 €.",
+        "amountPrecision": "Indiquez un montant avec deux décimales maximum.",
       "fromRequired": "Indiquez le nom de la personne qui offre le bon.",
       "recipientRequired": "Indiquez le nom de la personne qui recevra le bon.",
-      "messageRequired": "Ajoutez un message au bon cadeau."
+      "messageRequired": "Ajoutez un message au bon cadeau.",
+      "organizationTypeRequired": "Sélectionnez un type d’organisation.",
+      "lastNameRequired": "Indiquez votre nom.",
+      "firstNameRequired": "Indiquez votre prénom.",
+      "billingAddressRequired": "Indiquez votre adresse de facturation.",
+      "emailRequired": "Indiquez votre adresse e-mail.",
+      "emailConfirmationRequired": "Confirmez votre adresse e-mail.",
+      "emailInvalid": "Indiquez une adresse e-mail valide.",
+      "emailMismatch": "Les deux adresses e-mail ne correspondent pas."
     }
   },
   "contact": {

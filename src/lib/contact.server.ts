@@ -1,5 +1,7 @@
 import nodemailer, { type Transporter } from "nodemailer";
 
+import type { GiftCardPaymentLink } from "./stancer.server";
+
 const TO = "contact@welcome-coworking.com";
 
 /**
@@ -26,6 +28,11 @@ export type GiftCardPayload = {
   from: string;
   recipient: string;
   message: string;
+  organizationType: "company" | "association" | "individual" | "public";
+  lastName: string;
+  firstName: string;
+  billingAddress: string;
+  email: string;
 };
 
 const escape = (value: string) =>
@@ -133,19 +140,34 @@ const GIFT_CARD_DESIGNS: Record<GiftCardPayload["design"], string> = {
   green: "Vert & or",
 };
 
+const ORGANIZATION_TYPES: Record<GiftCardPayload["organizationType"], string> = {
+  company: "Société",
+  association: "Association",
+  individual: "Personne physique",
+  public: "Organisation publique",
+};
+
 /** Envoie une demande de bon cadeau vers la boîte de contact de Welcome. */
-export async function sendGiftCardEmail(data: GiftCardPayload) {
+export async function sendGiftCardEmail(data: GiftCardPayload, payment: GiftCardPaymentLink) {
   const formattedAmount = new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR",
   }).format(data.amount);
   const subjectRecipient = data.recipient.replace(/[\r\n]+/g, " ").trim();
+  const replyName = `${data.firstName} ${data.lastName}`.replace(/[\r\n"]/g, " ").trim();
 
   const rows: Array<[string, string]> = [
     ["Modèle", GIFT_CARD_DESIGNS[data.design]],
     ["Montant TTC", formattedAmount],
     ["De la part de", data.from],
     ["Pour", data.recipient],
+    ["Type d'organisation", ORGANIZATION_TYPES[data.organizationType]],
+    ["Nom", data.lastName],
+    ["Prénom", data.firstName],
+    ["Adresse de facturation", data.billingAddress],
+    ["E-mail", data.email],
+    ["Référence Stancer", payment.paymentIntentId],
+    ["Référence de commande", payment.orderId],
   ];
 
   const html = `
@@ -155,12 +177,20 @@ export async function sendGiftCardEmail(data: GiftCardPayload) {
         ${rows
           .map(
             ([label, value]) =>
-              `<tr><td style="color:#5a5a5a">${label}</td><td><strong>${escape(value)}</strong></td></tr>`,
+              `<tr><td style="color:#5a5a5a">${label}</td><td style="white-space:pre-wrap"><strong>${escape(value)}</strong></td></tr>`,
           )
           .join("")}
       </table>
       <p style="color:#5a5a5a;margin-top:16px">Message :</p>
       <p style="white-space:pre-wrap">${escape(data.message)}</p>
+      <p style="margin-top:24px">
+        <a href="${escape(payment.url)}" style="display:inline-block;padding:12px 18px;border-radius:8px;background:#c6b24a;color:#0b0b0b;font-weight:bold;text-decoration:none">
+          Ouvrir le lien de paiement Stancer
+        </a>
+      </p>
+      <p style="color:#5a5a5a;font-size:13px">
+        Envoyer ce lien au client uniquement avec l'aperçu personnalisé validé. La facture sera établie manuellement dans LINK après confirmation du paiement.
+      </p>
     </div>
   `;
 
@@ -171,12 +201,18 @@ export async function sendGiftCardEmail(data: GiftCardPayload) {
     "",
     "Message :",
     data.message,
+    "",
+    "Lien de paiement Stancer (à envoyer avec l’aperçu personnalisé) :",
+    payment.url,
+    "",
+    "La facture sera établie manuellement dans LINK après confirmation du paiement.",
   ].join("\n");
 
   try {
     const info = await getTransporter().sendMail({
       from: `"Welcome Coworking" <${SMTP_USER}>`,
       to: TO,
+      replyTo: `"${replyName}" <${data.email}>`,
       subject: `Bon cadeau de Noël — ${formattedAmount} pour ${subjectRecipient}`,
       text,
       html,

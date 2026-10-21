@@ -965,17 +965,43 @@
       "from": "From:",
       "recipient": "For:",
       "message": "Message:",
+      "billingTitle": "Billing information",
+      "billingLead": "We will use these details to prepare the invoice for your gift voucher.",
+      "organizationType": "Organisation type",
+      "organizationTypes": {
+        "placeholder": "Select a type",
+        "company": "Company",
+        "association": "Association",
+        "individual": "Individual",
+        "public": "Public organisation"
+      },
+      "lastName": "Last name",
+      "firstName": "First name",
+      "billingAddress": "Billing address",
+      "email": "Email address",
+      "emailConfirmation": "Confirm email address",
+      "nextStepsTitle": "What happens next",
+        "nextSteps": "Submitting this form does not trigger any payment. Once prepared, we will email you a preview of the personalised voucher together with a secure Stancer payment link. Your electronic invoice will be sent as soon as payment is confirmed.",
       "submit": "Send my request",
       "sending": "Sending…",
-      "success": "Your request has been sent to contact@welcome-coworking.com.",
+      "success": "Your request has been sent. You will receive the personalised preview and payment link by email.",
       "error": "We could not send your request. Please try again or email contact@welcome-coworking.com."
     },
     "validation": {
       "amountRequired": "Enter an amount greater than €0.",
-      "amountMaximum": "The amount cannot exceed €10,000.",
+        "amountMaximum": "The amount cannot exceed €10,000.",
+        "amountPrecision": "Enter an amount with no more than two decimal places.",
       "fromRequired": "Enter the name of the person giving the voucher.",
       "recipientRequired": "Enter the name of the person receiving the voucher.",
-      "messageRequired": "Add a message to the gift voucher."
+      "messageRequired": "Add a message to the gift voucher.",
+      "organizationTypeRequired": "Select an organisation type.",
+      "lastNameRequired": "Enter your last name.",
+      "firstNameRequired": "Enter your first name.",
+      "billingAddressRequired": "Enter your billing address.",
+      "emailRequired": "Enter your email address.",
+      "emailConfirmationRequired": "Confirm your email address.",
+      "emailInvalid": "Enter a valid email address.",
+      "emailMismatch": "The two email addresses do not match."
     }
   },
   "contact": {

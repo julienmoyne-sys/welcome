@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { Check, Gift, Send, Snowflake } from "lucide-react";
+import { Check, CreditCard, Gift, Send, Snowflake } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -11,6 +11,7 @@ import giftCardRed from "@/assets/gift-card-christmas-red.webp";
 import { submitGiftCard } from "@/lib/gift-card.actions";
 
 type Design = "ivory" | "red" | "green";
+type OrganizationType = "company" | "association" | "individual" | "public";
 
 const DESIGNS: Array<{ id: Design; image: StaticImageData }> = [
   { id: "ivory", image: giftCardIvory },
@@ -27,6 +28,12 @@ export function GiftCardShop() {
     from: "",
     recipient: "",
     message: "",
+    organizationType: "" as OrganizationType | "",
+    lastName: "",
+    firstName: "",
+    billingAddress: "",
+    email: "",
+    emailConfirmation: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -37,6 +44,7 @@ export function GiftCardShop() {
     setErrors((current) => {
       const next = { ...current };
       delete next[key];
+      if (key === "email") delete next.emailConfirmation;
       return next;
     });
   };
@@ -59,7 +67,19 @@ export function GiftCardShop() {
       }
 
       setStatus("success");
-      setForm((current) => ({ ...current, amount: "", from: "", recipient: "", message: "" }));
+      setForm((current) => ({
+        ...current,
+        amount: "",
+        from: "",
+        recipient: "",
+        message: "",
+        organizationType: "",
+        lastName: "",
+        firstName: "",
+        billingAddress: "",
+        email: "",
+        emailConfirmation: "",
+      }));
     } catch {
       setStatus("error");
     }
@@ -246,6 +266,141 @@ export function GiftCardShop() {
                   className="w-full resize-y rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 py-3 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
                 />
               </Field>
+
+              <div className="mt-2 border-t border-welcome-black/10 pt-7 sm:col-span-2">
+                <h3 className="font-manrope text-[22px] font-semibold text-welcome-black">
+                  {t("form.billingTitle")}
+                </h3>
+                <p className="mt-2 font-inter text-sm leading-relaxed text-welcome-body/70">
+                  {t("form.billingLead")}
+                </p>
+              </div>
+
+              <Field
+                htmlFor="gift-organization-type"
+                label={t("form.organizationType")}
+                error={errors.organizationType}
+                className="sm:col-span-2"
+              >
+                <select
+                  id="gift-organization-type"
+                  required
+                  value={form.organizationType}
+                  onChange={(event) => update("organizationType", event.target.value)}
+                  aria-invalid={Boolean(errors.organizationType)}
+                  aria-describedby={
+                    errors.organizationType ? "gift-organization-type-error" : undefined
+                  }
+                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                >
+                  <option value="">{t("form.organizationTypes.placeholder")}</option>
+                  <option value="company">{t("form.organizationTypes.company")}</option>
+                  <option value="association">{t("form.organizationTypes.association")}</option>
+                  <option value="individual">{t("form.organizationTypes.individual")}</option>
+                  <option value="public">{t("form.organizationTypes.public")}</option>
+                </select>
+              </Field>
+
+              <Field htmlFor="gift-last-name" label={t("form.lastName")} error={errors.lastName}>
+                <input
+                  id="gift-last-name"
+                  type="text"
+                  required
+                  autoComplete="family-name"
+                  value={form.lastName}
+                  onChange={(event) => update("lastName", event.target.value)}
+                  aria-invalid={Boolean(errors.lastName)}
+                  aria-describedby={errors.lastName ? "gift-last-name-error" : undefined}
+                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                />
+              </Field>
+
+              <Field htmlFor="gift-first-name" label={t("form.firstName")} error={errors.firstName}>
+                <input
+                  id="gift-first-name"
+                  type="text"
+                  required
+                  autoComplete="given-name"
+                  value={form.firstName}
+                  onChange={(event) => update("firstName", event.target.value)}
+                  aria-invalid={Boolean(errors.firstName)}
+                  aria-describedby={errors.firstName ? "gift-first-name-error" : undefined}
+                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                />
+              </Field>
+
+              <Field
+                htmlFor="gift-billing-address"
+                label={t("form.billingAddress")}
+                error={errors.billingAddress}
+                className="sm:col-span-2"
+              >
+                <textarea
+                  id="gift-billing-address"
+                  rows={3}
+                  required
+                  autoComplete="street-address"
+                  value={form.billingAddress}
+                  onChange={(event) => update("billingAddress", event.target.value)}
+                  aria-invalid={Boolean(errors.billingAddress)}
+                  aria-describedby={
+                    errors.billingAddress ? "gift-billing-address-error" : undefined
+                  }
+                  className="w-full resize-y rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 py-3 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                />
+              </Field>
+
+              <Field htmlFor="gift-email" label={t("form.email")} error={errors.email}>
+                <input
+                  id="gift-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={form.email}
+                  onChange={(event) => update("email", event.target.value)}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? "gift-email-error" : undefined}
+                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                />
+              </Field>
+
+              <Field
+                htmlFor="gift-email-confirmation"
+                label={t("form.emailConfirmation")}
+                error={errors.emailConfirmation}
+              >
+                <input
+                  id="gift-email-confirmation"
+                  type="email"
+                  required
+                  autoComplete="off"
+                  value={form.emailConfirmation}
+                  onChange={(event) => update("emailConfirmation", event.target.value)}
+                  aria-invalid={Boolean(errors.emailConfirmation)}
+                  aria-describedby={
+                    errors.emailConfirmation ? "gift-email-confirmation-error" : undefined
+                  }
+                  className="h-14 w-full rounded-[12px] border border-welcome-black/15 bg-welcome-white px-4 font-inter text-base text-welcome-black outline-none transition focus:border-welcome-gold focus:ring-2 focus:ring-welcome-gold/20"
+                />
+              </Field>
+            </div>
+
+            <div
+              role="note"
+              className="mt-7 flex items-start gap-3 rounded-[14px] border border-welcome-gold/35 bg-welcome-gold/10 p-4"
+            >
+              <CreditCard
+                className="mt-0.5 h-5 w-5 shrink-0 text-welcome-gold"
+                aria-hidden="true"
+              />
+              <div>
+                <p className="font-manrope text-sm font-semibold text-welcome-black">
+                  {t("form.nextStepsTitle")}
+                </p>
+                <p className="mt-1 font-inter text-sm leading-relaxed text-welcome-body/75">
+                  {t("form.nextSteps")}
+                </p>
+              </div>
             </div>
 
             <button

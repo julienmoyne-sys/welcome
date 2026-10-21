@@ -983,17 +983,43 @@
       "from": "Von:",
       "recipient": "Für:",
       "message": "Nachricht:",
+      "billingTitle": "Rechnungsinformationen",
+      "billingLead": "Diese Angaben verwenden wir, um die Rechnung für Ihren Geschenkgutschein zu erstellen.",
+      "organizationType": "Organisationsform",
+      "organizationTypes": {
+        "placeholder": "Bitte auswählen",
+        "company": "Unternehmen",
+        "association": "Verein",
+        "individual": "Privatperson",
+        "public": "Öffentliche Organisation"
+      },
+      "lastName": "Nachname",
+      "firstName": "Vorname",
+      "billingAddress": "Rechnungsadresse",
+      "email": "E-Mail-Adresse",
+      "emailConfirmation": "E-Mail-Adresse bestätigen",
+      "nextStepsTitle": "So geht es weiter",
+        "nextSteps": "Mit dem Absenden dieses Formulars wird keine Zahlung ausgelöst. Nach der Vorbereitung senden wir Ihnen eine Vorschau des personalisierten Gutscheins zusammen mit einem sicheren Stancer-Zahlungslink per E-Mail. Die elektronische Rechnung erhalten Sie, sobald die Zahlung bestätigt ist.",
       "submit": "Anfrage senden",
       "sending": "Wird gesendet…",
-      "success": "Ihre Anfrage wurde an contact@welcome-coworking.com gesendet.",
+      "success": "Ihre Anfrage wurde gesendet. Die personalisierte Vorschau und den Zahlungslink erhalten Sie per E-Mail.",
       "error": "Ihre Anfrage konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie an contact@welcome-coworking.com."
     },
     "validation": {
       "amountRequired": "Geben Sie einen Betrag über 0 € ein.",
-      "amountMaximum": "Der Betrag darf 10.000 € nicht überschreiten.",
+        "amountMaximum": "Der Betrag darf 10.000 € nicht überschreiten.",
+        "amountPrecision": "Geben Sie einen Betrag mit höchstens zwei Dezimalstellen ein.",
       "fromRequired": "Geben Sie den Namen der schenkenden Person ein.",
       "recipientRequired": "Geben Sie den Namen der beschenkten Person ein.",
-      "messageRequired": "Fügen Sie dem Gutschein eine Nachricht hinzu."
+      "messageRequired": "Fügen Sie dem Gutschein eine Nachricht hinzu.",
+      "organizationTypeRequired": "Wählen Sie eine Organisationsform aus.",
+      "lastNameRequired": "Geben Sie Ihren Nachnamen ein.",
+      "firstNameRequired": "Geben Sie Ihren Vornamen ein.",
+      "billingAddressRequired": "Geben Sie Ihre Rechnungsadresse ein.",
+      "emailRequired": "Geben Sie Ihre E-Mail-Adresse ein.",
+      "emailConfirmationRequired": "Bestätigen Sie Ihre E-Mail-Adresse.",
+      "emailInvalid": "Geben Sie eine gültige E-Mail-Adresse ein.",
+      "emailMismatch": "Die beiden E-Mail-Adressen stimmen nicht überein."
     }
   },
   "contact": {
