@@ -696,6 +696,12 @@ function PersonalizedVoucherPreview({
   fromLabel: string;
   messageLabel: string;
 }) {
+  const amountWithTax = (
+    <span className="inline-flex items-baseline justify-center gap-[0.18em] whitespace-nowrap">
+      <span>{amount}</span>
+      <span className="text-[0.34em] font-medium tracking-normal">TTC</span>
+    </span>
+  );
   const details = (
     <div className="space-y-[0.2em] leading-[1.1]">
       <p className="line-clamp-2 break-words">
@@ -743,7 +749,7 @@ function PersonalizedVoucherPreview({
             {occasion}
           </p>
           <p className="absolute left-[5%] top-[37%] flex h-[17%] w-[47%] items-center justify-center overflow-hidden whitespace-nowrap px-[3%] text-center text-[clamp(14px,3.8vw,42px)] font-extrabold leading-none text-[#bd8528]">
-            {amount}
+            {amountWithTax}
           </p>
           <p className="absolute left-[6%] top-[55%] w-[45%] text-center text-[clamp(5px,1vw,10px)]">
             {validity}
@@ -763,7 +769,7 @@ function PersonalizedVoucherPreview({
             {occasion}
           </p>
           <p className="absolute left-[23.5%] top-[59%] flex h-[14%] w-[36%] items-center justify-center overflow-hidden whitespace-nowrap px-[3%] text-center text-[clamp(13px,3.2vw,36px)] font-bold leading-none text-[#fff8e9]">
-            {amount}
+            {amountWithTax}
           </p>
           <p className="absolute left-[24%] top-[76%] w-[36%] text-center text-[clamp(5px,0.95vw,9px)] text-[#2b1b14]">
             {validity}
@@ -780,7 +786,7 @@ function PersonalizedVoucherPreview({
             {occasion}
           </p>
           <p className="absolute left-[8%] top-[35%] flex h-[17%] w-[39.5%] items-center justify-center overflow-hidden whitespace-nowrap px-[3%] text-center text-[clamp(13px,3.4vw,38px)] font-bold leading-none text-[#063a2a]">
-            {amount}
+            {amountWithTax}
           </p>
           <p className="absolute left-[9%] top-[55%] w-[39%] text-center text-[clamp(5px,0.95vw,9px)] text-[#fff9e8]">
             {validity}
@@ -853,8 +859,9 @@ function CloudDesignThumbnail({
         <div
           className={`mt-[7%] flex h-[29%] items-center justify-center rounded-[10px] border-2 px-[6%] ${palette.border} ${palette.amount}`}
         >
-          <span className="whitespace-nowrap font-manrope text-[clamp(18px,4.5vw,46px)] font-extrabold leading-none tracking-tight">
-            100 €
+          <span className="inline-flex items-baseline gap-[0.18em] whitespace-nowrap font-manrope text-[clamp(18px,4.5vw,46px)] font-extrabold leading-none tracking-tight">
+            <span>100 €</span>
+            <span className="text-[0.34em] font-medium tracking-normal">TTC</span>
           </span>
         </div>
         <div className={`mt-[8%] space-y-[4%] ${palette.accent}`} aria-hidden="true">
@@ -895,6 +902,12 @@ function CloudVoucherArtwork({
   messageLabel: string;
 }) {
   const palette = CLOUD_PALETTES[design];
+  const amountWithTax = (
+    <span className="inline-flex items-baseline justify-center gap-[0.18em] whitespace-nowrap">
+      <span>{amount}</span>
+      <span className="text-[0.34em] font-medium tracking-normal">TTC</span>
+    </span>
+  );
 
   return (
     <div className={`absolute inset-0 ${palette.panel} ${palette.text}`}>
@@ -928,7 +941,7 @@ function CloudVoucherArtwork({
         className={`absolute left-[5%] top-[34%] flex h-[18%] w-[52.5%] items-center justify-center overflow-hidden rounded-[12px] border-2 px-[6%] ${palette.border} ${palette.amount}`}
       >
         <span className="whitespace-nowrap font-manrope text-[clamp(14px,3.7vw,40px)] font-extrabold leading-none tracking-tight">
-          {amount}
+          {amountWithTax}
         </span>
       </div>
       <p className="absolute left-[6%] top-[54%] w-[50.5%] text-center font-inter text-[clamp(5px,1.05vw,11px)] opacity-85">

@@ -1,10 +1,13 @@
+import { randomUUID } from "node:crypto";
+
 import { z } from "zod";
 
 import { sendGiftCardDeliveryEmail } from "@/lib/contact.server";
 import { generateGiftCardPdf } from "@/lib/gift-card-pdf.server";
 import {
   getStancerPaymentIntent,
-  markGiftCardDelivered,
+  releaseGiftCardDeliveryClaim,
+  setGiftCardDeliveryState,
   verifyStancerSignature,
 } from "@/lib/stancer.server";
 
@@ -45,17 +48,20 @@ const metadataSchema = z.object({
   }),
   delivery: z
     .object({
-      sentAt: z.string().datetime(),
+      claimId: z.string().uuid().optional(),
+      processingAt: z.string().datetime().optional(),
+      sentAt: z.string().datetime().optional(),
     })
     .optional(),
 });
 
-const RELEVANT_EVENTS = new Set([
-  "payment.succeeded",
-  "payment.updated",
-  "payment_intent.updated",
-  "payment_intent.captured",
-]);
+const RELEVANT_EVENTS = new Set(["payment.succeeded"]);
+const DELIVERY_LEASE_MS = 2 * 60 * 1000;
+const deliveriesInProgress = new Set<string>();
+
+function waitForCompetingClaims() {
+  return new Promise((resolve) => setTimeout(resolve, 250));
+}
 
 export async function POST(request: Request) {
   const payload = await request.text();
@@ -86,7 +92,12 @@ export async function POST(request: Request) {
   if (!paymentIntentId || !/^pi_[a-zA-Z0-9]{24}$/.test(paymentIntentId)) {
     return new Response(null, { status: 204 });
   }
+  if (deliveriesInProgress.has(paymentIntentId)) {
+    return new Response("Delivery already processing", { status: 503 });
+  }
 
+  deliveriesInProgress.add(paymentIntentId);
+  let claimId: string | undefined;
   try {
     const paymentIntent = await getStancerPaymentIntent(paymentIntentId);
     if (paymentIntent.status !== "captured") return new Response(null, { status: 204 });
@@ -96,18 +107,58 @@ export async function POST(request: Request) {
 
     const metadata = metadataSchema.parse(paymentIntent.metadata);
     if (metadata.delivery?.sentAt) return new Response(null, { status: 204 });
+    const processingAt = metadata.delivery?.processingAt
+      ? Date.parse(metadata.delivery.processingAt)
+      : Number.NaN;
+    if (Number.isFinite(processingAt) && Date.now() - processingAt < DELIVERY_LEASE_MS) {
+      return new Response("Delivery already processing", { status: 503 });
+    }
+
+    claimId = randomUUID();
+    await setGiftCardDeliveryState(paymentIntentId, metadata, {
+      claimId,
+      processingAt: new Date().toISOString(),
+    });
+
+    await waitForCompetingClaims();
+    const claimedPaymentIntent = await getStancerPaymentIntent(paymentIntentId);
+    const claimedMetadata = metadataSchema.parse(claimedPaymentIntent.metadata);
+    if (claimedMetadata.delivery?.sentAt) return new Response(null, { status: 204 });
+    if (claimedMetadata.delivery?.claimId !== claimId) {
+      return new Response("Delivery claim superseded", { status: 503 });
+    }
 
     const documentData = {
-      ...metadata.giftCard,
+      ...claimedMetadata.giftCard,
       amount: paymentIntent.amount / 100,
     };
     const pdf = await generateGiftCardPdf(documentData);
+
+    // Réserver définitivement l'envoi avant l'appel SMTP empêche deux livraisons
+    // concurrentes du même paiement. En cas d'échec SMTP, le verrou est libéré
+    // dans le catch afin qu'une relivraison Stancer puisse réessayer.
+    await setGiftCardDeliveryState(paymentIntentId, claimedMetadata, {
+      claimId,
+      processingAt: claimedMetadata.delivery?.processingAt,
+      sentAt: new Date().toISOString(),
+    });
     await sendGiftCardDeliveryEmail(documentData, paymentIntentId, pdf);
-    await markGiftCardDelivered(paymentIntentId, metadata);
 
     return new Response(null, { status: 204 });
   } catch (error) {
+    if (claimId) {
+      try {
+        await releaseGiftCardDeliveryClaim(paymentIntentId, claimId);
+      } catch (releaseError) {
+        console.error(
+          `Gift card delivery claim release failed for ${paymentIntentId}`,
+          releaseError,
+        );
+      }
+    }
     console.error(`Gift card webhook processing failed for ${paymentIntentId}`, error);
     return new Response("Processing failed", { status: 500 });
+  } finally {
+    deliveriesInProgress.delete(paymentIntentId);
   }
 }

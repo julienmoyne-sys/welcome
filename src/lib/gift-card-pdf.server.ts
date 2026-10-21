@@ -147,7 +147,8 @@ type TextLayerOptions = {
   text: string;
   left?: number;
   centerX?: number;
-  baseline: number;
+  baseline?: number;
+  centerY?: number;
   width: number;
   size: number;
   color: string;
@@ -162,6 +163,7 @@ async function textLayer({
   left,
   centerX,
   baseline,
+  centerY,
   width,
   size,
   color,
@@ -194,12 +196,23 @@ async function textLayer({
     .toBuffer();
   const metadata = await sharp(input).metadata();
   const measuredWidth = metadata.width ?? width;
+  const measuredHeight = metadata.height ?? size;
 
   return {
     input,
     left: centerX === undefined ? (left ?? 0) : Math.round(centerX - measuredWidth / 2),
-    top: Math.max(0, Math.round(baseline - size * 1.05)),
+    top: Math.max(
+      0,
+      centerY === undefined
+        ? Math.round((baseline ?? size) - size * 1.05)
+        : Math.round(centerY - measuredHeight / 2),
+    ),
   };
+}
+
+function amountWithTaxMarkup(amount: string, size: number) {
+  const taxSize = Math.round(size * 0.34 * 1024);
+  return `${amount} <span size="${taxSize}" weight="normal">TTC</span>`;
 }
 
 function linesMarkup(lines: string[]) {
@@ -415,6 +428,7 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
     } as const;
     const palette = palettes[data.design];
     const message = linesMarkup(wrapText(data.message, 46, 4));
+    const amountSize = fontSizeFor(amount, 108, 88, 10);
 
     return Promise.all([
       textLayer({
@@ -440,11 +454,11 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
         letterSpacing: 2,
       }),
       textLayer({
-        text: amount,
+        text: amountWithTaxMarkup(amount, amountSize),
         centerX: 480,
-        baseline: 435,
+        centerY: 405,
         width: 720,
-        size: fontSizeFor(amount, 108, 88, 10),
+        size: amountSize,
         color: palette.amountText,
         align: "centre",
         bold: true,
@@ -507,6 +521,7 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
     const recipientLines = linesMarkup(wrapText(data.recipient, 34, 2));
     const fromLines = linesMarkup(wrapText(data.from, 34, 2));
     const message = linesMarkup(wrapText(data.message, 32, 5));
+    const amountSize = fontSizeFor(amount, 78, 60, 9);
     return Promise.all([
       textLayer({
         text: occasion,
@@ -520,11 +535,11 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
         letterSpacing: 2,
       }),
       textLayer({
-        text: amount,
+        text: amountWithTaxMarkup(amount, amountSize),
         centerX: 645,
-        baseline: 704,
+        centerY: 677,
         width: 600,
-        size: fontSizeFor(amount, 78, 60, 9),
+        size: amountSize,
         color: "#fff8e9",
         align: "centre",
         bold: true,
@@ -592,6 +607,7 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
 
   if (data.design === "green" || data.design === "congratulations") {
     const message = linesMarkup(wrapText(data.message, 48, 4));
+    const amountSize = fontSizeFor(amount, 102, 78, 9);
     return Promise.all([
       textLayer({
         text: occasion,
@@ -605,11 +621,11 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
         letterSpacing: 2,
       }),
       textLayer({
-        text: amount,
+        text: amountWithTaxMarkup(amount, amountSize),
         centerX: 420,
-        baseline: 470,
+        centerY: 430,
         width: 620,
-        size: fontSizeFor(amount, 102, 78, 9),
+        size: amountSize,
         color: "#063a2a",
         align: "centre",
         bold: true,
@@ -660,6 +676,7 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
   }
 
   const message = linesMarkup(wrapText(data.message, 45, 4));
+  const amountSize = fontSizeFor(amount, 108, 78, 9);
   return Promise.all([
     textLayer({
       text: occasion,
@@ -673,11 +690,11 @@ async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptio
       letterSpacing: 4,
     }),
     textLayer({
-      text: amount,
+      text: amountWithTaxMarkup(amount, amountSize),
       centerX: 400,
-      baseline: 510,
+      centerY: 460,
       width: 620,
-      size: fontSizeFor(amount, 108, 78, 9),
+      size: amountSize,
       color: "#bd8528",
       align: "centre",
       bold: true,

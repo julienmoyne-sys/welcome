@@ -39,7 +39,9 @@ export type GiftCardPaymentMetadata = {
     locale: "fr" | "en" | "de";
   };
   delivery?: {
-    sentAt: string;
+    claimId?: string;
+    processingAt?: string;
+    sentAt?: string;
   };
 };
 
@@ -195,18 +197,32 @@ export async function getStancerPaymentIntent(paymentIntentId: string) {
   });
 }
 
-export async function markGiftCardDelivered(
+export async function setGiftCardDeliveryState(
   paymentIntentId: string,
   metadata: GiftCardPaymentMetadata,
+  delivery: GiftCardPaymentMetadata["delivery"],
 ) {
   await stancerRequest<StancerPaymentIntent>(`/payment_intents/${paymentIntentId}`, {
     method: "PATCH",
     body: JSON.stringify({
       metadata: {
         ...metadata,
-        delivery: { sentAt: new Date().toISOString() },
+        delivery,
       },
     }),
+  });
+}
+
+export async function releaseGiftCardDeliveryClaim(paymentIntentId: string, claimId: string) {
+  const paymentIntent = await getStancerPaymentIntent(paymentIntentId);
+  const metadata = paymentIntent.metadata;
+  if (!metadata || metadata.delivery?.claimId !== claimId) return;
+
+  const metadataWithoutDelivery = { ...metadata };
+  delete metadataWithoutDelivery.delivery;
+  await stancerRequest<StancerPaymentIntent>(`/payment_intents/${paymentIntentId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ metadata: metadataWithoutDelivery }),
   });
 }
 
