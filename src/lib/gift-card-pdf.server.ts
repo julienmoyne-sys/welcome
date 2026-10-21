@@ -211,10 +211,9 @@ function buildCloudOverlay(
       <rect x="36" y="36" width="888" height="952" rx="22" fill="none" stroke="${palette.accent}" stroke-width="3" opacity="0.75"/>
       <line x1="959" y1="0" x2="959" y2="1024" stroke="${palette.accent}" stroke-width="4"/>
       <g font-family="Arial, sans-serif">
-        <text x="90" y="112" fill="${palette.accent}" font-size="34" font-weight="800">WELCOME!</text>
-        <text x="278" y="112" fill="${palette.accent}" font-size="18" letter-spacing="7">COWORKING</text>
-        <text x="480" y="193" text-anchor="middle" fill="${palette.text}" font-family="Georgia, serif" font-size="35" font-weight="700" letter-spacing="5">CHÈQUE CADEAU</text>
-        <text x="480" y="274" text-anchor="middle" fill="${palette.accent}" font-family="Georgia, serif" font-size="${fontSizeFor(values.occasion, 48, 38, 22)}" font-weight="700" letter-spacing="3">${values.occasion}</text>
+        <rect x="90" y="62" width="380" height="105" rx="12" fill="#fffdf7"/>
+        <text x="480" y="211" text-anchor="middle" fill="${palette.text}" font-family="Georgia, serif" font-size="34" font-weight="700" letter-spacing="5">CHÈQUE CADEAU</text>
+        <text x="480" y="278" text-anchor="middle" fill="${palette.accent}" font-family="Georgia, serif" font-size="${fontSizeFor(values.occasion, 45, 35, 22)}" font-weight="700" letter-spacing="3">${values.occasion}</text>
         <rect x="90" y="315" width="780" height="180" rx="20" fill="${palette.amountBackground}" stroke="${palette.accent}" stroke-width="4"/>
         <text x="480" y="435" text-anchor="middle" fill="${palette.amountText}" font-size="${fontSizeFor(values.amount, 108, 88, 10)}" font-weight="800">${values.amount}</text>
         <text x="480" y="548" text-anchor="middle" fill="${palette.text}" font-size="23" opacity="0.9">${values.validity}</text>
@@ -255,53 +254,59 @@ function buildOverlay(data: GiftCardDocumentData) {
   }
 
   if (data.design === "red" || data.design === "birthday") {
-    const message = wrapText(data.message, 34, 3);
+    const recipientLines = wrapText(data.recipient, 34, 2);
+    const fromLines = wrapText(data.from, 34, 2);
+    const message = wrapText(data.message, 32, 5);
     return `
       <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
         <g font-family="Georgia, serif">
-          <text x="650" y="573" text-anchor="middle" fill="#9b1119" font-size="${fontSizeFor(occasion, 45, 34, 22)}" font-weight="700" letter-spacing="3">${occasion}</text>
-          <text x="645" y="710" text-anchor="middle" fill="#fff8e9" font-size="${fontSizeFor(amount, 100, 78, 10)}" font-weight="700">${amount}</text>
+          <text x="650" y="573" text-anchor="middle" fill="#9b1119" font-size="${fontSizeFor(occasion, 42, 32, 20)}" font-weight="700" letter-spacing="2">${occasion}</text>
+          <text x="645" y="704" text-anchor="middle" fill="#fff8e9" font-size="${fontSizeFor(amount, 92, 72, 9)}" font-weight="700">${amount}</text>
         </g>
-        <g fill="#94131a" font-family="Georgia, serif" font-size="24">
-          <text x="1100" y="558"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
-          <text x="1100" y="613"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
-          <text x="1100" y="668" font-weight="700">${copy.message} :</text>
-          <text x="1100" y="711" font-size="22" font-style="italic">${textSpans(message, 1100, 711, 37)}</text>
+        <g fill="#94131a" font-family="Georgia, serif">
+          <text x="1100" y="554" font-size="22" font-weight="700">${copy.recipient} :</text>
+          <text x="1100" y="584" font-size="20">${textSpans(recipientLines, 1100, 584, 25)}</text>
+          <text x="1100" y="646" font-size="22" font-weight="700">${copy.from} :</text>
+          <text x="1100" y="676" font-size="20">${textSpans(fromLines, 1100, 676, 25)}</text>
+          <text x="1100" y="733" font-size="21" font-weight="700">${copy.message} :</text>
+          <text x="1100" y="757" font-size="17" font-style="italic">${textSpans(message, 1100, 757, 19)}</text>
         </g>
         <text x="640" y="798" text-anchor="middle" fill="#2b1b14" font-family="Georgia, serif" font-size="21">${validity}</text>
       </svg>`;
   }
 
   if (data.design === "green" || data.design === "congratulations") {
-    const message = wrapText(data.message, 52, 2);
+    const message = wrapText(data.message, 48, 4);
     return `
       <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
+        <rect x="100" y="260" width="660" height="70" rx="8" fill="#063a2a"/>
         <g font-family="Georgia, serif">
-          <text x="430" y="307" text-anchor="middle" fill="#fff9e8" font-size="${fontSizeFor(occasion, 46, 34, 22)}" font-weight="700" letter-spacing="2">${occasion}</text>
-          <text x="420" y="475" text-anchor="middle" fill="#063a2a" font-size="${fontSizeFor(amount, 112, 86, 10)}" font-weight="700">${amount}</text>
+          <text x="430" y="307" text-anchor="middle" fill="#fff9e8" font-size="${fontSizeFor(occasion, 42, 32, 20)}" font-weight="700" letter-spacing="2">${occasion}</text>
+          <text x="420" y="470" text-anchor="middle" fill="#063a2a" font-size="${fontSizeFor(amount, 102, 78, 9)}" font-weight="700">${amount}</text>
           <text x="430" y="576" text-anchor="middle" fill="#fff9e8" font-size="22">${validity}</text>
         </g>
-        <g fill="#171512" font-family="Georgia, serif" font-size="23">
-          <text x="125" y="817"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
-          <text x="125" y="862"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
-          <text x="125" y="907" font-weight="700">${copy.message} :</text>
-          <text x="310" y="907" font-size="21" font-style="italic">${textSpans(message, 310, 907, 31)}</text>
+        <g fill="#171512" font-family="Georgia, serif" font-size="20">
+          <text x="125" y="804"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
+          <text x="125" y="840"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
+          <text x="125" y="882" font-weight="700">${copy.message} :</text>
+          <text x="300" y="882" font-size="16" font-style="italic">${textSpans(message, 300, 882, 18)}</text>
         </g>
       </svg>`;
   }
 
-  const message = wrapText(data.message, 38, 2);
+  const message = wrapText(data.message, 45, 4);
   return `
     <svg width="1536" height="1024" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg">
+      ${data.design === "thankYou" ? '<rect x="78" y="735" width="660" height="190" rx="18" fill="#fffdf7" fill-opacity="0.96" stroke="#bd8528" stroke-width="2"/>' : ""}
       <g font-family="Arial, sans-serif">
-        <text x="410" y="337" text-anchor="middle" fill="#bd8528" font-size="${fontSizeFor(occasion, 42, 32, 22)}" font-weight="600" letter-spacing="7">${occasion}</text>
-        <text x="400" y="520" text-anchor="middle" fill="#bd8528" font-size="${fontSizeFor(amount, 124, 92, 10)}" font-weight="800">${amount}</text>
+        <text x="410" y="337" text-anchor="middle" fill="#bd8528" font-size="${fontSizeFor(occasion, 39, 30, 20)}" font-weight="600" letter-spacing="5">${occasion}</text>
+        <text x="400" y="510" text-anchor="middle" fill="#bd8528" font-size="${fontSizeFor(amount, 108, 78, 9)}" font-weight="800">${amount}</text>
         <text x="400" y="570" text-anchor="middle" fill="#171512" font-size="22">${validity}</text>
-        <g fill="#171512" font-size="25">
-          <text x="105" y="790"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
-          <text x="105" y="837"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
-          <text x="105" y="884" font-weight="700">${copy.message} :</text>
-          <text x="295" y="884" font-size="22" font-style="italic">${textSpans(message, 295, 884, 32)}</text>
+        <g fill="#171512" font-size="21">
+          <text x="105" y="780"><tspan font-weight="700">${copy.recipient} :</tspan> ${recipient}</text>
+          <text x="105" y="819"><tspan font-weight="700">${copy.from} :</tspan> ${from}</text>
+          <text x="105" y="854" font-weight="700">${copy.message} :</text>
+          <text x="275" y="854" font-size="17" font-style="italic">${textSpans(message, 275, 854, 19)}</text>
         </g>
       </g>
     </svg>`;
@@ -360,6 +365,10 @@ export async function generateGiftCardPdf(data: GiftCardDocumentData) {
 
   if (isCloudDesign(data.design)) {
     const photo = await sharp(template).resize({ height: 1024 }).png().toBuffer();
+    const logoSource = await readFile(
+      join(process.cwd(), "src", "assets", "welcome-logo-cropped.png"),
+    );
+    const logo = await sharp(logoSource).resize({ width: 330 }).png().toBuffer();
     const photoMetadata = await sharp(photo).metadata();
     const photoWidth = photoMetadata.width ?? 576;
 
@@ -374,6 +383,7 @@ export async function generateGiftCardPdf(data: GiftCardDocumentData) {
       .composite([
         { input: photo, top: 0, left: 1536 - photoWidth },
         { input: Buffer.from(buildOverlay(data)), top: 0, left: 0 },
+        { input: logo, top: 82, left: 115 },
       ])
       .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
       .toBuffer();

@@ -39,7 +39,7 @@ const metadataSchema = z.object({
     occasion: z.enum(["christmas", "birthday", "congratulations", "thankYou"]).default("christmas"),
     from: z.string().min(1).max(40),
     recipient: z.string().min(1).max(40),
-    message: z.string().min(1).max(140),
+    message: z.string().min(1).max(100),
     email: z.string().email().max(255),
     locale: z.enum(["fr", "en", "de"]),
   }),

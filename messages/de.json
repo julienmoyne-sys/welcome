@@ -1070,7 +1070,7 @@
       "recipientRequired": "Geben Sie den Namen der beschenkten Person ein.",
       "messageRequired": "Fügen Sie dem Gutschein eine Nachricht hinzu.",
       "nameMaximum": "Begrenzen Sie diesen Namen auf 40 Zeichen.",
-      "messageMaximum": "Begrenzen Sie die Nachricht auf 140 Zeichen.",
+      "messageMaximum": "Begrenzen Sie die Nachricht auf 100 Zeichen.",
       "organizationTypeRequired": "Wählen Sie eine Organisationsform aus.",
       "lastNameRequired": "Geben Sie Ihren Nachnamen ein.",
       "firstNameRequired": "Geben Sie Ihren Vornamen ein.",

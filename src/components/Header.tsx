@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { Snowflake } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import { HomeLogoLink } from "./HomeLogoLink";
@@ -32,9 +31,8 @@ export function Header() {
             ))}
             <Link
               href="/shop"
-              className="inline-flex items-center gap-1.5 font-manrope text-[16px] font-semibold text-welcome-black transition-colors duration-200 hover:text-welcome-gold"
+              className="inline-flex items-center rounded-full border border-welcome-gold/55 bg-welcome-gold/10 px-4 py-2 font-manrope text-[15px] font-semibold text-welcome-black shadow-[0_8px_22px_-16px_rgba(198,178,74,0.9)] transition-all duration-200 hover:-translate-y-0.5 hover:border-welcome-gold hover:bg-welcome-gold hover:text-[#0b0b0b] hover:shadow-[0_12px_26px_-14px_rgba(198,178,74,0.85)]"
             >
-              <Snowflake className="h-4 w-4 text-welcome-gold" aria-hidden="true" />
               {t("shop")}
             </Link>
             <Link
@@ -49,10 +47,9 @@ export function Header() {
             <Link
               href="/shop"
               aria-label={t("shop")}
-              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-[10px] border border-welcome-gold/35 px-2.5 font-manrope text-sm font-semibold text-welcome-black transition-colors hover:border-welcome-gold hover:text-welcome-gold sm:px-3 lg:hidden"
+              className="inline-flex h-10 items-center justify-center rounded-full border border-welcome-gold bg-welcome-gold px-3 font-manrope text-sm font-semibold text-[#0b0b0b] shadow-[0_8px_20px_-14px_rgba(198,178,74,0.9)] transition-all hover:brightness-105 hover:shadow-[0_10px_24px_-12px_rgba(198,178,74,0.85)] lg:hidden"
             >
-              <Snowflake className="h-4 w-4 text-welcome-gold" aria-hidden="true" />
-              <span className="hidden md:inline">{t("shop")}</span>
+              {t("shop")}
             </Link>
             <LanguageSwitcher />
             <ThemeToggle />

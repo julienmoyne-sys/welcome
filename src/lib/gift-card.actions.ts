@@ -52,7 +52,7 @@ async function parseGiftCard(input: unknown, locale: string) {
         .refine((value) => Number.isInteger(value * 100), t("amountPrecision")),
       from: z.string().trim().min(1, t("fromRequired")).max(40, t("nameMaximum")),
       recipient: z.string().trim().min(1, t("recipientRequired")).max(40, t("nameMaximum")),
-      message: z.string().trim().min(1, t("messageRequired")).max(140, t("messageMaximum")),
+      message: z.string().trim().min(1, t("messageRequired")).max(100, t("messageMaximum")),
       organizationType: z.enum(["company", "association", "individual", "public"], {
         errorMap: () => ({ message: t("organizationTypeRequired") }),
       }),

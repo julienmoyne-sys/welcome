@@ -1052,7 +1052,7 @@
       "recipientRequired": "Enter the name of the person receiving the voucher.",
       "messageRequired": "Add a message to the gift voucher.",
       "nameMaximum": "Limit this name to 40 characters.",
-      "messageMaximum": "Limit the message to 140 characters.",
+      "messageMaximum": "Limit the message to 100 characters.",
       "organizationTypeRequired": "Select an organisation type.",
       "lastNameRequired": "Enter your last name.",
       "firstNameRequired": "Enter your first name.",

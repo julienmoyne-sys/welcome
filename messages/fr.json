@@ -1077,7 +1077,7 @@
       "recipientRequired": "Indiquez le nom de la personne qui recevra le bon.",
       "messageRequired": "Ajoutez un message au bon cadeau.",
       "nameMaximum": "Limitez ce nom à 40 caractères.",
-      "messageMaximum": "Limitez le message à 140 caractères.",
+      "messageMaximum": "Limitez le message à 100 caractères.",
       "organizationTypeRequired": "Sélectionnez un type d’organisation.",
       "lastNameRequired": "Indiquez votre nom.",
       "firstNameRequired": "Indiquez votre prénom.",

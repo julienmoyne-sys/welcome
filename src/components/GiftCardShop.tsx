@@ -12,6 +12,7 @@ import giftCardIvory from "@/assets/gift-card-template-ivory.png";
 import giftCardPrivateOfficeClouds from "@/assets/gift-card-private-office-clouds.png";
 import giftCardRed from "@/assets/gift-card-template-red.png";
 import giftCardThankYou from "@/assets/gift-card-template-thank-you.png";
+import welcomeLogo from "@/assets/welcome-logo-cropped.png";
 import { submitGiftCard, validateGiftCard } from "@/lib/gift-card.actions";
 
 type Design =
@@ -29,7 +30,7 @@ type Occasion = "christmas" | "birthday" | "congratulations" | "thankYou";
 type OrganizationType = "company" | "association" | "individual" | "public";
 
 const GIFT_NAME_MAX_LENGTH = 40;
-const GIFT_MESSAGE_MAX_LENGTH = 140;
+const GIFT_MESSAGE_MAX_LENGTH = 100;
 const CLOUD_DESIGNS = new Set<Design>(["cloudBirthday", "cloudThankYou", "cloudCongratulations"]);
 
 function isCloudDesign(design: Design): design is CloudDesign {
@@ -696,14 +697,14 @@ function PersonalizedVoucherPreview({
   messageLabel: string;
 }) {
   const details = (
-    <div className="space-y-[0.25em] leading-tight">
-      <p className="truncate">
+    <div className="space-y-[0.2em] leading-[1.1]">
+      <p className="line-clamp-2 break-words">
         <strong>{recipientLabel}</strong> {recipient}
       </p>
-      <p className="truncate">
+      <p className="line-clamp-2 break-words">
         <strong>{fromLabel}</strong> {from}
       </p>
-      <p className="line-clamp-2 italic">
+      <p className="line-clamp-5 break-words italic">
         <strong className="not-italic">{messageLabel}</strong> {message}
       </p>
     </div>
@@ -738,16 +739,19 @@ function PersonalizedVoucherPreview({
 
       {!isCloudDesign(design) && (design === "ivory" || design === "thankYou") && (
         <div className="absolute inset-0 font-inter text-[#171512]">
-          <p className="absolute left-[4%] top-[29%] w-[49%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-semibold uppercase tracking-[0.12em] text-[#bd8528]">
+          <p className="absolute left-[5%] top-[29%] flex h-[6.5%] w-[47%] items-center justify-center overflow-hidden px-[2%] text-center text-[clamp(7px,2vw,20px)] font-semibold uppercase tracking-[0.1em] text-[#bd8528]">
             {occasion}
           </p>
-          <p className="absolute left-[5%] top-[36%] flex h-[18%] w-[47%] items-center justify-center whitespace-nowrap text-center text-[clamp(18px,6vw,58px)] font-extrabold leading-none text-[#bd8528]">
+          <p className="absolute left-[5%] top-[37%] flex h-[17%] w-[47%] items-center justify-center overflow-hidden whitespace-nowrap px-[3%] text-center text-[clamp(14px,3.8vw,42px)] font-extrabold leading-none text-[#bd8528]">
             {amount}
           </p>
-          <p className="absolute left-[5%] top-[54%] w-[47%] text-center text-[clamp(5px,1.15vw,11px)]">
+          <p className="absolute left-[6%] top-[55%] w-[45%] text-center text-[clamp(5px,1vw,10px)]">
             {validity}
           </p>
-          <div className="absolute left-[7%] top-[75%] w-[41%] text-[clamp(5px,1.3vw,12px)]">
+          {design === "thankYou" && (
+            <div className="absolute left-[6%] top-[71.5%] h-[20.5%] w-[43%] rounded-[8px] border border-[#bd8528]/55 bg-[#fffdf7]/95" />
+          )}
+          <div className="absolute left-[7%] top-[74%] z-10 max-h-[17%] w-[41%] overflow-hidden text-[clamp(4px,0.75vw,8px)]">
             {details}
           </div>
         </div>
@@ -755,16 +759,16 @@ function PersonalizedVoucherPreview({
 
       {!isCloudDesign(design) && (design === "red" || design === "birthday") && (
         <div className="absolute inset-0 font-serif text-[#94131a]">
-          <p className="absolute left-[20%] top-[52%] w-[44%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.08em]">
+          <p className="absolute left-[20%] top-[51%] flex h-[7%] w-[44%] items-center justify-center overflow-hidden px-[2%] text-center text-[clamp(7px,2vw,20px)] font-bold uppercase tracking-[0.07em]">
             {occasion}
           </p>
-          <p className="absolute left-[23.5%] top-[58.5%] flex h-[15%] w-[36%] items-center justify-center whitespace-nowrap text-center text-[clamp(16px,4.3vw,44px)] font-bold leading-none text-[#fff8e9]">
+          <p className="absolute left-[23.5%] top-[59%] flex h-[14%] w-[36%] items-center justify-center overflow-hidden whitespace-nowrap px-[3%] text-center text-[clamp(13px,3.2vw,36px)] font-bold leading-none text-[#fff8e9]">
             {amount}
           </p>
-          <p className="absolute left-[23%] top-[76%] w-[38%] text-center text-[clamp(5px,1.1vw,10px)] text-[#2b1b14]">
+          <p className="absolute left-[24%] top-[76%] w-[36%] text-center text-[clamp(5px,0.95vw,9px)] text-[#2b1b14]">
             {validity}
           </p>
-          <div className="absolute left-[71%] top-[53%] w-[24%] text-[clamp(5px,1.25vw,12px)]">
+          <div className="absolute left-[71%] top-[53%] max-h-[31%] w-[24%] overflow-hidden text-[clamp(4px,0.75vw,8px)]">
             {details}
           </div>
         </div>
@@ -772,16 +776,16 @@ function PersonalizedVoucherPreview({
 
       {!isCloudDesign(design) && (design === "green" || design === "congratulations") && (
         <div className="absolute inset-0 font-serif">
-          <p className="absolute left-[5%] top-[25%] w-[50%] truncate text-center text-[clamp(8px,2.5vw,24px)] font-bold uppercase tracking-[0.06em] text-[#fff9e8]">
+          <p className="absolute left-[6%] top-[24%] flex h-[7%] w-[48%] items-center justify-center overflow-hidden bg-[#063a2a] px-[2%] text-center text-[clamp(7px,2vw,20px)] font-bold uppercase tracking-[0.05em] text-[#fff9e8]">
             {occasion}
           </p>
-          <p className="absolute left-[8%] top-[34%] flex h-[18.5%] w-[39.5%] items-center justify-center whitespace-nowrap text-center text-[clamp(16px,4.5vw,46px)] font-bold leading-none text-[#063a2a]">
+          <p className="absolute left-[8%] top-[35%] flex h-[17%] w-[39.5%] items-center justify-center overflow-hidden whitespace-nowrap px-[3%] text-center text-[clamp(13px,3.4vw,38px)] font-bold leading-none text-[#063a2a]">
             {amount}
           </p>
-          <p className="absolute left-[8%] top-[55%] w-[41%] text-center text-[clamp(5px,1.1vw,10px)] text-[#fff9e8]">
+          <p className="absolute left-[9%] top-[55%] w-[39%] text-center text-[clamp(5px,0.95vw,9px)] text-[#fff9e8]">
             {validity}
           </p>
-          <div className="absolute left-[8%] top-[78%] w-[43%] text-[clamp(5px,1.25vw,12px)] text-[#171512]">
+          <div className="absolute left-[8%] top-[76%] max-h-[16%] w-[43%] overflow-hidden text-[clamp(4px,0.75vw,8px)] text-[#171512]">
             {details}
           </div>
         </div>
@@ -840,10 +844,10 @@ function CloudDesignThumbnail({
         />
       </div>
       <div className={`absolute inset-y-[6%] left-[5%] w-[52.5%] ${palette.text}`}>
-        <p className={`font-manrope text-[clamp(7px,1.2vw,13px)] font-extrabold ${palette.accent}`}>
-          WELCOME! <span className="font-medium tracking-[0.25em]">COWORKING</span>
-        </p>
-        <p className="mt-[8%] font-serif text-[clamp(10px,2.2vw,23px)] font-semibold uppercase tracking-[0.06em]">
+        <div className="relative h-[17%] w-[70%] rounded-[5px] bg-[#fffdf7]">
+          <Image src={welcomeLogo} alt="" fill sizes="18vw" className="object-contain p-[3%]" />
+        </div>
+        <p className="mt-[6%] font-serif text-[clamp(10px,2.2vw,23px)] font-semibold uppercase tracking-[0.06em]">
           {occasion}
         </p>
         <div
@@ -908,38 +912,36 @@ function CloudVoucherArtwork({
         aria-hidden="true"
       />
       <div className="absolute left-[5%] top-[5%] w-[52.5%]">
-        <p
-          className={`font-manrope text-[clamp(6px,1.15vw,12px)] font-extrabold ${palette.accent}`}
-        >
-          WELCOME! <span className="font-medium tracking-[0.25em]">COWORKING</span>
-        </p>
-        <p className="mt-[4%] font-serif text-[clamp(7px,1.4vw,15px)] font-semibold uppercase tracking-[0.08em] opacity-85">
+        <div className="relative h-[clamp(18px,4.2vw,44px)] w-[58%] rounded-[5px] bg-[#fffdf7]">
+          <Image src={welcomeLogo} alt="" fill sizes="18vw" className="object-contain p-[2.5%]" />
+        </div>
+        <p className="mt-[3%] font-serif text-[clamp(7px,1.4vw,15px)] font-semibold uppercase tracking-[0.08em] opacity-85">
           CHÈQUE CADEAU
         </p>
       </div>
       <p
-        className={`absolute left-[5%] top-[20%] w-[52.5%] truncate text-center font-serif text-[clamp(8px,2.3vw,24px)] font-bold uppercase tracking-[0.07em] ${palette.accent}`}
+        className={`absolute left-[5%] top-[25%] flex h-[7%] w-[52.5%] items-center justify-center overflow-hidden px-[3%] text-center font-serif text-[clamp(8px,2vw,21px)] font-bold uppercase tracking-[0.06em] ${palette.accent}`}
       >
         {occasion}
       </p>
       <div
-        className={`absolute left-[5%] top-[29%] flex h-[19%] w-[52.5%] items-center justify-center rounded-[12px] border-2 px-[4%] ${palette.border} ${palette.amount}`}
+        className={`absolute left-[5%] top-[34%] flex h-[18%] w-[52.5%] items-center justify-center overflow-hidden rounded-[12px] border-2 px-[6%] ${palette.border} ${palette.amount}`}
       >
-        <span className="whitespace-nowrap font-manrope text-[clamp(15px,4vw,42px)] font-extrabold leading-none tracking-tight">
+        <span className="whitespace-nowrap font-manrope text-[clamp(14px,3.7vw,40px)] font-extrabold leading-none tracking-tight">
           {amount}
         </span>
       </div>
-      <p className="absolute left-[6%] top-[51.5%] w-[50.5%] text-center font-inter text-[clamp(5px,1.05vw,11px)] opacity-85">
+      <p className="absolute left-[6%] top-[54%] w-[50.5%] text-center font-inter text-[clamp(5px,1.05vw,11px)] opacity-85">
         {validity}
       </p>
-      <div className="absolute left-[7%] top-[59%] w-[48.5%] space-y-[0.25em] font-inter text-[clamp(5px,0.95vw,10px)] leading-[1.2]">
+      <div className="absolute left-[7%] top-[61%] max-h-[29%] w-[48.5%] space-y-[0.25em] overflow-hidden font-inter text-[clamp(5px,0.95vw,10px)] leading-[1.2]">
         <p className="line-clamp-2 break-words">
           <strong>{recipientLabel}</strong> {recipient}
         </p>
         <p className="line-clamp-2 break-words">
           <strong>{fromLabel}</strong> {from}
         </p>
-        <p className="line-clamp-4 italic">
+        <p className="line-clamp-4 break-words italic">
           <strong className="not-italic">{messageLabel}</strong> {message}
         </p>
       </div>
