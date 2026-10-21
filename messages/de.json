@@ -23,6 +23,12 @@
       "ogTitle": "Kontakt | Welcome! Coworking Straßburg",
       "ogDescription": "Sprechen Sie mit uns über Ihren Bedarf an Büro, Arbeitsplatz oder Besprechungsraum in Straßburg."
     },
+    "shop": {
+      "title": "Weihnachtsgutscheine | Welcome! Coworking Straßburg",
+      "description": "Verschenken Sie einen personalisierten Welcome! Coworking-Gutschein für Open Space, private Büros und den Besprechungsraum in Straßburg.",
+      "ogTitle": "Weihnachtsgutscheine | Welcome! Coworking",
+      "ogDescription": "Wählen Sie Design und Betrag und personalisieren Sie einen Welcome! Coworking-Gutschein für Weihnachten 2026."
+    },
     "openSpace": {
       "title": "Open Space in Straßburg — Welcome Coworking",
       "description": "Entdecken Sie den Open Space von Welcome Coworking in Straßburg: hell, ruhig und flexibel mit Glasfaser, Kaffee und Druckmöglichkeit.",
@@ -103,6 +109,7 @@
     "solutions": "Angebote",
     "references": "Referenzen",
     "acces": "Anfahrt",
+    "shop": "Shop",
     "contact": "Kontakt",
     "cta": "Besichtigung buchen",
     "languageLabel": "Sprache wählen",
@@ -935,6 +942,59 @@
     "eyebrow": "Kontakt",
     "title": "Sprechen wir darüber, wie Sie arbeiten.",
     "lead": "Sagen Sie uns, was Sie brauchen."
+  },
+  "shop": {
+    "hero": {
+      "eyebrow": "Weihnachten 2026",
+      "title": "Verschenken Sie Zeit und Raum",
+      "lead": "Ein nützliches, stilvolles und vollständig personalisiertes Geschenk für alle Leistungen von Welcome! Coworking.",
+      "validity": "Gültig vom 1. Januar 2027 bis zum 31. Dezember 2028"
+    },
+    "designs": {
+      "eyebrow": "Ihr Geschenkgutschein",
+      "title": "Wählen Sie Ihr Design",
+      "lead": "Wählen Sie das Motiv für Ihr Geschenk. Betrag und Nachricht werden nach Ihren Angaben personalisiert.",
+      "selected": "Ausgewählt",
+      "choose": "Auswählen",
+      "items": {
+        "ivory": {
+          "title": "Elfenbein & Gold",
+          "description": "Hell und modern",
+          "alt": "Elfenbeinfarbener und goldener Welcome Coworking-Weihnachtsgutschein mit Besprechungsraum"
+        },
+        "red": {
+          "title": "Weihnachtsrot",
+          "description": "Warm und traditionell",
+          "alt": "Roter Welcome Coworking-Weihnachtsgutschein mit großer Schleife"
+        },
+        "green": {
+          "title": "Grün & Gold",
+          "description": "Elegant und edel",
+          "alt": "Grüner und goldener Welcome Coworking-Weihnachtsgutschein mit privatem Büro"
+        }
+      }
+    },
+    "form": {
+      "eyebrow": "Personalisierung",
+      "title": "Gestalten Sie Ihren Gutschein",
+      "lead": "Tragen Sie die Angaben ein, die auf dem Gutschein erscheinen sollen. Ihre Anfrage geht direkt an das Team von Welcome! Coworking.",
+      "summaryLabel": "Ihre Auswahl",
+      "amount": "Betrag in Euro inkl. MwSt.",
+      "from": "Von:",
+      "recipient": "Für:",
+      "message": "Nachricht:",
+      "submit": "Anfrage senden",
+      "sending": "Wird gesendet…",
+      "success": "Ihre Anfrage wurde an contact@welcome-coworking.com gesendet.",
+      "error": "Ihre Anfrage konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie an contact@welcome-coworking.com."
+    },
+    "validation": {
+      "amountRequired": "Geben Sie einen Betrag über 0 € ein.",
+      "amountMaximum": "Der Betrag darf 10.000 € nicht überschreiten.",
+      "fromRequired": "Geben Sie den Namen der schenkenden Person ein.",
+      "recipientRequired": "Geben Sie den Namen der beschenkten Person ein.",
+      "messageRequired": "Fügen Sie dem Gutschein eine Nachricht hinzu."
+    }
   },
   "contact": {
     "eyebrow": "Kontakt",

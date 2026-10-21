@@ -20,6 +20,14 @@ export type ContactPayload = {
   message: string;
 };
 
+export type GiftCardPayload = {
+  design: "ivory" | "red" | "green";
+  amount: number;
+  from: string;
+  recipient: string;
+  message: string;
+};
+
 const escape = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -115,6 +123,76 @@ export async function sendContactEmail(data: ContactPayload) {
 
     const message = error instanceof Error ? error.message : String(error);
     console.error(`SMTP send failed via ${SMTP_HOST}:${SMTP_PORT}: ${message}`);
+    throw new Error(`Email send failed: ${message}`);
+  }
+}
+
+const GIFT_CARD_DESIGNS: Record<GiftCardPayload["design"], string> = {
+  ivory: "Ivoire & or",
+  red: "Rouge de Noël",
+  green: "Vert & or",
+};
+
+/** Envoie une demande de bon cadeau vers la boîte de contact de Welcome. */
+export async function sendGiftCardEmail(data: GiftCardPayload) {
+  const formattedAmount = new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+  }).format(data.amount);
+  const subjectRecipient = data.recipient.replace(/[\r\n]+/g, " ").trim();
+
+  const rows: Array<[string, string]> = [
+    ["Modèle", GIFT_CARD_DESIGNS[data.design]],
+    ["Montant TTC", formattedAmount],
+    ["De la part de", data.from],
+    ["Pour", data.recipient],
+  ];
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;color:#0b0b0b">
+      <h2 style="color:#0b0b0b">Nouvelle demande de bon cadeau de Noël</h2>
+      <table cellpadding="6" style="border-collapse:collapse">
+        ${rows
+          .map(
+            ([label, value]) =>
+              `<tr><td style="color:#5a5a5a">${label}</td><td><strong>${escape(value)}</strong></td></tr>`,
+          )
+          .join("")}
+      </table>
+      <p style="color:#5a5a5a;margin-top:16px">Message :</p>
+      <p style="white-space:pre-wrap">${escape(data.message)}</p>
+    </div>
+  `;
+
+  const text = [
+    "Nouvelle demande de bon cadeau de Noël",
+    "",
+    ...rows.map(([label, value]) => `${label} : ${value}`),
+    "",
+    "Message :",
+    data.message,
+  ].join("\n");
+
+  try {
+    const info = await getTransporter().sendMail({
+      from: `"Welcome Coworking" <${SMTP_USER}>`,
+      to: TO,
+      subject: `Bon cadeau de Noël — ${formattedAmount} pour ${subjectRecipient}`,
+      text,
+      html,
+    });
+
+    if (info.rejected?.length) {
+      throw new Error(`SMTP rejected recipients: ${info.rejected.join(", ")}`);
+    }
+
+    return { success: true as const };
+  } catch (error) {
+    transporter?.close();
+    transporter = null;
+
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`SMTP gift card send failed via ${SMTP_HOST}:${SMTP_PORT}: ${message}`);
     throw new Error(`Email send failed: ${message}`);
   }
 }

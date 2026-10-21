@@ -23,6 +23,12 @@
       "ogTitle": "Contact | Welcome! Coworking Strasbourg",
       "ogDescription": "Échangeons sur vos besoins en bureau, poste de travail ou salle de réunion à Strasbourg."
     },
+    "shop": {
+      "title": "Bons cadeaux de Noël | Welcome! Coworking Strasbourg",
+      "description": "Offrez un bon cadeau Welcome! Coworking personnalisable, valable sur l’open space, les bureaux privatifs et la salle de réunion à Strasbourg.",
+      "ogTitle": "Bons cadeaux de Noël | Welcome! Coworking",
+      "ogDescription": "Choisissez votre modèle, votre montant et personnalisez un bon cadeau Welcome! Coworking pour Noël 2026."
+    },
     "openSpace": {
       "title": "Open space à Strasbourg — Welcome Coworking",
       "description": "Découvrez l'open space de Welcome Coworking à Strasbourg : un espace lumineux et calme, avec accès flexible, fibre, café et impression.",
@@ -103,6 +109,7 @@
     "solutions": "Solutions",
     "references": "Références",
     "acces": "Accès",
+    "shop": "Shop",
     "contact": "Contact",
     "cta": "Organiser une visite",
     "languageLabel": "Choisir la langue",
@@ -942,6 +949,59 @@
     "eyebrow": "Contact",
     "title": "Parlons de votre façon de travailler.",
     "lead": "Dites-nous ce dont vous avez besoin."
+  },
+  "shop": {
+    "hero": {
+      "eyebrow": "Noël 2026",
+      "title": "Offrez du temps et de l’espace",
+      "lead": "Un cadeau utile, élégant et entièrement personnalisable, à utiliser sur toutes les prestations Welcome! Coworking.",
+      "validity": "Valable du 1er janvier 2027 au 31 décembre 2028"
+    },
+    "designs": {
+      "eyebrow": "Votre bon cadeau",
+      "title": "Choisissez votre modèle",
+      "lead": "Sélectionnez le visuel qui accompagnera votre cadeau. Le montant et le message seront personnalisés selon vos indications.",
+      "selected": "Sélectionné",
+      "choose": "Choisir",
+      "items": {
+        "ivory": {
+          "title": "Ivoire & or",
+          "description": "Lumineux et contemporain",
+          "alt": "Bon cadeau de Noël Welcome Coworking ivoire et or avec une salle de réunion"
+        },
+        "red": {
+          "title": "Rouge de Noël",
+          "description": "Chaleureux et traditionnel",
+          "alt": "Bon cadeau de Noël Welcome Coworking rouge avec un grand ruban"
+        },
+        "green": {
+          "title": "Vert & or",
+          "description": "Élégant et raffiné",
+          "alt": "Bon cadeau de Noël Welcome Coworking vert et or avec un bureau privatif"
+        }
+      }
+    },
+    "form": {
+      "eyebrow": "Personnalisation",
+      "title": "Créez votre bon cadeau",
+      "lead": "Renseignez les informations à inscrire sur le bon. Votre demande sera envoyée directement à l’équipe Welcome! Coworking.",
+      "summaryLabel": "Votre sélection",
+      "amount": "Montant en euros TTC",
+      "from": "De la part de :",
+      "recipient": "Pour :",
+      "message": "Message :",
+      "submit": "Envoyer ma demande",
+      "sending": "Envoi en cours…",
+      "success": "Votre demande a bien été envoyée à contact@welcome-coworking.com.",
+      "error": "L’envoi a échoué. Merci de réessayer ou de nous écrire à contact@welcome-coworking.com."
+    },
+    "validation": {
+      "amountRequired": "Indiquez un montant supérieur à 0 €.",
+      "amountMaximum": "Le montant ne peut pas dépasser 10 000 €.",
+      "fromRequired": "Indiquez le nom de la personne qui offre le bon.",
+      "recipientRequired": "Indiquez le nom de la personne qui recevra le bon.",
+      "messageRequired": "Ajoutez un message au bon cadeau."
+    }
   },
   "contact": {
     "eyebrow": "Contact",

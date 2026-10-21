@@ -22,6 +22,7 @@ const PAGES = [
   { path: "/salle-de-reunion", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/cuisine-detente", changeFrequency: "weekly" as const, priority: 0.7 },
   { path: "/contact", changeFrequency: "weekly" as const, priority: 0.8 },
+  { path: "/shop", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/faq", changeFrequency: "weekly" as const, priority: 0.7 },
   { path: "/mentions-legales", changeFrequency: "yearly" as const, priority: 0.3 },
   {

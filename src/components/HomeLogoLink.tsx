@@ -31,7 +31,7 @@ export function HomeLogoLink({ label }: { label: string }) {
 
   return (
     <Link href="/" className="shrink-0" aria-label={label} onClick={handleClick}>
-      <WelcomeLogo className="w-[210px]" />
+      <WelcomeLogo className="w-[112px] sm:w-[180px] md:w-[210px]" />
     </Link>
   );
 }
