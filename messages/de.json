@@ -29,6 +29,10 @@
       "ogTitle": "Personalisierte Geschenkgutscheine | Welcome! Coworking",
       "ogDescription": "Wählen Sie Design, Anlass und Betrag für einen personalisierten Welcome! Coworking-Geschenkgutschein."
     },
+    "shopConfirmation": {
+      "title": "Zahlungsbestätigung | Welcome! Coworking",
+      "description": "Bestätigung Ihrer Bestellung eines Welcome! Coworking-Geschenkgutscheins."
+    },
     "openSpace": {
       "title": "Open Space in Straßburg — Welcome Coworking",
       "description": "Entdecken Sie den Open Space von Welcome Coworking in Straßburg: hell, ruhig und flexibel mit Glasfaser, Kaffee und Druckmöglichkeit.",
@@ -944,6 +948,18 @@
     "lead": "Sagen Sie uns, was Sie brauchen."
   },
   "shop": {
+    "confirmation": {
+      "eyebrow": "Bestellung bestätigt",
+      "title": "Vielen Dank, Ihre Zahlung wurde entgegengenommen.",
+      "lead": "Ihr personalisierter Geschenkgutschein wird vorbereitet. Sie erhalten ihn in Kürze per E-Mail als PDF.",
+      "emailTitle": "Prüfen Sie Ihren Posteingang",
+      "emailText": "Der Gutschein wird an die bei der Bestellung angegebene Adresse gesendet. Prüfen Sie bitte auch Ihren Spam-Ordner.",
+      "invoiceTitle": "Ihre elektronische Rechnung",
+      "invoiceText": "Sie wird Ihnen nach Bestätigung der Zahlung separat zugesendet.",
+      "contact": "Noch nichts erhalten? Schreiben Sie uns an contact@welcome-coworking.com.",
+      "homeButton": "Zur Startseite",
+      "shopButton": "Weiteren Gutschein bestellen"
+    },
     "hero": {
       "eyebrow": "Geschenkgutscheine",
       "title": "Verschenken Sie Zeit und Raum",

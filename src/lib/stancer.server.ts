@@ -160,6 +160,7 @@ export async function createGiftCardPaymentLink(
         methods_allowed: ["card"],
         threeds: "required",
         capture: true,
+        return_url: `https://www.welcome-coworking.com/${input.locale}/shop/confirmation`,
         metadata,
       }),
     });

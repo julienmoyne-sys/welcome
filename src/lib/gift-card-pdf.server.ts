@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-import sharp from "sharp";
+import sharp, { type OverlayOptions } from "sharp";
 
 export type GiftCardOccasion = "christmas" | "birthday" | "congratulations" | "thankYou";
 
@@ -35,6 +35,17 @@ const TEMPLATE_FILENAMES: Record<GiftCardDocumentData["design"], string> = {
   cloudThankYou: "gift-card-private-office-clouds.png",
   cloudCongratulations: "gift-card-private-office-clouds.png",
 };
+
+const TEXT_FONT_FILE = join(
+  process.cwd(),
+  "node_modules",
+  "next",
+  "dist",
+  "compiled",
+  "@vercel",
+  "og",
+  "Geist-Regular.ttf",
+);
 
 type CloudDesign = "cloudBirthday" | "cloudThankYou" | "cloudCongratulations";
 
@@ -130,6 +141,69 @@ function textSpans(lines: string[], x: number, startY: number, lineHeight: numbe
 
 function fontSizeFor(value: string, normal: number, compact: number, threshold: number) {
   return value.length > threshold ? compact : normal;
+}
+
+type TextLayerOptions = {
+  text: string;
+  left?: number;
+  centerX?: number;
+  baseline: number;
+  width: number;
+  size: number;
+  color: string;
+  align?: "left" | "centre" | "right";
+  bold?: boolean;
+  italic?: boolean;
+  letterSpacing?: number;
+};
+
+async function textLayer({
+  text,
+  left,
+  centerX,
+  baseline,
+  width,
+  size,
+  color,
+  align = "left",
+  bold = false,
+  italic = false,
+  letterSpacing = 0,
+}: TextLayerOptions): Promise<OverlayOptions> {
+  const attributes = [
+    `foreground="${color}"`,
+    bold ? 'weight="bold"' : "",
+    italic ? 'style="italic"' : "",
+    letterSpacing ? `letter_spacing="${letterSpacing * 1024}"` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const input = await sharp({
+    text: {
+      text: `<span ${attributes}>${text}</span>`,
+      font: `Geist ${size}`,
+      fontfile: TEXT_FONT_FILE,
+      width,
+      align,
+      rgba: true,
+      dpi: 72,
+    },
+  })
+    .png()
+    .toBuffer();
+  const metadata = await sharp(input).metadata();
+  const measuredWidth = metadata.width ?? width;
+
+  return {
+    input,
+    left: centerX === undefined ? (left ?? 0) : Math.round(centerX - measuredWidth / 2),
+    top: Math.max(0, Math.round(baseline - size * 1.05)),
+  };
+}
+
+function linesMarkup(lines: string[]) {
+  return lines.map(escapeXml).join("\n");
 }
 
 function getParisCivilDate(date: Date) {
@@ -312,6 +386,347 @@ function buildOverlay(data: GiftCardDocumentData) {
     </svg>`;
 }
 
+function buildGraphicsOverlay(data: GiftCardDocumentData) {
+  return buildOverlay(data).replace(/<text\b[\s\S]*?<\/text>/g, "");
+}
+
+async function buildTextLayers(data: GiftCardDocumentData): Promise<OverlayOptions[]> {
+  const copy = COPY[data.locale];
+  const issueDate = getParisCivilDate(new Date());
+  const expirationDate = addTwoYears(issueDate);
+  const occasion = escapeXml(occasionLabel(data, issueDate.year).slice(0, 50));
+  const amount = escapeXml(
+    new Intl.NumberFormat(data.locale, { style: "currency", currency: "EUR" }).format(data.amount),
+  );
+  const validity = escapeXml(
+    copy.validity(
+      formatCivilDate(issueDate, data.locale),
+      formatCivilDate(expirationDate, data.locale),
+    ),
+  );
+  const recipient = escapeXml(data.recipient.slice(0, 40));
+  const from = escapeXml(data.from.slice(0, 40));
+
+  if (isCloudDesign(data.design)) {
+    const palettes = {
+      cloudBirthday: { text: "#fff9ec", accent: "#f0cf7a", amountText: "#781c2e" },
+      cloudThankYou: { text: "#173f32", accent: "#b67b29", amountText: "#fff9ec" },
+      cloudCongratulations: { text: "#fff9ec", accent: "#e3c366", amountText: "#063a2a" },
+    } as const;
+    const palette = palettes[data.design];
+    const message = linesMarkup(wrapText(data.message, 46, 4));
+
+    return Promise.all([
+      textLayer({
+        text: "CHÈQUE CADEAU",
+        centerX: 480,
+        baseline: 211,
+        width: 530,
+        size: 34,
+        color: palette.text,
+        align: "centre",
+        bold: true,
+        letterSpacing: 3,
+      }),
+      textLayer({
+        text: occasion,
+        centerX: 480,
+        baseline: 278,
+        width: 720,
+        size: fontSizeFor(occasion, 45, 35, 22),
+        color: palette.accent,
+        align: "centre",
+        bold: true,
+        letterSpacing: 2,
+      }),
+      textLayer({
+        text: amount,
+        centerX: 480,
+        baseline: 435,
+        width: 720,
+        size: fontSizeFor(amount, 108, 88, 10),
+        color: palette.amountText,
+        align: "centre",
+        bold: true,
+      }),
+      textLayer({
+        text: validity,
+        centerX: 480,
+        baseline: 548,
+        width: 700,
+        size: 23,
+        color: palette.text,
+        align: "centre",
+      }),
+      textLayer({
+        text: `<b>${copy.recipient} :</b> ${recipient}`,
+        left: 100,
+        baseline: 657,
+        width: 760,
+        size: 27,
+        color: palette.text,
+      }),
+      textLayer({
+        text: `<b>${copy.from} :</b> ${from}`,
+        left: 100,
+        baseline: 718,
+        width: 760,
+        size: 27,
+        color: palette.text,
+      }),
+      textLayer({
+        text: `<b>${copy.message} :</b>`,
+        left: 100,
+        baseline: 779,
+        width: 760,
+        size: 27,
+        color: palette.text,
+      }),
+      textLayer({
+        text: message,
+        left: 100,
+        baseline: 812,
+        width: 760,
+        size: 24,
+        color: palette.text,
+        italic: true,
+      }),
+      textLayer({
+        text: "welcome-coworking.com",
+        left: 100,
+        baseline: 957,
+        width: 700,
+        size: 20,
+        color: palette.accent,
+        letterSpacing: 2,
+      }),
+    ]);
+  }
+
+  if (data.design === "red" || data.design === "birthday") {
+    const recipientLines = linesMarkup(wrapText(data.recipient, 34, 2));
+    const fromLines = linesMarkup(wrapText(data.from, 34, 2));
+    const message = linesMarkup(wrapText(data.message, 32, 5));
+    return Promise.all([
+      textLayer({
+        text: occasion,
+        centerX: 650,
+        baseline: 573,
+        width: 500,
+        size: fontSizeFor(occasion, 42, 32, 20),
+        color: "#9b1119",
+        align: "centre",
+        bold: true,
+        letterSpacing: 2,
+      }),
+      textLayer({
+        text: amount,
+        centerX: 645,
+        baseline: 704,
+        width: 600,
+        size: fontSizeFor(amount, 78, 60, 9),
+        color: "#fff8e9",
+        align: "centre",
+        bold: true,
+      }),
+      textLayer({
+        text: `<b>${copy.recipient} :</b>`,
+        left: 1100,
+        baseline: 554,
+        width: 360,
+        size: 22,
+        color: "#94131a",
+      }),
+      textLayer({
+        text: recipientLines,
+        left: 1100,
+        baseline: 584,
+        width: 360,
+        size: 20,
+        color: "#94131a",
+      }),
+      textLayer({
+        text: `<b>${copy.from} :</b>`,
+        left: 1100,
+        baseline: 646,
+        width: 360,
+        size: 22,
+        color: "#94131a",
+      }),
+      textLayer({
+        text: fromLines,
+        left: 1100,
+        baseline: 676,
+        width: 360,
+        size: 20,
+        color: "#94131a",
+      }),
+      textLayer({
+        text: `<b>${copy.message} :</b>`,
+        left: 1100,
+        baseline: 733,
+        width: 360,
+        size: 21,
+        color: "#94131a",
+      }),
+      textLayer({
+        text: message,
+        left: 1100,
+        baseline: 757,
+        width: 360,
+        size: 17,
+        color: "#94131a",
+        italic: true,
+      }),
+      textLayer({
+        text: validity,
+        centerX: 640,
+        baseline: 798,
+        width: 680,
+        size: 21,
+        color: "#2b1b14",
+        align: "centre",
+      }),
+    ]);
+  }
+
+  if (data.design === "green" || data.design === "congratulations") {
+    const message = linesMarkup(wrapText(data.message, 48, 4));
+    return Promise.all([
+      textLayer({
+        text: occasion,
+        centerX: 430,
+        baseline: 307,
+        width: 620,
+        size: fontSizeFor(occasion, 42, 32, 20),
+        color: "#fff9e8",
+        align: "centre",
+        bold: true,
+        letterSpacing: 2,
+      }),
+      textLayer({
+        text: amount,
+        centerX: 420,
+        baseline: 470,
+        width: 620,
+        size: fontSizeFor(amount, 102, 78, 9),
+        color: "#063a2a",
+        align: "centre",
+        bold: true,
+      }),
+      textLayer({
+        text: validity,
+        centerX: 430,
+        baseline: 576,
+        width: 620,
+        size: 22,
+        color: "#fff9e8",
+        align: "centre",
+      }),
+      textLayer({
+        text: `<b>${copy.recipient} :</b> ${recipient}`,
+        left: 125,
+        baseline: 804,
+        width: 650,
+        size: 20,
+        color: "#171512",
+      }),
+      textLayer({
+        text: `<b>${copy.from} :</b> ${from}`,
+        left: 125,
+        baseline: 840,
+        width: 650,
+        size: 20,
+        color: "#171512",
+      }),
+      textLayer({
+        text: `<b>${copy.message} :</b>`,
+        left: 125,
+        baseline: 882,
+        width: 175,
+        size: 20,
+        color: "#171512",
+      }),
+      textLayer({
+        text: message,
+        left: 300,
+        baseline: 882,
+        width: 510,
+        size: 16,
+        color: "#171512",
+        italic: true,
+      }),
+    ]);
+  }
+
+  const message = linesMarkup(wrapText(data.message, 45, 4));
+  return Promise.all([
+    textLayer({
+      text: occasion,
+      centerX: 410,
+      baseline: 337,
+      width: 620,
+      size: fontSizeFor(occasion, 39, 30, 20),
+      color: "#bd8528",
+      align: "centre",
+      bold: true,
+      letterSpacing: 4,
+    }),
+    textLayer({
+      text: amount,
+      centerX: 400,
+      baseline: 510,
+      width: 620,
+      size: fontSizeFor(amount, 108, 78, 9),
+      color: "#bd8528",
+      align: "centre",
+      bold: true,
+    }),
+    textLayer({
+      text: validity,
+      centerX: 400,
+      baseline: 570,
+      width: 620,
+      size: 22,
+      color: "#171512",
+      align: "centre",
+    }),
+    textLayer({
+      text: `<b>${copy.recipient} :</b> ${recipient}`,
+      left: 105,
+      baseline: 780,
+      width: 650,
+      size: 21,
+      color: "#171512",
+    }),
+    textLayer({
+      text: `<b>${copy.from} :</b> ${from}`,
+      left: 105,
+      baseline: 819,
+      width: 650,
+      size: 21,
+      color: "#171512",
+    }),
+    textLayer({
+      text: `<b>${copy.message} :</b>`,
+      left: 105,
+      baseline: 854,
+      width: 170,
+      size: 21,
+      color: "#171512",
+    }),
+    textLayer({
+      text: message,
+      left: 275,
+      baseline: 854,
+      width: 500,
+      size: 17,
+      color: "#171512",
+      italic: true,
+    }),
+  ]);
+}
+
 function jpegToPdf(jpeg: Buffer, width: number, height: number) {
   const parts: Buffer[] = [];
   const offsets = [0];
@@ -361,6 +776,7 @@ export async function generateGiftCardPdf(data: GiftCardDocumentData) {
   const template = await readFile(
     join(process.cwd(), "src", "assets", TEMPLATE_FILENAMES[data.design]),
   );
+  const textLayers = await buildTextLayers(data);
   let jpeg: Buffer;
 
   if (isCloudDesign(data.design)) {
@@ -382,14 +798,18 @@ export async function generateGiftCardPdf(data: GiftCardDocumentData) {
     })
       .composite([
         { input: photo, top: 0, left: 1536 - photoWidth },
-        { input: Buffer.from(buildOverlay(data)), top: 0, left: 0 },
+        { input: Buffer.from(buildGraphicsOverlay(data)), top: 0, left: 0 },
         { input: logo, top: 82, left: 115 },
+        ...textLayers,
       ])
       .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
       .toBuffer();
   } else {
     jpeg = await sharp(template)
-      .composite([{ input: Buffer.from(buildOverlay(data)), top: 0, left: 0 }])
+      .composite([
+        { input: Buffer.from(buildGraphicsOverlay(data)), top: 0, left: 0 },
+        ...textLayers,
+      ])
       .jpeg({ quality: 94, chromaSubsampling: "4:4:4" })
       .toBuffer();
   }

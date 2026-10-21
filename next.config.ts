@@ -34,6 +34,9 @@ const WORDPRESS_REDIRECTS = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/api/stancer/webhook": ["./node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf"],
+  },
   experimental: {
     inlineCss: true,
   },

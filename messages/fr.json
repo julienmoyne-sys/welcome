@@ -29,6 +29,10 @@
       "ogTitle": "Bons cadeaux personnalisés | Welcome! Coworking",
       "ogDescription": "Choisissez votre modèle, votre occasion et votre montant pour créer un bon cadeau Welcome! Coworking personnalisé."
     },
+    "shopConfirmation": {
+      "title": "Confirmation de paiement | Welcome! Coworking",
+      "description": "Confirmation de votre commande de bon cadeau Welcome! Coworking."
+    },
     "openSpace": {
       "title": "Open space à Strasbourg — Welcome Coworking",
       "description": "Découvrez l'open space de Welcome Coworking à Strasbourg : un espace lumineux et calme, avec accès flexible, fibre, café et impression.",
@@ -951,6 +955,18 @@
     "lead": "Dites-nous ce dont vous avez besoin."
   },
   "shop": {
+    "confirmation": {
+      "eyebrow": "Commande confirmée",
+      "title": "Merci, votre paiement a bien été pris en compte.",
+      "lead": "Votre bon cadeau personnalisé est en cours de préparation. Il vous sera envoyé par e-mail au format PDF dans quelques instants.",
+      "emailTitle": "Surveillez votre boîte e-mail",
+      "emailText": "Le bon sera envoyé à l’adresse renseignée lors de la commande. Pensez à vérifier le dossier des courriers indésirables.",
+      "invoiceTitle": "Votre facture électronique",
+      "invoiceText": "Elle vous sera envoyée séparément après validation du paiement.",
+      "contact": "Vous n’avez rien reçu ? Écrivez-nous à contact@welcome-coworking.com.",
+      "homeButton": "Retour à l’accueil",
+      "shopButton": "Commander un autre bon"
+    },
     "hero": {
       "eyebrow": "Bons cadeaux",
       "title": "Offrez du temps et de l’espace",

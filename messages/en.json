@@ -29,6 +29,10 @@
       "ogTitle": "Personalised gift vouchers | Welcome! Coworking",
       "ogDescription": "Choose a design, occasion and amount to create a personalised Welcome! Coworking gift voucher."
     },
+    "shopConfirmation": {
+      "title": "Payment confirmation | Welcome! Coworking",
+      "description": "Confirmation of your Welcome! Coworking gift voucher order."
+    },
     "openSpace": {
       "title": "Open space in Strasbourg — Welcome Coworking",
       "description": "Discover the Welcome Coworking open space in Strasbourg: a bright, quiet workspace with flexible access, fibre internet, coffee and printing.",
@@ -926,6 +930,18 @@
     "lead": "Tell us what you need."
   },
   "shop": {
+    "confirmation": {
+      "eyebrow": "Order confirmed",
+      "title": "Thank you, your payment has been received.",
+      "lead": "Your personalised gift voucher is being prepared. It will be sent to you by email as a PDF in the next few moments.",
+      "emailTitle": "Check your inbox",
+      "emailText": "The voucher will be sent to the address entered with your order. Please also check your spam folder.",
+      "invoiceTitle": "Your electronic invoice",
+      "invoiceText": "It will be sent separately once the payment has been confirmed.",
+      "contact": "Nothing has arrived? Email us at contact@welcome-coworking.com.",
+      "homeButton": "Back to home",
+      "shopButton": "Order another voucher"
+    },
     "hero": {
       "eyebrow": "Gift vouchers",
       "title": "Give the gift of time and space",
