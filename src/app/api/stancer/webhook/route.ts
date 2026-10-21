@@ -1,15 +1,8 @@
-import { randomUUID } from "node:crypto";
-
 import { z } from "zod";
 
 import { sendGiftCardDeliveryEmail } from "@/lib/contact.server";
 import { generateGiftCardPdf } from "@/lib/gift-card-pdf.server";
-import {
-  getStancerPaymentIntent,
-  releaseGiftCardDeliveryClaim,
-  setGiftCardDeliveryState,
-  verifyStancerSignature,
-} from "@/lib/stancer.server";
+import { getStancerPaymentIntent, verifyStancerSignature } from "@/lib/stancer.server";
 
 export const runtime = "nodejs";
 
@@ -46,21 +39,26 @@ const metadataSchema = z.object({
     email: z.string().email().max(255),
     locale: z.enum(["fr", "en", "de"]),
   }),
-  delivery: z
-    .object({
-      claimId: z.string().uuid().optional(),
-      processingAt: z.string().datetime().optional(),
-      sentAt: z.string().datetime().optional(),
-    })
-    .optional(),
 });
 
-const RELEVANT_EVENTS = new Set(["payment.succeeded"]);
-const DELIVERY_LEASE_MS = 2 * 60 * 1000;
+const RELEVANT_EVENTS = new Set([
+  "payment.succeeded",
+  "payment.updated",
+  "payment_intent.updated",
+  "payment_intent.captured",
+]);
+const DELIVERY_MEMORY_TTL_MS = 24 * 60 * 60 * 1000;
 const deliveriesInProgress = new Set<string>();
+const processedEvents = new Map<string, number>();
+const deliveredPayments = new Map<string, number>();
 
-function waitForCompetingClaims() {
-  return new Promise((resolve) => setTimeout(resolve, 250));
+function pruneDeliveryMemory(now: number) {
+  for (const [id, timestamp] of processedEvents) {
+    if (now - timestamp > DELIVERY_MEMORY_TTL_MS) processedEvents.delete(id);
+  }
+  for (const [id, timestamp] of deliveredPayments) {
+    if (now - timestamp > DELIVERY_MEMORY_TTL_MS) deliveredPayments.delete(id);
+  }
 }
 
 export async function POST(request: Request) {
@@ -84,7 +82,10 @@ export async function POST(request: Request) {
 
   const event = eventSchema.safeParse(json);
   if (!event.success) return new Response("Invalid payload", { status: 400 });
-  if (!RELEVANT_EVENTS.has(event.data.type)) return new Response(null, { status: 204 });
+  if (!RELEVANT_EVENTS.has(event.data.type)) {
+    console.info(`Ignored Stancer webhook event ${event.data.type}`);
+    return new Response(null, { status: 204 });
+  }
 
   const paymentIntentId = event.data.type.startsWith("payment_intent.")
     ? event.data.data.id
@@ -92,12 +93,17 @@ export async function POST(request: Request) {
   if (!paymentIntentId || !/^pi_[a-zA-Z0-9]{24}$/.test(paymentIntentId)) {
     return new Response(null, { status: 204 });
   }
-  if (deliveriesInProgress.has(paymentIntentId)) {
-    return new Response("Delivery already processing", { status: 503 });
+  const now = Date.now();
+  pruneDeliveryMemory(now);
+  if (
+    processedEvents.has(event.data.id) ||
+    deliveredPayments.has(paymentIntentId) ||
+    deliveriesInProgress.has(paymentIntentId)
+  ) {
+    return new Response(null, { status: 204 });
   }
 
   deliveriesInProgress.add(paymentIntentId);
-  let claimId: string | undefined;
   try {
     const paymentIntent = await getStancerPaymentIntent(paymentIntentId);
     if (paymentIntent.status !== "captured") return new Response(null, { status: 204 });
@@ -106,56 +112,21 @@ export async function POST(request: Request) {
     }
 
     const metadata = metadataSchema.parse(paymentIntent.metadata);
-    if (metadata.delivery?.sentAt) return new Response(null, { status: 204 });
-    const processingAt = metadata.delivery?.processingAt
-      ? Date.parse(metadata.delivery.processingAt)
-      : Number.NaN;
-    if (Number.isFinite(processingAt) && Date.now() - processingAt < DELIVERY_LEASE_MS) {
-      return new Response("Delivery already processing", { status: 503 });
-    }
-
-    claimId = randomUUID();
-    await setGiftCardDeliveryState(paymentIntentId, metadata, {
-      claimId,
-      processingAt: new Date().toISOString(),
-    });
-
-    await waitForCompetingClaims();
-    const claimedPaymentIntent = await getStancerPaymentIntent(paymentIntentId);
-    const claimedMetadata = metadataSchema.parse(claimedPaymentIntent.metadata);
-    if (claimedMetadata.delivery?.sentAt) return new Response(null, { status: 204 });
-    if (claimedMetadata.delivery?.claimId !== claimId) {
-      return new Response("Delivery claim superseded", { status: 503 });
-    }
-
     const documentData = {
-      ...claimedMetadata.giftCard,
+      ...metadata.giftCard,
       amount: paymentIntent.amount / 100,
     };
     const pdf = await generateGiftCardPdf(documentData);
-
-    // Réserver définitivement l'envoi avant l'appel SMTP empêche deux livraisons
-    // concurrentes du même paiement. En cas d'échec SMTP, le verrou est libéré
-    // dans le catch afin qu'une relivraison Stancer puisse réessayer.
-    await setGiftCardDeliveryState(paymentIntentId, claimedMetadata, {
-      claimId,
-      processingAt: claimedMetadata.delivery?.processingAt,
-      sentAt: new Date().toISOString(),
-    });
     await sendGiftCardDeliveryEmail(documentData, paymentIntentId, pdf);
+    const deliveredAt = Date.now();
+    processedEvents.set(event.data.id, deliveredAt);
+    deliveredPayments.set(paymentIntentId, deliveredAt);
+    console.info(
+      `Gift card delivered for ${paymentIntentId} from Stancer event ${event.data.type}`,
+    );
 
     return new Response(null, { status: 204 });
   } catch (error) {
-    if (claimId) {
-      try {
-        await releaseGiftCardDeliveryClaim(paymentIntentId, claimId);
-      } catch (releaseError) {
-        console.error(
-          `Gift card delivery claim release failed for ${paymentIntentId}`,
-          releaseError,
-        );
-      }
-    }
     console.error(`Gift card webhook processing failed for ${paymentIntentId}`, error);
     return new Response("Processing failed", { status: 500 });
   } finally {
