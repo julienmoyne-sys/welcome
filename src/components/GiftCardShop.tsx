@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { ArrowRight, Check, CreditCard, Gift, Pencil, Sparkles } from "lucide-react";
+import { ArrowRight, Check, CreditCard, Pencil } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -156,39 +156,15 @@ export function GiftCardShop() {
 
   return (
     <main>
-      <section className="relative overflow-hidden bg-[#062f25] px-6 py-20 text-white lg:px-10 lg:py-28">
-        <div className="pointer-events-none absolute inset-0 opacity-20" aria-hidden="true">
-          <Sparkles className="absolute left-[8%] top-12 h-16 w-16 text-[#e3c366]" />
-          <Sparkles className="absolute right-[10%] top-20 h-10 w-10 text-[#e3c366]" />
-          <Sparkles className="absolute bottom-10 left-[22%] h-8 w-8 text-white" />
-          <Sparkles className="absolute bottom-12 right-[25%] h-14 w-14 text-white" />
-        </div>
-        <div className="relative mx-auto max-w-[980px] text-center">
-          <p className="font-inter text-[14px] font-semibold uppercase tracking-[0.18em] text-[#e3c366]">
-            {t("hero.eyebrow")}
-          </p>
-          <h1 className="mt-5 font-manrope text-[43px] font-bold leading-[1.06] tracking-tight sm:text-[58px] lg:text-[72px]">
-            {t("hero.title")}
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl font-inter text-[18px] leading-[1.75] text-white/80">
-            {t("hero.lead")}
-          </p>
-          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#e3c366]/40 bg-white/10 px-5 py-2.5 font-inter text-sm text-white/90 backdrop-blur-sm">
-            <Gift className="h-4 w-4 text-[#e3c366]" aria-hidden="true" />
-            {t("hero.validity")}
-          </div>
-        </div>
-      </section>
-
       <section className="bg-welcome-cream px-6 py-16 lg:px-10 lg:py-24">
         <div className="mx-auto max-w-[1280px]">
           <div className="text-center">
             <p className="font-inter text-[14px] font-medium uppercase tracking-[0.14em] text-welcome-sage">
               {t("designs.eyebrow")}
             </p>
-            <h2 className="mt-4 font-manrope text-[34px] font-semibold tracking-tight text-welcome-black sm:text-[44px]">
+            <h1 className="mt-4 font-manrope text-[34px] font-semibold tracking-tight text-welcome-black sm:text-[44px]">
               {t("designs.title")}
-            </h2>
+            </h1>
             <p className="mx-auto mt-4 max-w-2xl font-inter text-[16px] leading-relaxed text-welcome-body/75">
               {t("designs.lead")}
             </p>
