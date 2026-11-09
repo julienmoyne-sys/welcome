@@ -191,7 +191,7 @@
       },
       "privateOffices": {
         "title": "Private Büros",
-        "text": "Geschlossene Räume für vertrauliches Arbeiten.",
+        "text": "Geschlossene, private Räume für vertrauliches Arbeiten.",
         "alt": "Private Büros mit Glastrennwand, Holzschreibtisch und warmer Beleuchtung"
       },
       "meetingRoom": {
@@ -241,15 +241,15 @@
   },
   "privateOfficesPage": {
     "back": "Zurück zu den Räumen",
-    "eyebrow": "Private Büros",
-    "titleLead": "Ihr eigenes Büro,",
+    "eyebrow": "Bürovermietung in Straßburg",
+    "titleLead": "Ein privates Büro,",
     "titleHighlight": "ganz ohne Aufwand.",
     "lead": "Genießen Sie in Straßburg-Meinau einen geschlossenen, ruhigen und komfortablen Raum, um effizient zu arbeiten und Ihre Vertraulichkeit zu wahren.",
     "visit": "Besichtigung buchen",
     "imageAlt": "Privates Welcome Büro mit Glastrennwand, Holztisch und warmer Beleuchtung",
     "detailsEyebrow": "Ihr Raum",
-    "detailsTitle": "Die Ruhe eines geschlossenen Büros",
-    "detailsText": "Unsere geschlossenen Büros bieten bestmöglichen Komfort mit direktem Tageslicht.",
+    "detailsTitle": "Die Ruhe eines Einzelbüros",
+    "detailsText": "Unsere Privatbüros bieten bestmöglichen Komfort mit direktem Tageslicht.",
     "features": [
       {
         "title": "Mobiliar",
@@ -298,7 +298,7 @@
         },
         {
           "question": "Was kostet ein privates Büro und wie lange ist die Laufzeit?",
-          "answer": "Private Büros sind ab 450 € netto pro Monat erhältlich und werden ohne Mindestlaufzeit angeboten. Kontaktieren Sie Welcome, um das passende Angebot für Ihr Team zu finden."
+          "answer": "Private Büros sind ab 450 € netto pro Monat erhältlich (Einführungsangebot) und werden ohne Mindestlaufzeit angeboten. Kontaktieren Sie Welcome, um das passende Angebot für Ihr Team zu finden."
         }
       ]
     }

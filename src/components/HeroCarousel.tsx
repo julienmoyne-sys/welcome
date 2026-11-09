@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import coworkingLounge from "@/assets/hero-coworking-lounge-desktop-4k.jpg";
-import meetingRoom from "@/assets/hero-meeting-room-desktop-4k.jpg";
+import meetingRoom from "@/assets/hero-meeting-room-desktop-4k-clean.jpg";
 import mobilePrivateOffice from "@/assets/hero-private-office-clouds-mobile.png";
 import privateOffice from "@/assets/hero-private-office-desktop-4k.jpg";
 

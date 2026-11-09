@@ -198,7 +198,7 @@
       },
       "privateOffices": {
         "title": "Bureaux privatifs",
-        "text": "Des espaces fermés pour travailler en toute confidentialité.",
+        "text": "Des espaces fermés et privés pour travailler en toute confidentialité.",
         "alt": "Bureaux privatifs avec cloison vitrée, bureau en bois et éclairage chaleureux"
       },
       "meetingRoom": {
@@ -248,15 +248,15 @@
   },
   "privateOfficesPage": {
     "back": "Revenir aux espaces",
-    "eyebrow": "Les bureaux privatifs",
-    "titleLead": "Un bureau à vous,",
+    "eyebrow": "Location de bureau Strasbourg",
+    "titleLead": "Un bureau privé,",
     "titleHighlight": "sans les contraintes.",
     "lead": "À Strasbourg Meinau, profitez d'un espace fermé, calme et confortable pour travailler efficacement et préserver votre confidentialité.",
     "visit": "Organiser une visite",
     "imageAlt": "Bureau privatif Welcome avec cloison vitrée, bureau en bois et éclairage chaleureux",
     "detailsEyebrow": "Votre espace",
-    "detailsTitle": "La tranquillité d'un bureau fermé",
-    "detailsText": "Nos bureaux fermés bénéficient du meilleur confort possible avec lumière naturelle directe.",
+    "detailsTitle": "La tranquillité d'un bureau individuel",
+    "detailsText": "Nos bureaux privatifs bénéficient du meilleur confort possible avec lumière naturelle directe.",
     "features": [
       {
         "title": "Mobilier",
@@ -305,7 +305,7 @@
         },
         {
           "question": "Quel est le tarif et l'engagement d'un bureau privatif ?",
-          "answer": "Les bureaux privatifs sont proposés à partir de 450 € HT par mois, sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
+          "answer": "Les bureaux privatifs sont proposés à partir de 450 € HT par mois (offre de lancement), sans minimum d'engagement. Contactez Welcome pour identifier la formule adaptée à votre équipe."
         }
       ]
     }
